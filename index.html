@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+<head>
+
+  <title>Document</title>
+
+  <style>
+
+  </style>
+
+</head>
+
+<body>
+  <h1>Hello</h1>
+
+  <script>
+
+    //  sum of array
+
+    // arr=[1,5,6,4,10]
+    // newarr= arr.reduce((total,value)=>{
+    //   return total+value
+    // })
+    // console.log(newarr)
+
+
+    // Staircase
+
+    // let n=4
+    // for (let index = 0; index<n; index++) {
+    //   let sentence="#"
+    //   for (let index2 = 0; index2<index; index2++) {
+    //    sentence= sentence+"#"   
+    // }
+    // console.log(sentence)
+    // }
+
+
+    // Reverse an array
+
+    // arr=[1,2,3,4,5]
+    // console.log(arr.reverse()); 
+
+
+
+
+    // Kth smallest 
+
+    // arr=[1,22,3,-4,5]
+
+    //  arr.sort((a, b) => a - b)
+
+    // console.log(arr[k]);
+
+
+    // Best Time to Buy and Sell Stock
+
+    // prices = [7,10,5,13,60,4]
+    // let min= Infinity
+    // let profit=0
+    // for(i=0;i<prices.length;i++){
+    //   min=Math.min(min,prices[i])
+    //   profit=Math.max(profit,prices[i]-min)
+    // }
+    // console.log(profit);
+
+
+    // Find First Duplicate ----Remaining
+
+    // let nums=[2,3,55,4,8,10,55,5]
+    // var findDuplicate = function(nums) {
+    //     for(let n of nums){
+    //         if(nums[Math.abs(n)-1] < 0) return Math.abs(n);
+    //         nums[Math.abs(n)-1]*=-1;
+    //     }
+    //     return -1;
+    // };
+    // console.log(findDuplicate(nums))
+
+
+
+    // Maximum Product of Three Numbers    
+
+    // arr=[1,2,10,3,4,5]
+    // newarr=[]
+
+    // for(j=0;j<3;j++){
+    //   let max=0
+    // for(i=0;i<arr.length;i++){
+    //   max= max<arr[i]?arr[i]:max;
+    // }
+    // newarr.push(max)
+    // arr.splice(arr.indexOf(max), 1);
+    // }
+    // let product=newarr[0]*newarr[1]*newarr[2]
+    // console.log(newarr);
+    // console.log(product);
+
+
+    // Longest Continuous Increasing Subsequence Answer not complete
+
+    // nums = [1,3,5,4,7]
+    // len=1
+    // max=0
+    // prev=0
+    // for (let n of nums) {
+    //  if (prev<n) len++
+    //  else{
+    //    len=1
+    //  }
+    //   }
+
+    //   console.log(len);
+
+
+    // Largest Number At Least Twice of Others
+
+    // nums=[2,22,13,4,5]
+    // let first = 0;
+    //   let second = 0;
+    //   let ans = 0;
+    //   for (let i = 0; i < nums.length; i++) {
+    //     if (nums[i] > first) {
+    //       second = first;
+    //       first = nums[i];
+    //       ans = i;
+    //     } else if (nums[i] > second) {
+    //       second = nums[i];
+    //     }
+    //   }
+    //   let numb= first >= second * 2 ? ans : -1;
+
+    // console.log(numb);
+    // console.log(first);
+    // console.log(second);
+    // other solution find max number, then second max compare them
+
+
+
+    // Factorial
+
+    // let n=5
+    // let product=1
+    // while(n>1){
+    //   product=product*n
+    //   n--
+    // }
+    // console.log(product);
+
+
+    // trapping-rain-water
+
+    // arr = [7,4,0,9]
+
+    // let limit= arr[0]>arr[arr.length-1] ? arr[arr.length-1]: arr[0];
+    // let sum=0
+    // for(i=1;i<arr.length-1;i++){
+    //     sum=sum + limit- arr[i]
+    // }
+
+    // console.log(sum);
+
+
+    // palindrome
+
+    // let sentence="abcecba"
+
+    // arr= sentence.split("")
+    // len=arr.length
+    // let flagNP= true
+    // for(i=0;i<(len-1)/2;i++){
+    //     if(arr[i]!=arr[len-1-i]) flagNP= false
+    // }
+
+    // if(flagNP){
+    //     console.log("A palindrome");
+    // }
+    // else{
+    //     console.log("Not a palindrome");
+    // }
+
+
+    // Frequency counter
+
+    // let sentence="Gaurav"
+    // function Counter(sentence){
+    //   return sentence.split("").reduce((total, letter) => {
+    //     total[letter] ? total[letter]++ : total[letter] = 1;
+    //     return total;
+    //   }, {});
+    // };
+
+    // let newsentence=Counter(sentence)
+    //  console.log(newsentence)
+
+    // for(const property in newsentence){
+    //     if(newsentence[property]>1){
+    //     console.log(property)
+    //     }
+    // }
+
+
+    // First Unique Character in a String
+
+
+    // let sentence="Gurav"
+
+    // var firstUniqChar = function(s) {
+    //     let frequency = {}
+
+    //     for (let char of s) {
+    //         frequency[char] ? frequency[char]++ : frequency[char] = 1
+    //     }
+    //     console.log(frequency);
+    //     // console.log(s[1]);
+    //     for (let i = 0; i < s.length; i++) {
+    //         if (frequency[s[i]] === 1) console.log(s[i]);
+    //     } 
+    // };
+
+    // var firstUniqChar = function(s) {
+
+    //     for(i=0; i<s.length; i++)
+    //         if(s.indexOf(s[i])!==s.lastIndexOf(s[i])) return s[i]
+    //     return "No repeat"
+    // };
+
+    // console.log(firstUniqChar(sentence)); 
+
+
+    // Sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+    // Find the sum of first 100 prime numbers
+
+    // function sumprime(number){
+    //     let numArray=[];
+    // for(i=1;i<number;i++){
+
+    //     numArray.push(i)
+    // }
+
+    // num = numArray.filter((number) => {
+    //     if(number===1){
+    //       return false  
+    //     }
+    //    else if(number===2){
+    //       return true  
+    //     }
+    //   for (var i = 2; i <= Math.sqrt(number); i++) {
+    //     if (number % i === 0) return false;
+    //   }
+    //   return number;
+    // }).reduce((total,value)=>{
+    //     return total=total+value
+    // },0)
+
+    // console.log(num)
+    // }
+
+    // sumprime(10)
+
+
+    // write a function to find strings appearing an odd number of times
+    // arr=['aa','bb','aa','bb','aa','cc','cc','ddd'] ===> ['aa','ddd'] because aa appears 3x and ddd 1x
+
+
+    // function Counter(sentence){
+    //   let array= sentence.reduce((total, letter) => {
+    //     total[letter] ? total[letter]++ : total[letter] = 1;
+    //     return total;
+    //   }, {});
+    //   let newarr=[]
+    //   for(const property in array){
+    //       if(array[property]%2!==0){
+    //            newarr.push(property)
+    //       } 
+    //   }
+    //   return newarr
+    // };
+
+    // arr=['aa','bb','aa','bb','aa','cc','cc','ddd']
+
+    // Counter(arr)
+
+
+    // Find the number start and end positin of "556013604"
+
+    // mystring = 
+    // "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450"
+    // let find="556013604"
+    // console.log(mystring.search(find))
+    // let start=mystring.search(find)
+    // let end =  find.length -1 +start
+
+    // console.log(`start at ${start} and end at ${end}`)
+
+
+  // tricky ques 
+//     1 + true  // 2
+//     true + true // 2
+//     "1" + true // "1true"
+//     "2" > "3" // false
+//     "two" > "three" // true it compares letters with highest number 
+
+
+// loop in react 
+// function App() {
+//   const list = []
+
+//   for(let i=5;i<101;){
+//    list.push(<li>{i}</li>)
+//    i=i+5
+// }
+
+// console.log(list);
+//   return (
+//     <>
+//    <h1>React</h1>
+//    <ul>
+//    {list.map((item)=>{
+//      return <>{item}</>
+//    })}
+//    </ul>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+// var arr = [[1,2],[3,4],[4,5]] //[1,2,3,4,5]
+
+// let newarray= arr.flat()
+// let newarray= arr.flat(Infinity)
+
+// let uniqueArray = newarray.filter(function(item, index) {
+//     return newarray.indexOf(item) == index;
+// })
+
+// console.log(uniqueArray);
+
+
+
+
+// const brunch = {
+//     food: 'Dim sum',
+//     beverage: 'Jasmine tea',
+//     order: () => {
+//         return `I'll have the ${this.food} with ${this.beverage} please.`
+//     }
+// }
+// brunch.order();
+
+
+
+
+
+// var trees = ["xyz","xxxx","test","ryan","apple"];
+// delete trees[3];
+// console.log(trees.length);
+
+
+
+
+
+// function display() {
+//   var a = b = 10;
+// }
+// display();
+// console.log('b', typeof b === 'undefined'); b,false
+// console.log('a', typeof a === 'undefined'); a,true
+
+// But in fact, var a = b = 3; is actually shorthand for:
+
+// b = 3;
+// var a = b;
+// Therefore, b ends up being a global variable (since it is not preceded by the var keyword)
+//  and is still in scope even outside of the enclosing function.
+
+// The reason a is undefined is that a is a local variable to that self-executing anonymous function
+
+
+
+
+
+// const items = [
+//   {name: 'a', price: 100},
+//   {name: 'b', price: 10},
+//   {name: 'c', price: 50},
+//   {name: 'd', price: 30},
+// ];
+// let newitems=[]
+//  newitems = items.filter((item,index)=>{
+//         return item.price>50
+// })
+
+// console.log(newitems);
+
+
+
+
+
+// let arr = [1.34567,2.34,3.6,8,9.05676]
+
+// arr.map((item)=>{
+//   return item.toFixed(2)
+// })
+
+// log
+
+// console.log([2].reduce((a) => {
+//       return a
+// }))
+
+
+
+
+// let a = [1,20,33,100,22,1000,2]
+// a.sort((a,b)=>{
+//    return a-b
+// })
+
+
+
+
+// function a(){
+//   console.log("a")
+//   setTimeout(()=>{console.log("b")}, 0)
+//   Promise.resolve().then(_ => console.log("c"))
+//   console.log("c2")
+//   console.log("c3")
+// }
+// a()
+
+
+// function a() {
+//     console.log(this.name);
+// }
+
+// var obj={
+//     name:"Gaurav"
+// }
+
+// a.call(obj)
+
+
+// let a =3;
+// let b=5;
+// for (var i = 1; i < 51; i++) {
+//   a--;
+//   b--;
+//   if (a === 0 && b === 0) {
+//     console.log("Fizz Buzz");
+//     a=3;b=5;
+//   } else if (a === 0) {
+//     console.log("Fizz");
+//     a=3
+//   } else if (b === 0) {
+//     console.log("Buzz");
+//     b=5;
+//   } else {
+//     console.log(i);
+//   }
+// }
+
+
+
+// let a={a:1}
+// let b={a:1}
+// let c=a
+// console.log(a===c) //true   here comparison of reference is done
+// console.log(a==b) //false
+
+
+
+
+
+// const a=[1, [2], [3, [[4]]],[5,6]]
+
+// console.log(a.flat(Infinity));  
+
+
+
+
+// obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: {
+// 		d: 4
+// 	}
+// }
+// obj2 = {...obj};
+// obj2.c.d = 5;
+// console.log(obj);
+// console.log(obj2);
+
+
+
+
+// var a = 5;
+// console.log(a); 
+// function abc(){
+//     var a = 3;
+//     console.log(a); 
+// }
+// abc();
+// console.log(a);
+
+
+
+
+// for(let i=0; i<5; i++){
+// 	setTO(()=>{
+// 		console.log(i)
+// 	},0);
+// }
+
+
+// var a = 5; 
+// var a = 3;
+
+
+// let counter = 1;
+// let a = counter++; 
+// alert(a);
+
+
+// state = {
+// 	a: 100
+// }
+
+// function changeState(){
+// 	setState({
+// 		a :200
+// 	});
+// 	console.log(this.state.a);	
+// }
+
+// changeState();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
