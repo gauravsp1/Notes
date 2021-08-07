@@ -1,0 +1,767 @@
+JavaScript
+
+
+Advantages of JavaScript
+Speed. Client-side JavaScript is very fast because it can be run immediately within the client-side browser. 
+Unless outside resources are required, JavaScript is unhindered by network calls to a backend server.
+
+Simplicity. JavaScript is relatively simple to learn and implement.
+
+Popularity. JavaScript is used everywhere on the web.
+
+Interoperability. JavaScript plays nicely with other languages and can be used in a huge variety of applications.
+
+Server Load. Being client-side reduces the demand on the website server.
+
+Gives the ability to create rich interfaces.
+
+
+Lazy loading ****
+Lazy loading (also called on-demand loading) is an optimization technique for the online content, be it a website or a web app.
+Instead of loading the entire web page and rendering it to the user in one go as in bulk loading, the concept of lazy loading assists in loading 
+only the required section and delays the remaining, until it is needed by the user.
+
+Advantages of Lazy loading:
+
+On-demand loading reduces time consumption and memory usage thereby optimizing content delivery. 
+
+As only a fraction of the web page, which is required, is loaded first thus, the time taken is less and the loading of rest of the section 
+is delayed which saves storage. All of this enhances the user’s experience as the requested content is fed in no time.
+
+Unnecessary code execution is avoided.
+
+Optimal usage of time and space resources makes it a cost-effective approach from the point of view of business persons. (website owners)
+
+Disadvantages of Lazy loading:
+
+Firstly, the extra lines of code, to be added to the existing ones, to implement lazy load makes the code a bit complicated.
+Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
+
+
+data types: numbers, strings, objects, Boolean, Undefined, Null *******
+
+
+Why Js is called interpreter language ****
+An Interpreter directly executes instructions written in a programming or scripting language without previously converting 
+them to an object code or machine code. Examples of interpreted languages are Perl, Python and Matlab.
+
+
+
+Is Js single threaded or multi-threaded ****
+single threaded
+JavaScript doesn't support multithreading
+It means that the main thread where JavaScript code is run, runs in one line at a time manner and there is no possibility of running code in parallel.
+Now, JavaScript is a single-threaded language, which means it has only one call stack that is used to execute the program. 
+As we know stacks are FILO that is First In Last Out. Similarly, within the call stack, whenever a line of code gets inside the call stack 
+it gets executed and move out of the stack. In this way, the JavaScript is the single-thread language because of only one call stack.
+Since, JavaScript is a single-threaded language, it is synchronous in nature.
+
+
+How Js handles multi-threaded operations *****
+using async 
+https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/
+
+
+
+How Promise works----Scenario base que ******
+Promises provide a mechanism to handle the results and errors from asynchronous operations.
+Promise are used for asynchronous operations.. they have 3 states resolved, rejected, pending
+First we need to create a promise  var promise = new Promise(function(resolve, reject) { } then consume it using .then
+
+
+A Promise is basically created when we are unsure of whether or not the assigned task will be completed
+Promises are used to handle asynchronous operations in JavaScript. 
+They are easy to manage when dealing with multiple asynchronous operations where callbacks can create callback hell leading to unmanageable code.
+ They can handle multiple asynchronous operations easily and provide better error handling than callbacks.
+ 
+Benefits of Promises:-
+Improves Code Readability
+Better handling of asynchronous operations
+Better flow of control definition in asynchronous logic
+Better Error Handling
+
+//A Promise has four states:-
+
+A Promise has three states:-
+
+fulfilled/resolved: Action related to the promise succeeded
+rejected: Action related to the promise failed
+pending: Promise is still pending i.e not fulfilled or rejected yet
+
+//settled/finally: Promise has fulfilled or rejected
+
+There are two phases one is to create a promise and other to consume it.
+var promise = new Promise(function(resolve, reject) { 
+  const x = "geeksforgeeks"; 
+  const y = "geeksforgeeks"
+  if(x === y) { 
+    resolve(); 
+  } else { 
+    reject(); 
+  } 
+}); 
+  
+promise. 
+    then(function () { 
+        console.log('Success, You are a GEEK'); 
+    }). 
+    catch(function () { 
+        console.log('Some error has occured'); 
+    }); 
+
+
+Chaining in Promise *****************
+When we consume first Promise it returns another Promise which is consumed by some other Promise this chain continues
+
+https://www.javascripttutorial.net/es6/promise-chaining/
+
+let p = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(10);
+    }, 3 * 100);
+});
+
+p.then((result) => {
+    console.log(result); // 10
+    return result * 2;
+}).then((result) => {
+    console.log(result); // 20
+    return result * 3;
+}).then((result) => {
+    console.log(result); // 60
+    return result * 4;
+});
+Output:
+
+10
+20
+60
+ 
+Multiple promise and want to pass if all promises succeed ******
+use Promise.all(Promise 1,promise 2,...).then((values) => {console.log(values);}
+
+Promise.race()  ***********
+
+
+
+
+Event Loop *****
+An event loop is something that pulls stuff out of the callback queue and places it onto the call stack whenever the function stack becomes empty.
+The event loop  gives us an illusion of being multithreaded even though it is single-threaded. 
+The below illusion demonstrates the functioning of event loop well:
+Here the callback function in the event queue has not yet run and is waiting for its time into the stack when the SetTimeOut() is being executed 
+and the Web API is making the mentioned wait. When the function stack becomes empty, the function gets loaded onto the stack as shown below:
+That is where the event loop comes into picture, it takes the first event from the Event Queue and places it onto the stack 
+i.e in this case the callback function. From here, this function executes calling other functions inside it, if any.
+https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/
+
+
+Two types of Queue ********
+CallBack Queue ---setTimeout and other callback functions
+Microtask Queue ---Promises
+
+Microtask Queue has higer priority over callBack Queue
+
+
+callBack works ***********
+any function passed as argument of another function is called as callback function
+the callback is the function that is passed as the argument to setTimeout.
+
+The problem with callbacks is it creates something called “Callback Hell.” Basically, you start nesting functions within functions within functions, 
+and it starts to get really hard to read the code. So in this situation Promises came to handle the nested callback in a better way.
+
+
+
+
+New ES6 features **********
+
+The let keyword
+The const keyword
+JavaScript Arrow Functions
+JavaScript Class
+Template Strings
+Destructuring
+Array.find()
+Array.findIndex()
+Default Parameter Values
+Rest and spread Operator
+https://github.com/lukehoban/es6features
+
+Template Strings *******
+We don't need to concate string and variable with + symbole anymore
+var name = "Bob", time = "today";
+`Hello ${name}, how are you ${time}?`
+
+
+Destructuring ********
+var [a, , b] = [1,2,3];
+obj{a:1,b:2,c:{d:4,e:5}}
+
+const {a,b,c:{d}} = obj
+
+
+The let keyword **********
+These two keywords provide Block Scope variables
+Before  JavaScript had only two types of scope: Global Scope and Function Scope.
+Global variables can be accessed from anywhere in a JavaScript program.
+Variables declared  (inside a function) have Function Scope.
+LET and CONST declared inside a block {} cannot be accessed from outside the block:
+var keyword cannot have Block Scope.
+Variables declared with the let keyword can have Block Scope.
+Can reassign values in LET but not in CONST
+let x=5;
+ x=10;
+ 
+ const z=300;
+z=500;  Uncaught SyntaxError: Identifier 'z' has already been declared
+
+Rest all same between LET and CONST
+
+
+
+Default Parameter Values **********
+function myFunction(x, y = 10) {
+  // y is 10 if not passed or undefined
+  return x + y;
+}
+myFunction(5); // will return 15
+
+
+
+JavaScript Arrow Functions **********
+https://www.codementor.io/@dariogarciamoya/understanding--this--in-javascript-du1084lyn
+https://www.codementor.io/@dariogarciamoya/understanding-this-in-javascript-with-arrow-functions-gcpjwfyuc
+
+Two benifits one shorter syntax other diferent behavior of this keyword
+Arrow functions allow us to write shorter function syntax:
+Before:
+hello = function() {
+  return "Hello World!";
+}
+After:
+hello = () => "Hello World!";
+
+In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
+Arrow functions do not have their own this but they inherit it from the parent scope.
+Arrow functions shine best with anything that requires this to be bound to the context, and not the function itself.
+
+
+const myObject = {
+  myArrowFunction: null,
+  myMethod: function () {
+    this.myArrowFunction = () => { console.log(this) };
+  }
+};
+
+When we call myObject.myMethod(), we initialize myObject.myArrowFunction with an arrow function which is inside of the method myMethod, 
+so it will inherit its scope. We can clearly see a perfect use case, closures.
+
+myObject.myMethod() // this === myObject
+
+myObject.myArrowFunction() // this === myObject
+
+const myArrowFunction = myObject.myArrowFunction;
+myArrowFunction() // this === myObject
+
+
+var obj = { // does not create a new scope
+  i: 10,
+  b: () => console.log(this.i, this),
+  c: function() {
+    console.log(this.i, this);
+  }
+}
+
+obj.b(); // prints undefined, Window {...} (or the global object)
+obj.c(); // prints 10, Object {...}
+Arrow functions do not have their own this
+arrow functions are the best choice when working with closures or callbacks, 
+but not a good choice when working with class/object methods or constructors.
+ES6 arrow functions can’t be bound to a this keyword, so it will lexically go up a scope, 
+and use the value of this in the scope in which it was defined.
+
+
+function foo() {
+    console.log( this.bar );
+}
+
+var bar = "global";
+
+var obj1 = {
+    bar: "obj1",
+    foo: foo
+};
+
+var obj2 = {
+    bar: "obj2"
+};
+
+foo();          // "global"
+obj1.foo();     // "obj1"
+foo.call( obj2 );  // "obj2"
+new foo();       // undefined
+
+
+
+Object Literal **********
+an object literal is a comma-separated list of name-value pairs inside of curly braces.
+
+
+
+
+JavaScript Class ****************
+When we want same obj properties for many objs we create a blueprint of it that is called class
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+}
+
+
+
+
+Different Kinds of Loops ***********
+
+JavaScript supports different kinds of loops:
+
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object or gives the index value of array
+for/of - loops through the values of an iterable object or gives the  value of array
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+
+
+
+
+
+
+Hoisting ********
+Hoisting is JavaScript's default behavior of moving declarations to the top. We can do this for variables and functions
+In JavaScript, a variable can be declared after it has been used.
+JavaScript only hoists declarations, not initializations.
+All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined , 
+but let and const declarations remain uninitialized. 
+They will only get initialized when their lexical binding (assignment) is evaluated during runtime by the JavaScript engine.
+ReferenceError is thrown when trying to access a previously undeclared variable
+For let and const they are stored in different way in seperate memory space in Script and not in Global 
+so we cannot acces them without intializing them.
+
+2 Golden Rules:
+1. Variable declarations are scanned and are made undefined
+2. Function declarations are scanned and are made available
+
+Temporal Dead Zone ********
+time between hoisting let and const and intializing them
+
+Can hoisting work for functions **********
+ All functions and variables are hoisted
+
+
+Lexcical scope **********
+A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
+inside another function defined after the variable declaration. 
+But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+Inner functions can acces outer variables but outter cannot access inner function variables
+
+
+
+Closure ***********
+
+function outerFunction() {
+  var name = 'Gaurav';
+  function innerFunction() {
+  var surname = 'Pawar';
+    console.log(name+surname)
+  }
+  return innerFunction;
+}
+
+var output = outerFunction();
+output();
+
+A closure is the combination of a function bundled together  with   its  lexical environment
+When we return the inner function it not only returns values of inner function but also its lexical environment
+Disadvantages...it uses more memory
+
+
+Use Strict *********
+With strict mode, you can not, for example, use undeclared variables.
+You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
+Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
+Strict mode makes it easier to write "secure" JavaScript.
+Strict mode changes previously accepted "bad syntax" into real errors.
+The this keyword in functions behaves differently in strict mode.
+The this keyword refers to the object that called the function.
+If the object is not specified, functions in strict mode will return undefined and functions in normal mode will return the global object (window):
+
+
+
+
+Minification-(bundle multiple files in a group) ***********
+Minification is the process of minimizing code and markup in your web pages and script files. 
+It's one of the main methods used to reduce load times and bandwidth usage on websites. 
+Minification dramatically improves site speed and accessibility, directly translating into a better user experience
+
+Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
+Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
+Minification is performed on the web server before a response is sent.
+
+
+
+call() vs apply() vs bind() *******
+With call(), an object can use a method belonging to another object.
+var person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+var person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+person.fullName.call(person1, "Oslo", "Norway");
+
+The apply() method is similar to the call() method 
+The call() method takes arguments separately.
+
+The apply() method takes arguments as an array.
+
+var person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+var person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+person.fullName.apply(person1, ["Oslo", "Norway"]);
+
+
+partial classes **********
+A “partial class” is a class whose methods and variables are parceled out into multiple files. 
+When the files are compiled, the class reassembles itself into the full class definition
+in general JavaScript is a class-less language. Everything is an object. 
+And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
+Purpose of partial classes is to allow a class's definition to span across multiple files. 
+This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
+
+
+how to extend a class ********
+using the extends keyword
+
+
+CallBack Hell ********
+Having nested callBack
+
+null vs undefiend ********
+Something hasn't been initialized but memory is alocated to it : undefined.(declared but not initialized)
+Something is currently unavailable: null.
+null is an assingment value
+
+typeof undefined           // undefined
+typeof null                // object
+
+null === undefined         // false
+null == undefined          // true
+
+
+typeOf null ********
+n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
+Unfortunately, in JavaScript, the data type of null is an object. You can consider it a bug in JavaScript that typeof null is an object.
+
+How to access History ********
+windows.history
+
+
+filter vs map **************
+The map method is used to perform operation on each item of an array, while the filter method is used to select certain items of an array.
+
+
+How to make a copy of array or object *******
+use spread operator
+Array.from()
+Array.map()
+Array.concat()
+Array.slice()
+
+
+forEach vs Map ***********
+forEach() — executes a provided function once for each array element.the forEach() method doesn’t actually return anything (undefined). 
+It simply calls a provided function on each element in your array. This callback is allowed to mutate the calling array.
+
+map() — creates a new array with the results of calling a provided function on every element in the calling array.
+the map() method will also call a provided function on every element in the array. 
+The difference is that map() utilizes return values and actually returns a new Array of the same size.
+map is faster than forEach
+this method does not change the original array.
+
+
+JavaScript Array Methods **********
+concat()
+filter()
+find()
+findIndex()
+forEach()
+from()
+includes()
+indexOf()
+isArray()
+join()
+keys()
+length
+lastIndexOf()
+map()
+pop()
+push()
+reduce()
+reduceRight()
+reverse()
+shift()method removes the first item of an array.
+slice().....var citrus = fruits.slice(1, 3);......The slice() method selects the elements starting at the given start argument, and ends at, but does not include, the given end argument.
+some()
+sort()
+splice()....fruits.splice(2, 0, "Lemon", "Kiwi");.....The splice() method adds/removes items to/from an array, and returns the removed item(s).
+Note: This method changes the original array.
+
+toString()
+unshift() method adds new items to the beginning of an array, and returns the new length.
+valueOf()  array.valueOf()
+
+
+
+event bubbling ********
+https://www.geeksforgeeks.org/event-bubbling-in-javascript/
+Event bubbling is the concept in which an event triggers at the deepest  element, and triggers on parent elements in nesting order. 
+When we have  div1 inside div2 inside div3 when event in div3 is triggered it goes till div1  
+In event bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.
+It is a process that starts with the element that triggered the event and then bubbles up to the containing elements in the hierarchy.
+
+One way to prevent event bubbling is using event.stopPropagation()
+Event bubbling is a method of event propagation in the HTML DOM API when an event is in an element inside another element,
+and both elements have registered a handle to that event.
+
+
+
+
+Event delegate **************
+
+
+
+Event Capturing ******************
+In event capturing, an event propagates from the outermost element to the target element. 
+It is the opposite of event bubbling, where events propagate outwards from the target to the outer elements. 
+
+
+
+Event Propogation **********
+
+event delegation is the technique, bubbling is what the event itself does, and capturing is a way of using event delegation 
+on events that don’t bubble.
+
+
+Currying ******
+Currying turns multi-argument functions into unary (single argument) functions.
+Curried functions take many arguments one at a time.
+
+const sum= (a)=>(b)=>(c)=>(d)=> a+b+c+d
+sum(1)(2)(3)(4)
+
+how to define JSON array..syntax ********
+JSON is a format for storing and transporting data.
+JSON is often used when data is sent from a server to a web page.
+JSON stands for JavaScript Object Notation
+
+JSON Syntax Rules-
+Data is in name/value pairs
+Data is separated by commas
+Curly braces hold objects
+Square brackets hold arrays
+
+use the JavaScript built-in function JSON.parse() to convert the string into a JavaScript object
+
+JSON Example
+{
+"employees":[
+  {"firstName":"John", "lastName":"Doe"},
+  {"firstName":"Anna", "lastName":"Smith"},
+  {"firstName":"Peter", "lastName":"Jones"}
+]
+}
+
+
+
+
+Why to Encode URL ********
+password protection
+
+
+
+Decorator ********
+Don't know
+
+
+"==" vs "===" ********
+"==" compares for same value can have different type
+"===" compares for same value and type
+
+
+
+falsy valuse *******
+false, 0, -0, 0n, "", null, undefined, and NaN
+
+
+Higher-Order function *********
+Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
+In simple words, A Higher-Order function is a function that receives a function as an parameter or returns the function as output.
+It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
+Ex. map
+
+
+Recursion JavaScript *************
+It is calling itself inside the function. Working of recursion in JavaScript. A recursive function must have a condition to stop calling itself. 
+Otherwise, the function is called indefinitely. Once the condition is met, the function stops calling itself.
+
+
+
+
+
+Prototype ********
+All JavaScript objects inherit properties and methods from a prototype.
+The JavaScript prototype property allows you to add new properties to object constructors:
+function Mobile() {
+  this.a=10;
+}
+
+Mobile.prototype.z = 20;
+
+function Nokia() {
+  this.b=100;
+}
+
+Nokia.prototype=Object.create(Mobile.prototype)
+
+var nokiaMobile= new Nokia()
+Now, nokiaMobile.z=20
+
+Here we can inherit prototype properties not classes or constructor
+nokiaMobile can ascess value of z but not of a
+
+Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
+prototype chain *****
+Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
+
+
+
+
+
+Prototype inheritance ********
+In JavaScript, inheritance is supported by using prototype object. Some people call it "Prototypal Inheriatance" 
+and some people call it "Behaviour Delegation".
+
+
+
+valueTpye and refrenceType ******
+
+When we assign values from these variables to other variables , we copy the value to the new variable. They are copied by value.
+Changing one does not change the other. Think of the variables as having no relationship to each other.
+Variables that are assigned a non-primitive value are given a reference to that value. 
+That reference points to the object’s location in memory. The variables don’t actually contain the value.
+
+Javascript has 5 data types that are passed by value: Boolean, null, undefined, String, and Number. We’ll call these primitive types.
+Javascript has 3 data types that are passed by reference: Array, Function, and Object. These are all technically Objects, 
+so we’ll refer to them collectively as Objects.
+
+
+deep copying and shallow copying *****
+A deep copy means that all of the values of the new variable are copied and disconnected from the original variable. 
+A shallow copy means that certain (sub-)values are still connected to the original variable.
+Shallow Copy: It makes a copy of the reference to X into Y. Think about it as a copy of X’s Address. 
+So, the addresses of X and Y will be the same i.e. they will be pointing to the same memory location.
+Deep copy: It makes a copy of all the members of X, allocates different memory location for Y and then assigns the copied members to Y to achieve 
+deep copy. In this way, if X vanishes Y is still valid in the memory.
+Nested arrays/objects ****
+JSON.parse(JSON.stringify(someArray))
+
+
+Factory Function ******
+define one function and take input and return an obj
+
+local storage vs session storage ********
+sessionStorage is similar to localStorage ; the difference is that while data in localStorage doesn't expire, 
+data in sessionStorage is cleared when the page session ends.
+ ... A page session lasts as long as the tab or the browser is open, and survives over page reloads and restores.
+localStorage is a windows function. It takes key and value pair localStorage.setItem(key,value)
+localStorage.getItem(key)  localStorage.removeItem(key) localStorage.clear()
+To store object in local storage localStorage.setItem("user",JSON.stringify(object)) and to retrive it 
+JSON.parse(localStorage.getItem("user"))
+SessionStorage is about 5 MB
+local storage store from 2 MB to 10 MB size 
+
+Constructor *****
+a special method for creating and initializing a object created within a class
+It has instance members
+_proto_ has prototype members
+
+
+
+How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********
+const obj = new Object();
+Object.keys(obj).length === 0;
+
+
+
+Array manupilation methods/libraries--Slice,split,reduce ********
+https://www.w3schools.com/jsref/jsref_obj_array.asp
+
+Splice vs slice ********
+slice(start, end)..........for both string and array
+substring(start, end)
+substr(start, length)
+
+array.splice(index, howmany, item1, ....., itemX)...for array only
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi");
+
+
+
+
+Function Expression *************
+create a function and assign it to a variable
+wile hosting it behaves like var and not like function
+
+
+Anonymous Function *******
+Function without name
+You can create it as function expression but not as regular function/statement function
+
+
+First Class Function ********
+
+Ability to pass function as argument or return a function from function is called first class function
+
+
+
+JavaScript is Case Sensitive
+Camel Case
+
+document.getElementById('demo').innerHTML = 'Hello JavaScript';
+document.getElementById("demo").style.fontSize = "35px";
+
+var x = new String("John");             
+var y = new String("John");
+// (x == y) is false because x and y are different objects
+
+But you can use the toString() method to output numbers from base 2 to base 36.
+var myNumber = 32;
+myNumber.toString(10);  // returns 32
+myNumber.toString(32);  // returns 10
+myNumber.toString(16);  // returns 20
+
+There are 3 JavaScript methods that can be used to convert variables to numbers:
+
+The Number() method
+The parseInt() method
+The parseFloat() method
+

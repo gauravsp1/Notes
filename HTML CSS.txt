@@ -1,0 +1,325 @@
+HTML
+
+HTML stands for Hyper Text Markup Language
+HTML is the standard markup language for creating Web pages
+HTML describes the structure of a Web page
+HTML consists of a series of elements
+HTML elements tell the browser how to display the content
+HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
+
+html4 vs html5 **********
+Can make input numerical using only html ************
+
+All HTML need to have a DOCTYPE declared. The DOCTYPE is not actually an element or HTML tag. 
+It lets the browser know how the document should be interpreted, by indicating what version or standard of HTML (or other markup language)
+is being used.
+
+The <!DOCTYPE html> declaration defines that this document is an HTML5 document
+The <html> element is the root element of an HTML page
+
+<tagname style="property:value;">
+
+
+<b> - Bold text
+<strong> - Important text
+<i> - Italic text
+<em> - Emphasized text
+<mark> - Marked text
+<small> - Smaller text
+<del> - Deleted text
+<ins> - Inserted text
+<sub> - Subscript text
+<sup> - Superscript text
+
+
+
+Here are the block-level elements in HTML:
+
+<address>
+<article>
+<aside>
+<div>
+<footer>
+<form>
+<h1>-<h6>
+<header>
+<hr>
+<li>
+<main><nav>
+<noscript>
+<ol>
+<p>
+<pre>
+<section>
+<table>
+<ul>
+
+
+Here are the inline elements in HTML:
+
+<a>
+<button>
+<em>
+<i>
+<img>
+<input>
+<label>
+<span>
+<textarea>
+
+
+There are two display values: block and inline
+A block-level element always starts on a new line and takes up the full width available
+An inline element does not start on a new line and it only takes up as much width as necessary
+The <div> element is a block-level and is often used as a container for other HTML elements
+The <span> element is an inline container used to mark up a part of a text, or a part of a document
+
+
+media query**********
+@media not|only mediatype and (expressions) {
+  CSS-Code;
+}
+@media screen and (min-width: 480px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+
+laptop 1200*1080 (x*y)
+tablet 880*
+mobile 576*
+
+
+
+A semantic element clearly describes its meaning to both the browser and the developer.
+
+Examples of non-semantic elements: <div> and <span> - Tells nothing about its content.
+
+Examples of semantic elements: <form>, <table>, and <article> ,nav,footer- Clearly defines its content.
+
+
+<script src="demo_async.js" async></script>
+If async is present: The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
+If async is not present and defer is present: The script is executed when the page has finished parsing
+If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
+
+
+To enrich the semantic content of documents, new page structure elements such as <main>, <section>, <article>, <header>, <footer>, <aside>, 
+<nav>, and <figure> are added.
+<video>, <audio> and <canvas> elements were added
+Web APIS drag and drop
+
+tag vs element *******
+HTML Tags: Tags are the starting and ending parts of an HTML element. 
+They begin with < symbol and end with > symbol. Whatever written inside < and > are called tags.
+<b> </b>
+
+HTML elements: Elements enclose the contents in between the tags. They consist of some kind of structure or expression. 
+It generally consists of a start tag, content and an end tag.
+<b>This is the content.</b>
+
+HTML Attributes: It is used to define the character of an HTML element. It always placed in the opening tag of an element. 
+It generally provides additional styling (attribute) to the element.
+
+
+CSS-
+
+
+CSS stands for Cascading Style Sheets
+CSS describes how HTML elements are to be displayed on screen, paper, or in other media
+
+p {
+  color: red;
+  text-align: center;
+}
+
+
+p is a selector in CSS (it points to the HTML element you want to style: <p>).
+color is a property, and red is the property value
+text-align is a property, and center is the property value
+
+There are three ways of inserting a style sheet:
+
+External CSS  <link rel="stylesheet" href="mystyle.css">
+Internal CSS
+Inline CSS
+
+
+Box-Model
+
+Content/element - The content of the box, where text and images appear
+Padding - Clears an area around the content. The padding is transparent
+Border - A border that goes around the padding and content
+Margin - Clears an area outside the border. The margin is transparent
+
+why we use box-model***********
+
+The display Property
+display: inline;
+display: block;
+display: none;
+display: flex;
+display: inline-block
+
+
+flex properties
+
+The flex container properties are:
+flex-direction
+flex-wrap
+flex-flow : The flex-flow property is a shorthand property for setting both the flex-direction and flex-wrap properties.
+justify-content : Horizontally
+align-items : Vertically
+align-content
+
+The flex item properties are:
+order
+flex-grow
+flex-shrink
+flex-basis
+flex
+align-self
+
+
+
+visibility: hidden; vs display: none;
+diplay removes the element complete and next element occupies it's position
+visibility: hidden means that element is just not visible but present
+display	 	Specifies how an element should be displayed
+visibility	Specifies whether or not an element should be visible
+
+
+
+
+
+
+The position Property
+There are five different position values:
+static(By Default)
+relative
+fixed : is positioned relative to the viewport
+absolute---- position: absolute; is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
+sticky : is positioned based on the user's scroll position.
+
+
+
+
+
+overflow property controls what happens to content that is too big to fit into an area.
+The overflow property has the following values:
+visible - Default. The overflow is not clipped. The content renders outside the element's box
+hidden - The overflow is clipped, and the rest of the content will be invisible
+scroll - The overflow is clipped, and a scrollbar is added to see the rest of the content
+auto - Similar to scroll, but it adds scrollbars only when necessary
+
+
+
+While em is relative to the font-size of its direct or nearest parent, rem is only relative to the html (root) font-size.
+Use em units for sizing that should scale depending on the font size of an element other than the root. 
+Use rem units for sizing that doesn't need em units, and that should scale depending on browser font size settings. 
+Use rem units unless you're sure you need em units, including on font sizes.
+
+The float Property
+The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
+The float property can have one of the following values:
+left - The element floats to the left of its container
+right - The element floats to the right of its container
+none - The element does not float (will be displayed just where it occurs in the text). This is default
+inherit - The element inherits the float value of its parent
+In its simplest use, the float property can be used to wrap text around images.
+
+
+
+
+
+The clear property specifies what elements can float beside the cleared element and on which side.
+The clear property can have one of the following values:
+none - Allows floating elements on both sides. This is default
+left - No floating elements allowed on the left side
+right- No floating elements allowed on the right side
+both - No floating elements allowed on either the left or the right side
+inherit - The element inherits the clear value of its parent
+The most common way to use the clear property is after you have used a float property on an element.
+
+
+
+
+
+
+To horizontally center a block element (like <div>), use margin: auto;
+
+
+Diff selectors vs pseudo elements *************
+CSS selectors are used to "find" (or select) the HTML elements you want to style.
+
+
+
+
+
+
+A pseudo-class is used to define a special state of an element.
+For example, it can be used to:
+Style an element when a user mouses over it
+Style visited and unvisited links differently
+Style an element when it gets focus
+selector:pseudo-class {
+  property: value;
+}
+a:focus
+a:hover
+
+
+A CSS pseudo-element is used to style specified parts of an element.
+
+For example, it can be used to:
+
+Style the first letter, or line, of an element
+Insert content before, or after, the content of an element	
+selector::pseudo-element {
+  property: value;
+}
+
+Selector		Example				Example description
+::after			p::after			Insert something after the content of each <p> element
+::before		p::before			Insert something before the content of each <p> element
+::first-letter	p::first-letter		Selects the first letter of each <p> element
+::first-line	p::first-line		Selects the first line of each <p> element
+::selection		p::selection		Selects the portion of an element that is selected by a user
+
+
+CSS gradients let you display smooth transitions between two or more specified colors.
+
+CSS defines two types of gradients:
+
+Linear Gradients (goes down/up/left/right/diagonally)
+Radial Gradients (defined by their center)
+
+
+With the CSS transform property you can use the following 2D transformation methods:
+
+translate()
+rotate()
+scaleX()
+scaleY()
+scale()
+skewX()
+skewY()
+skew()
+matrix()
+
+
+Animation**********
+
+
+ box-sizing: border-box;
+
+
+CSS Specificity
+If there are two or more conflicting CSS rules that point to the same element, the browser follows some rules to determine 
+which one is most specific and therefore wins out.
+Think of specificity as a score/rank that determines which style declarations are ultimately applied to an element.
+The universal selector (*) has low specificity, while ID selectors are highly specific! 
+
+1em is 16px.
+
+

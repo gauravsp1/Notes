@@ -1,0 +1,32 @@
+Redux
+
+npm install redux
+
+Action - describes the changes in the sate
+Reducer - actually carries out the state changes given by action
+Store - holds the state of the application
+
+
+App---dispatch--->Reducer---->Store---subscribe--->App
+
+mapStateToProps
+mapDispatchToProps
+
+Middleware ******
+Redux middleware provides a third-party extension point between dispatching an action, and the moment it reaches the reducer. 
+People use Redux middleware for logging, crash reporting, talking to an asynchronous API, routing, and more.
+
+Middleware allows for side effects to be run without blocking state updates. 
+We can run side effects (like API requests) in response to a specific action,
+
+Redux Thunk middleware allows you to write action creators that return a function instead of an action. 
+The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met. 
+Used to make api calls
+
+Redux Thunk is a middleware that lets you call action creators that return a function instead of an action object. 
+That function receives the store’s dispatch method, which is then used to dispatch regular synchronous actions inside the function’s body 
+once the asynchronous operations have been completed.
+
+Once Redux Thunk has been installed and included in your project with applyMiddleware(thunk), you can start dispatching actions asynchronously.
+
+logger middleware 

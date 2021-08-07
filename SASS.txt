@@ -1,0 +1,40 @@
+SASS
+
+create variable for multiple purpose
+$color-blue: blue;
+
+Easy nesting
+
+mixin ****
+Can write a block a code and reuse it by @include
+Can also pass parameter in it
+
+SASS
+@mixins commonCode($parameter){
+color: blue;
+background:$parameter;
+}
+
+@include commonCode(argument)
+
+
+
+
+
+
+Git
+
+git init
+git add . or add file name
+git commit -m"first commit"
+git remote add origin repository address
+git branch
+git push  origin master / branch name
+
+git checkout  branch name
+git pull origin branch name  combination of git fetch and git merge
+git fetch which fetches the recent commits in the local repository and 
+git merge, which will merge the branch
+git remote -v
+// http://localhost:3000/121/5e26950a1d5f600929cafa07/60acb16a5d4f7a06e42acd26
+
