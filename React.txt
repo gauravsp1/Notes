@@ -757,6 +757,9 @@ static getDerivedStateFromError(error)
 componentDidCatch(error,info)
 
 
-
-
+Additional Hooks
+1. React Hook Form
+2. HookRouter
+3. Use-Http
+4. UseLocalStorage
 

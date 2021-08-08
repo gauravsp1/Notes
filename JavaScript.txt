@@ -765,3 +765,14 @@ The Number() method
 The parseInt() method
 The parseFloat() method
 
+Nullish coalescing operator (??) *****
+The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+
+Optional chaining (?.) *****
+The optional chaining operator (?.) enables you to read the value of a property located deep within a chain of connected objects without having to check that each reference in the chain is valid.
+let nestedProp = obj.first?.second;
+You can use optional chaining when attempting to call a method which may not exist. This can be helpful, for example, when using an API in which a method might be unavailable, either due to the age of the implementation or because of a feature which isn't available on the user's device.
+let result = someInterface.customMethod?.();
+Array item access with optional chaining
+let arrayItem = arr?.[42];
+

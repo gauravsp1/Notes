@@ -61,4 +61,8 @@ const [validationErrors, setValidationErrors] = useState({
     } 
   }
   
+  //Pass state through history url
+
+  history.push({pathname:'kyc', state:{ purchaseViaLoan: value ,  cartDetails: {cartDetails} }})
+
   
