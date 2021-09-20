@@ -15,6 +15,10 @@ a bit of installation  process *********
 What is React *****
 React is  front end, JavaScript library for building user interfaces or UI components. It is maintained by Facebook 
 
+One of the main ways it does that is by encouraging you to be declarative instead of imperative. 
+You get to declare how your components should behave and look under different states, and React’s internal machinery handles the complexity 
+of managing updates, updating the UI to reflect changes, and so on.
+
 Reconciliation *****
 Reconciliation is the process through which React updates the DOM. When a component's state changes, 
 React has to calculate if it is necessary to update the DOM. It does this by creating a virtual DOM and comparing it with the current DOM. 
@@ -61,7 +65,9 @@ The virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 It’s a step that happens between the render function being called and the displaying of elements on the screen. 
 This entire process is called reconciliation.
 
-
+Component ***********
+Encapsulated units of functionality that are the primary unit in React. They utilize data (properties and state) to render your UI as output;
+The rendering process (outputting and updating a UI based on your data) is predictable in React, and your components can hook into it using React’s APIs.
 
 Performance ********
 React uses VDOM, which makes the web applications run much faster than those developed with alternate front-end frameworks. 
@@ -384,6 +390,13 @@ React Router **********
 React Router, and dynamic, client-side routing, allows us to build a single-page web application with navigation without the page refreshing 
 as the user navigates
 React Router plays an important role to display multiple views in a single page application
+history.replace prevents going back from brower button.
+
+
+
+useRouteMatch **********
+
+
 
 
 
@@ -530,7 +543,7 @@ if else
 Element Variable
 ternary operator
 Short circuit operator ( Condition && what to display)
-Optional chaining
+Optional chaining--checkif conditional rendering
 
 Controlled Vs Uncontrolled Data input (any performance issue?) ***********
 Not sure but if it's suggested by react to use then it doesn't have performance issue
@@ -762,4 +775,19 @@ Additional Hooks
 2. HookRouter
 3. Use-Http
 4. UseLocalStorage
+
+DOM ***********
+
+The DOM provides a structured way of accessing, storing, and manipulating different parts of a document. 
+At a high level, the DOM is a tree structure that reflects the hierarchy of an XML document. This tree structure is comprised of subtrees
+that are in turn made of nodes. You’ll probably know these as the divs and other elements that make up your web pages and applications.
+You’ve probably used the DOM API before—but you may not have known you were
+using it. Whenever you use a method in JavaScript that accesses, modifies, or stores
+information related to something in an HTML document, you’re almost certainly using
+the DOM or its related APIs. This means that not all the methods you’ve used in JavaScript are
+necessarily part of the JavaScript language itself (document.findElemenyById,
+querySelectorAll, alert, and so on). They’re part of the bigger collection of web
+APIs—the DOM and other APIs that go into a browser—that allow you to interact with
+documents.
+
 

@@ -107,7 +107,24 @@ function fizzbuzz(){
 }
 fizzbuzz()
 
-
+let a =3;
+let b=5;
+for (var i = 1; i < 16; i++) {
+  a--;
+  b--;
+  if (a === 0 && b === 0) {
+    console.log("Fizz Buzz");
+    a=3;b=5;
+  } else if (a === 0) {
+    console.log("Fizz");
+    a=3
+  } else if (b === 0) {
+    console.log("Buzz");
+    b=5;
+  } else {
+    console.log(i);
+  }
+}
 
 
 
@@ -359,7 +376,7 @@ newArray=[array[0],array[1],array[2][0],array[2][1],array[2][2][0],array[2][2][1
 array[2][2][2][1]]
 
 let newarray= array.flat().flat().flat()
-
+array.flat(Infinity)
 
 console.log(newArray); //[1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -383,6 +400,22 @@ let maxi = arr[0];
     console.log(maxi)
 
 Math.max(arr)
+
+Second Max
+arr = [1, 180, 10, 7, 56, 90,140,200]
+
+function largest(arr){
+    let max=0
+    let secondMax=0
+    arr.forEach((value)=>{
+        secondMax=max>value?secondMax<value?value:secondMax :max
+         max=max<value?value:max
+          })
+    console.log("secondMax",secondMax)
+    console.log("max",max)
+}
+
+largest(arr)
 **********************************
 
 
@@ -469,6 +502,20 @@ function Counter() {
 console.log(new Counter().add(1).add(2).add(3).get())
 console.log("second",new Counter().add(1).add(10).reset().add(5).get())
 
+function Counter() {
+    var count = 0;
+        this.add = function (value) {
+            count = count + value;
+            return this
+        };
+        this.get = function () {
+            return count
+        };
+        this.reset = function () {
+            count = 0;
+            return this
+        }
+}
 
 
 	
@@ -532,7 +579,8 @@ outer();
 
 Output to the console will be “3”.
 
-There are three closures in the example, each with it’s own var b declaration. When a variable is invoked closures will be checked in order from local to global until an instance is found. Since the inner closure has a b variable of its own, that is what will be output.
+There are three closures in the example, each with it’s own var b declaration. When a variable is invoked closures will be checked in order 
+from local to global until an instance is found. Since the inner closure has a b variable of its own, that is what will be output.
 
 Furthermore, due to hoisting the code in inner will be interpreted as follows:
 
