@@ -183,18 +183,29 @@ Bundling is the process of following imported files and merging them into a sing
 This bundle can then be included on a webpage to load an entire app at once.
 
 
+Basic rules of Hooks ******
+Only Call Hooks at the Top Level
+Don’t call Hooks inside loops, conditions, or nested functions. 
+Only Call Hooks from React Functions
+
+
+
+
+
+
 
 Different React Hooks **********
+React hooks, is used to manage state in functional components,
 Basic Hooks-
 useState
 useEffect
-useContext
-
-Additional Hooks-
 useHistory
 useLocation
 useMemo
 useParams
+
+Additional Hooks-
+useContext
 useReducer
 useRouteMatch
 useCallback
@@ -290,11 +301,46 @@ Similar to window.location
 useMemo ****
 Cache result of the function called
 
+function returnValue(inputValue) {
+      return inputValue + 10;
+    }
+
+    var calculatedValue = useMemo(() => returnValue(10), [10]);
+	
+In other words, useCallback gives you referential equality between renders for functions. 
+And useMemo gives you referential equality between renders for values.
+	
+
+function foo() {
+  return 'bar';
+}
+
+const memoizedCallback = useCallback(foo, []);
+const memoizedResult = useMemo(foo, []);
+
+memoizedCallback;
+// ƒ foo() {
+//   return 'bar';
+// }
+memoizedResult; // 'bar'
+memoizedCallback(); // 'bar'
+memoizedResult(); // 🔴 TypeError
+
+So what is the difference? useCallback returns its function uncalled so you can call it later, 
+while useMemo calls its function and returns the result.
+
+
 useParams *********
 To pass parameter from url used in router
+<Route path="/payment/:outletId/:customerId/:tableno/:price" component={CheckoutBot} />
+
+import { useParams } from 'react-router';
+const { outletId, customerId, tableno, price } = useParams();
 
 
-
+useRef ****
+useRef gives us a mutable object whose current property refers to the passed initial value. 
+If we don't change it manually, the value will persist for the entire lifetime of the component.
 
 useReducer *****
 It is used for state management
@@ -320,6 +366,29 @@ clientside
 Custom Hooks **********
 Custom Hook is a JavaScript function whose name starts with use.
 Share logic-this are an alternatve to HOC and Render Props
+
+function useCustomHooks() {
+  let userName = "Mayank";
+  let userDesignation = "Trainer";
+  return [userName, userDesignation];
+}
+
+function ApplicationComponent() {
+  const [name, designation] = useCustomHooks();
+  return (
+    <div>
+      <h1>User Name: {name}</h1>
+      <h2>User Designation: {designation}</h2>
+    </div>
+   )
+}
+
+“use” appended to function name representing Custom Hooks
+The Custom Hook above is returning some values
+The Custom Hook can then be Re-used
+
+
+
 
 
 Set interval syntax ****
@@ -397,7 +466,31 @@ history.replace prevents going back from brower button.
 useRouteMatch **********
 
 
+Props data prev and next store ****
+https://blog.logrocket.com/how-to-get-previous-props-state-with-react-hooks/
 
+// custom hook for getting previous value 
+function usePrevious(value) {
+  const ref = useRef();
+  
+  useEffect(() => {
+    ref.current = value;
+  });
+  
+  return ref.current;
+}
+
+// the App where the hook is used 
+function Counter() {
+  const [count, setCount] = useState(0);
+  // 👇 look here
+  const prevCount = usePrevious(count)
+
+  return <h1>Now: {count}, before: {prevCount}</h1>;
+}
+
+// How the App is rendered 
+<Counter />
 
 
 Single page Routing *******
@@ -435,11 +528,14 @@ Route ******
 It is used to define and render component based on the specified path
 
 
-How to prevent Rerendering *******
+How to prevent Rerendering of child component *******
 Use memo to stop it
 UseCallBack()
 Return null from the render method.
-
+React.memo()
+A component can re-render even if its props don’t change. 
+More often than not this is due to a parent component re-rendering causing the child to re-render.
+To avoid this, we can wrap the child component in React.memo() to ensure it only re-renders if props have changed:
 
 techniques for optimizing react application performance ********
 useMemo Hook
@@ -505,25 +601,16 @@ class ErrorBoundary extends React.Component {
 
 
 
-
-Pure Function *******
-Pure functions are functions that accept an input and returns a value without modifying any data outside its scope(Side Effects). 
-Its output or return value must depend on the input/arguments and pure functions must return a value.
-Not only must pure function return a value but it must depend on the input.
-
-function pure(arg) {
-    return arg * 4
-}
-Its return value is only determined by its input values
-Its return value is always the same for the same input values
-
-
-
 Pure Component *******
 A React component is considered pure if it renders the same output for the same state and props.
 Pure Components in React are the components which do not re-renders when the value of state and props has been updated with the same values. 
 If the value of the previous state or props and the new state or props is the same, the component is not re-rendered.
 
+
+Why Pure Components? *******
+
+Pure components have some performance improvements and render optimizations because React implements the shouldComponentUpdate() method 
+for them with a shallow comparison for props and state.
 
 Controlled Vs Uncontrolled Component ***********
 Controlled- In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. 
@@ -585,6 +672,26 @@ Higher Order Component (HOC) is wrapping around "normal" component and provide a
 It is actually a function that takes one component and returns another component that wraps the original one
 Its used to enchance the input component and is reusable
 it is used to share common functionality between component without repeating code
+
+const WithComponent=OriginalComponent=> {
+    function NewComponent(props){
+        const [state,setState]=useState(0)
+        function Increament(){
+            setState((prev)=>prev+1)
+        }
+        function Decreament(){
+            setState((prev)=>prev-1)
+        }
+        return (
+            <div>
+                <OriginalComponent state={state} Increament={Increament} Decreament={Decreament} {...props}/>
+            </div>
+        )
+    }
+    return NewComponent
+}
+
+export default WithComponent
 
 
 Can HOC(High order Component) be pure components ***********
@@ -696,6 +803,27 @@ async function postData(){
 
 }
 
+difference between put and post ******
+Put is used to update the resource while post is used to create the resource.
+Put request can be safely called multiple times but post can't as it will create duplicate resources
+Watch this when free https://www.youtube.com/watch?v=1xVK2m817Bw
+
+
+
+PropTypes *****
+Used to fix the type of props
+
+import PropTypes from 'prop-types';
+function Employee({ name, salary }) {
+  return (
+    <h1>{name}'s salary is {salary + 0}</h1>
+  );
+}
+Employee.propTypes = {
+  name: PropTypes.string,
+  salary: PropTypes.number
+}
+
 
 
 Life Cycle Methods of react ***********
@@ -790,4 +918,13 @@ querySelectorAll, alert, and so on). They’re part of the bigger collection of 
 APIs—the DOM and other APIs that go into a browser—that allow you to interact with
 documents.
 
+componentWillUnmount equivalent in hooks****
+To do the cleanup after the component unmounts, we have a simple way to perform the equivalent of the componentWillUnmount using the useEffect Hook.
+The only thing that we need to do is to return a function inside the callback function of the useEffect Hook, like this:
 
+useEffect(() => {
+  window.addEventListener("mousemove", () => {});
+  return () => {
+    window.removeEventListener("mousemove", () => {})
+  }
+}, []);

@@ -380,6 +380,10 @@ array.flat(Infinity)
 
 console.log(newArray); //[1, 2, 3, 4, 5, 6, 7, 8]
 
+function Flatten(){
+	
+}
+
 **********************
 Input:
 
@@ -525,10 +529,12 @@ console.log("Find",arr.find(i=>i));  //Find 2
 console.log("Filter",arr.filter(i=>i));  // Filter (5) [2, 5, "ello", 4, 8]
 console.log("Reduce",arr.reduce(i=>i));  // Reduce null
 console.log("Map",arr.map(i=>i));  //  Map (9) [null, 2, 5, "", "ello", 4, undefined, 8, null]
-
-
+If we write condition in map it returns true or false according to the condition
+arr=[1,2,3,4,6]
+console.log("Mapss",arr.map(i=>i>3));  // [false, false, false, true, true]
 
     
+
 this.setState({​​​​​count:1}​​​​​);
 console.log("Value of count :",this.state.count);
 
@@ -537,8 +543,8 @@ console.log("Value of count :",this.state.count);
 let a={​​​​​a:1}​​​​​;
 let b={​​​​​a:1}​​​​​;
 let c=a;
-a===c;
-a===b;
+a===c; // true 
+a===b; // false
 
 
 
@@ -667,13 +673,5 @@ console.log(isEqual);
 
 
 
-
-
-
-
-
-
-
-
-
+console.log(1+ +"2"+"5") // "35"
 

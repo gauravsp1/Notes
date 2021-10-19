@@ -109,6 +109,8 @@ promise.
         console.log('Some error has occured'); 
     }); 
 
+Async functions always return a promise.
+async await holds the code execution till the promise is completed
 
 Chaining in Promise *****************
 When we consume first Promise it returns another Promise which is consumed by some other Promise this chain continues
@@ -140,8 +142,30 @@ Output:
 Multiple promise and want to pass if all promises succeed ******
 use Promise.all(Promise 1,promise 2,...).then((values) => {console.log(values);}
 
-Promise.race()  ***********
+Multiple Api hits at same time use Promise.all or axios.all
 
+import axios from 'axios';
+ 
+let one = "https://api.storyblok.com/v1/cdn/stories/health?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
+let two = "https://api.storyblok.com/v1/cdn/datasources/?token=wANpEQEsMYGOwLxwXQ76Ggtt"
+let three = "https://api.storyblok.com/v1/cdn/stories/vue?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
+ 
+const requestOne = axios.get(one);
+const requestTwo = axios.get(two);
+const requestThree = axios.get(three);
+ 
+axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+  const responseOne = responses[0]
+  const responseTwo = responses[1]
+  const responesThree = responses[2]
+  // use/access the results 
+})).catch(errors => {
+  // react on errors.
+})
+
+
+Promise.race()  ***********
+Resovle the promise which is completed first
 
 
 
@@ -223,6 +247,10 @@ z=500;  Uncaught SyntaxError: Identifier 'z' has already been declared
 
 Rest all same between LET and CONST
 
+The const keyword makes a variable itself immutable, not its assigned content.
+When the content is an object, this means the object itself can still be altered. 
+Therefore, it's possible to change the content of the object that is declared with const variable, 
+but you cannot assign a new object to a const variable.
 
 
 Default Parameter Values **********
@@ -426,7 +454,6 @@ If the object is not specified, functions in strict mode will return undefined a
 
 
 
-
 Minification-(bundle multiple files in a group) ***********
 Minification is the process of minimizing code and markup in your web pages and script files. 
 It's one of the main methods used to reduce load times and bandwidth usage on websites. 
@@ -467,6 +494,10 @@ var person1 = {
 }
 person.fullName.apply(person1, ["Oslo", "Norway"]);
 
+Bind creates a copy of that method with our Object and can be invoked latter. It is similar to call function.
+It doesn’t directly invoke it.
+
+let printMyName=person.fullName.bind(person1, "Oslo", "Norway");
 
 partial classes **********
 A “partial class” is a class whose methods and variables are parceled out into multiple files. 
@@ -475,6 +506,14 @@ in general JavaScript is a class-less language. Everything is an object.
 And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
 Purpose of partial classes is to allow a class's definition to span across multiple files. 
 This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
+
+
+
+Comparing two Objects ***********
+Comparing objects is easy, use === or Object.is(). This function returns true if they have the same reference and false if they do not. 
+Again, let me stress, it is comparing the references to the objects, not the keys and values of the objects.
+Same for array.
+
 
 
 how to extend a class ********
@@ -495,6 +534,7 @@ typeof null                // object
 null === undefined         // false
 null == undefined          // true
 
+typeOf function is function
 
 typeOf null ********
 n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
@@ -776,6 +816,28 @@ You can create it as function expression but not as regular function/statement f
 First Class Function ********
 
 Ability to pass function as argument or return a function from function is called first class function
+A programming language is said to have First-class functions when functions in that language are treated like any other variable. 
+For example, in such a language, a function can be passed as an argument to other functions, 
+can be returned by another function and can be assigned as a value to a variable.
+
+Pure Function *******
+Pure functions are functions that accept an input and returns a value without modifying any data outside its scope(Side Effects). 
+Its output or return value must depend on the input/arguments and pure functions must return a value.
+Not only must pure function return a value but it must depend on the input.
+
+function pure(arg) {
+    return arg * 4
+}
+Its return value is only determined by its input values
+Its return value is always the same for the same input values
+There are no state changes in pure functions
+map is an example of pure function
+
+The goal of our pure function is to keep our code predictable. To make sure of this, 
+a pure function should return the same output based on the same input; if a function does anything else it's no longer pure. 
+Here, we're always going to take in a number and receive that number multiplied by two
+Pure components in React should follow suit and never manipulate global state that other components maybe depending on as well. 
+
 
 
 
@@ -816,3 +878,5 @@ let result = someInterface.customMethod?.();
 Array item access with optional chaining
 let arrayItem = arr?.[42];
 
+Debounce
+https://www.freecodecamp.org/news/debounce-and-throttle-in-react-with-hooks/

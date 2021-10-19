@@ -102,6 +102,9 @@ Examples of semantic elements: <form>, <table>, and <article> ,nav,footer- Clear
 If async is present: The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
 If async is not present and defer is present: The script is executed when the page has finished parsing
 If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
+https://www.youtube.com/watch?v=IrHmpdORLu8
+Wise to use Defer as it maintains the order of excecution
+
 
 
 To enrich the semantic content of documents, new page structure elements such as <main>, <section>, <article>, <header>, <footer>, <aside>, 

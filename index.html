@@ -44,6 +44,26 @@
 
 
 
+    // Reverse a String
+//     function reverse(str){
+//         newString=""
+//         for(i=str.length-1;i>=0;i--){
+//           newString+=str[i]
+//         }
+//         return newString
+//     }
+// console.log(reverse("Gaurav"))
+
+// function reverse(str){
+//       if(str===""){
+//         return "";
+//       } 
+//       return reverse(str.substr(1)) + str.charAt(0)
+// }
+// function reverse(str){
+// return str.split("").reduce((acc,item)=>item+acc,"")
+// }
+
     // Kth smallest 
 
     // arr=[1,22,3,-4,5]
@@ -213,19 +233,13 @@
     //     }
     //     console.log(frequency);
     //     // console.log(s[1]);
-    //     for (let i = 0; i < s.length; i++) {
-    //         if (frequency[s[i]] === 1) console.log(s[i]);
+    //     for (let item in frequency) {
+    //         if (frequency[item] === 1){
+              // return console.log(item);
+    // } 
     //     } 
     // };
 
-    // var firstUniqChar = function(s) {
-
-    //     for(i=0; i<s.length; i++)
-    //         if(s.indexOf(s[i])!==s.lastIndexOf(s[i])) return s[i]
-    //     return "No repeat"
-    // };
-
-    // console.log(firstUniqChar(sentence)); 
 
 
     // Sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
@@ -300,7 +314,7 @@
 //     "1" + true // "1true"
 //     "2" > "3" // false
 //     "two" > "three" // true it compares letters with highest number 
-
+        // "true"==true  // ans is false as "true" converted into NaN and true into 1
 
 // loop in react 
 // function App() {
@@ -339,7 +353,21 @@
 
 // console.log(uniqueArray);
 
-
+// function Flatten(arr){
+//   someNewArray=arr.reduce((acc,item)=>{
+//       if(Array.isArray(item)){
+//         acc= acc.concat(Flatten(item))
+//       }
+//       else{
+//         acc.push(item) 
+//         or 
+//         acc=[...acc,item]
+//       }
+//       return acc
+//   },[])
+//       return someNewArray
+// }
+// console.log(Flatten(arr));
 
 
 // const brunch = {
@@ -357,8 +385,8 @@
 
 // var trees = ["xyz","xxxx","test","ryan","apple"];
 // delete trees[3];
-// console.log(trees.length);
-
+// console.log(trees.length);  //5
+// console.log(trees);   //  ['xyz', 'xxxx', 'test', empty, 'apple']
 
 
 
@@ -556,10 +584,27 @@
 
 // largest(arr)
 
+// var a={name:"Gaurav",surname:"Pawar"}
+// var b={name:"Varun",state:"Hs"}
+
+// var c={...a,...b}
+
+// console.log(c)
 
 
 
+// const arr =[{age: 15, isSelected: false}, {age:20, isSelected: false},
+//     { age: 25 , isSelected:false}]
 
+//     let arry4=arr.reduce((total,value)=>{
+//     if(value.age>18){
+//          value.isSelected=true
+//    total.push(value)
+//     }
+//    return total
+// },[])
+
+// console.log("newarray",arry4);
 
 
 
