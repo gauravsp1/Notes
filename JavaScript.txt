@@ -251,7 +251,7 @@ The const keyword makes a variable itself immutable, not its assigned content.
 When the content is an object, this means the object itself can still be altered. 
 Therefore, it's possible to change the content of the object that is declared with const variable, 
 but you cannot assign a new object to a const variable.
-
+This is possible because obj is refrenceType and not primitive data type.
 
 Default Parameter Values **********
 function myFunction(x, y = 10) {
