@@ -2,14 +2,14 @@
 ******* First *****
 
 Performance monitoring
-What is CORS issue, how to resove them  ****
+What is CORS issue, how to resove them  ***********************************************************************
 forcefull make reload the page
 cache clear (any inbuilt react components)
 Where does async/promise keep the code before going into callBack Queue
 Why do we need pure functions/ Pure components
 after How long does a authenticate token expires  ****
 Core Web Vitals  ****
-
+Set array method?
 
 ******************************************
 What is ContextAPI
@@ -32,7 +32,10 @@ Why are HOC needed?
 Pure function/HOC in Redux?
 Learn More about Objects
 javascript converts objects to "[object Object]" why??
-
+React class based life cycle Component will recive props
+Prototype inheritence
+cane we give hight and width to inline elements
+Read more about "this"
 
 ************Project****************
 skeleton
@@ -41,11 +44,4 @@ skeleton
 
 i have experience in developing websites using react and i think "Company Name" would be a greate place to learn more about Frontend technolgy,
 i think working at "Company Name" will help me grow technically and professionally as well.
-
-
-
-
-
-
-
 

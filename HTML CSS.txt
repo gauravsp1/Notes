@@ -216,6 +216,10 @@ scroll - The overflow is clipped, and a scrollbar is added to see the rest of th
 auto - Similar to scroll, but it adds scrollbars only when necessary
 
 
+object-fit: cover;
+Whenever you're displaying an image on the website, use the object-fit property with the value of cover so the image will scale and fit 
+as per the specified image width and height dimension.This will make your images look better rather than squizzed or cropped 
+even If all the actual image sizes are not of the same width and height.
 
 While em is relative to the font-size of its direct or nearest parent, rem is only relative to the html (root) font-size.
 Use em units for sizing that should scale depending on the font size of an element other than the root. 

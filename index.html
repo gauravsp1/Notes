@@ -535,7 +535,16 @@
 // console.log(a);
 
 
+// var t=10
 
+// function hello(){
+//   if(!t){
+//     var t=20
+//   }
+//   console.log(t); //20
+// }
+
+// hello()
 
 // for(let i=0; i<5; i++){
 // 	setTO(()=>{
@@ -550,7 +559,7 @@
 
 // let counter = 1;
 // let a = counter++; 
-// alert(a);
+// alert(a);  //1
 
 
 // state = {
@@ -609,10 +618,102 @@
 
 
 
+// function outer(){
+//     var name="Gaurav"
+//   return  inner=()=>{
+//         var surname="pawar"
+//         console.log(name+surname);
+//         console.log(this);
+//     }
+// }
+
+// var check=outer()
+// check()
+
+
+// function series(num){
+//     // if its -ve or zewro msg- grt than zero
+//     //if +ve return num as it
+//     //if decial return grt part of the decimal
+//     let array=num.toString().split(".")
+//     // console.log(array)
+//     if(num<=0){
+//         console.log("number should be Greater than zero");
+//     }
+//     else if(num.toString().includes(".")){
+//             let grtNum=array[0]>array[1]?array[0]:array[1]
+//             console.log(parsInt(grtNum))
+//     }
+//     else{
+//         console.log(num);
+//     }
+
+// }
+
+// series(55.657)
+// series(-25)
+// series(100)
+// series(25.13)
+
+// let array=[3,5,4,3,5,3]
+
+// value 3 is dup at index 3
+// value 5 is dup at index 4
+// value 3 is dup at index 5
+
+
+// function Duplicate(arr){
+//       arr.forEach((value,index)=>{
+//         for(i=index+1;i<arr.length;i++){
+//           if(value==arr[i]){
+//             return console.log(`value ${value} is dup at index ${i}`);
+//           }
+//         }
+//       })
+// }
+
+// Duplicate(array)
+
+// data=[2,5]
+// data.length>0?
+
+// useEffect(()=>{
+//     if(data.length>0){
+//         Our Api call
+//     }
+// },[Fetchdata])
 
 
 
+// const arr = [
+//   { id: 1, name: "test1" },
+//   { id: 2, name: "test2" },
+//   { id: 2, name: "test3" },
+//   { id: 3, name: "test4" },
+//   { id: 4, name: "test5" },
+//   { id: 5, name: "test6" },
+//   { id: 5, name: "test7" },
+//   { id: 6, name: "test8" }
+// ]
 
+// let newArray = arr.filter((value, index, array) => {
+//      return (array.findIndex((innerValue => {
+//       return innerValue.id === value.id
+//   })) === index
+//   )
+// })
+
+// const filteredArr = arr.reduce((acc, current) => {
+//   const x = acc.find(item => item.id === current.id);
+//   if (!x) {
+//     return acc.concat([current]);
+//   } else {
+//     return acc;
+//   }
+// }, []);
+
+// console.log(newArray);
+// console.log(filteredArr);
 
 
 

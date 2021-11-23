@@ -177,6 +177,12 @@ Updation	The parent component sets props for the children components
 
 
 
+Prop Drilling *********
+Prop drilling is basically a situation when the same data is being sent at almost every level due to requirements in the final level. 
+
+
+
+
 Bundling ********
 Most React apps will have their files “bundled” using tools like Webpack, Rollup or Browserify. 
 Bundling is the process of following imported files and merging them into a single file: a “bundle”. 
