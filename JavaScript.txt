@@ -111,6 +111,11 @@ promise.
 
 Async functions always return a promise.
 async await holds the code execution till the promise is completed
+Async/Await is a fancier syntax to handle multiple promises in synchronous code fashion. 
+When we put async keyword before a function declaration, it will return a promise and we can use await keyword inside it 
+which blocks the code until promise it awaits resolves or rejects.
+
+
 
 Chaining in Promise *****************
 When we consume first Promise it returns another Promise which is consumed by some other Promise this chain continues
@@ -550,10 +555,8 @@ The map method is used to perform operation on each item of an array, while the 
 
 How to make a copy of array or object *******
 use spread operator
-Array.from()
-Array.map()
 Array.concat()
-Array.slice()
+Array.slice(0)
 
 
 forEach vs Map ***********
@@ -615,6 +618,9 @@ and both elements have registered a handle to that event.
 
 
 Event delegate **************
+Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
+we can add an event listener to a parent element and call an event on a particular target using the . target property of the event object.
+
 
 
 
@@ -880,3 +886,31 @@ let arrayItem = arr?.[42];
 
 Debounce
 https://www.freecodecamp.org/news/debounce-and-throttle-in-react-with-hooks/
+
+
+
+What is CORS issue *****
+Cross-origin resource sharing is a mechanism that allows restricted resources on a web page to be requested from another domain 
+outside the domain from which the first resource was served.
+To fix it add allowed origins names into backend server
+
+after How long does a authenticate token expires ****
+valid for 60 days
+
+
+
+Synthetic events ******
+https://medium.com/@maxfpowell/synthetic-events-in-react-a95e6dc80c99
+Synthetic events are the wrapper that React uses to standardise event functionality across browsers. 
+It is important to remember that events are not part of core Javascript. 
+Instead, they come from each browser’s own Javascript API — meaning that how browsers handle events will differ. 
+Browsers can recognise many different types of events (e.g MouseEvent, KeyboardEvent or ErrorEvent) and will have varying levels 
+of functionality for each of them. In React, we have only the SyntheticEvent object, 
+with a common functionality that creates consistency across browsers.
+
+
+
+
+
+
+

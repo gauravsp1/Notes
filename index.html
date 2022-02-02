@@ -347,12 +347,6 @@
 // let newarray= arr.flat()
 // let newarray= arr.flat(Infinity)
 
-// let uniqueArray = newarray.filter(function(item, index) {
-//     return newarray.indexOf(item) == index;
-// })
-
-// console.log(uniqueArray);
-
 // function Flatten(arr){
 //   someNewArray=arr.reduce((acc,item)=>{
 //       if(Array.isArray(item)){
@@ -537,14 +531,8 @@
 
 // var t=10
 
-// function hello(){
-//   if(!t){
-//     var t=20
-//   }
-//   console.log(t); //20
-// }
 
-// hello()
+
 
 // for(let i=0; i<5; i++){
 // 	setTO(()=>{
@@ -716,12 +704,140 @@
 // console.log(filteredArr);
 
 
+// class Calculator{
+//     count =0
+//     add(value){
+//        ;
+//        this.count=value+this.count
+//        console.log(this.count)
+//        return this 
+//     }
+//     subtract(value){
+//        ;
+//        this.count= this.count-value
+//        console.log(this.count)
+//        return this 
+//     }
+//     divide(value){
+//        ;
+//        this.count= this.count/value
+//        console.log(this.count)
+//        return this 
+//     }
+//     multiply(value){
+//        ;
+//        this.count= value*this.count
+//        console.log(this.count)
+//        return this 
+//     }
+//     reset(){
+//         this.count=0
+//         return this
+//     }
+// }
+
+// const c = new Calculator();
+
+// c.add(5);
+
+// c.reset(); // resets value to 0;
+
+// c.subtract(5);
+
+// c.reset();
+
+// c.add(10).subtract(5).divide(2);
+
+// c.reset();
+
+// c.add(10).subtract(5).divide(2);
+
+// c.reset();
+
+// c.add(10).subtract(5).divide(2).multiply(5);
+
+// c.reset();
 
 
 
+// const f1 = (index) => {
+//     return new Promise((res,rej)=>{
+//         setTimeout(()=>{
+//             res(index)
+//         },1000)
+//     })
+// }
+
+// let a = []
+// for(let i=0;i<=100;i++){
+//     a.push(f1)
+// }
+
+// a.forEach((item,index)=>{
+//       item(index).then((data)=>{
+//        console.log(data)
+//       })
+// })
 
 
 
+// var myObject = {
+//     foo: "bar", 
+//     func: function() {
+//          var self = this; 
+//          console.log("outer func: this.foo = " + this.foo);
+//          console.log("outer func: self.foo = " + self.foo); 
+         
+//          (function() { 
+//            console.log("inner func: this.foo = " + this.foo);
+//             console.log("inner func: self.foo = " + self.foo); 
+//             }()); 
+//           }   
+//       }; 
+            
+//     myObject.func();
+
+
+    // Bar
+    // bar 
+
+    // undefined
+    // bar
+
+
+
+//   var b=15;
+// function foo(){
+//     var b=5;
+
+//     function baz (){
+//         console.log(b)  
+//     }
+//     exec(baz);
+// }
+
+// function exec(func){
+//     var b=10;
+//     func();
+// }
+// foo();
+
+//5
+
+// function sum(a){
+//     return function (b){
+//       if(b){
+//         return sum (a+b)
+//       }
+//       else{
+//         return a
+//       }
+//     }
+// }
+
+// const sum=(a)=>(b)=> b?sum(a+b):a
+
+// sum(1)(2)(3)(4)()
 
 
 

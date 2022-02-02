@@ -213,8 +213,8 @@ useParams
 Additional Hooks-
 useContext
 useReducer
-useRouteMatch
 useCallback
+useRouteMatch
 
 https://reactjs.org/docs/hooks-reference.html
 
@@ -297,7 +297,7 @@ function ThemedButton() {
 useHistory *******
 History also has location but it is mutable
 Similar to window.history
-
+const history=useHistory()
 
 
 useLocation *******
@@ -551,17 +551,12 @@ Use constant and inline elements.
 Lazy Loading
 Use PureComponents
 Invoke high order components
-
+React.memo()
 
 Synthetic Events ********
 
 
 
-
-Spread Operator ************
-use ...
-it spreads the contain
-Usefull to get Previous values, update values in object
 
 
 
@@ -570,9 +565,6 @@ In a nutshell, Material-UI is an open-source project that features React compone
 ... With over 35,000 stars on GitHub, Material-UI is one of the top user interface libraries for React out there
 
 
-ArrayBuffer ***********
-The ArrayBuffer object is used to represent a generic, fixed-length raw binary data buffer
-const buffer = new ArrayBuffer(8);
 
 
 
@@ -637,6 +629,8 @@ Element Variable
 ternary operator
 Short circuit operator ( Condition && what to display)
 Optional chaining--checkif conditional rendering
+Nullish coalescing operator (??)
+
 
 Controlled Vs Uncontrolled Data input (any performance issue?) ***********
 Not sure but if it's suggested by react to use then it doesn't have performance issue

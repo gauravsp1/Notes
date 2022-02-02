@@ -99,8 +99,8 @@ Examples of semantic elements: <form>, <table>, and <article> ,nav,footer- Clear
 
 
 <script src="demo_async.js" async></script>
-If async is present: The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
-If async is not present and defer is present: The script is executed when the page has finished parsing
+If async is present: The script is fetched simultaneouly with HTML parsing and immediately executed.
+If async is not present and defer is present: The script is fetched simultaneouly with HTML parsing but executed when the page has finished parsing
 If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
 https://www.youtube.com/watch?v=IrHmpdORLu8
 Wise to use Defer as it maintains the order of excecution
@@ -163,6 +163,17 @@ display: block;
 display: none;
 display: flex;
 display: inline-block
+
+
+can we give height and width to inline elements *****
+No. IF you want to then convert it into display:inline-block
+You cannot set the height and width of block-level elements in CSS.
+
+
+Diff between display: inline; and display: inline-block *******
+we give height and width to inline-block  but not to inline elements
+You cannot set the height and width of block-level elements in CSS.
+
 
 
 flex properties
@@ -326,6 +337,14 @@ If there are two or more conflicting CSS rules that point to the same element, t
 which one is most specific and therefore wins out.
 Think of specificity as a score/rank that determines which style declarations are ultimately applied to an element.
 The universal selector (*) has low specificity, while ID selectors are highly specific! 
+0 *
+1 element tag
+10 Class
+100 ID
+1000 inline css
+10000 !important
+
+
 
 1em is 16px.
 

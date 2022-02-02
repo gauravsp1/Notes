@@ -9,6 +9,12 @@ for(var i=0;i<10;i++){
 
 if we use let then it will print normally..but Y?
 
+In the first example, using var, the variable declared in the loop redeclares the variable outside the loop.
+
+In the second example, using let, the variable declared in the loop does not redeclare the variable outside the loop.
+
+When let is used to declare the i variable in a loop, the i variable will only be visible within the loop.
+
 
 
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -368,22 +374,6 @@ var b=100
 [a,b]=[b,a]
 
 
-
-
-var array=[1,2,[3,4,[5,6,[7,8]]]]
-
-newArray=[array[0],array[1],array[2][0],array[2][1],array[2][2][0],array[2][2][1],array[2][2][2][0],
-array[2][2][2][1]]
-
-let newarray= array.flat().flat().flat()
-array.flat(Infinity)
-
-console.log(newArray); //[1, 2, 3, 4, 5, 6, 7, 8]
-
-function Flatten(){
-	
-}
-
 **********************
 Input:
 
@@ -675,3 +665,130 @@ console.log(isEqual);
 
 console.log(1+ +"2"+"5") // "35"
 
+
+
+/**
+ * Create a Javascript class based calculator which can
+ * perform below operations
+ *
+ * All operations output should be printed on console
+ */
+
+const c = new Calculator();
+
+c.add(5);
+
+c.reset(); // resets value to 0;
+
+c.subtract(5);
+
+c.reset();
+
+c.add(10).subtract(5).divide(2);
+
+c.reset();
+
+c.add(10).subtract(5).divide(2);
+
+c.reset();
+
+c.add(10).subtract(5).divide(2).multiply(5);
+
+c.reset();
+
+Calculator.factorial(5); // Class function
+
+
+
+
+
+// const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// for (let i = 0; i < 10; i++) {
+//   setTimeout(() => console.log(a[i]), 1000);
+// // console.log(a[i])
+// }
+
+// i=0
+// i=1
+
+
+// const clothes = ['jacket', 't-shirt'];
+// clothes.length = 0;
+// console.log(clothes[0])
+
+// b=10
+// function display() {
+//     var b=10
+//     var a;
+// // b=10
+// // var a =b
+
+//     }
+//     display();
+//     console.log('b', typeof b === 'undefined'); false
+//     console.log('a', typeof a === 'undefined'); true
+
+// const sum =(a)=>(b)=>(c)=> console.log(a+b+c);
+
+
+// sum (1)(2)(3)
+
+
+
+let array=[1, 2, 3, 4, ,5, 6, 7, 8, 9, 10]
+// {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]}
+
+// let result=array.sort((a,b)=>a%2-b%2)
+
+// console.log("Result",result);
+
+let result=array.reduce((acc,item)=>{
+        // acc["even"]=[]
+        // acc["odd"]=[]
+
+        if(item %2===0){
+             acc.even.push(item)   
+        } else{
+            acc.odd.push(item)
+        }
+        return acc
+},{
+    even:[],
+    odd:[]
+})
+
+console.log("Result",result);
+
+
+
+// Sentence case 
+// Write a method which take one parameter that is string containing sentence and return a string with first letter of word is capital and rest is in lower case ?
+// const name = 'deepaK khanDelwal PqR;
+// Expected result -> Deepak Khandelwal Pqr
+
+
+// function CapitalFistLetter(value){
+    
+//    const result= value.toLowerCase().split(" ").map((item)=>{
+//                     return  newsentence= newsentence.charAt(0).toUpperCase() +newsentence.slice(1)
+//         }).join(" ")
+
+//         console.log(result);
+   
+// }
+
+// const namesentence = "deepaK khanDelwal PqR GauRaV"
+
+// CapitalFistLetter(namesentence)
+
+// // splice
+// // CharAt 
+
+
+
+const num1 = 10;
+
+
+
+const res = num1.add(20, 30, 40).subtract(20);
+console.log(res);
