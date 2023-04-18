@@ -1,0 +1,308 @@
+what is a server***************
+CDN? ********
+CrossOrigin ********
+package.json details ********
+React.CreateElement() ********
+React vs ReactDOM ********
+render in React means? ********
+What is DOM ********
+crossOrigin resource ********
+What does bundler do? ********
+npm vs yarn ********
+Latest ES features************
+
+package.json ********
+It containts the specifics required by npm.
+package.json is a file that contains metadata about the project, such as the project name, version, and a list of dependencies that the project relies on. This file is used to manage dependencies and scripts for the project. The package.json file can be manually edited, but it is typically generated automatically using a package manager such as npm (Node Package Manager) or Yarn.
+
+
+package-lock.json ********
+package-lock.json is a file that is generated automatically by npm when installing dependencies. It is used to lock down the versions of the dependencies that are installed, ensuring that the same versions are used across different environments and by different developers. This helps to prevent issues that can arise when different developers use different versions of the same dependency.
+
+Caret vs tilde **************
+
+
+GitIgnore Files(package-lock.json to keep or not?) **********
+
+Hot Module Reloading **************
+
+Read parcel document - https://parceljs.org/features/development/
+
+browserList **************
+
+script types in HTML **************
+
+put everything which you can regenerate on server into git ignore
+
+polifilly **************
+Tree shaking **************
+babel-plugin-transform-remove-console(5th video namaste react) **************
+more about jsx **************
+tab-index **************
+
+Because of Babel JS is able to read HTML like code in Js files 
+JSX => React.createElement  =>  Obj  =>  HTML
+
+
+React element **************
+const heading = (
+	<h1>Title</h1>
+)
+
+React functional component **************
+const heading = ()=>(
+	<h1>Title</h1>
+)
+
+
+
+We cannot write {let xyz=33} inside jsx *******************
+JSX is a syntax extension for JavaScript that allows you to write HTML-like code inside your JavaScript files. When you write JSX, it needs to be transpiled to valid JavaScript code before it can be executed in a web browser or Node.js environment.
+
+In JSX, curly braces {} are used to embed JavaScript expressions inside the HTML-like code. When you use curly braces, the code inside the braces is evaluated as JavaScript and the result is inserted into the output.
+
+In the code you provided, {let xyz=33} is not a valid JavaScript expression, because you cannot use the let keyword inside curly braces. Instead, you need to declare the variable outside of the JSX expression and then use it inside the expression, as shown in the corrected code example I provided.
+
+Config Driven UI *****************************
+
+React Fiber(New reconciliation engine responsible for diff algorithm)****************
+https://github.com/acdlite/react-fiber-architecture
+
+Why not to use index as a key ****************
+
+https://legacy.reactjs.org/docs/reconciliation.html#recursing-on-children
+https://robinpokorny.com/blog/index-as-a-key-is-an-anti-pattern/
+
+
+
+changing variable values doesn't re-render component so we use useState, react does not tract the variables it tracks only useState variable *****************************
+bolean values are not printed *****************************
+
+
+Micro-services *****************************
+Different micro-services are connected by different port under same domain name
+
+Expression vs Statement *****************************
+
+https://react.dev/learn/javascript-in-jsx-with-curly-braces *****************************
+
+
+Why to use CDN for images *****************************
+
+Formik *****************************
+
+new changes of react router *****************************
+
+async await, axios, promises read more *********************
+
+CSR vs SSR ******************
+
+Practice login, calculator,dynamic table component *******************
+
+create browserRouter******************
+
+Outlet,useRouteError in react router*********
+
+have code more modular, readable, maintanable, testable, reusable *******************
+
+Function statements vs Function expressions****************
+
+In JavaScript, there are two primary ways to define a function: function statements and function expressions. While both approaches allow you to create reusable blocks of code, there are some important differences between the two.
+
+Function statements are created using the function keyword followed by the function name and a set of parentheses. Here's an example of a function statement:
+
+javascript
+Copy code
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+One important characteristic of function statements is that they are "hoisted" to the top of their scope. This means that you can call a function statement before it is defined, like so:
+
+javascript
+Copy code
+greet('Alice');
+
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+Function expressions, on the other hand, involve defining a function as part of an expression, typically by assigning it to a variable. Here's an example of a function expression:
+
+javascript
+Copy code
+const greet = function(name) {
+  console.log(`Hello, ${name}!`);
+};
+One key difference between function statements and function expressions is that function expressions are not hoisted. This means that you must define the function expression before you can call it:
+
+javascript
+Copy code
+const greet = function(name) {
+  console.log(`Hello, ${name}!`);
+};
+
+greet('Alice');
+Another difference between function statements and function expressions is that function expressions can be anonymous, meaning that they do not have a name. Here's an example of an anonymous function expression:
+
+javascript
+Copy code
+const greet = function(name) {
+  console.log(`Hello, ${name}!`);
+};
+Overall, both function statements and function expressions are useful in different contexts. Function statements are more traditional and can be useful for defining global functions or methods, while function expressions are more flexible and can be useful for defining anonymous functions or functions that are passed as arguments to other functions.
+
+
+
+SASS**************
+
+Port No. meaning*********
+
+super in class based Component
+
+When a class is called constructor is the first thing called, so create a state here
+
+we donot mutate state directly,why?
+
+
+Why we cannot use async for useEffect callback function************
+
+react life cycle in detail *************
+
+Redux practice*********
+API Context*********
+
+
+Why we need Custom Hooks**************
+Reusability
+
+When to write custom hook vs Functional component*********
+
+
+Chunking/Code Splitting/Dyanamic bundling/Lazy loading/onDemand loading**************
+
+
+Should we do lazy loading inside component**************
+
+React Dev Tools**************
+profiler
+component 
+
+
+Web optimization**************
+
+web optimization parameters(first page loading time)(webVitals)**************
+how to use multiple context , nested context**************
+
+Redux Tool kit**************
+
+
+use extaclty what you want to subscribe in redux for enhancing performance (Lecture 14- timestamp: 2hr 40min)
+
+web Sockets*************
+
+
+Practice CSS********
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+gauzreact11 	
+Gauz@241
+
+
+
+Gaurav@24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
