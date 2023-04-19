@@ -80,8 +80,6 @@ Better handling of asynchronous operations
 Better flow of control definition in asynchronous logic
 Better Error Handling
 
-//A Promise has four states:-
-
 A Promise has three states:-
 
 fulfilled/resolved: Action related to the promise succeeded
@@ -908,6 +906,13 @@ Browsers can recognise many different types of events (e.g MouseEvent, KeyboardE
 of functionality for each of them. In React, we have only the SyntheticEvent object, 
 with a common functionality that creates consistency across browsers.
 
+Web Workers********
+
+
+
+
+
+ Service Workers********
 
 
 

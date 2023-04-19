@@ -90,6 +90,10 @@ tablet 880*
 mobile 576*
 
 
+laptop,desktop 1280 
+table 768 to 1024 pixels
+mobile  320 to 414 pixels
+
 
 A semantic element clearly describes its meaning to both the browser and the developer.
 
