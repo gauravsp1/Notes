@@ -14,7 +14,7 @@ In the first example, using var, the variable declared in the loop redeclares th
 In the second example, using let, the variable declared in the loop does not redeclare the variable outside the loop.
 
 When let is used to declare the i variable in a loop, the i variable will only be visible within the loop.
-
+This happens because of block level scope.
 
 
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -25,20 +25,46 @@ console.log(numArray)
 
 
 Sort array- high to low,low to high *******
+
+array.sort(sortingFunction);
+
+Here, array is the array to be sorted, and sortingFunction is an optional function that determines the order in which the elements of the array are sorted.
+If the sortingFunction is not provided, the array will be sorted in alphabetical order by default.
+The sortingFunction takes two arguments and returns a value based on the comparison of the two values. 
+If the return value is negative, the first value is sorted before the second value. 
+If the return value is positive, the second value is sorted before the first value. 
+If the return value is zero, no sorting is performed for the two values.
+
 var numArray = [140000, 104, 99];
 numArray.sort(function(a, b) {
   return a - b;    //low to high
 });
 
+array to String *******
+array.toString()
 
 sort array on frequency of appearance *******
 
 
 Remove duplicate from array *******
 
-uniqueArray = array.filter(function(item, index) {
-    return array.indexOf(item) == index;
+const array = [1, 2, 2, 3, 3, 4, 5, 5];
+const uniqueArray = [...new Set(array)];
+console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
+
+uniqueArray = array.filter(function(item, index,self) {
+    return self.indexOf(item) === index;
 })
+
+const array = [1, 2, 2, 3, 3, 4, 5, 5];
+const uniqueArray = array.reduce((accumulator, currentValue) => {
+  if (!accumulator.includes(currentValue)) {
+    accumulator.push(currentValue);
+  }
+  return accumulator;
+}, []);
+console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
+
 
 
 Firt sort the array
@@ -60,18 +86,14 @@ console.log(noDups); // [1,2,3]
 How to find prime no in array ********
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-numArray = numArray.filter((number) => {
-    if(number===1){
-      return false  
+numArray = numArray.filter((item,index)=>{
+    if(item%2===0) {
+        return true
     }
-   else if(number===2){
-      return true  
+    else {
+        return false
     }
-  for (var i = 2; i <= Math.sqrt(number); i++) {
-    if (number % i === 0) return false;
-  }
-  return number;
-});
+})
 
 console.log(numArray);
 
@@ -81,12 +103,7 @@ console.log(numArray);
 capitalize the last letter of each word in a string *********
 var input = "Party like its 2015";
 
-input = input.toLowerCase().split(" ")
-for(var i = 0 ; i < input.length ; i++){
-    var len = input[i].length;
-    input[i] = input[i].substring(0, len-1) + input[i].substr(len-1,len).toUpperCase();
-  }
-  input = input.join(" ")
+input = input.split(" ").map((item)=>item.slice(0,-1) + item.slice(-1).toUpperCase()).join(" ")
 console.log(input)
 
 //string.substr(start, length)
@@ -150,6 +167,18 @@ const fib =(N)=> {
 
 console.log(fib(4));
 
+const fib=(length)=>{
+        let memo=[]
+        memo[0]=0
+        memo[1]=1
+        Array.from({length:length}).forEach((item,index)=>{
+            if(index<length-2){
+
+                memo[index+2]=memo[index+1]+memo[index]
+            }
+        })
+        return memo
+}
 
 
 Reverse string **********
@@ -158,7 +187,11 @@ var revsentence =sentence.split('').reverse().join('')
 console.log(revsentence)
 
 
-
+const str = 'hello world';
+const reversedStr = str.split('').reduce((accumulator, currentValue) => {
+  return currentValue + accumulator;
+}, '');
+console.log(reversedStr); // Output: dlrow olleh
 
 
 12 hr clock to 24 hrs **************
@@ -277,13 +310,12 @@ function angle(min, hr){
 	
 }
 
-
-***********************************
+Sum of digits ********
 
 var x=55
  var new =x.toString()
 output as 10
-
+------------------------------------------
 var x=55
  var newx =x.toString()
 var sumt=0
@@ -297,7 +329,7 @@ function sum(newx){
 }
 
 sum(newx)
-
+----------------------------------------
 
 var value = 2568,
     sum = 0;
@@ -308,6 +340,17 @@ while (value>0) {
 }
 
 console.log(sum);
+
+----------------------------------------------------
+function sumDigits(number) {
+  if (number === 0) {
+    return 0;
+  } else {
+    return number % 10 + sumDigits(Math.floor(number / 10));
+  }
+}
+
+console.log(sumDigits(2345)); // Output: 14
 
 *******************************************
 
@@ -720,8 +763,8 @@ Calculator.factorial(5); // Class function
 // function display() {
 //     var b=10
 //     var a;
-// // b=10
-// // var a =b
+// 
+// // var a=b
 
 //     }
 //     display();
@@ -792,3 +835,36 @@ const num1 = 10;
 
 const res = num1.add(20, 30, 40).subtract(20);
 console.log(res);
+
+
+const array = [ 'fatfish', 'medium', 'blog', 'fat', 'fish' ]
+
+console.log(array.at(-1)) // fish
+
+
+Instead of 
+const len = array.length
+
+console.log(array[ len - 1 ]) // fish
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

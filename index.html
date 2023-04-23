@@ -157,15 +157,19 @@
 
 
 
-    // Factorial
+//     Factorial
 
-    // let n=5
-    // let product=1
-    // while(n>1){
-    //   product=product*n
-    //   n--
-    // }
-    // console.log(product);
+//     const factorial=(number)=>{
+//   if (number === 0 || number === 1) {
+//     return 1;
+//   }
+//    let product=1
+//    for(var i=1;i<=number;i++){
+//          product=product*i
+//       }
+//       return product
+// }
+//     console.log(factorial(5));
 
 
     // trapping-rain-water
@@ -213,9 +217,9 @@
     // let newsentence=Counter(sentence)
     //  console.log(newsentence)
 
-    // for(const property in newsentence){
-    //     if(newsentence[property]>1){
-    //     console.log(property)
+    // for(const key in newsentence){
+    //     if(newsentence[key]>1){
+    //     console.log(key)
     //     }
     // }
 
@@ -347,21 +351,19 @@
 // let newarray= arr.flat()
 // let newarray= arr.flat(Infinity)
 
-// function Flatten(arr){
-//   someNewArray=arr.reduce((acc,item)=>{
-//       if(Array.isArray(item)){
-//         acc= acc.concat(Flatten(item))
-//       }
-//       else{
-//         acc.push(item) 
-//         or 
-//         acc=[...acc,item]
+// const flatten=(arr)=>{
+//     const newArray= arr.reduce((acc,item)=>{
+//   if(Array.isArray(item)){
+//      const flatArray=  flatten(item)
+//      acc.push(...flatArray)
+//       } else{
+//        acc.push(item)
 //       }
 //       return acc
-//   },[])
-//       return someNewArray
+//    },[])
+//    return newArray
 // }
-// console.log(Flatten(arr));
+// console.log(flatten(arr));
 
 
 // const brunch = {
@@ -432,7 +434,7 @@
 
 // console.log([2].reduce((a) => {
 //       return a
-// }))
+// }))       ==> 2
 
 
 
@@ -452,8 +454,14 @@
 //   console.log("c2")
 //   console.log("c3")
 // }
-// a()
+// a()    
 
+// ==> 
+  //a
+  //c2
+  //c3
+  //c
+  //b
 
 // function a() {
 //     console.log(this.name);
@@ -535,7 +543,7 @@
 
 
 // for(let i=0; i<5; i++){
-// 	setTO(()=>{
+// 	setTimeout(()=>{
 // 		console.log(i)
 // 	},0);
 // }
@@ -685,9 +693,7 @@
 // ]
 
 // let newArray = arr.filter((value, index, array) => {
-//      return (array.findIndex((innerValue => {
-//       return innerValue.id === value.id
-//   })) === index
+//      return index ===array.findIndex((item)=>item.id===value.id)
 //   )
 // })
 
@@ -838,508 +844,6 @@
 // const sum=(a)=>(b)=> b?sum(a+b):a
 
 // sum(1)(2)(3)(4)()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

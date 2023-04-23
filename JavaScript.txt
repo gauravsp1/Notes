@@ -796,7 +796,10 @@ Array manupilation methods/libraries--Slice,split,reduce ********
 https://www.w3schools.com/jsref/jsref_obj_array.asp
 
 Splice vs slice ********
-slice(start, end)..........for both string and array
+slice(start, end)..........for both string and array 
+The slice() method selects from a given start, up to a (not inclusive) given end.
+
+
 substring(start, end)
 substr(start, length)
 
