@@ -16,6 +16,18 @@ Server Load. Being client-side reduces the demand on the website server.
 Gives the ability to create rich interfaces.
 
 
+Why is JavaScript Single Threaded language *************
+
+
+What is  interpreted programming language ************
+
+
+loosly type and strongly type ************
+ 
+why is JavaScript loosly type **********
+
+
+
 Lazy loading ****
 Lazy loading (also called on-demand loading) is an optimization technique for the online content, be it a website or a web app.
 Instead of loading the entire web page and rendering it to the user in one go as in bulk loading, the concept of lazy loading assists in loading 
@@ -167,10 +179,19 @@ axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...response
 })
 
 
+Promise.all([p1,p2,p3])
+Returns reject if any is rejected
+
+Promise.allSettled([p1,p2,p3])
+Gives status and result for all promises
+
 Promise.race()  ***********
-Resovle the promise which is completed first
+Shows the first promise either resolved or rejected
+Resovle/Reject the promise which is completed first
 
-
+Promise.any()
+shows the first resolved promise
+	
 
 Event Loop *****
 An event loop is something that pulls stuff out of the callback queue and places it onto the call stack whenever the function stack becomes empty.
@@ -890,11 +911,32 @@ https://www.freecodecamp.org/news/debounce-and-throttle-in-react-with-hooks/
 
 
 
+Debounce
+ const [inputValue, setInputValue] = useState();
+  const delayFn = () => {
+    console.log("called", inputValue);
+  };
+
+  useEffect(() => {
+    let delay = setTimeout(() => {
+      delayFn(inputValue);
+    }, 2000);
+    return () => clearTimeout(delay);
+  }, [inputValue]);
+  
+ <input
+          type="text"
+          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue}
+        />
+
+Throttleing
+
 What is CORS issue *****
 Cross-origin resource sharing is a mechanism that allows restricted resources on a web page to be requested from another domain 
 outside the domain from which the first resource was served.
 To fix it add allowed origins names into backend server
-
+Access-Control-Allow-Origin :[Add domain names]
 after How long does a authenticate token expires ****
 valid for 60 days
 
@@ -909,6 +951,16 @@ Browsers can recognise many different types of events (e.g MouseEvent, KeyboardE
 of functionality for each of them. In React, we have only the SyntheticEvent object, 
 with a common functionality that creates consistency across browsers.
 
+
+
+Web Vitals **********
+LCP (Largest ContentFul Paint) -- Loading
+FID(First Input Delay) -- Interactive
+CLS (Cumulative Layout Shift) -- Visual Stability
+
+
+
+
 Web Workers********
 
 
@@ -918,7 +970,29 @@ Web Workers********
  Service Workers********
 
 
+WebPack bunderler analyses *********
+https://www.youtube.com/watch?v=5IG4UmULyoA timestamp 7:38
 
 
+How to handle Errors in JS *********
+
+Rendering Pattern ****************
+CSR
+SSR
+SSG(Static Site Generation)
+iSSG(Incremental Static Site Generation)
+
+https://www.youtube.com/watch?v=fRgAI3FiYHc&list=PLe3J6mZBq1xVDr297Yg0p1SHbdj_Oceld
+
+CSR vs SSR***********
+
+SSR -
+For SEO
+fast initial load
+mostly static contain
+
+CSR-
+SEO not so imp
+lots of user interaction
 
 

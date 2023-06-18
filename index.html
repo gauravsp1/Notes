@@ -365,6 +365,12 @@
 // }
 // console.log(flatten(arr));
 
+// const flat = (array) => {
+//   return array.reduce(
+//     (acc, it) => acc.concat(Array.isArray(it) ? flat(it) : it),
+//     []
+//   );
+// };
 
 // const brunch = {
 //     food: 'Dim sum',
@@ -588,6 +594,11 @@
 // }
 
 // largest(arr)
+
+
+// const array = [-1, 10, 6, 5];
+// const max = array.reduce((max, num) => (max > num ? max : num));
+// const min = array.reduce((min, num) => (min < num ? min : num));
 
 // var a={name:"Gaurav",surname:"Pawar"}
 // var b={name:"Varun",state:"Hs"}
@@ -844,6 +855,62 @@
 // const sum=(a)=>(b)=> b?sum(a+b):a
 
 // sum(1)(2)(3)(4)()
+
+
+
+// Polyfills
+
+// Maps
+  // let arr=[1,2,3,4]
+  // arr.map((item,index,arr)=>{})
+  // Array.prototype.myMap = finction(cb){
+  //       let temp=[]
+  //       for (let index = 0; index < this.length; index++) {
+  //         temp.push(cb(this[index],index,this))
+          
+  //       }
+  //       return temp;
+  // }
+
+  // Filter 
+  // Array.prototype.myFilter= function(cb){
+  //   let temp=[]
+  //       for (let index = 0; index < this.length; index++) {
+  //         if(cb(this[index],index,this)){
+  //           temp.push(this[index])
+  //         }
+          
+  //       }
+  //       return temp;
+  // }
+
+  // Reduce 
+    // arr.reduce((acc,item,arr)=>{
+    //   return acc+item
+    // },initialValue)
+    // Array.prototype.myReducer= function(cb,initialValue){
+    //   let accumulator=initialValue
+    //   for (let index = 0; index < this.length; index++) {
+    //     accumulator=accumulator? cb(accumulator,this[index],this):this[index]
+      
+    //   }
+
+    //   return first
+    // }
+
+    //Currying + Recursion
+
+//     let sum= (a)=>{
+//     return (b)=>{
+//         if(b){
+//             return sum(a+b)
+//         }
+//         return a
+//     }
+// }
+
+
+// console.log(sum(1)(2)(3)())  //6
 
 
 

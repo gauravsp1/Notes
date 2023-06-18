@@ -16,6 +16,21 @@ In the second example, using let, the variable declared in the loop does not red
 When let is used to declare the i variable in a loop, the i variable will only be visible within the loop.
 This happens because of block level scope.
 
+for(let i=0;i<10;i++){
+    setTimeout(()=>{
+        console.log(i)
+    },1000)
+}-----will print 1 to 10
+
+for(var i=0;i<10;i++){
+function close(x){
+
+    setTimeout(()=>{
+        console.log(x)
+    },1000)
+}
+close(i)
+}-----will print 1 to 10
 
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
  numArray.length=0
@@ -65,6 +80,7 @@ const uniqueArray = array.reduce((accumulator, currentValue) => {
 }, []);
 console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
 
+const uniqueArray2 = array.reduce((acc, it) => acc.includes(it) ? acc : [ ...acc, it ], [])
 
 
 Firt sort the array

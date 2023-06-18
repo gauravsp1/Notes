@@ -1,48 +1,105 @@
-what is a server***************
+
+
+
 CDN? ********
-CrossOrigin ********
-package.json details ********
+A content delivery network (CDN) is a geographically distributed group of servers that caches content close to end users.
+A CDN allows for the quick transfer of assets needed for loading Internet content, including HTML pages, JavaScript files, stylesheets, images, and videos.
+
+
 React.CreateElement() ********
-React vs ReactDOM ********
-render in React means? ********
-What is DOM ********
-crossOrigin resource ********
-What does bundler do? ********
-npm vs yarn ********
+React.createElement() is a method used in React.js, a popular JavaScript library for building user interfaces. 
+It is used to create React elements, which are the building blocks of React applications.
+The method takes three arguments:
+
+The type of element to create, such as a HTML tag like div or a custom React component.
+An object containing the element's properties, such as its className, id, or style.
+Any children elements, which can be nested React.createElement() calls or simple text nodes.
+
+const element = React.createElement('h1', null, 'Hello, world!');
+
+
+
 Latest ES features************
+2016- Array.includes()
+2017-
+1]Object.entries()
+Filtering an object: You can use Object.entries() and Object.fromEntries() together to filter an object.
+const obj = { a: 1, b: 2, c: 3 };
+const filteredObj = Object.fromEntries(Object.entries(obj).filter(([key, value]) => value > 1));
+
+console.log(filteredObj);
+// Output: { b: 2, c: 3 }
+
+2]async and await
+
+2018-Asynchronous Iteration,Promise.finally
+
+2019-
+Object.fromEntries
+const fruits = [
+["apples", 300],
+["pears", 900],
+["bananas", 500]
+];
+
+Object.fromEntries(fruits)
+
+{
+    "apples": 300,
+    "pears": 900,
+    "bananas": 500
+}
+
+2020-
+1]Nullish Coalescing Operator (??)
+The ?? operator returns the first argument if it is not nullish (null or undefined).Otherwise it returns the second.
+2]Optional Chaining Operator (?.)
+3]&&=  If the first value is true, the second value is assigned.
+4]||= Operator If the first value is false, the second value is assigned.
+
+2021-
+1]Promise.any()
+2]Numeric Separator (_)  const num = 1_000_000_000;
+
+React vs ReactDOM ********
+React is a JavaScript library for building user interfaces. 
+It provides a set of abstractions and APIs for creating reusable UI components, managing component state, and rendering components to the DOM.
+
+ReactDOM, on the other hand, is a separate library that provides APIs for interacting with the DOM. 
+It is used by React to render components to the DOM, and provides a number of additional APIs for working with the DOM, such as ReactDOM.findDOMNode() and ReactDOM.createPortal().
+
+In other words, React is responsible for creating and managing the component hierarchy and state, 
+while ReactDOM provides the necessary APIs for rendering that component hierarchy to the browser's DOM.
 
 package.json ********
 It containts the specifics required by npm.
-package.json is a file that contains metadata about the project, such as the project name, version, and a list of dependencies that the project relies on. This file is used to manage dependencies and scripts for the project. The package.json file can be manually edited, but it is typically generated automatically using a package manager such as npm (Node Package Manager) or Yarn.
+package.json is a file that contains metadata about the project, such as the project name, version, and a list of dependencies that the project relies on.
+This file is used to manage dependencies and scripts for the project. 
+The package.json file can be manually edited, but it is typically generated automatically using a package manager such as npm (Node Package Manager) or Yarn.
 
 
 package-lock.json ********
-package-lock.json is a file that is generated automatically by npm when installing dependencies. It is used to lock down the versions of the dependencies that are installed, ensuring that the same versions are used across different environments and by different developers. This helps to prevent issues that can arise when different developers use different versions of the same dependency.
-
-Caret vs tilde **************
-
-
-GitIgnore Files(package-lock.json to keep or not?) **********
+package-lock.json is a file that is generated automatically by npm when installing dependencies.
+It is used to lock down the versions of the dependencies that are installed, ensuring that the same versions are used across different environments and by different developers.
+This helps to prevent issues that can arise when different developers use different versions of the same dependency.
 
 Hot Module Reloading **************
+HMR is particularly useful during the development process, when developers need to make frequent changes to the application code. 
+It can help speed up the development cycle and improve productivity, as developers can see changes immediately and get faster feedback on their work.
 
-Read parcel document - https://parceljs.org/features/development/
 
-browserList **************
-
-script types in HTML **************
-
-put everything which you can regenerate on server into git ignore
-
-polifilly **************
 Tree shaking **************
-babel-plugin-transform-remove-console(5th video namaste react) **************
-more about jsx **************
-tab-index **************
+Tree shaking is a term used in modern JavaScript development that refers to the process of removing unused code from a project's source files. 
+It's a technique that's commonly used by modern JavaScript bundlers, such as Webpack and Rollup, to optimize the size of the final bundle that's sent to the client.
+Tree shaking works by analyzing the import and export statements in a project's source code and identifying which modules are actually used. 
+It then removes any code that's not used, including entire modules and individual functions or variables.
+The result of tree shaking is a smaller bundle size, which can improve the performance of the application by reducing the amount of JavaScript 
+that needs to be downloaded and parsed by the browser.
 
-Because of Babel JS is able to read HTML like code in Js files 
+put everything which you can regenerate on server into git ignore********
+
+Because of Babel JS is able to read HTML like code in Js files ********
 JSX => React.createElement  =>  Obj  =>  HTML
-
 
 React element **************
 const heading = (
@@ -54,55 +111,26 @@ const heading = ()=>(
 	<h1>Title</h1>
 )
 
-
-
 We cannot write {let xyz=33} inside jsx *******************
-JSX is a syntax extension for JavaScript that allows you to write HTML-like code inside your JavaScript files. When you write JSX, it needs to be transpiled to valid JavaScript code before it can be executed in a web browser or Node.js environment.
-
-In JSX, curly braces {} are used to embed JavaScript expressions inside the HTML-like code. When you use curly braces, the code inside the braces is evaluated as JavaScript and the result is inserted into the output.
-
-In the code you provided, {let xyz=33} is not a valid JavaScript expression, because you cannot use the let keyword inside curly braces. Instead, you need to declare the variable outside of the JSX expression and then use it inside the expression, as shown in the corrected code example I provided.
-
-Config Driven UI *****************************
+JSX is a syntax extension for JavaScript that allows you to write HTML-like code inside your JavaScript files. 
+When you write JSX, it needs to be transpiled to valid JavaScript code before it can be executed in a web browser or Node.js environment.
+In JSX, curly braces {} are used to embed JavaScript expressions inside the HTML-like code. 
+When you use curly braces, the code inside the braces is evaluated as JavaScript and the result is inserted into the output.
+In the code you provided, {let xyz=33} is not a valid JavaScript expression, because you cannot use the let keyword inside curly braces. 
+Instead, you need to declare the variable outside of the JSX expression and then use it inside the expression, as shown in the corrected code example I provided.
 
 React Fiber(New reconciliation engine responsible for diff algorithm)****************
 https://github.com/acdlite/react-fiber-architecture
 
 Why not to use index as a key ****************
-
 https://legacy.reactjs.org/docs/reconciliation.html#recursing-on-children
 https://robinpokorny.com/blog/index-as-a-key-is-an-anti-pattern/
-
-
-
-changing variable values doesn't re-render component so we use useState, react does not tract the variables it tracks only useState variable *****************************
-bolean values are not printed *****************************
-
 
 Micro-services *****************************
 Different micro-services are connected by different port under same domain name
 
-Expression vs Statement *****************************
-
-https://react.dev/learn/javascript-in-jsx-with-curly-braces *****************************
-
-
-Why to use CDN for images *****************************
-
-Formik *****************************
-
-new changes of react router *****************************
-
-async await, axios, promises read more *********************
-
-CSR vs SSR ******************
-
-Practice login, calculator,dynamic table component *******************
-
-create browserRouter******************
-
-Outlet,useRouteError in react router*********
-
+changing variable values doesn't re-render component so we use useState, react does not tract the variables it tracks only useState variable *****************************
+bolean values are not printed *****************************
 have code more modular, readable, maintanable, testable, reusable *******************
 
 Function statements vs Function expressions****************
@@ -151,78 +179,83 @@ const greet = function(name) {
 Overall, both function statements and function expressions are useful in different contexts. Function statements are more traditional and can be useful for defining global functions or methods, while function expressions are more flexible and can be useful for defining anonymous functions or functions that are passed as arguments to other functions.
 
 
-
-SASS**************
-
-Port No. meaning*********
-
-super in class based Component
-
-When a class is called constructor is the first thing called, so create a state here
-
-we donot mutate state directly,why?
-
-
-Why we cannot use async for useEffect callback function************
-
-react life cycle in detail *************
-
-Redux practice*********
-API Context*********
-
-
-Why we need Custom Hooks**************
-Reusability
-
-When to write custom hook vs Functional component*********
-
-
 Chunking/Code Splitting/Dyanamic bundling/Lazy loading/onDemand loading**************
-
-
-Should we do lazy loading inside component**************
 
 React Dev Tools**************
 profiler
 component 
 
-
-Web optimization**************
-
-web optimization parameters(first page loading time)(webVitals)**************
-how to use multiple context , nested context**************
-
-Redux Tool kit**************
-
-
 use extaclty what you want to subscribe in redux for enhancing performance (Lecture 14- timestamp: 2hr 40min)
 
+
+
+browserList **************
+
+
+
+
+Config Driven UI *****************************
+
+
+
+
+Array.from**********************
+
+Expression vs Statement *****************************
+
+async await, axios, promises read more *********************
+
+We can convert any funvtion into promise using async.
+Await holds the code block till it is executed. Two async functions can run parallel.
+
+
+
+
+CSR vs SSR ******************
+API Context*********
+Why we need Custom Hooks**************
+Reusability
+
+When to write custom hook vs Functional component*********
+
+Web optimization**************
+web optimization parameters(first page loading time)(webVitals)**************
 web Sockets*************
+flexbox alignItem vs align content****************
 
-
-Practice CSS********
-
-
-
+***********************************************************************
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+what is a server***************
+CrossOrigin ********
+package.json details ********
+render in React means? ********
+What is DOM ********
+crossOrigin resource ********
+What does bundler do? ********
+npm vs yarn ********
+Caret vs tilde **************
+GitIgnore Files(package-lock.json to keep or not?) **********
+Read parcel document - https://parceljs.org/features/development/
+script types in HTML **************
+more about jsx **************
+tab-index **************
+Formik *****************************
+https://react.dev/learn/javascript-in-jsx-with-curly-braces *****************************
+babel-plugin-transform-remove-console(5th video namaste react) **************
+new changes of react router *****************************
+Practice login, calculator,dynamic table component *******************
+create browserRouter******************
+Outlet,useRouteError in react router*********
+Port No. meaning*********
+super in class based Component*********
+When a class is called constructor is the first thing called, so create a state here*********
+we donot mutate state directly,why?*********
+Why we cannot use async for useEffect callback function************
+Should we do lazy loading inside component**************
+how to use multiple context , nested context**************
+Redux Tool kit**************
 
 
 
@@ -232,77 +265,3 @@ Gauz@241
 
 
 Gaurav@24
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

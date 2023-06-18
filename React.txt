@@ -714,6 +714,9 @@ useState
 Render Props  ***********
 https://www.youtube.com/watch?v=EZil2OTyB4w&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=37
 The term “render prop” refers to a technique for sharing code between React components using a prop whose value is a function.
+The Render Props pattern involves passing a function as a prop to a component, allowing that component to render or provide data to its child components. 
+The parent component provides a function as a prop, and the child component invokes that function, typically passing relevant data or state back to the parent. 
+This pattern promotes reusability and flexibility by allowing components to be composed in different ways.
 
 
 
@@ -928,3 +931,14 @@ useEffect(() => {
     window.removeEventListener("mousemove", () => {})
   }
 }, []);
+
+Whats is storyBook************
+
+
+
+
+
+
+
+
+
