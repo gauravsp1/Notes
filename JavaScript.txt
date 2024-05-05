@@ -50,7 +50,8 @@ Firstly, the extra lines of code, to be added to the existing ones, to implement
 Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
 
 
-data types: numbers, strings, objects, Boolean, Undefined, Null *******
+data types:  *******
+numbers, strings, objects, Boolean, Undefined, Null
 
 
 Why Js is called interpreter language ****
@@ -828,7 +829,15 @@ array.splice(index, howmany, item1, ....., itemX)...for array only
 var fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.splice(2, 0, "Lemon", "Kiwi");
 
+The slice method is a built-in JavaScript method that is available for both strings and arrays.
+It is used to extract a portion of an array or a string and create a new array or string containing the selected elements or characters.
+The slice method takes one or two arguments:
 
+start (required): The index at which to begin extraction. This argument specifies where the slice should start.
+	If the start argument is negative, it counts from the end of the string or array. If start is not provided, or if it's undefined, the slice starts from the beginning (index 0).
+
+end (optional): The index at which to stop extraction. The end index is not included in the slice.
+	If end is not provided, or if it's undefined, the slice continues to the end of the string or array. Like start, if end is negative, it counts from the end of the string or array.
 
 
 Function Expression *************
@@ -894,6 +903,10 @@ The parseFloat() method
 Nullish coalescing operator (??) *****
 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand 
 when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+const result = leftOperand ?? rightOperand;
+If leftOperand is null or undefined, result will be equal to rightOperand.
+If leftOperand is any other falsy value (e.g., 0, false, "", NaN), result will be leftOperand.
+
 
 Optional chaining (?.) *****
 The optional chaining operator (?.) enables you to read the value of a property located deep within a chain of connected objects without having
@@ -942,21 +955,10 @@ valid for 60 days
 
 
 
-Synthetic events ******
-https://medium.com/@maxfpowell/synthetic-events-in-react-a95e6dc80c99
-Synthetic events are the wrapper that React uses to standardise event functionality across browsers. 
-It is important to remember that events are not part of core Javascript. 
-Instead, they come from each browser’s own Javascript API — meaning that how browsers handle events will differ. 
-Browsers can recognise many different types of events (e.g MouseEvent, KeyboardEvent or ErrorEvent) and will have varying levels 
-of functionality for each of them. In React, we have only the SyntheticEvent object, 
-with a common functionality that creates consistency across browsers.
-
-
-
 Web Vitals **********
-LCP (Largest ContentFul Paint) -- Loading
-FID(First Input Delay) -- Interactive
-CLS (Cumulative Layout Shift) -- Visual Stability
+LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec 
+FID(First Input Delay) -- Interactive below 100ms
+CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
 
 
 
@@ -994,5 +996,21 @@ mostly static contain
 CSR-
 SEO not so imp
 lots of user interaction
+
+
+WEB in General
+
+
+How to measure speed *******
+https://web.dev/what-is-speed/
+
+
+
+
+
+
+
+
+
 
 

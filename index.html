@@ -41,7 +41,18 @@
     // arr=[1,2,3,4,5]
     // console.log(arr.reverse()); 
 
+//     const reversed = arr.reduce((acc, curr) => {
+//   acc.unshift(curr);
+//   return acc;
+// }, []);
 
+//     function reverseArray(arr) {
+//   const reversed = [];
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     reversed.push(arr[i]);
+//   }
+//   return reversed;
+// }
 
 
     // Reverse a String
@@ -87,16 +98,16 @@
 
     // Find First Duplicate ----Remaining
 
-    // let nums=[2,3,55,4,8,10,55,5]
-    // var findDuplicate = function(nums) {
-    //     for(let n of nums){
-    //         if(nums[Math.abs(n)-1] < 0) return Math.abs(n);
-    //         nums[Math.abs(n)-1]*=-1;
-    //     }
-    //     return -1;
-    // };
-    // console.log(findDuplicate(nums))
+// let nums = [2, 3, 55, 4, 8, 10, 55, 5, 3];
 
+// const firstDuplicate = (inputArr) => {
+//   const newArr = inputArr.filter((item, index) => {
+//     return inputArr.indexOf(item) !== index;
+//   });
+//   console.log(newArr[0]);
+// };
+
+// firstDuplicate(nums);
 
 
     // Maximum Product of Three Numbers    
@@ -133,30 +144,6 @@
     //   console.log(len);
 
 
-    // Largest Number At Least Twice of Others
-
-    // nums=[2,22,13,4,5]
-    // let first = 0;
-    //   let second = 0;
-    //   let ans = 0;
-    //   for (let i = 0; i < nums.length; i++) {
-    //     if (nums[i] > first) {
-    //       second = first;
-    //       first = nums[i];
-    //       ans = i;
-    //     } else if (nums[i] > second) {
-    //       second = nums[i];
-    //     }
-    //   }
-    //   let numb= first >= second * 2 ? ans : -1;
-
-    // console.log(numb);
-    // console.log(first);
-    // console.log(second);
-    // other solution find max number, then second max compare them
-
-
-
 //     Factorial
 
 //     const factorial=(number)=>{
@@ -171,6 +158,10 @@
 // }
 //     console.log(factorial(5));
 
+// const factorial = (n) => {
+//   if (n === 1) return 1;
+//   return n * factorial(n - 1);
+// };
 
     // trapping-rain-water
 
@@ -531,6 +522,7 @@
 // console.log(obj2);
 
 
+-------------------------------------------------------------------------------------
 
 
 // var a = 5;
@@ -541,10 +533,6 @@
 // }
 // abc();
 // console.log(a);
-
-
-// var t=10
-
 
 
 
@@ -585,9 +573,9 @@
 // function largest(arr){
 //     let max=0
 //     let secondMax=0
-//     arr.forEach((value)=>{
-//         secondMax=max>value?secondMax<value?value:secondMax :max
-//          max=max<value?value:max
+//     arr.forEach((item)=>{
+//          secondMax = max < item ? max : secondMax < item ? item : secondMax;
+//          max = max < item ? item : max;
 //           })
 //     console.log("secondMax",secondMax)
 //     console.log("max",max)
@@ -638,24 +626,19 @@
 // check()
 
 
-// function series(num){
-//     // if its -ve or zewro msg- grt than zero
-//     //if +ve return num as it
-//     //if decial return grt part of the decimal
-//     let array=num.toString().split(".")
-//     // console.log(array)
-//     if(num<=0){
-//         console.log("number should be Greater than zero");
-//     }
-//     else if(num.toString().includes(".")){
-//             let grtNum=array[0]>array[1]?array[0]:array[1]
-//             console.log(parsInt(grtNum))
-//     }
-//     else{
-//         console.log(num);
-//     }
+  //     // if its -ve or zewro msg- grt than zero
+  //     //if +ve return num as it
+  //     //if decial return grt part of the decimal
+//   const series = (inputValue) => {
+//   const inputArray = inputValue.toString().split(".");
+//   if (inputArray.length >= 2) {
+//     const grtNum =
+//       inputArray[0] > inputArray[1] ? inputArray[0] : inputArray[1];
 
-// }
+//     console.log("Decimaal", grtNum);
+//   } else if (inputValue > 0) console.log("inputValue", inputValue);
+//   else if (inputValue <= 0) console.log("Grt than zero");
+// };
 
 // series(55.657)
 // series(-25)
@@ -913,6 +896,91 @@
 // console.log(sum(1)(2)(3)())  //6
 
 
+// Deep comparison
+// const obj1 = {
+//   a: "test1",
+//   b: "test2",
+//   c: "test3",
+//   d: [1, 2, 3],
+//   e: {
+//     a: 22,
+//   },
+// };
+
+// const obj2 = {
+//   a: "test1",
+//   b: "test2",
+//   c: "test3",
+//   d: [1, 2, 3],
+//   e: {
+//     a: 22,
+//   },
+// };
+
+// const deepEqual = (objA, objB) => {
+//   if (typeof objA !== "object" || typeof objB !== "object") {
+//     return objA === objB;
+//   }
+  // if (Array.isArray(objA) && Array.isArray(objB)) {
+
+  //   if (objA.length !== objB.length) {
+  //     return false;
+  //   }
+
+  //   for (let i = 0; i < objA.length; i++) {
+  //     if (!deepEqual(objA[i], objB[i])) {
+  //       return false;
+  //     }
+  //   }
+
+  //   return false;
+  // }
+
+//   const keysA = Object.keys(objA);
+//   const keysB = Object.keys(objB);
+//   if (keysA.length !== keysB.length) {
+//     return false;
+//   }
+//   if (
+//     !keysA.every((item) => {
+//       return keysB.includes(item);
+//     })
+//   ) {
+//     return false;
+//   }
+//   return keysA.every((item) => {
+//     return deepEqual(objA[item], objB[item]);
+//   });
+// };
+
+// console.log(deepEqual(obj1, obj2));
+
+// function printPattern(n) {
+//   let num = 1;
+//   let space = n - 1;
+
+//   for (let i = 1; i <= n; i++) {
+//     let line = "";
+
+//     // Add spaces
+//     for (let j = 1; j <= space; j++) {
+//       line += "  ";
+//     }
+
+//     // Add numbers
+//     for (let j = 1; j <= i; j++) {
+//       line += num + " ";
+//       num++;
+//     }
+
+//     // Update the number of spaces
+//     space--;
+
+//     console.log(line);
+//   }
+// }
+
+// printPattern(4);
 
 
   </script>

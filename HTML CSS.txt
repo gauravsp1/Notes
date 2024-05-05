@@ -176,12 +176,11 @@ display: inline-block
 
 can we give height and width to inline elements *****
 No. IF you want to then convert it into display:inline-block
-You cannot set the height and width of block-level elements in CSS.
+You cannot set the height and width of inline-level elements in CSS.
 
 
 Diff between display: inline; and display: inline-block *******
 we give height and width to inline-block  but not to inline elements
-You cannot set the height and width of block-level elements in CSS.
 
 
 
@@ -191,9 +190,8 @@ The flex container properties are:
 flex-direction
 flex-wrap
 flex-flow : The flex-flow property is a shorthand property for setting both the flex-direction and flex-wrap properties.
-justify-content : Horizontally
-align-items : Vertically
-align-content
+justify-content : Main Axis
+align-items : Other Axis
 
 The flex item properties are:
 order
@@ -206,7 +204,7 @@ align-self
 
 
 visibility: hidden; vs display: none;
-diplay removes the element complete and next element occupies it's position
+display removes the element complete and next element occupies it's position
 visibility: hidden means that element is just not visible but present
 display	 	Specifies how an element should be displayed
 visibility	Specifies whether or not an element should be visible

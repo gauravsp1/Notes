@@ -37,4 +37,3 @@ git fetch which fetches the recent commits in the local repository and
 git merge, which will merge the branch
 git remote -v
 // http://localhost:3000/121/5e26950a1d5f600929cafa07/60acb16a5d4f7a06e42acd26
-

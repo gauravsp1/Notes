@@ -1,0 +1,12 @@
+
+System Design
+
+1] Design
+	1. Requirment
+	2. Architecture
+	3.Interface
+
+2] System Components
+	1.Scale
+	2.Security
+	3.Maintainance

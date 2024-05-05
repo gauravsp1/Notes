@@ -1,16 +1,10 @@
 
 
 
-
-
-
-
-
 ******Top***********
 
 Factory/Constructor functions
 Javascript class
-Real life examples of Closure
 Custom hooks
 Hands on practice in React and Redux syntax
 server-side rendering
@@ -62,7 +56,7 @@ Practice about Promise
 Practical eg. of Closure
 More about Middleware Redux.
 Custom Hooks
-LightHouse
+
 Performance monitoring
 Why do we need pure functions/ Pure components
 Core Web Vitals  ****
