@@ -8,7 +8,7 @@ HTML elements tell the browser how to display the content
 HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
 
 html4 vs html5 **********
-Can make input numerical using only html ************
+
 
 All HTML need to have a DOCTYPE declared. The DOCTYPE is not actually an element or HTML tag. 
 It lets the browser know how the document should be interpreted, by indicating what version or standard of HTML (or other markup language)

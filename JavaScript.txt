@@ -1,200 +1,281 @@
 JavaScript
 
+JavaScript is a high-level, dynamic, and interpreted programming language that is widely used for web development.
+
+Key Characteristics of JavaScript
+
+Interpreted Language:
+JavaScript code is executed by the browser’s JavaScript engine line by line, making it an interpreted language. Unlike compiled languages,
+JavaScript does not require a separate compilation step.
+
+Dynamically Typed: 
+JavaScript variables can hold values of any data type and the type of a variable can change during the execution of a program.
+
+Object-Oriented: 
+JavaScript is object-oriented but with a prototype-based inheritance model, unlike the class-based inheritance of languages like Java or C++.
+
+First-Class Functions: 
+Functions in JavaScript are first-class citizens, meaning they can be assigned to variables, passed as arguments to other functions, and returned from other functions.
+
+Event-Driven:
+JavaScript is designed to respond to user actions and events, such as clicks, key presses, and mouse movements, making it ideal for interactive web pages.
+
+Asynchronous Programming: 
+JavaScript supports asynchronous programming through callbacks, promises, and async/await, which is essential for tasks like network requests.
+
+Runs in the Browser and on the Server:
+While originally developed for client-side scripting, JavaScript can now also be used on the server side thanks to environments like Node.js.
+
+
 
 Advantages of JavaScript
-Speed. Client-side JavaScript is very fast because it can be run immediately within the client-side browser. 
-Unless outside resources are required, JavaScript is unhindered by network calls to a backend server.
+Fast and Efficient:
+JavaScript runs directly in the client's browser, which means it can execute code quickly and provide immediate feedback to users.Unless outside resources are required,
+JavaScript is unhindered by network calls to a backend server.
+
+Reduced Server Load:
+By handling tasks on the client side, JavaScript reduces the processing burden on the server. This can lead to better scalability and lower server costs.
 
 Simplicity. JavaScript is relatively simple to learn and implement.
 
-Popularity. JavaScript is used everywhere on the web.
+Reduced Server Load:
+By handling tasks on the client side, JavaScript reduces the processing burden on the server. This can lead to better scalability and lower server costs.
 
-Interoperability. JavaScript plays nicely with other languages and can be used in a huge variety of applications.
+Rich Ecosystem
+Libraries and Frameworks: JavaScript has a vast ecosystem of libraries and frameworks that simplify development.
+Popular ones include React, Angular, Vue.js for front-end development, and Node.js, Express for back-end development.
 
-Server Load. Being client-side reduces the demand on the website server.
-
-Gives the ability to create rich interfaces.
-
-
-Why is JavaScript Single Threaded language *************
 
 
 What is  interpreted programming language ************
+An interpreted programming language is one in which most of its implementations execute instructions directly,
+without the need for compiling a program into machine-language instructions beforehand.
+In other words, interpreted languages are typically executed by an interpreter, which reads the program code and executes it line-by-line or statement-by-statement.
+
+Advantages:
+Ease of Use: Rapid development and testing due to the lack of a separate compilation step.
+Portability: Programs can be run on any platform with a suitable interpreter.
+Flexibility: Dynamic typing and execution allow for more flexible programming patterns.
+
+Disadvantages:
+Performance: Typically slower execution compared to compiled languages due to the overhead of interpretation.
+Runtime Errors: Errors are detected at runtime, which can lead to issues being discovered later in the development process.
 
 
 loosly type and strongly type ************
- 
-why is JavaScript loosly type **********
+In programming languages, the concepts of loosely typed (also known as weakly typed) and strongly typed refer to how strictly a language enforces type constraints.
+In loosely typed languages, type checking is less strict, and implicit type conversions (coercions) are often performed.
+These languages tend to allow more flexibility in how variables are used, but this can sometimes lead to unexpected behaviors.
 
-
-
-Lazy loading ****
-Lazy loading (also called on-demand loading) is an optimization technique for the online content, be it a website or a web app.
-Instead of loading the entire web page and rendering it to the user in one go as in bulk loading, the concept of lazy loading assists in loading 
-only the required section and delays the remaining, until it is needed by the user.
-
-Advantages of Lazy loading:
-
-On-demand loading reduces time consumption and memory usage thereby optimizing content delivery. 
-
-As only a fraction of the web page, which is required, is loaded first thus, the time taken is less and the loading of rest of the section 
-is delayed which saves storage. All of this enhances the user’s experience as the requested content is fed in no time.
-
-Unnecessary code execution is avoided.
-
-Optimal usage of time and space resources makes it a cost-effective approach from the point of view of business persons. (website owners)
-
-Disadvantages of Lazy loading:
-
-Firstly, the extra lines of code, to be added to the existing ones, to implement lazy load makes the code a bit complicated.
-Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
+In strongly typed languages, type checking is more rigorous, and implicit type conversions are typically not performed or are restricted.
+Variables are often explicitly bound to a specific type, and attempting to use a value of the wrong type can result in errors.
 
 
 data types:  *******
 numbers, strings, objects, Boolean, Undefined, Null
 
 
-Why Js is called interpreter language ****
-An Interpreter directly executes instructions written in a programming or scripting language without previously converting 
-them to an object code or machine code. Examples of interpreted languages are Perl, Python and Matlab.
+Why is JavaScript Single Threaded language *************
+JavaScript is single-threaded by design to ensure simplicity and a responsive user interface, avoiding the complexities associated with multi-threading.
+It uses an event-driven model and asynchronous mechanisms like callbacks, promises, and async/await to achieve concurrency,
+allowing it to handle multiple tasks efficiently without blocking the main thread. For heavier computations, Web Workers provide a way to run scripts in the background.
+This design makes JavaScript well-suited for web development and interactive applications.
 
 
+How Promise works******
+Promise is an object representing the eventual completion or failure of an asynchronous operation.
+Promises provide a way to handle asynchronous operations more gracefully than traditional callback-based approaches.
 
-Is Js single threaded or multi-threaded ****
-single threaded
-JavaScript doesn't support multithreading
-It means that the main thread where JavaScript code is run, runs in one line at a time manner and there is no possibility of running code in parallel.
-Now, JavaScript is a single-threaded language, which means it has only one call stack that is used to execute the program. 
-As we know stacks are FILO that is First In Last Out. Similarly, within the call stack, whenever a line of code gets inside the call stack 
-it gets executed and move out of the stack. In this way, the JavaScript is the single-thread language because of only one call stack.
-Since, JavaScript is a single-threaded language, it is synchronous in nature.
+Creating a Promise
+A Promise is created using the Promise constructor, which takes a function (executor) with two arguments: resolve and reject. These functions are used to settle the Promise:
+resolve(value): If the operation is successful, the promise is fulfilled with the value.
+reject(reason): If the operation fails, the promise is rejected with the reason (typically an error message).
+
+let myPromise = new Promise((resolve, reject) => {
+    let success = true; // Simulate success or failure
+    if (success) {
+        resolve("Operation successful!");
+    } else {
+        reject("Operation failed.");
+    }
+});
+
+Consuming a Promise
+To handle the result of a Promise, you use the .then(), .catch(), and .finally() methods:
+
+.then(onFulfilled, onRejected): Attaches callbacks for the success and failure cases.
+.catch(onRejected): Attaches a callback for only the failure case.
+.finally(onFinally): Attaches a callback that will be invoked regardless of the outcome.
+
+Chaining Promises
+Promises can be chained to handle multiple asynchronous operations in sequence. Each .then returns a new Promise, allowing for further chaining:
+
+let promiseChain = new Promise((resolve, reject) => {
+    resolve(1);
+});
+
+promiseChain
+    .then((result) => {
+        console.log(result); // 1
+        return result + 1;
+    })
+    .then((result) => {
+        console.log(result); // 2
+        return result + 1;
+    })
+    .then((result) => {
+        console.log(result); // 3
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+Promises with Async/Await
+The async and await keywords provide a more readable and straightforward way to work with Promises.
+An async function always returns a Promise. The await keyword is used to wait for the Promise to settle:
+async await holds the code execution till the promise is completed. Async/Await is a fancier syntax to handle multiple promises in synchronous code fashion. 
+When we put async keyword before a function declaration, it will return a promise and we can use await keyword inside it 
+which blocks the code until promise it awaits resolves or rejects.
 
 
-How Js handles multi-threaded operations *****
-using async 
-https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/
-
-
-
-How Promise works----Scenario base que ******
-Promises provide a mechanism to handle the results and errors from asynchronous operations.
-Promise are used for asynchronous operations.. they have 3 states resolved, rejected, pending
-First we need to create a promise  var promise = new Promise(function(resolve, reject) { } then consume it using .then
-
-
-A Promise is basically created when we are unsure of whether or not the assigned task will be completed
-Promises are used to handle asynchronous operations in JavaScript. 
-They are easy to manage when dealing with multiple asynchronous operations where callbacks can create callback hell leading to unmanageable code.
- They can handle multiple asynchronous operations easily and provide better error handling than callbacks.
- 
 Benefits of Promises:-
 Improves Code Readability
 Better handling of asynchronous operations
 Better flow of control definition in asynchronous logic
 Better Error Handling
 
-A Promise has three states:-
+Promise.all()
+Promise.all() takes an iterable of Promises (such as an array) and returns a single Promise that resolves when all the input Promises have resolved.
+If any of the input Promises reject, the returned Promise immediately rejects with the reason of the first rejected Promise.
 
-fulfilled/resolved: Action related to the promise succeeded
-rejected: Action related to the promise failed
-pending: Promise is still pending i.e not fulfilled or rejected yet
+let promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'First'));
+let promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
 
-//settled/finally: Promise has fulfilled or rejected
+Promise.all([promise1, promise2, promise3])
+    .then((results) => {
+        console.log(results); // ["First", "Second", "Third"]
+    })
+    .catch((error) => {
+        console.error(error);
+    });
 
-There are two phases one is to create a promise and other to consume it.
-var promise = new Promise(function(resolve, reject) { 
-  const x = "geeksforgeeks"; 
-  const y = "geeksforgeeks"
-  if(x === y) { 
-    resolve(); 
-  } else { 
-    reject(); 
-  } 
-}); 
-  
-promise. 
-    then(function () { 
-        console.log('Success, You are a GEEK'); 
-    }). 
-    catch(function () { 
-        console.log('Some error has occured'); 
-    }); 
+let promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'First'));
+let promise2 = new Promise((_, reject) => setTimeout(reject, 2000, 'Error in Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
 
-Async functions always return a promise.
-async await holds the code execution till the promise is completed
-Async/Await is a fancier syntax to handle multiple promises in synchronous code fashion. 
-When we put async keyword before a function declaration, it will return a promise and we can use await keyword inside it 
-which blocks the code until promise it awaits resolves or rejects.
+Promise.all([promise1, promise2, promise3])
+    .then((results) => {
+        console.log(results);
+    })
+    .catch((error) => {
+        console.error(error); // "Error in Second"
+    });
+When to use:
 
+Parallel Execution: When you need to execute multiple asynchronous operations in parallel and wait for all of them to complete before proceeding.
+All-or-Nothing: When you require that all promises succeed for your code to continue. If any promise fails, you want to handle that failure immediately.
 
 
-Chaining in Promise *****************
-When we consume first Promise it returns another Promise which is consumed by some other Promise this chain continues
+Promise.race()
+Promise.race() takes an iterable of Promises and returns a single Promise that resolves or rejects as soon as one of the input Promises resolves or rejects.
+let promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'First'));
+let promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
 
-https://www.javascripttutorial.net/es6/promise-chaining/
+Promise.race([promise1, promise2, promise3])
+    .then((result) => {
+        console.log(result); // "First"
+    })
+    .catch((error) => {
+        console.error(error);
+    });
 
-let p = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(10);
-    }, 3 * 100);
-});
+let promise1 = new Promise((_, reject) => setTimeout(reject, 1000, 'Error in First'));
+let promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
 
-p.then((result) => {
-    console.log(result); // 10
-    return result * 2;
-}).then((result) => {
-    console.log(result); // 20
-    return result * 3;
-}).then((result) => {
-    console.log(result); // 60
-    return result * 4;
-});
-Output:
+Promise.race([promise1, promise2, promise3])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error); // "Error in First"
+    });
+When to use:
 
-10
-20
-60
- 
-Multiple promise and want to pass if all promises succeed ******
-use Promise.all(Promise 1,promise 2,...).then((values) => {console.log(values);}
-
-Multiple Api hits at same time use Promise.all or axios.all
-
-import axios from 'axios';
- 
-let one = "https://api.storyblok.com/v1/cdn/stories/health?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
-let two = "https://api.storyblok.com/v1/cdn/datasources/?token=wANpEQEsMYGOwLxwXQ76Ggtt"
-let three = "https://api.storyblok.com/v1/cdn/stories/vue?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
- 
-const requestOne = axios.get(one);
-const requestTwo = axios.get(two);
-const requestThree = axios.get(three);
- 
-axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
-  const responseOne = responses[0]
-  const responseTwo = responses[1]
-  const responesThree = responses[2]
-  // use/access the results 
-})).catch(errors => {
-  // react on errors.
-})
+First Resolved Wins: When you need the result of the first promise that resolves or rejects, and the others can be ignored or cancelled.
+Timeout Handling: Implementing a timeout for a promise. You want either the result or an error indicating that the operation took too long.
 
 
-Promise.all([p1,p2,p3])
-Returns reject if any is rejected
+Promise.allSettled()
+Promise.allSettled() takes an iterable of Promises and returns a single Promise that resolves when all of the input Promises have settled (each may resolve or reject).
+The returned Promise resolves with an array of objects that each describe the outcome of each Promise.
+The returned Promise adopts the state (resolved/rejected) of the first settled Promise.
+let promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'First'));
+let promise2 = new Promise((_, reject) => setTimeout(reject, 2000, 'Error in Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
 
-Promise.allSettled([p1,p2,p3])
-Gives status and result for all promises
+Promise.allSettled([promise1, promise2, promise3])
+    .then((results) => {
+        console.log(results);
+        // [
+        //   { status: 'fulfilled', value: 'First' },
+        //   { status: 'rejected', reason: 'Error in Second' },
+        //   { status: 'fulfilled', value: 'Third' }
+        // ]
+    });
+When to use:
 
-Promise.race()  ***********
-Shows the first promise either resolved or rejected
-Resovle/Reject the promise which is completed first
+Handle All Outcomes: When you need to know the outcome of all promises, regardless of whether they resolve or reject.
+Resilience: Useful for running multiple operations where each should be completed and reported on, even if some fail.
 
 Promise.any()
-shows the first resolved promise
-	
+Promise.any() takes an iterable of Promises and returns a single Promise that resolves as soon as any of the input Promises resolves.
+If all input Promises reject, the returned Promise rejects with an AggregateError containing all the rejection reasons.
+let promise1 = new Promise((_, reject) => setTimeout(reject, 1000, 'Error in First'));
+let promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'Second'));
+let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
+
+Promise.any([promise1, promise2, promise3])
+    .then((result) => {
+        console.log(result); // "Second"
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+let promise1 = new Promise((_, reject) => setTimeout(reject, 1000, 'Error in First'));
+let promise2 = new Promise((_, reject) => setTimeout(reject, 2000, 'Error in Second'));
+let promise3 = new Promise((_, reject) => setTimeout(reject, 3000, 'Error in Third'));
+
+Promise.any([promise1, promise2, promise3])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error); // AggregateError: All promises were rejected
+    });
+When to use:
+
+First Successful: When you need the first promise that resolves successfully, and you don’t care about the rejections unless all promises fail.
+Redundancy: Useful for fault tolerance, where you try multiple strategies or sources and proceed with the first successful result.
+
+Promise.all(): Waits for all Promises to resolve or any to reject. Returns an array of results or the first rejection reason.
+Promise.race(): Resolves or rejects as soon as one of the Promises resolves or rejects. Returns the value or reason of the first settled Promise.
+Promise.allSettled(): Waits for all Promises to settle (resolve or reject). Returns an array of objects describing each Promise's outcome.
+Promise.any(): Resolves as soon as any Promise resolves. Rejects if all Promises reject, with an AggregateError.
+
+Promise.all(): Use when you need all promises to succeed and want to wait for all of them to complete.
+Promise.race(): Use when you need the first promise to settle (resolve or reject) and proceed with its result.
+Promise.allSettled(): Use when you need to handle the results of all promises, regardless of whether they succeeded or failed.
+Promise.any(): Use when you need the first successful result among multiple promises and want to ignore rejections unless all promises fail.
+
+
 
 Event Loop *****
+The event loop ensures that JavaScript can perform non-blocking, asynchronous operations even though it is single-threaded. 
+
 An event loop is something that pulls stuff out of the callback queue and places it onto the call stack whenever the function stack becomes empty.
 The event loop  gives us an illusion of being multithreaded even though it is single-threaded. 
 The below illusion demonstrates the functioning of event loop well:
@@ -215,26 +296,23 @@ Microtask Queue has higer priority over callBack Queue
 callBack works ***********
 any function passed as argument of another function is called as callback function
 the callback is the function that is passed as the argument to setTimeout.
-
 The problem with callbacks is it creates something called “Callback Hell.” Basically, you start nesting functions within functions within functions, 
 and it starts to get really hard to read the code. So in this situation Promises came to handle the nested callback in a better way.
 
 
-
-
 New ES6 features **********
 
-The let keyword
-The const keyword
+let and const keyword
 JavaScript Arrow Functions
 JavaScript Class
 Template Strings
 Destructuring
-Array.find()
-Array.findIndex()
 Default Parameter Values
 Rest and spread Operator
-https://github.com/lukehoban/es6features
+Array.find()
+Array.findIndex()
+
+
 
 Template Strings *******
 We don't need to concate string and variable with + symbole anymore
@@ -242,41 +320,33 @@ var name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
 
+
 Destructuring ********
 var [a, , b] = [1,2,3];
 [a, b, ...rest] = [10, 20, 30, 40, 50];
-
 console.log(rest);
 // expected output: Array [30,40,50]
 
-
 obj{a:1,b:2,c:{d:4,e:5}}
-
 const {a,b,c:{d}} = obj
+
+
 
 
 The let keyword **********
 These two keywords provide Block Scope variables
 Before  JavaScript had only two types of scope: Global Scope and Function Scope.
-Global variables can be accessed from anywhere in a JavaScript program.
-Variables declared  (inside a function) have Function Scope.
-LET and CONST declared inside a block {} cannot be accessed from outside the block:
-var keyword cannot have Block Scope.
-Variables declared with the let keyword can have Block Scope.
-Can reassign values in LET but not in CONST
-let x=5;
- x=10;
- 
- const z=300;
-z=500;  Uncaught SyntaxError: Identifier 'z' has already been declared
-
-Rest all same between LET and CONST
-
+Global variables can be accessed from anywhere in a JavaScript program. Variables declared  (inside a function) have Function Scope.
+LET and CONST declared inside a block {} cannot be accessed from outside the block: var keyword cannot have Block Scope.
+Can reassign values in LET but not in CONST.Rest all same between LET and CONST.
 The const keyword makes a variable itself immutable, not its assigned content.
 When the content is an object, this means the object itself can still be altered. 
 Therefore, it's possible to change the content of the object that is declared with const variable, 
 but you cannot assign a new object to a const variable.
 This is possible because obj is refrenceType and not primitive data type.
+
+
+
 
 Default Parameter Values **********
 function myFunction(x, y = 10) {
@@ -373,65 +443,73 @@ new foo();       // undefined
 
 Object Literal **********
 an object literal is a comma-separated list of name-value pairs inside of curly braces.
+const person = {
+    name: 'John',
+    age: 30,
+    greet: function() {
+        console.log('Hello, my name is ' + this.name);
+    }
+};
 
 
 
 
 JavaScript Class ****************
 When we want same obj properties for many objs we create a blueprint of it that is called class
-class Car {
-  constructor(name, year) {
-    this.name = name;
-    this.year = year;
-  }
+
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
 }
 
-
-
-
-Different Kinds of Loops ***********
-
-JavaScript supports different kinds of loops:
-
-for - loops through a block of code a number of times
-for/in - loops through the properties of an object or gives the index value of array
-for/of - loops through the values of an iterable object or gives the  value of array
-while - loops through a block of code while a specified condition is true
-do/while - also loops through a block of code while a specified condition is true
-forEach-array.forEach(function(currentValue, index, arr), thisValue)
-
-
-
-
+const john = new Person('John', 30);
+john.greet(); // Hello, my name is John
 
 
 Hoisting ********
-Hoisting is JavaScript's default behavior of moving declarations to the top. We can do this for variables and functions
-In JavaScript, a variable can be declared after it has been used.
-JavaScript only hoists declarations, not initializations.
-All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined , 
-but let and const declarations remain uninitialized. 
-They will only get initialized when their lexical binding (assignment) is evaluated during runtime by the JavaScript engine.
-ReferenceError is thrown when trying to access a previously undeclared variable
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (function or global scope) before code execution.
+This means that you can use variables and functions before they are actually declared in the code.
+All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined ,
+but let and const declarations remain uninitialized.
+They are in a "temporal dead zone" (TDZ) from the start of the block until the declaration is encountered. Accessing them before the declaration results in a ReferenceError.
+
 For let and const they are stored in different way in seperate memory space in Script and not in Global 
 so we cannot acces them without intializing them.
+
+Temporal Dead Zone (TDZ)
+The TDZ is the time between entering the scope (such as a block) and the point where the variable is declared.
+Variables declared with let and const cannot be accessed during this time.
 
 2 Golden Rules:
 1. Variable declarations are scanned and are made undefined
 2. Function declarations are scanned and are made available
 
-Temporal Dead Zone ********
-time between hoisting let and const and intializing them
-
-Can hoisting work for functions **********
- All functions and variables are hoisted
 
 
-Lexcical scope **********
+Lexical  scope **********
 A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
 inside another function defined after the variable declaration. 
 But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
 Inner functions can acces outer variables but outter cannot access inner function variables
+
+In JavaScript, functions create their own scope. The variables defined inside a function are not accessible outside of it.
+However, functions defined within another function have access to the variables of the outer function. This nested structure defines the lexical scope.
+
+Key Points of Lexical Scope
+Scope Chain:
+When a variable is referenced, JavaScript looks up the scope chain starting from the innermost scope and moving outward until it finds the variable or reaches the global scope.
+
+Function Scope:
+Each function creates a new scope. Variables declared within a function are not accessible outside it.
+
+Block Scope:
+With ES6, let and const introduced block-scoped variables, which are only accessible within the block they are defined in (e.g., within a loop or an if statement).
 
 
 
@@ -476,6 +554,50 @@ Strict mode changes previously accepted "bad syntax" into real errors.
 The this keyword in functions behaves differently in strict mode.
 The this keyword refers to the object that called the function.
 If the object is not specified, functions in strict mode will return undefined and functions in normal mode will return the global object (window):
+
+"Strict mode" in JavaScript is a way to opt into a restricted variant of JavaScript,
+which can help catch common coding mistakes and "unsafe" actions such as accessing global objects or using undeclared variables.
+
+
+Different Kinds of Loops ***********
+
+JavaScript supports different kinds of loops:
+
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object or gives the index value of array
+for/of - loops through the values of an iterable object or gives the  value of array
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+forEach-array.forEach(function(currentValue, index, arr), thisValue)
+
+
+Lazy loading ****
+Lazy loading is a design pattern and optimization technique used to improve the performance and resource management of applications, particularly in the context of web development.
+It involves delaying the loading of non-critical resources until they are actually needed,
+which can lead to faster initial load times and more efficient use of bandwidth and system resources.
+
+How Lazy Loading Works
+The main idea behind lazy loading is to load resources only when they are required. For instance, in a web application, images, scripts, or other components 
+might only be loaded when they come into the user's viewport (i.e., they are visible on the screen).
+
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+Benefits of Lazy Loading
+Improved Performance: By loading only the necessary resources initially, the initial page load time is reduced, making the application appear faster to users.
+Reduced Bandwidth Usage: Only the resources that are needed are downloaded, which can save bandwidth, especially important for users with limited or slow internet connections.
+Better Resource Management: Lazy loading can help in managing memory and CPU usage more efficiently, as fewer resources are loaded and processed at any given time.
+Enhanced User Experience: Users get a quicker response time and the content they need without waiting for the entire page to load.
+
+
+Disadvantages of Lazy loading:
+
+Firstly, the extra lines of code, to be added to the existing ones, to implement lazy load makes the code a bit complicated.
+Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
+
+
+Lazy loading is a powerful optimization technique that can greatly enhance the performance and user experience of web applications. 
+By delaying the loading of non-essential resources, you can reduce initial load times, save bandwidth, and improve the overall responsiveness of your application. 
+Implementing lazy loading requires a thoughtful approach to determine which resources can be loaded on demand and ensuring that the user experience remains seamless.
 
 
 
@@ -524,6 +646,21 @@ It doesn’t directly invoke it.
 
 let printMyName=person.fullName.bind(person1, "Oslo", "Norway");
 
+
+Use Cases
+call() and apply()
+
+Useful when you need to borrow methods from one object to another.
+Suitable for invoking functions that require a specific this value and immediate execution.
+
+bind()
+
+Ideal for creating a function with a specific this context that can be called later.
+Useful in event handling where you need to ensure the this context refers to a specific object.
+Helps in scenarios like partial function application, where you create a new function with pre-set arguments.
+
+
+
 partial classes **********
 A “partial class” is a class whose methods and variables are parceled out into multiple files. 
 When the files are compiled, the class reassembles itself into the full class definition
@@ -538,17 +675,49 @@ Comparing two Objects ***********
 Comparing objects is easy, use === or Object.is(). This function returns true if they have the same reference and false if they do not. 
 Again, let me stress, it is comparing the references to the objects, not the keys and values of the objects.
 Same for array.
+structuredClone()
+const clone = structuredClone(originalObject);
 
 
-
-how to extend a class ********
-using the extends keyword
-
-
-CallBack Hell ********
-Having nested callBack
 
 null vs undefiend ********
+
+null
+Type: null is an object.
+Meaning: null explicitly indicates the absence of any object value. It is a value that a programmer can assign to a variable to denote that it is intentionally empty.
+Use Cases:
+To explicitly indicate that a variable should be empty.
+To reset or clear a variable's value.
+
+undefined
+Type: undefined is a primitive type.
+Meaning: undefined indicates that a variable has been declared but has not yet been assigned a value. It is the default value for uninitialized variables.
+Use Cases:
+Variables that are declared but not assigned any value.
+Function parameters that are not provided.
+Properties that do not exist on an object.
+The return value of functions that do not explicitly return a value.
+
+Key Differences
+Initialization and Assignment:
+
+null is an assignment value. It can be explicitly assigned to a variable to indicate "no value."
+undefined is the default value for variables that have been declared but not initialized.
+Type:
+
+null is an object.
+undefined is a primitive type.
+Usage:
+
+Use null when you want to explicitly indicate the absence of a value.
+Use undefined to indicate that a variable has not been initialized.
+Comparison:
+
+null == undefined is true because they are loosely equal.
+null === undefined is false because they are of different types.
+
+
+
 Something hasn't been initialized but memory is alocated to it : undefined.(declared but not initialized)
 Something is currently unavailable: null.
 null is an assingment value
@@ -565,18 +734,28 @@ typeOf null ********
 n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
 Unfortunately, in JavaScript, the data type of null is an object. You can consider it a bug in JavaScript that typeof null is an object.
 
-How to access History ********
-windows.history
-
-
-filter vs map **************
-The map method is used to perform operation on each item of an array, while the filter method is used to select certain items of an array.
-
 
 How to make a copy of array or object *******
-use spread operator
-Array.concat()
-Array.slice(0)
+
+Shallow Copy
+
+Using slice()
+const originalArray = [1, 2, 3];
+const shallowCopy = originalArray.slice();
+console.log(shallowCopy); // [1, 2, 3]
+
+Using Spread Operator (...)
+Using Array.from()
+
+Deep Copy
+
+Using structuredClone()
+const originalObject = { a: 1, b: { c: 2 } };
+const deepCopy = structuredClone(originalObject);
+
+console.log(deepCopy); // { a: 1, b: { c: 2 } }
+
+
 
 
 forEach vs Map ***********
@@ -589,27 +768,25 @@ The difference is that map() utilizes return values and actually returns a new A
 map is faster than forEach
 this method does not change the original array.
 
+Key Differences
+
+Return Value:
+forEach: Does not return a new array (returns undefined).
+map: Returns a new array with transformed elements.
+Use Case:
+forEach: Best used for performing side effects (e.g., updating external variables, logging).
+map: Best used for transforming and creating new arrays.
+
+Chainability:
+forEach: Not chainable because it returns undefined.
+map: Chainable because it returns a new array.
+
+Modification:
+forEach: Can modify the original array.
+map: Does not modify the original array.
+
 
 JavaScript Array Methods **********
-concat()
-filter()
-find()
-findIndex()
-forEach()
-from()
-includes()
-indexOf()
-isArray()
-join()
-keys()
-length
-lastIndexOf()
-map()
-pop()
-push()
-reduce()
-reduceRight()
-reverse()
 shift()method removes the first item of an array.
 slice().....var citrus = fruits.slice(1, 3);......The slice() method selects the elements starting at the given start argument, and ends at, but does not include, the given end argument.
 some()
@@ -621,10 +798,36 @@ toString()
 unshift() method adds new items to the beginning of an array, and returns the new length.
 valueOf()  array.valueOf()
 
+Splice vs slice ********
+slice(start, end)..........for both string and array 
+The slice() method selects from a given start, up to a (not inclusive) given end.
+
+substring(start, end)
+substr(start, length)
+
+array.splice(index, howmany, item1, ....., itemX)...for array only
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi");
+
+The slice method is a built-in JavaScript method that is available for both strings and arrays.
+It is used to extract a portion of an array or a string and create a new array or string containing the selected elements or characters.
+The slice method takes one or two arguments:
+
+start (required): The index at which to begin extraction. This argument specifies where the slice should start.
+	If the start argument is negative, it counts from the end of the string or array. If start is not provided, or if it's undefined, the slice starts from the beginning (index 0).
+
+end (optional): The index at which to stop extraction. The end index is not included in the slice.
+	If end is not provided, or if it's undefined, the slice continues to the end of the string or array. Like start, if end is negative, it counts from the end of the string or array.
+
+array methods which modify old array and which provide new array *******
+Modify - splice,push, pop(),shift(),unshift(),splice(),sort(),reverse()
+dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includes(),every(),some()
+
+
 
 
 event bubbling ********
-https://www.geeksforgeeks.org/event-bubbling-in-javascript/
+
 Event bubbling is the concept in which an event triggers at the deepest  element, and triggers on parent elements in nesting order. 
 When we have  div1 inside div2 inside div3 when event in div3 is triggered it goes till div1  
 In event bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.
@@ -634,36 +837,35 @@ One way to prevent event bubbling is using event.stopPropagation()
 Event bubbling is a method of event propagation in the HTML DOM API when an event is in an element inside another element,
 and both elements have registered a handle to that event.
 
-
-
-
 Event delegate **************
 Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
 we can add an event listener to a parent element and call an event on a particular target using the . target property of the event object.
-
-
-
 
 Event Capturing ******************
 In event capturing, an event propagates from the outermost element to the target element. 
 It is the opposite of event bubbling, where events propagate outwards from the target to the outer elements. 
 
-
-
 Event Propogation **********
-
 event delegation is the technique, bubbling is what the event itself does, and capturing is a way of using event delegation 
 on events that don’t bubble.
 
 
 Currying ******
-Currying turns multi-argument functions into unary (single argument) functions.
+Currying turns multi-argument functions into single argument functions.
 Curried functions take many arguments one at a time.
 
-const sum= (a)=>(b)=>(c)=>(d)=> a+b+c+d
-sum(1)(2)(3)(4)
+function curriedAdd(a) {
+    return function(b) {
+        return function(c) {
+            return a + b + c;
+        };
+    };
+}
 
-how to define JSON array..syntax ********
+console.log(curriedAdd(1)(2)(3)); // Output: 6
+
+
+JSON ********
 JSON is a format for storing and transporting data.
 JSON is often used when data is sent from a server to a web page.
 JSON stands for JavaScript Object Notation
@@ -685,22 +887,9 @@ JSON Example
 ]
 }
 
-
-
-
-Why to Encode URL ********
-password protection
-
-
-
-Decorator ********
-Don't know
-
-
 "==" vs "===" ********
 "==" compares for same value can have different type
 "===" compares for same value and type
-
 
 
 falsy valuse *******
@@ -709,24 +898,78 @@ false, 0, -0, 0n, "", null, undefined, and NaN
 
 Higher-Order function *********
 Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
-In simple words, A Higher-Order function is a function that receives a function as an parameter or returns the function as output.
+
 It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
-Ex. map
+Ex. map, filter, and reduce.
 
 A parameter is a variable that we list as part of a function definition.
 An argument is a value that we pass to the function when we invoke it.
+
 
 Recursion JavaScript *************
 It is calling itself inside the function. Working of recursion in JavaScript. A recursive function must have a condition to stop calling itself. 
 Otherwise, the function is called indefinitely. Once the condition is met, the function stops calling itself.
 
+Pros:
+Simplicity: Recursive solutions can often be simpler and more elegant than iterative solutions.
+Readability: Recursive functions can closely mirror the problem statement, making the code easier to understand.
+Divide and Conquer: Recursion is well-suited for problems that can be divided into smaller, similar subproblems.
 
+Cons:
+Performance Overhead: Recursive solutions may have higher memory and time complexity compared to iterative solutions.
+Stack Overflow: If not implemented correctly or without proper termination conditions, recursion can lead to stack overflow errors.
+Debugging Complexity: Debugging recursive functions can be challenging due to multiple function calls and stack traces.
+
+When to Use Recursion
+Tasks with Indefinite Depth: Recursion is suitable for tasks with indefinite depth, such as tree traversal or finding permutations.
+Divide and Conquer: Problems that can be solved by breaking them down into smaller, similar subproblems often lend themselves well to recursion.
+Tail Call Optimization: In languages that support tail call optimization (TCO), recursion can be efficient for iterative processes.
 
 
 
 Prototype ********
+The prototype property is for functions (specifically constructor functions), not for plain objects.
 All JavaScript objects inherit properties and methods from a prototype.
 The JavaScript prototype property allows you to add new properties to object constructors:
+
+Objects vs. Functions: Remember that the prototype property is for functions (specifically constructor functions), not for plain objects.
+Direct Assignment: For plain objects, you can directly assign properties using the dot notation or bracket notation.
+
+
+function Animal(type) {
+    this.type = type;
+}
+
+Animal.prototype.speak = function() {
+    console.log(`${this.type} makes a sound.`);
+};
+
+const dog = new Animal("Dog");
+dog.speak(); // Output: Dog makes a sound.
+
+In this example:
+
+Constructor Function: Animal is a constructor function.
+Prototype Method: speak is added to Animal.prototype.
+Instance: dog is an instance of Animal and can use the speak method via prototype inheritance.
+
+
+Benefits of Constructor Functions
+Code Reusability: Create multiple objects with shared properties and methods.
+Memory Efficiency: Methods defined on the prototype are shared across instances, saving memory.
+OOP Principles: They enable Object-Oriented Programming (OOP) principles like inheritance and encapsulation.
+
+Constructor Functions: Special functions for creating and initializing objects.
+Prototype: Used to add methods that are shared across all instances of a constructor function.
+The new Keyword: Facilitates the creation of a new object, setting up inheritance from the constructor's prototype.
+Constructor functions and prototypes are foundational concepts in JavaScript, enabling efficient object creation and method sharing.
+
+Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
+Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
+
+
+prototype chain *****
+
 function Mobile() {
   this.a=10;
 }
@@ -741,13 +984,9 @@ Nokia.prototype=Object.create(Mobile.prototype)
 
 var nokiaMobile= new Nokia()
 Now, nokiaMobile.z=20
-
-Here we can inherit prototype properties not classes or constructor
 nokiaMobile can ascess value of z but not of a
 
-Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
-prototype chain *****
-Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
+
 
 Babel *****
 Transpilers give us access to tomorrow’s JavaScript today
@@ -756,12 +995,6 @@ But what happens if we want to take advantage of all the benefits of the newest 
 The users of our web applications may still be using older browsers? One answer to this problem is to use transpilers (“transformation + compiling”),
 tools that take cutting-edge JavaScript code and transform it into equivalent (or, if that’s not possible, similar) code that works properly 
 in most current browsers. Today’s most popular transpilers are Traceur (https://github.com/google/ traceur-compiler) and Babel (https://babeljs.io/).
-
-
-Prototype inheritance ********
-In JavaScript, inheritance is supported by using prototype object. Some people call it "Prototypal Inheriatance" 
-and some people call it "Behaviour Delegation".
-
 
 
 valueTpye and refrenceType ******
@@ -787,57 +1020,101 @@ Nested arrays/objects ****
 JSON.parse(JSON.stringify(someArray))
 
 
-Factory Function ******
-define one function and take input and return an obj
-
 local storage vs session storage ********
-sessionStorage is similar to localStorage ; the difference is that while data in localStorage doesn't expire, 
-data in sessionStorage is cleared when the page session ends.
- ... A page session lasts as long as the tab or the browser is open, and survives over page reloads and restores.
-localStorage is a windows function. It takes key and value pair localStorage.setItem(key,value)
-localStorage.getItem(key)  localStorage.removeItem(key) localStorage.clear()
-To store object in local storage localStorage.setItem("user",JSON.stringify(object)) and to retrive it 
-JSON.parse(localStorage.getItem("user"))
-SessionStorage is about 5 MB
-local storage store from 2 MB to 10 MB size 
 
-Constructor *****
-a special method for creating and initializing a object created within a class
-It has instance members
-_proto_ has prototype members
+Local Storage is suitable for long-term storage needs where data should persist across multiple browser sessions.
+Session Storage is ideal for short-term storage needs where data should only persist for the duration of a page session.
 
+Local Storage
+Local Storage is designed for storage that spans multiple sessions. Data stored in local storage is persistent and will remain until explicitly deleted,
+even if the browser is closed and reopened.
+
+Characteristics of Local Storage
+
+Persistence:
+Data stored in local storage persists even after the browser is closed and reopened.
+
+Scope:
+Local storage is scoped to the origin (protocol, hostname, and port). This means data stored in local storage is accessible only within the same origin.
+
+Capacity:
+Typically, local storage can hold up to 5-10 MB of data per origin, but this limit can vary depending on the browser.
+
+Usage:
+Local storage is often used for long-term storage of data that needs to be accessible across multiple sessions, such as user preferences, theme settings,
+or other application state data.
+
+// Storing data in local storage
+localStorage.setItem('username', 'Alice');
+
+// Retrieving data from local storage
+const username = localStorage.getItem('username');
+console.log(username); // Output: Alice
+
+// Removing data from local storage
+localStorage.removeItem('username');
+
+// Clearing all data from local storage
+localStorage.clear();
+
+
+Session Storage
+Session Storage is designed for storage that lasts only for the duration of a page session. Data stored in session storage is available only while the page (or tab) is open.
+When the page is closed, the data is deleted.
+
+Characteristics of Session Storage
+
+Persistence:
+Data stored in session storage is only available for the duration of the page session. It is cleared when the page (or tab) is closed.
+
+Scope:
+Session storage is also scoped to the origin and additionally scoped to the specific tab or window. 
+Data stored in one tab or window is not accessible in another tab or window, even if they are from the same origin.
+
+Capacity:
+Like local storage, session storage typically allows up to 5-10 MB of data per origin.
+
+Usage:
+Session storage is useful for storing temporary data that needs to persist only for the duration of the user's session on a particular page, 
+such as form data being filled out, temporary state of a multi-step process, or other short-term information.
+
+// Storing data in session storage
+sessionStorage.setItem('sessionKey', 'value123');
+
+// Retrieving data from session storage
+const sessionValue = sessionStorage.getItem('sessionKey');
+console.log(sessionValue); // Output: value123
+
+// Removing data from session storage
+sessionStorage.removeItem('sessionKey');
+
+// Clearing all data from session storage
+sessionStorage.clear();
+
+
+
+Constructor Function, Factory Function*****
+Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
+The this object is returned implicitly if the function does not return another object explicitly.
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+const person1 = new Person("Alice", 30);
+console.log(person1.name); // Output: "Alice"
+console.log(person1.age);  // Output: 30
+
+When a function is called without new, it executes as a regular function.
+When a function is called with new, it creates a new object and binds this to that new object.
+
+Regular Functions: Perform tasks and do not create objects. Called without new.
+Constructor Functions: Create and initialize objects. Called with new.
+Arrow Functions: Cannot be used as constructors and lack their own this context.
 
 
 How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********
-const obj = new Object();
 Object.keys(obj).length === 0;
-
-
-
-Array manupilation methods/libraries--Slice,split,reduce ********
-https://www.w3schools.com/jsref/jsref_obj_array.asp
-
-Splice vs slice ********
-slice(start, end)..........for both string and array 
-The slice() method selects from a given start, up to a (not inclusive) given end.
-
-
-substring(start, end)
-substr(start, length)
-
-array.splice(index, howmany, item1, ....., itemX)...for array only
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.splice(2, 0, "Lemon", "Kiwi");
-
-The slice method is a built-in JavaScript method that is available for both strings and arrays.
-It is used to extract a portion of an array or a string and create a new array or string containing the selected elements or characters.
-The slice method takes one or two arguments:
-
-start (required): The index at which to begin extraction. This argument specifies where the slice should start.
-	If the start argument is negative, it counts from the end of the string or array. If start is not provided, or if it's undefined, the slice starts from the beginning (index 0).
-
-end (optional): The index at which to stop extraction. The end index is not included in the slice.
-	If end is not provided, or if it's undefined, the slice continues to the end of the string or array. Like start, if end is negative, it counts from the end of the string or array.
 
 
 Function Expression *************
@@ -851,11 +1128,11 @@ You can create it as function expression but not as regular function/statement f
 
 
 First Class Function ********
-
 Ability to pass function as argument or return a function from function is called first class function
 A programming language is said to have First-class functions when functions in that language are treated like any other variable. 
 For example, in such a language, a function can be passed as an argument to other functions, 
 can be returned by another function and can be assigned as a value to a variable.
+
 
 Pure Function *******
 Pure functions are functions that accept an input and returns a value without modifying any data outside its scope(Side Effects). 
@@ -876,29 +1153,12 @@ Here, we're always going to take in a number and receive that number multiplied 
 Pure components in React should follow suit and never manipulate global state that other components maybe depending on as well. 
 
 
-
-
-JavaScript is Case Sensitive
-Camel Case
-
-document.getElementById('demo').innerHTML = 'Hello JavaScript';
-document.getElementById("demo").style.fontSize = "35px";
-
-var x = new String("John");             
-var y = new String("John");
-// (x == y) is false because x and y are different objects
-
-But you can use the toString() method to output numbers from base 2 to base 36.
-var myNumber = 32;
-myNumber.toString(10);  // returns 32
-myNumber.toString(32);  // returns 10
-myNumber.toString(16);  // returns 20
-
 There are 3 JavaScript methods that can be used to convert variables to numbers:
 
 The Number() method
 The parseInt() method
 The parseFloat() method
+
 
 Nullish coalescing operator (??) *****
 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand 
@@ -909,8 +1169,9 @@ If leftOperand is any other falsy value (e.g., 0, false, "", NaN), result will b
 
 
 Optional chaining (?.) *****
-The optional chaining operator (?.) enables you to read the value of a property located deep within a chain of connected objects without having
- to check that each reference in the chain is valid.
+Optional chaining is a feature introduced in ECMAScript 2020 (ES11) that allows you to safely access nested properties of an object 
+without the need for a series of null/undefined checks.
+
 let nestedProp = obj.first?.second;
 You can use optional chaining when attempting to call a method which may not exist. This can be helpful, for example, 
 when using an API in which a method might be unavailable, either due to the age of the implementation or because of a feature 
@@ -921,8 +1182,6 @@ let arrayItem = arr?.[42];
 
 Debounce
 https://www.freecodecamp.org/news/debounce-and-throttle-in-react-with-hooks/
-
-
 
 Debounce
  const [inputValue, setInputValue] = useState();
@@ -943,16 +1202,40 @@ Debounce
           value={inputValue}
         />
 
-Throttleing
+
+Throttleing *****
+
 
 What is CORS issue *****
-Cross-origin resource sharing is a mechanism that allows restricted resources on a web page to be requested from another domain 
-outside the domain from which the first resource was served.
-To fix it add allowed origins names into backend server
-Access-Control-Allow-Origin :[Add domain names]
-after How long does a authenticate token expires ****
-valid for 60 days
+CORS stands for Cross-Origin Resource Sharing. It's a security feature implemented by web browsers to restrict web pages from making requests to a different domain 
+than the one that served the original page. This restriction is in place to prevent malicious websites from accessing sensitive data from other websites without permission.
 
+Origin: An origin is defined by the combination of scheme (protocol), domain, and port of a URL. For example, https://example.com and http://localhost:3000 are different origins.
+
+Same-Origin Policy: By default, web browsers enforce the Same-Origin Policy, which means that a web page served from one origin cannot normally make requests to resources
+from a different origin.
+
+Cross-Origin Requests: When a web page tries to make a request to a different origin (cross-origin request), 
+the browser sends an HTTP request with an Origin header indicating the origin of the requesting page.
+
+CORS Headers: The server hosting the requested resource can include special HTTP headers in its response to indicate whether it allows cross-origin requests 
+from the requesting origin. These headers include:
+
+Access-Control-Allow-Origin: Specifies which origins are allowed to access the resource. It can be a specific origin, * (wildcard) to allow any origin, 
+or null to disallow all cross-origin requests.
+
+Access-Control-Allow-Methods: Specifies the HTTP methods (e.g., GET, POST, etc.) allowed when accessing the resource.
+
+Access-Control-Allow-Headers: Specifies the HTTP headers allowed when accessing the resource.
+
+Access-Control-Allow-Credentials: Indicates whether the resource supports credentials such as cookies or authorization headers in cross-origin requests.
+
+Preflight Requests: For certain types of cross-origin requests (e.g., requests with custom headers or methods other than GET, POST, or HEAD),
+the browser first sends a preflight OPTIONS request to the server to determine if the actual request is safe to send.
+The server responds with CORS headers indicating whether the actual request is allowed.
+
+Simple Requests: Requests that meet certain criteria, such as using only safe methods (e.g., GET, POST) and not including custom headers other than those allowed by the server, 
+are considered simple requests and may not trigger a preflight request.
 
 
 Web Vitals **********
@@ -961,22 +1244,34 @@ FID(First Input Delay) -- Interactive below 100ms
 CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
 
 
-
-
 Web Workers********
 
+Web Workers provide a way to run scripts in background threads in web applications, allowing for parallel execution of code.
+This helps in improving performance and responsiveness by offloading computationally intensive tasks from the main thread, which is responsible for updating the user interface.
+Web Workers let JavaScript do more than one thing at a time.
+These helpers, called Worker threads, can keep working even if the main part is busy with other things.
+
+Types of Web Workers
+Dedicated Workers: Used by a single script. They are simpler and more commonly used.
+Shared Workers: Can be accessed by multiple scripts, even if they are in different windows, iframes, or tabs.
+Service Workers: Act as a proxy between the web application, the browser, and the network (when available). They enable features like offline caching and push notifications.
 
 
+Service Workers********
+ 
+Service Workers are a type of Web Worker in JavaScript that act as a proxy between web applications, the browser, and the network (when available).
+They enable advanced features like offline caching, background sync, and push notifications, significantly enhancing web app performance and capabilities,
+especially in unreliable network conditions.
 
+Offline Caching: Service Workers can cache assets and API responses, allowing web applications to function offline or with limited connectivity.
+Background Sync: They enable tasks to be deferred until the user has stable connectivity, ensuring data consistency.
+Push Notifications: Service Workers can handle push notifications, allowing web apps to re-engage users even when the app is not active.
 
- Service Workers********
 
 
 WebPack bunderler analyses *********
 https://www.youtube.com/watch?v=5IG4UmULyoA timestamp 7:38
 
-
-How to handle Errors in JS *********
 
 Rendering Pattern ****************
 CSR
@@ -1005,12 +1300,57 @@ How to measure speed *******
 https://web.dev/what-is-speed/
 
 
+Semantic Elements **************
+Semantic elements in HTML are used to give meaning to the content they surround, rather than just specifying how the content should be presented.
+They help describe the structure of the web page, making it more accessible to different devices and users, including those using assistive technologies like screen readers.
+These elements help browsers, search engines, and other software understand the purpose of each part of the page. 
+Using semantic elements appropriately not only improves the structure and readability of your HTML code but also 
+enhances accessibility and search engine optimization (SEO) of your website.
 
 
+How for loop works exactly **********
 
 
+Encapsulation ******
+Encapsulation is a fundamental concept in object-oriented programming (OOP) that restricts direct access to some of an object's components and
+can prevent the accidental modification of data. In JavaScript, encapsulation is achieved primarily through the use of functions and closures,
+as well as through classes and modules introduced in ES6.
+
+Benefits of Encapsulation
+Data Hiding: Protects the internal state of an object from unintended or harmful modifications.
+Modularity: Makes the code more modular by separating concerns and responsibilities.
+Maintenance: Easier to maintain and update the code since the internal implementation is hidden from the outside world.
+Reusability: Encapsulated code can be reused in different parts of an application without modification.
+
+Using Closures
+Closures allow functions to have access to variables from an enclosing scope even after the enclosing function has finished executing.
+This can be used to create private variables and functions.
+
+function createCounter() {
+    let count = 0; // Private variable
+
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        decrement: function() {
+            count--;
+            return count;
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.getCount()); // 2
+console.log(counter.decrement()); // 1
+// console.log(counter.count); // Undefined, count is private
 
 
-
-
-
+In this example, count is a private variable that cannot be accessed directly from outside the createCounter function.
+The only way to modify or access count is through the methods provided (increment, decrement, and getCount)

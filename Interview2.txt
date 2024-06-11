@@ -1,0 +1,259 @@
+
+
+fun1();
+fun2();
+function fun1() {
+    console.log("fun1")
+}
+
+const fun2 = () => {
+    console.log("fun2")
+}
+*****************************************
+
+convert a string like "aabb" to "a2b2c2"
+convert a string like "aabccbb" to "a2b2c2"
+
+
+function encodeString(str) {
+  let encoded = '';
+  let count = 1;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === str[i + 1]) {
+      count++;
+    } else {
+      encoded += str[i] + count;
+      count = 1;
+    }
+  }
+  return encoded;
+}
+
+console.log(encodeString('Aabb'));
+
+*****************************************************
+
+print a value for particular time continuosly 
+let timer = setInterval(() => {
+  console.log("hello");
+}, 0);
+setTimeout(() => {
+  clearInterval(timer);
+}, 2000);
+
+
+******************************************
+
+// Sentence case 
+// Write a method which take one parameter that is string containing sentence and return a string with first letter of word is capital and rest is in lower case ?
+// const name = 'deepaK khanDelwal PqR;
+// Expected result -> Deepak Khandelwal Pqr
+
+// function CapitalFistLetter(value){
+    
+//    const result= value.toLowerCase().split(" ").map((item)=>{
+//                     return  newsentence= newsentence.charAt(0).toUpperCase() +newsentence.slice(1)
+//         }).join(" ")
+
+//         console.log(result);
+   
+// }
+
+
+************************************
+
+	
+const arr=[null, 2,5,'',"ello",4,undefined,8,null];
+
+console.log("Find",arr.find(i=>i));  
+console.log("Filter",arr.filter(i=>i));   
+console.log("Reduce",arr.reduce(i=>i));
+console.log("Map",arr.map(i=>i));  
+
+arr=[1,2,3,4,6]
+console.log("Mapss",arr.map(i=>i>3)); 
+
+
+	
+const arr=[null, 2,5,'',"ello",4,undefined,8,null];
+
+console.log("Find",arr.find(i=>i));  //Find 2
+console.log("Filter",arr.filter(i=>i));  // Filter (5) [2, 5, "ello", 4, 8]
+console.log("Reduce",arr.reduce(i=>i));  // Reduce null
+console.log("Map",arr.map(i=>i));  //  Map (9) [null, 2, 5, "", "ello", 4, undefined, 8, null]
+If we write condition in map it returns true or false according to the condition
+arr=[1,2,3,4,6]
+console.log("Mapss",arr.map(i=>i>3));  // [false, false, false, true, true]
+
+
+***********************************************************
+
+
+let array=[1, 2, 3, 4, ,5, 6, 7, 8, 9, 10]
+// {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]}
+
+let result=array.reduce((acc,item)=>{
+        // acc["even"]=[]
+        // acc["odd"]=[]
+
+        if(item %2===0){
+             acc.even.push(item)   
+        } else{
+            acc.odd.push(item)
+        }
+        return acc
+},{
+    even:[],
+    odd:[]
+})
+
+console.log("Result",result);
+
+
+***********************************************
+
+
+var b = 1;
+function outer(){
+   	var b = 2
+    function inner(){
+        b++;
+        var b = 3;
+        console.log(b)
+    }
+    inner();
+}
+outer();
+
+Output to the console will be “3”.
+
+There are three closures in the example, each with it’s own var b declaration. When a variable is invoked closures will be checked in order 
+from local to global until an instance is found. Since the inner closure has a b variable of its own, that is what will be output.
+
+Furthermore, due to hoisting the code in inner will be interpreted as follows:
+
+function inner () {
+    var b; // b is undefined
+    b++; // b is NaN
+    b = 3; // b is 3
+    console.log(b); // output "3"
+}
+
+
+**************************
+
+// b=10
+// function display() {
+//     var b=10
+//     var a;
+// 
+// // var a=b
+
+//     }
+//     display();
+//     console.log('b', typeof b === 'undefined'); false
+//     console.log('a', typeof a === 'undefined'); true
+
+**************************************
+
+const person = {
+       name: "John"
+    }
+    const personsArray = [{person}, {person}, {person}];
+    personsArray[0].name = "Sid";
+    console.log(personsArray[1].name)
+
+***********************************************
+
+// write a function to find strings appearing an odd number of times
+// arr=['aa','bb','aa','bb','aa','cc','cc','ddd'] ===> ['aa','ddd'] because aa appears 3x and ddd 1x
+
+// function Counter(sentence){
+//   let array= sentence.reduce((total, letter) => {
+//     total[letter] ? total[letter]++ : total[letter] = 1;
+//     return total;
+//   }, {});
+//   let newarr=[]
+//   for(const property in array){
+//       if(array[property]%2!==0){
+//            newarr.push(property)
+//       } 
+//   }
+//   return newarr
+// };
+
+// arr=['aa','bb','aa','bb','aa','cc','cc','ddd']
+
+// Counter(arr)
+
+
+
+*************************************
+
+// const brunch = {
+//     food: 'Dim sum',
+//     beverage: 'Jasmine tea',
+//     order: () => {
+//         return `I'll have the ${this.food} with ${this.beverage} please.`
+//     }
+// }
+// brunch.order();
+
+*************************************************
+
+// function a(){
+//   console.log("a")
+//   setTimeout(()=>{console.log("b")}, 0)
+//   Promise.resolve().then(_ => console.log("c"))
+//   console.log("c2")
+//   console.log("c3")
+// }
+// a()    
+
+// ==> 
+//a
+//c2
+//c3
+//c
+//b
+
+*******************************************
+
+// var myObject = {
+//     foo: "bar", 
+//     func: function() {
+//          var self = this; 
+//          console.log("outer func: this.foo = " + this.foo);
+//          console.log("outer func: self.foo = " + self.foo); 
+     
+//          (function() { 
+//            console.log("inner func: this.foo = " + this.foo);
+//             console.log("inner func: self.foo = " + self.foo); 
+//             }()); 
+//           }   
+//       }; 
+        
+//     myObject.func();
+
+
+// Bar
+// bar 
+
+// undefined
+// bar
+
+***************************************************
+
+Use of "Key" in Component
+Life Cycle Methods of react
+Hooks
+Portal
+
+
+
+
+
+
+
+
+

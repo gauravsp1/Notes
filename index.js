@@ -212,7 +212,7 @@
 // }
 
 // num = numArray.filter((number) => {
-//     if(number===1){
+//     if(number<2>){
 //       return false  
 //     }
 //    else if(number===2){
@@ -855,40 +855,37 @@
 // };
 
 // const deepEqual = (objA, objB) => {
-//   if (typeof objA !== "object" || typeof objB !== "object") {
-//     return objA === objB;
-//   }
-// if (Array.isArray(objA) && Array.isArray(objB)) {
-
-//   if (objA.length !== objB.length) {
-//     return false;
-//   }
-
-//   for (let i = 0; i < objA.length; i++) {
-//     if (!deepEqual(objA[i], objB[i])) {
+//     //Compare actual value break recursion
+//     if (typeof objA !== "object" || typeof objB !== "object") {
+//       return objA === objB;
+//     }
+//     //Compare array
+//     if (Array.isArray(objA) && Array.isArray(objA)) {
+//       //Compare array length
+//       if (objA.length !== objB.length) {
+//         return false;
+//       }
+//       for (let i = 0; i < objA.length; i++) {
+//         if (!deepEqual(objA[i], objB[i])) {
+//           return false;
+//         }
+//       }
+//       return true;
+//     }
+//     //Compare objects
+//     const KeyA = Object.keys(objA);
+//     const KeyB = Object.keys(objB);
+  
+//     if (KeyA.length !== KeyB.length) {
 //       return false;
 //     }
-//   }
-
-//   return false;
-// }
-
-//   const keysA = Object.keys(objA);
-//   const keysB = Object.keys(objB);
-//   if (keysA.length !== keysB.length) {
-//     return false;
-//   }
-//   if (
-//     !keysA.every((item) => {
-//       return keysB.includes(item);
-//     })
-//   ) {
-//     return false;
-//   }
-//   return keysA.every((item) => {
-//     return deepEqual(objA[item], objB[item]);
-//   });
-// };
+//     for (let key of KeyA) {
+//       if (!KeyB.includes(key) || !deepEqual(objA[key], objB[key])) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
 
 // console.log(deepEqual(obj1, obj2));
 

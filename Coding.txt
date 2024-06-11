@@ -175,7 +175,17 @@ const fib =(num)=> {
 
 console.log(fib(4));
 
+function fibonacci(n) {
+  // Base cases: if n is 0 or 1, return n
+  if (n === 0 || n === 1) {
+    return n;
+  }
+  // Recursive case: sum of the previous two Fibonacci numbers
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
 
+// Calculate the 7th Fibonacci number
+console.log(fibonacci(0)); // Output: 13
 
 
 Reverse string **********
@@ -912,10 +922,71 @@ console.log(encodeString('Aabb')); // Output: a2b2c2
 
 
 
+const input = {
+  a: 1,
+  b: 2,
+  c: {
+    d: "string",
+    e: [10, 20, [30]],
+  },
+};
+
+// output = [1, 2, "string", 10, 20, 30]
+
+function flattenObject(obj) {
+  const result = [];
+
+  function traverse(obj) {
+    for (const key in obj) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        traverse(obj[key]);
+      } else {
+        result.push(obj[key]);
+      }
+    }
+  }
+
+  traverse(obj);
+  return result;
+}
+
+const output = flattenObject(input);
+console.log(output); // [1, 2, "string", 10, 20, 30]
 
 
 
+const person = {
+       name: "John"
+    }
+    const personsArray = [{person}, {person}, {person}];
+    personsArray[0].name = "Sid";
+    console.log(personsArray[1].name)
+    
+    fun1();
+fun2();
+function fun1() {
+    console.log("fun1")
+}
+
+const fun2 = () => {
+    console.log("fun2")
+	
+	
 
 
 
+for( var i=0;i<5;i++){
+setTimeout(()=>{
+console.log(i);
+},i*2)
+}
 
+//IIFE()
+
+for (var i = 1; i <= 3; i++) {
+    (function(i) {
+        setTimeout(function() {
+            console.log(i); // This will log 1, 2, 3
+        }, 1000);
+    })(i);
+}
