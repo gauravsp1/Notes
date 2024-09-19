@@ -1,0 +1,24 @@
+LLD practices
+
+
+Filter
+realTime input
+Calculator
+ToDo List
+Tic-Tac-Toe Game
+Search Bar with filtering dropdown values 
+Price Range Slider with Min-Max Input ---https://www.geeksforgeeks.org/price-range-slider-with-min-max-input-using-html-css-and-javascript/
+Star Rating
+Drag and Drop Sortable List
+ 
+ 
+ 
+ 
+ 
+Done
+Infinite scroll
+Accordian
+ImageSlider
+CountDown - pause, play
+StopWatch- pause, play, lap
+Clock- pause, play,

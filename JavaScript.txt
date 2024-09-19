@@ -361,14 +361,7 @@ JavaScript Arrow Functions **********
 https://www.codementor.io/@dariogarciamoya/understanding--this--in-javascript-du1084lyn
 https://www.codementor.io/@dariogarciamoya/understanding-this-in-javascript-with-arrow-functions-gcpjwfyuc
 
-Arrow functions let us create functions with less syntactic clutter. They don’t have their own
-this parameter. Instead, they inherit it from the context in which they were created:
-const values = [0, 3, 2, 5, 7, 4, 8, 1];
-values.sort((v1,v2) => v1 - v2); /*OR*/ values.sort((v1,v2) => { return v1 - v2;});
-value.forEach(value => console.log(value));
-
-Two benifits one shorter syntax other diferent behavior of this keyword
-Arrow functions allow us to write shorter function syntax:
+Arrow functions let us create functions with less syntactic clutter.
 Before:
 hello = function() {
   return "Hello World!";
@@ -376,28 +369,10 @@ hello = function() {
 After:
 hello = () => "Hello World!";
 
+
 In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
-Arrow functions do not have their own this but they inherit it from the parent scope.
-Arrow functions shine best with anything that requires this to be bound to the context, and not the function itself.
-
-
-const myObject = {
-  myArrowFunction: null,
-  myMethod: function () {
-    this.myArrowFunction = () => { console.log(this) };
-  }
-};
-
-When we call myObject.myMethod(), we initialize myObject.myArrowFunction with an arrow function which is inside of the method myMethod, 
-so it will inherit its scope. We can clearly see a perfect use case, closures.
-
-myObject.myMethod() // this === myObject
-
-myObject.myArrowFunction() // this === myObject
-
-const myArrowFunction = myObject.myArrowFunction;
-myArrowFunction() // this === myObject
-
+Arrow functions, unlike traditional functions, do not have their own this context. Instead, they inherit this from the surrounding (lexical) scope. 
+This means that the value of this inside an arrow function is determined by where the arrow function is defined, not where it is called. 
 
 var obj = { // does not create a new scope
   i: 10,
@@ -414,7 +389,6 @@ arrow functions are the best choice when working with closures or callbacks,
 but not a good choice when working with class/object methods or constructors.
 ES6 arrow functions can’t be bound to a this keyword, so it will lexically go up a scope, 
 and use the value of this in the scope in which it was defined.
-
 Because the b arrow function is created as a property value on an object literal, and the object literal is created in global code, 
 the this value of the arrow function will be the this value of the global code.
 
@@ -1042,7 +1016,7 @@ Typically, local storage can hold up to 5-10 MB of data per origin, but this lim
 
 Usage:
 Local storage is often used for long-term storage of data that needs to be accessible across multiple sessions, such as user preferences, theme settings,
-or other application state data.
+or other application state data, user Details(non-sensitive)
 
 // Storing data in local storage
 localStorage.setItem('username', 'Alice');
@@ -1091,6 +1065,46 @@ sessionStorage.removeItem('sessionKey');
 // Clearing all data from session storage
 sessionStorage.clear();
 
+
+Cookies ****
+Cookies are small pieces of data stored by a web browser on behalf of a website.
+They are primarily used for session management, storing user preferences, and tracking user behavior across sessions and sites.
+
+Types of Cookies
+
+Session Cookies:
+These cookies are temporary and are deleted once the user closes the browser.
+They are mainly used to maintain a session, such as keeping a user logged in while navigating different pages of a website.
+
+Persistent Cookies:
+These cookies remain on the user’s device for a set duration defined in the cookie’s expires or max-age attribute.
+They can be used to store login tokens or user preferences for future visits.
+
+First-party Cookies:
+Created by the website the user is visiting.
+They are typically used for functionality like remembering login information or preferences (e.g., language, theme).
+
+Third-party Cookies:
+Set by domains other than the one the user is currently visiting.
+Commonly used for advertising and tracking purposes across different websites.
+
+Common Use Cases
+
+Session Management:
+Cookies store session identifiers to keep a user logged in across page navigations.
+For example, a session ID stored in a cookie allows the server to recognize the user during their visit.
+
+Personalization:
+Cookies can store user preferences (e.g., language or theme), so websites can provide a consistent experience across visits.
+
+Tracking and Analytics:
+Advertisers and analytics services use cookies to track users across different websites, allowing them to serve targeted ads or measure user behavior.
+
+Shopping Carts:
+E-commerce sites use cookies to keep track of items added to the cart, even if the user navigates away or comes back later.
+
+Typically used for data that must be sent to the server with each HTTP request (like session identifiers or CSRF tokens).
+how to use - document.cookie
 
 
 Constructor Function, Factory Function*****
@@ -1238,10 +1252,64 @@ Simple Requests: Requests that meet certain criteria, such as using only safe me
 are considered simple requests and may not trigger a preflight request.
 
 
+
+Polyfills *************
+A polyfill is a piece of code (usually JavaScript) that implements modern functionality on older browsers that do not natively support it. 
+It "fills in" the gap in browser support, allowing developers to use newer features without breaking the website on older or less-capable browsers.
+
+Map ****
+Array.Prototype.MyMap= function(cb){
+	let temp=[]
+	for(let i=0;i<this.length;i++){
+	temp.push(cb(this[i],i,this))
+	}
+	return temp
+}
+
+Filter ****
+Array.Prototype.MyMap= function(cb){
+	let temp=[]
+	for(let i=0;i<this.length;i++){
+	if(cb(this[i],i,this)){
+		temp.push(this[i])
+		}
+	}
+	return temp
+}
+
+Reduce ***
+Array.Prototype.MyReducer= function(cb,initialValue){
+	let accumulator=initialValue
+	for(let i=0;i<this.length;i++){
+		accumulator= accumulator? cb(accumulator,this[i],i,this): this[i]
+	}
+	return accumulator	
+
+}
+
+
+Call ****
+Function.Prototype.MyCall=function(context,...arg){
+	context.fn=this
+	context.fn(...arg)
+
+}
+
+Apply ****
+Function.Prototype.MyApply=function(context,arg){
+	context.fn=this
+	context.fn(arg)
+}
+
+Bind ****
+Function.Prototype.MyBind=function(context,...arg){
+	context.fn=this
+	return function (...newArgs){
+		return context.fn(...arg,...newArgs)
+	}
+}
+
 Web Vitals **********
-LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec 
-FID(First Input Delay) -- Interactive below 100ms
-CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
 
 
 Web Workers********
@@ -1354,3 +1422,62 @@ console.log(counter.decrement()); // 1
 
 In this example, count is a private variable that cannot be accessed directly from outside the createCounter function.
 The only way to modify or access count is through the methods provided (increment, decrement, and getCount)
+
+
+Web vitals ************
+
+LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec 
+FID(First Input Delay) -- Interactive below 100ms
+CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
+
+
+Core Web Vitals
+
+Largest Contentful Paint (LCP):
+Definition: Measures loading performance. It marks the point in the page load timeline when the main content has likely loaded.
+Good Threshold: LCP should occur within 2.5 seconds of when the page first starts loading.
+
+First Input Delay (FID):
+Definition: Measures interactivity. It quantifies the delay between when a user first interacts with a page (e.g., clicks a button) and when the browser responds to that interaction.
+Good Threshold: FID should be less than 100 milliseconds.
+
+Cumulative Layout Shift (CLS):
+Definition: Measures visual stability. It quantifies the amount of unexpected layout shift of visible page content.
+Good Threshold: CLS should be less than 0.1.
+
+Other Web Vitals
+In addition to the core Web Vitals, there are other important metrics that contribute to overall user experience:
+First Contentful Paint (FCP): Time from when the page starts loading to when any part of the page's content is rendered.
+Time to Interactive (TTI): The time it takes for the page to become fully interactive.
+Total Blocking Time (TBT): The sum of all time periods between FCP and TTI when the main thread was blocked for long enough to prevent input responsiveness.
+
+Importance of Web Vitals
+User Experience: Improving Web Vitals can lead to a better user experience by making websites load faster, respond quicker, and be more visually stable.
+SEO: Google uses these metrics as part of its ranking criteria, so optimizing for Web Vitals can improve search engine visibility and ranking.
+Performance Monitoring: They provide a standardized way to measure and monitor the performance of web pages.
+
+Tools for Measuring Web Vitals
+There are several tools and techniques to measure Web Vitals:
+Lighthouse: An open-source, automated tool for improving the quality of web pages. It provides audits for performance, accessibility, progressive web apps, SEO, and more.
+PageSpeed Insights: Provides insights into the performance of a web page on both mobile and desktop devices and provides suggestions on how to improve.
+Chrome DevTools: Built into the Chrome browser, it offers a variety of tools for developers to analyze and debug web performance.
+Web Vitals Extension: A Chrome extension that provides real-time feedback on the core Web Vitals metrics for any site you visit.
+Search Console: Provides a Core Web Vitals report to help website owners understand how their pages perform based on real-world usage data (field data).
+
+Example of Improving Core Web Vitals
+Here's a brief overview of how you might improve each of the core Web Vitals:
+
+Largest Contentful Paint (LCP):
+Optimize images and videos (use modern formats, compress, lazy load).
+Improve server response times (reduce time to first byte, use a CDN).
+Minimize render-blocking CSS and JavaScript.
+
+First Input Delay (FID):
+Minimize JavaScript execution time.
+Break up long tasks.
+Use web workers to run heavy tasks off the main thread.
+
+Cumulative Layout Shift (CLS):
+Include size attributes on your images and video elements.
+Ensure ads, embeds, and iframes have reserved space.
+Avoid inserting content above existing content except in response to user interaction.

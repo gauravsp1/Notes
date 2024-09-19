@@ -427,7 +427,34 @@ The Custom Hook can then be Re-used
 Set interval syntax ****
  var myVar = setInterval(alertFunc, 3000);
  clearInterval(myVar) 
- 
+
+
+Reasons to Clear setInterval or setTimeout ********
+
+Avoid Memory Leaks:
+If you don't clear a setInterval or a long setTimeout, it will continue to exist in memory, even if the component or object that initiated it has been removed
+or is no longer relevant.
+This can lead to memory leaks, where the JavaScript engine is holding onto resources that are no longer needed, which can degrade the performance of your application over time.
+
+Prevent Unwanted Repeated Executions (setInterval):
+setInterval will continue to execute the specified code at regular intervals indefinitely until it is cleared.
+If you no longer need the repeated execution (e.g., when navigating away from a page or when a certain condition is met),
+failing to clear the interval can result in redundant operations being executed, wasting CPU cycles.
+This can cause bugs, such as duplicate event handling, unnecessary API calls, or unexpected UI behavior.
+
+Avoid Delayed Execution (setTimeout):
+Sometimes a setTimeout schedules a function to execute after a certain delay. If the function is no longer needed (for example,
+if the user navigates away from a page or the condition that triggered it is no longer relevant), you should clear it to prevent code from running unexpectedly after the delay.
+
+Performance Optimization:
+Clearing unnecessary intervals or timeouts helps reduce unnecessary computations and keeps your application performant, especially in larger applications with frequent updates,
+animations, or API calls.
+
+Prevent Inconsistent State in UI Components:
+In applications using frameworks like React, setInterval or setTimeout can cause issues if not properly managed.
+For instance, if a component using a timer is unmounted without clearing the timer, the callback might try to update the state of a non-existent component, leading to errors.
+
+
  
 Inside package.jason different between dependances and dev-dependances **************
 --save in while running command in terminal **********
@@ -608,6 +635,8 @@ Benefits of Pure Components:
 Performance Optimization:
 By preventing unnecessary re-renders, pure components can improve the performance of your application, especially when dealing with large or complex component trees.
 
+Predictable Rendering:
+A pure component renders only when there are changes in props or state, leading to more predictable and optimized rendering behavior.
 
 Controlled Vs Uncontrolled Component ***********
 Controlled- In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. 
@@ -675,15 +704,7 @@ ternary operator
 Short circuit operator ( Condition && what to display)
 Optional chaining--checkif conditional rendering
 Nullish coalescing operator (??)
-
-
-Controlled Vs Uncontrolled Data input (any performance issue?) ***********
-Not sure but if it's suggested by react to use then it doesn't have performance issue
-
-
-Single source of truth *******
-Using useState in form input value
-
+switch case
 
 
 How to pass data from parent to child (props) ***********
@@ -697,27 +718,48 @@ Pass the callback function in the parent as a prop to the child component.
 The child component calls the parent callback function using props.
 
 
-
-Dependency injection ***********
-What is dependency injection? Classes often require references to other classes. 
-For example, a Car class might need a reference to an Engine class. 
-These required classes are called dependencies, and in this example the Car class is dependent on having an instance of the Engine class to run.
-
 How to pass data from component to component with no relationship *********
 Redux
-
-
-
-Services (API) ***********
 
 
 HOC(High order Component) ***********
 
 An HOC is a function that takes a component as an argument and returns a new component that wraps the original one.
 This allows you to add additional behavior or props to the wrapped component.
-Its used to enchance the input component and is reusable
+Its used to enchance the input component and is reusable.
 it is used to share common functionality between component without repeating code
 These functions are pure, which means they are receiving data and returning values according to that data.
+
+When to Use HOCs
+
+HOCs are useful in scenarios where you need to:
+Share common logic between multiple components.
+Abstract away complex behavior and keep components simple.
+Implement cross-cutting concerns like authentication, logging, performance monitoring, etc.
+
+Benefits of HOCs
+
+Code Reusability:
+HOCs promote the reuse of logic across multiple components, reducing redundancy and making the codebase more maintainable.
+
+Separation of Concerns:
+HOCs help separate the business logic from the UI components, leading to cleaner and more focused components.
+
+Flexibility:
+You can use HOCs to add multiple layers of functionality to a component, making them highly flexible and adaptable.
+
+Common Use Cases
+Access Control:
+Implementing authentication checks to render components conditionally based on user roles or permissions.
+
+Data Fetching:
+Managing data fetching logic, such as making API calls and handling loading states.
+
+Performance Optimization:
+Adding memoization or caching to prevent unnecessary re-renders and improve performance.
+
+Enhancing Component Behavior:
+Adding behavior like logging, error handling, analytics, etc.
 
 const WithComponent=OriginalComponent=> {
     function NewComponent(props){
@@ -740,9 +782,6 @@ const WithComponent=OriginalComponent=> {
 export default WithComponent
 
 
-Can HOC(High order Component) be pure components ***********
-Yes
-
 In built HOC in react*********
 connect from react-redux
 It allows you to map state and dispatch to props, enabling your component to interact with the Redux store.
@@ -750,19 +789,6 @@ It allows you to map state and dispatch to props, enabling your component to int
 withRouter from react-router-dom
 withRouter is an HOC provided by the react-router-dom library. It injects the router-related props (history, location, match) into the wrapped component,
 allowing you to access these props in any component.
-
-
-
-sanitize method in coding ***********
-HTML sanitization is the process of examining an HTML document and producing a new HTML document that preserves 
-only whatever tags are designated “safe” and desired. 
-HTML sanitization can be used to protect against cross-site scripting (XSS) attacks by sanitizing any HTML code submitted by a user.
-
-
-
-
-How to add/remove css class ***********
-useState
 
 
 Render Props  ***********
@@ -799,6 +825,7 @@ function App() {
     );
 }
 
+
 React.memo() *****
 React.memo is a higher-order component that optimizes functional components by memoizing their rendered output.
 This means that React will only re-render the component if its props change.
@@ -811,6 +838,11 @@ export default React.memo(MyComponent);
 
 When you have functional components that receive the same props over time and do not need to re-render unless their props change.
 To optimize components that do not rely on state or context changes.
+
+const MyComponent = React.memo(Component, (prevProps, nextProps) => {
+  // Custom comparison logic
+  return boolean;
+});
 
 
 
@@ -837,14 +869,6 @@ React.memo: Reduces the number of renders for a component.
 useMemo: Reduces the number of recalculations for a value or result.
 
 
-react render vs hydrate ***********
-Hydrate is basically used in case of SSR(Server side Rendering). ... hydrate() is same as render() , 
-but it is used to hydrate(attach event listeners) a container whose HTML contents were rendered by ReactDOMServer. 
-React will attempt to attach event listeners to the existing markup.
-
-
-
-
 server side rendering(SSR) ***********
 In Client-side rendering, your browser downloads a minimal HTML page. It renders the JavaScript and fills the content into it.
 Server-side rendering, on the other hand, renders the React components on the server. The output is HTML content.
@@ -854,74 +878,16 @@ You can combine these two to create an isomorphic app.
 
 
 package.lock.json ******
-it locks the version of installed dependencies
+package-lock.json is an automatically generated file in Node.js projects managed by npm
+It records the exact version of every installed package and its dependencies, ensuring a deterministic and reproducible build
+Consistency: Ensures that the exact same versions of dependencies are installed every time npm install is run, regardless of environment or machine.
+Security: Helps maintain a secure dependency tree by locking the dependencies to known, tested versions.
+Speed: Improves the performance of npm install by providing a detailed map of the dependency tree, allowing npm to skip redundant steps.
 
-
-
-
-
-Too many smaller components leading to over engineering 
-lots of necessary packages e.g. react router
-
-
-How to integrate API ***********
-API ********
-
-import axios from "axios";
-
- function getData(){
-    const url="https://jsonplaceholder.typicode.com/posts"
-    axios.get(url).then((res)=>{
-        // console.log(res.data);
-        setPost(res.data)
-    }).catch((error)=>{
-        console.log(error);
-    })
-}
-
-function SubmitHandler(e){
-    e.preventDefault()
-    console.log(state);
-
-    const url="https://jsonplaceholder.typicode.com/posts"
-    axios.post(url,state).then((res)=>{
-        console.log(res);
-        
-    }).catch((error)=>{
-        console.log(error);
-    })
-
-}
-
-Using Fetch
-
-async function getData(){
-	const url="https://jsonplaceholder.typicode.com/posts"
-	const response= await fetch(url)
-	const data = response.jason()
-
-}
-
-async function postData(){
-	let item={name,email,description}
-	const url="https://jsonplaceholder.typicode.com/posts"
-	const response= await fetch(url,{
-	method :"POST",
-	headers:{
-	"Content-Type":"application/jason"
-	"Accepted":"application/jason"
-	},
-	body: JASON.stringify(item)
-	});
-	// const data = response.jason()
-
-}
 
 difference between put and post ******
-Put is used to update the resource while post is used to create the resource.
+PUT is used for creating or replacing resources , while post is used to create the resource.
 Put request can be safely called multiple times but post can't as it will create duplicate resources
-Watch this when free https://www.youtube.com/watch?v=1xVK2m817Bw
-
 
 
 PropTypes *****
@@ -941,12 +907,17 @@ Employee.propTypes = {
 
 
 Life Cycle Methods of react ***********
-https://www.freecodecamp.org/news/how-to-understand-a-components-lifecycle-methods-in-reactjs-e1a609840630/
+
+
 Mounting--
-componentWillMount()
-This method is called just before a component mounts on the DOM or the render method is called. After this method, the component gets mounted.
-After this method, the component gets mounted.
- 
+constructor(props):
+Called before the component is mounted.
+Used to initialize state and bind event handlers.
+constructor(props) {
+  super(props);
+  this.state = { count: 0 };
+}
+
 componentDidMount()
 This method is called after the component gets mounted on the DOM. 
 Like componentWillMount, it is called once in a lifecycle. 
@@ -955,11 +926,11 @@ We can make API calls and update the state with the API response.
 
 
 Updating--
-shouldComponetUpdate()
+shouldComponentUpdate()
 This method determines whether the component should be updated or not. By default, it returns true. 
 But at some point, if you want to re-render the component on some condition, then shouldComponentUpdate method is the right place.
 
-componentWillUpdate()
+componentWillUpdate()  --- Deprecated 
 It is called before the re-rendering of the component takes place. It is called once after the ‘shouldComponentUpdate’ method. 
 If you want to perform some calculation before re-rendering of the component and after updating the state and prop, 
 then this is the best place to do it.
@@ -974,68 +945,39 @@ componentWillUnmount()
 This method is called before the unmounting of the component takes place.
 Before the removal of the component from the DOM, ‘componentWillUnMount’ executes. This method denotes the end of the component’s lifecycle.
 
-
 Error handling--componentDidCatch
 
 useEffect has replaced componentDidMount, componentDidUpdate, and componentWillUnmount
 
-React Class Component
 
-1.Mounting Lifecycle
-
-Constructor(props):-
-A special function that will get called whenever a new component is created.
-Initializing state.
-Binding the event handlers
-super(props)
-Make changes to state inside constructor
-
-static getDerivedStateFromProps(props,state)
-render()
-componentDidMount()
-Cause side effect
-
-2.Updating Lifecycle
-
-Constructor(props)
-static getDerivedStateFromProps(props,state)
-shouldComponentUpdate(nextProps,nextState){}
-render()
-getSnapshotBeforeUpdate(prevProps,prevState)
-componentDidUpdate(prevProps,prevState,snapshot)
-
-3.Unmounting Lifecycle
-componentWillUnmount()
-
-4.Error Handling
-static getDerivedStateFromError(error)
-componentDidCatch(error,info)
-
-
-Mounting:
 componentDidMount: Called after the component is rendered for the first time.
 useEffect(() => {}, []): Equivalent to componentDidMount. Runs after the first render.
-Updating:
+
 componentDidUpdate(prevProps, prevState): Called after the component updates.
 useEffect(() => {}): Runs after every render by default.
 To replicate componentDidUpdate, use useEffect with dependencies. Example: useEffect(() => {}, [prop1, prop2]).
-Unmounting:
+
 componentWillUnmount: Called before the component is removed from the DOM.
 useEffect(() => { return () => {} }, []): Return a cleanup function to run before unmounting.
-Error Handling:
-componentDidCatch(error, info): Catches JavaScript errors in child components.
-Error boundaries: Wrap components with try...catch blocks, or use libraries like react-error-boundary.
-Other Lifecycle Methods:
-getDerivedStateFromProps: Static method called when props change before render. Rarely used in favor of useState or useEffect.
+
 shouldComponentUpdate(nextProps, nextState): Allows you to control when the component should re-render. Use React.memo for functional components.
+const MyComponent = React.memo(Component, (prevProps, nextProps) => {
+  // Custom comparison logic
+  return boolean;
+});
 
 
+componentWillUnmount equivalent in hooks****
+To do the cleanup after the component unmounts, we have a simple way to perform the equivalent of the componentWillUnmount using the useEffect Hook.
+The only thing that we need to do is to return a function inside the callback function of the useEffect Hook, like this:
 
-Additional Hooks
-1. React Hook Form
-2. HookRouter
-3. Use-Http
-4. UseLocalStorage
+useEffect(() => {
+  window.addEventListener("mousemove", () => {});
+  return () => {
+    window.removeEventListener("mousemove", () => {})
+  }
+}, []);
+
 
 DOM ***********
 
@@ -1051,43 +993,16 @@ querySelectorAll, alert, and so on). They’re part of the bigger collection of 
 APIs—the DOM and other APIs that go into a browser—that allow you to interact with
 documents.
 
-componentWillUnmount equivalent in hooks****
-To do the cleanup after the component unmounts, we have a simple way to perform the equivalent of the componentWillUnmount using the useEffect Hook.
-The only thing that we need to do is to return a function inside the callback function of the useEffect Hook, like this:
-
-useEffect(() => {
-  window.addEventListener("mousemove", () => {});
-  return () => {
-    window.removeEventListener("mousemove", () => {})
-  }
-}, []);
-
-Whats is storyBook************
-
-
-What is CreateRef ***********
-
-
-what is useRef actually used for? ***********
-
-
-axios interceptor *********
-
 
 Auth Token (How, Where, When ) ***********
-it is saved in local or session storage? 
-
-
-fetch (other methods than axios)*********
-
-Custom hooks***********
+An auth token is a piece of data that represents a user's credentials and permissions. 
+It is used to verify that a request is made by an authenticated user. Common types of auth tokens include JSON Web Tokens (JWT), OAuth tokens, and custom tokens.
+Client-Side: Tokens can be stored in localStorage, sessionStorage, or as a cookie.
 
 
 React portal ********
-
 React Portal is a feature that allows you to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 This means you can render a child component at a different place in the DOM tree, which can be useful for scenarios like modals, tooltips, and other overlays.
-
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -1121,7 +1036,6 @@ function App() {
 
 export default App;
 
-
 In this example, Modal is a component that uses createPortal to render its children into a DOM node with the id 'modal-root',
 which should be a div at the top level of your HTML file:
 
@@ -1153,7 +1067,3 @@ Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a
 in current and older browsers or environments
 Babel is a JavaScript compiler and not a webpack loader. It compiles (transpiles) higher JavaScript code (ES6+) to lower JavaScript code (such as ES5).
 Because of babble we can write html inside Js
-
-
-
-

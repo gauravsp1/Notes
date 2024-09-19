@@ -1,12 +1,523 @@
 
-System Design
+GraphQL
 
-1] Design
-	1. Requirment
-	2. Architecture
-	3.Interface
+What is GraphQL
+Benefits
+rest vs GraphQL
 
-2] System Components
-	1.Scale
-	2.Security
-	3.Maintainance
+FireWall
+Proxy
+
+--------------------------------------------------------------
+Communications
+
+Short Polling *****
+Short polling is a technique used in client-server communication where the client repeatedly makes requests to the server at regular intervals to check for updates or new data.
+It's a simple but inefficient method for handling asynchronous data updates or real-time events.
+Its short live connect
+
+How Short Polling Works:
+Client Request: The client sends an HTTP request to the server.
+Server Response: The server processes the request and sends a response with the current data.
+Repeat: After receiving the response, the client waits for a predefined interval (e.g., a few seconds) before sending the next request.
+Polling Cycle: This cycle repeats indefinitely or until the client decides to stop polling.
+
+Advantages of Short Polling
+Simplicity: It’s easy to implement since it relies on standard HTTP requests.
+No Special Setup: Works with regular HTTP servers without needing WebSockets or long-polling configurations.
+
+Disadvantages of Short Polling
+Inefficiency: Polling too frequently can put a strain on both the client and the server, leading to high bandwidth usage and unnecessary load, especially when there’s no new data.
+Latency: Data may not be received in real-time, as the client only checks for updates at set intervals.
+Scalability Issues: For large-scale applications with many clients, frequent polling can overwhelm the server.
+
+Use Case
+Short polling might be used in simple applications where real-time data isn't critical and the server load is manageable,
+but in most modern applications, long polling, WebSockets, or SSEs are preferred for better performance and scalability.
+
+Example:-
+
+function pollServer() {
+  // Send a request to the server every 5 seconds
+  setInterval(async () => {
+    try {
+      const response = await fetch('/api/get-updates');
+      const data = await response.json();
+      console.log('Server response:', data);
+      // Handle the received data (e.g., update UI)
+    } catch (error) {
+      console.error('Error polling the server:', error);
+    }
+  }, 5000); // Poll every 5 seconds
+}
+
+pollServer();
+
+
+Long Polling *****
+Long polling is a technique used in client-server communication to allow a server to push updates to a client without the client having to repeatedly send requests
+at short intervals. Unlike short polling, where the client makes periodic requests regardless of whether there's new data,
+long polling keeps the connection open until the server has new information to send.
+When the server responds, the client immediately opens a new connection, maintaining near real-time data updates.
+
+How Long Polling Works:
+Client Request: The client sends a request to the server, just like in short polling.
+Server Holds the Connection: Instead of responding immediately, the server holds the connection open until there is new data to send.
+							This can be for several seconds, minutes, or until some event occurs.
+Server Response: When new data becomes available, the server sends a response to the client.
+Client Reconnects: Once the client receives the response, it immediately sends a new request to the server, repeating the cycle.
+
+Advantages of Long Polling
+Near Real-Time Updates: Long polling allows the client to receive updates as soon as they become available, providing a near real-time experience.
+More Efficient than Short Polling: Since the client doesn't continuously send requests, it reduces unnecessary traffic and server load compared to short polling.
+Works with Standard HTTP: Long polling uses standard HTTP requests, meaning it can be implemented without the need for special protocols or infrastructure (unlike WebSockets).
+
+Disadvantages of Long Polling
+Increased Server Load: While more efficient than short polling, long polling can still increase server load because the server must keep connections open, which consumes resources.
+Latency on Connection Termination: If the connection is interrupted (e.g., network issues), there may be a slight delay before the client reconnects and
+						re-establishes the long polling cycle.
+Scalability Issues: Long polling can lead to scalability challenges on the server side, especially with many clients,
+					since keeping many connections open can strain the server’s resources.
+
+Use Case
+Long polling is typically used when WebSockets or Server-Sent Events (SSE) aren't viable, such as in environments that do not support these technologies or
+when you're working within the constraints of an existing HTTP-based infrastructure.
+
+Example
+
+function longPoll() {
+  fetch('/api/get-updates')
+    .then(response => response.json())
+    .then(data => {
+      console.log('New data from server:', data);
+      // Process the new data (e.g., update UI)
+      // Immediately send the next long-polling request
+      longPoll();
+    })
+    .catch(error => {
+      console.error('Error during long polling:', error);
+      // Optionally, you could implement some delay before retrying
+      setTimeout(longPoll, 5000); // Retry after 5 seconds in case of an error
+    });
+}
+
+// Start long polling
+longPoll();
+
+
+WebSockets *****
+WebSockets provide a full-duplex communication channel over a single, long-lived connection between a client (typically a web browser) and a server.
+Unlike traditional HTTP requests, which are half-duplex (the client sends a request, and the server responds),
+WebSockets allow data to flow in both directions simultaneously, making them ideal for real-time applications like chat apps, live notifications, gaming, and collaborative tools.
+
+How WebSockets Work
+Handshake: WebSockets start with an HTTP request, known as the handshake, where the client asks the server to switch protocols.
+			If the server agrees, the HTTP connection is upgraded to a WebSocket connection.
+Full-Duplex Communication: Once the connection is established, the client and server can send messages to each other at any time.
+			There’s no need for the client to initiate a request every time it wants to receive data from the server.
+Connection Persistence: The WebSocket connection remains open until either the client or the server closes it.
+			This reduces the overhead of repeatedly establishing and tearing down connections.
+
+Advantages of WebSockets
+Real-Time Communication: WebSockets enable truly real-time communication because data can flow freely between the client and server without the need for repeated requests.
+Efficient: After the initial handshake, the WebSocket connection stays open, which reduces the overhead of constantly creating and closing connections (as in HTTP requests).
+		This efficiency is especially beneficial for applications that require frequent data updates, such as live feeds or notifications.
+Low Latency: Since WebSockets maintain an open connection, the delay between sending and receiving messages is minimal compared to traditional HTTP methods.
+Two-Way Communication: Both the client and server can push data at any time, enabling more dynamic and interactive applications.
+
+Disadvantages of WebSockets
+Complexity: WebSocket connections require more sophisticated handling, including error management, reconnection logic, and ensuring connection stability.
+Firewall Issues: Some firewalls and proxies might block WebSocket traffic because it operates on different ports and protocols compared to regular HTTP traffic.
+Scalability: WebSocket connections need to remain open, which can cause scalability challenges on the server side, especially with a large number of concurrent users.
+Useses more resources
+Connection limit
+loader balancer important
+Connection drop
+Backward Compatible
+
+Use Cases for WebSockets
+Real-Time Chat Applications: WebSockets allow users to exchange messages instantly.
+Live Notifications: Push notifications for real-time updates, like social media alerts or stock price changes.
+Online Multiplayer Games: Real-time synchronization between players in online games.
+Collaborative Tools: Real-time document editing and data syncing (e.g., Google Docs-like applications).
+Live Data Feeds: Stock market data, sports scores, or any other live data feed that needs to be continuously updated.
+
+Example 
+
+// Create a WebSocket connection
+const socket = new WebSocket('ws://example.com/socket');
+
+// Connection opened
+socket.addEventListener('open', function (event) {
+    console.log('WebSocket connection opened');
+    socket.send('Hello Server!'); // Send a message to the server
+});
+
+// Listen for messages from the server
+socket.addEventListener('message', function (event) {
+    console.log('Message from server', event.data);
+});
+
+// Listen for WebSocket close
+socket.addEventListener('close', function (event) {
+    console.log('WebSocket connection closed');
+});
+
+// Handle errors
+socket.addEventListener('error', function (error) {
+    console.error('WebSocket error:', error);
+});
+
+WebSocket Events
+open: Triggered when the connection is successfully established.
+message: Triggered when a message is received from the server.
+close: Triggered when the connection is closed.
+error: Triggered when there is an error with the WebSocket connection.
+
+
+Server-Sent Events **************
+Server-Sent Events (SSE) is a communication protocol that allows a server to push real-time updates to the client over a single HTTP connection.
+SSE is a one-way communication method, meaning the server can send data to the client continuously,
+but the client cannot send data back to the server over the same connection (though it can still send regular HTTP requests).
+SSE is simpler and less resource-intensive than WebSockets for many use cases where full two-way communication is not required, such as live updates,
+notifications, or real-time data streams.
+
+How SSE Works
+Client Establishes a Connection: The client opens an HTTP connection to the server using the EventSource API.
+Server Sends Events: The server continuously sends messages (events) to the client as they become available, without closing the connection.
+Persistent Connection: The connection remains open and the server sends updates as necessary. The client automatically reconnects if the connection is lost.
+Server-Sent Messages: Messages are sent as text in a specific format (plain text or JSON), and the client can handle these messages as events.
+
+Advantages of SSE
+Simple to Use: SSE is easy to implement both on the client and server sides, using standard HTTP. No complex protocols are required.
+Automatic Reconnection: The EventSource API automatically handles reconnection if the connection is lost. You don't need to write additional code for reconnections.
+Efficient for One-Way Updates: SSE is designed for one-way data streams, making it perfect for use cases like live news feeds, notifications, and dashboards.
+Less Overhead Than WebSockets: Unlike WebSockets, SSE uses simple HTTP connections, which are easier to scale, handle with firewalls, and integrate with existing infrastructure.
+
+Disadvantages of SSE
+One-Way Communication: SSE only allows the server to send data to the client. If two-way communication is required (e.g., in chat applications or multiplayer games),
+				WebSockets are a better choice.
+Limited Browser Support: While SSE is supported by most modern browsers, older versions of Internet Explorer and some other legacy browsers do not support it natively.
+Limited to HTTP: SSE works only over HTTP/1.x and HTTP/2. It cannot be used with other protocols like WebSockets.
+Connection Limits: Browsers can limit the number of concurrent SSE connections.
+				For example, Chrome and Firefox have limits on the number of concurrent connections to the same server.
+				
+Use Cases for SSE
+Live Feeds and Dashboards: SSE is great for applications that need to receive real-time data updates, such as live sports scores, stock price updates, or news tickers.
+Notifications: SSE is well-suited for sending live notifications to users, such as social media notifications, messaging alerts, or order status updates.
+Monitoring and Analytics: For real-time monitoring of server or application metrics, SSE can efficiently stream updates to the client.
+
+Example 
+
+// Establish a connection to the server
+const eventSource = new EventSource('/api/updates');
+
+// Listen for messages from the server
+eventSource.onmessage = function(event) {
+  console.log('New message from server:', event.data);
+  // Process the data (e.g., update UI)
+};
+
+// Listen for specific events
+eventSource.addEventListener('my-event', function(event) {
+  console.log('Custom event received:', event.data);
+});
+
+// Handle errors
+eventSource.onerror = function(event) {
+  console.error('Error in SSE connection:', event);
+};
+
+
+WebHooks************
+WebHooks are a method of enabling real-time communication between two systems. Instead of one system having to repeatedly request (poll) the other system for new data,
+WebHooks allow the first system to send (push) data to the other system whenever a specific event occurs.
+Essentially, WebHooks provide a way for systems to notify one another when something important happens, without the need for continuous polling.
+
+How WebHooks Work
+Event Trigger: A WebHook is triggered when a specific event occurs in the source system (e.g., a new user signs up, a payment is processed, or a file is uploaded).
+HTTP Request: When the event occurs, the source system makes an HTTP POST request to a predefined URL (the "WebHook URL") on the destination system.
+Payload: The HTTP request contains a payload (usually in JSON format) that includes details about the event. For example, in a WebHook for a new user registration,
+		the payload might include the user's details.
+Response: The destination system processes the payload and may send a response back to the source system to confirm receipt of the WebHook.
+
+Advantages of WebHooks
+Real-Time Updates: WebHooks push data to the destination system as soon as an event occurs, providing near-instant updates.
+Efficient: WebHooks are more efficient than polling because they eliminate the need for continuous requests to check for new data.
+			The source system only sends data when an event happens.
+Reduced Bandwidth Usage: Since WebHooks only send data when necessary, they reduce unnecessary network traffic and bandwidth consumption.
+Decoupled Systems: WebHooks help decouple systems, meaning that the source and destination systems can evolve independently.
+			The destination system only needs to provide an endpoint to receive the event data.
+			
+Disadvantages of WebHooks
+Handling Failures: If the destination system is unavailable or the WebHook request fails, the source system may not receive confirmation, potentially resulting in lost data.
+				Proper retry mechanisms need to be implemented.
+Security: WebHooks can expose endpoints to potential abuse if they are not properly secured.
+			It’s important to validate the origin of the WebHook request and use techniques like HMAC signatures to verify authenticity.
+Scalability: If a source system has to send WebHooks to many different destination systems, managing and scaling the WebHook infrastructure can become complex.
+Lack of Standardization: Different systems implement WebHooks in different ways, meaning there is no universal standard for payload formats or retry logic.
+
+Use Cases for WebHooks
+Payment Processing: Payment gateways (like Stripe or PayPal) use WebHooks to notify your application when a payment is completed, failed, or refunded.
+CI/CD Pipelines: Continuous integration tools (like GitHub Actions or Jenkins) use WebHooks to trigger builds or deployments when code is pushed to a repository.
+Notifications: Services like Slack and Discord use WebHooks to send real-time notifications to channels when certain events happen, such as a new message or issue being reported.
+CRM Integration: WebHooks can notify a CRM system when a new lead or contact is created in a different platform.
+IoT Devices: IoT platforms use WebHooks to notify other services when sensor data is updated, or an action is triggered.
+
+Example of WebHook Workflow
+Imagine you have an e-commerce platform (like Shopify) that wants to notify a third-party system (like a warehouse management system) every time a new order is placed.
+Setting Up the WebHook: The warehouse system provides a WebHook URL where it will receive order notifications (e.g., https://warehouse.com/webhooks/new-order).
+Order Placement Event: When a customer places a new order on the e-commerce platform, the platform automatically triggers a WebHook event.
+Sending the WebHook: The e-commerce platform sends an HTTP POST request to the WebHook URL with the order details in the payload (e.g., order ID, items, customer info).
+Processing the WebHook: The warehouse system receives the WebHook, processes the order details, and updates its system to prepare for shipping.
+Response: The warehouse system may respond with a success status to confirm receipt of the order.
+
+POST /webhooks/new-order HTTP/1.1
+Host: warehouse.com
+Content-Type: application/json
+
+{
+  "order_id": 12345,
+  "customer": {
+    "name": "John Doe",
+    "email": "johndoe@example.com"
+  },
+  "items": [
+    { "name": "T-shirt", "quantity": 1 },
+    { "name": "Jeans", "quantity": 2 }
+  ]
+}
+
+Source System  
+
+const axios = require('axios');
+
+// Send WebHook notification
+function sendWebhook(orderDetails) {
+  axios.post('https://warehouse.com/webhooks/new-order', orderDetails)
+    .then(response => {
+      console.log('Webhook sent successfully:', response.status);
+    })
+    .catch(error => {
+      console.error('Error sending webhook:', error);
+    });
+}
+
+// Example usage
+const orderDetails = {
+  order_id: 12345,
+  customer: { name: 'John Doe', email: 'johndoe@example.com' },
+  items: [{ name: 'T-shirt', quantity: 1 }]
+};
+
+sendWebhook(orderDetails);
+
+Destination System
+
+const express = require('express');
+const app = express();
+
+// Middleware to parse JSON body
+app.use(express.json());
+
+// Endpoint to receive WebHook
+app.post('/webhooks/new-order', (req, res) => {
+  const order = req.body;
+  console.log('New order received:', order);
+  // Process the order, e.g., update inventory, prepare for shipping
+
+  // Respond to acknowledge receipt of WebHook
+  res.status(200).send('Order processed');
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+
+Service Worker ***********
+A Service Worker is a script that runs in the background, separate from the web page, providing powerful capabilities such as intercepting network requests,
+enabling offline functionality, background synchronization, and more.
+It acts as a programmable network proxy between your web app and the network, allowing you to handle how network requests are made, cached, and returned to the browser.
+
+Key Features of Service Workers
+
+Offline Capabilities:
+Service workers can cache network requests and responses, allowing web applications to function offline or in conditions with poor network connectivity.
+This is crucial for Progressive Web Apps (PWAs) to deliver a seamless experience regardless of network status.
+
+Background Sync:
+Service workers enable background synchronization, allowing apps to defer certain tasks (like syncing data or uploading files) until the device has a stable network connection.
+
+Push Notifications:
+Service workers can handle push notifications even when the web app or browser is not open, allowing the app to deliver timely updates to the user.
+
+Network Interception:
+Service workers can intercept and handle network requests programmatically.
+This means you can control what resources get cached, how often they are updated, and how they are served back to the user (from the cache, network, or some combination of both).
+
+Performance Improvements:
+By caching static resources such as HTML, CSS, JavaScript, and images, service workers can drastically improve load times by serving these resources from 
+the cache instead of the network, reducing latency and improving the user experience.
+
+Lifecycle of a Service Worker
+
+Installation:
+When the service worker is first registered, the browser attempts to install it.
+During this phase, you typically cache the necessary resources (e.g., JavaScript, CSS, images) for offline use.
+
+Activation:
+After installation, the service worker enters the activation phase. Here, you might clean up old caches or perform other necessary maintenance tasks.
+
+Fetch Event:
+Once activated, the service worker intercepts network requests. It can serve files from the cache, fetch them from the network,
+or both depending on the strategy implemented (e.g., cache-first, network-first, etc.).
+
+
+Caching Strategies
+Service workers implement different caching strategies based on the needs of the application:
+
+Cache-First:
+The service worker tries to serve content from the cache first. If it’s not available, it will fetch it from the network.
+Suitable for static resources that don’t change often, like images or stylesheets.
+
+Network-First:
+The service worker tries to fetch content from the network first. If the network is unavailable, it will serve the content from the cache (if it exists).
+Useful for dynamic content that needs to be updated frequently.
+
+Cache-Then-Network:
+The service worker serves the cached response first and simultaneously fetches the latest version from the network. The cached version is updated after the network response arrives.
+This is ideal for resources that are relatively static but might change occasionally.
+
+Stale-While-Revalidate:
+The service worker serves the content from the cache immediately but fetches an updated version in the background and caches it for future requests.
+
+
+Limitations of Service Workers
+No Access to DOM:
+Service workers cannot directly interact with the DOM of web pages. 
+They communicate with web pages through the PostMessage API or handle events such as network requests and push notifications.
+
+Limited Lifespan:
+Service workers are event-driven and terminate when not in use, making them suitable for handling background tasks but not for long-running processes.
+
+Complexity:
+Managing cache updates and versioning can be complex. 
+For example, ensuring users get the latest version of resources when an update is deployed requires careful handling in the service worker code.
+
+
+PWA *****
+Progressive Web Apps (PWAs) are web applications that use modern web technologies and design patterns to offer a user experience similar to native mobile or desktop applications. 
+PWAs combine the best of both web and native apps, allowing users to access them through a browser but also giving the app capabilities typically found in native apps, 
+such as offline functionality, push notifications, and installation on a home screen.
+
+Key Features of Progressive Web Apps
+
+Progressive:
+PWAs are built to work for every user, regardless of browser or device.
+They enhance progressively, meaning they start with basic functionality and add more advanced features depending on the capabilities of the user’s device and browser.
+
+Responsive:
+PWAs adapt to various screen sizes, from mobile phones to desktop monitors, ensuring a consistent user experience across devices.
+
+Offline Access:
+One of the core features of PWAs is offline capability.
+Through service workers, PWAs can cache content and resources locally, allowing the app to work without an active internet connection.
+
+App-like:
+PWAs resemble and behave like native apps, providing a full-screen experience and using app-style interactions (like navigation).
+This helps users feel like they are using an actual application, not just a website.
+
+Installable:
+PWAs can be installed on a user's home screen without the need for an app store.
+This allows users to "install" the PWA just like a native app, giving it its own icon and launch behavior, as well as offline access.
+
+Safe and Secure:
+PWAs require HTTPS because they involve powerful APIs like service workers and push notifications. The secure connection ensures the integrity and confidentiality of the data.
+
+Engageable:
+PWAs can re-engage users with features like push notifications and background synchronization, improving user retention and engagement even when the app is not open.
+
+Linkable:
+Like traditional websites, PWAs are linkable via URLs, which makes them easily shareable and indexable by search engines.
+This means they can be discovered and accessed through search engines like Google, providing more visibility than traditional apps.
+
+Core Technologies Behind PWAs
+
+Service Workers:
+Service workers are the backbone of PWAs.
+These are background scripts that intercept network requests, manage the app’s cache, enable offline functionality, and handle push notifications.
+Service workers allow PWAs to cache resources locally and determine when to serve cached data versus fetching it from the network.
+
+Web App Manifest:
+The manifest is a simple JSON file that provides the browser with metadata about the app.
+This includes information like the app’s name, icons, theme colors, and how it should behave when installed.
+
+Caching Strategies:
+PWAs implement various caching strategies to optimize performance and ensure the app works offline. 
+Service workers manage caching of static assets (like images, CSS, and JavaScript) as well as dynamic content (like API responses).
+
+Benefits of PWAs
+
+Fast Loading:
+PWAs are designed to load quickly, even in uncertain network conditions, thanks to caching mechanisms that store assets locally on the user's device
+
+Increased Engagement:
+Features like push notifications, the ability to install the app on the home screen, and offline functionality increase user engagement and retention rates.
+
+Platform Independence:
+PWAs work across different platforms and devices, making them a flexible solution for reaching users without needing to develop separate native apps for
+iOS, Android, or desktop environments.
+
+No App Store Approval Required:
+Since PWAs are essentially web apps, they do not need to go through an app store’s approval process. 
+This means updates can be pushed faster, and the app can be distributed directly without relying on third-party app stores.
+
+SEO-Friendly:
+Unlike native apps, PWAs are indexable by search engines, which can help drive traffic and improve discoverability.
+
+Cost-Effective:
+PWAs eliminate the need to develop and maintain separate codebases for different platforms (e.g., iOS, Android, Windows). 
+A single codebase can be used for all devices, reducing development costs.
+
+Limitations of PWAs
+
+Limited iOS Support:
+While PWAs work well on Android, iOS support is more limited. Features like background sync and push notifications are still restricted on iOS, 
+though Apple has made improvements in recent years.
+
+No Access to Some Native Features:
+PWAs do not have access to some native features like Bluetooth, NFC, or certain device sensors, limiting them compared to native apps in certain use cases.
+
+Browser Compatibility:
+While most modern browsers support the key technologies behind PWAs, some older browsers may not provide full support, limiting the reach of PWAs to some users.
+
+
+Rendering patterns ******
+
+Client-Side Rendering (CSR)
+What it is: In CSR, the browser loads an empty HTML page and then renders the content on the client side using JavaScript (often React or another framework). 
+All the data fetching, rendering, and routing happens on the client side after the initial page load.
+When to Use: CSR is good for highly dynamic web applications where interactivity and client-side state management are crucial. However, the initial load time can be slower, 
+and SEO can be more challenging.
+
+Server-Side Rendering (SSR)
+What it is: SSR involves rendering the React components on the server and sending fully rendered HTML to the client. 
+This leads to faster initial page loads and improved SEO since the content is already available to the client without waiting for JavaScript to execute.
+When to Use: SSR is ideal for applications where SEO is important, such as blogs, e-commerce websites, and news portals. 
+It also improves the perceived performance of web apps since users see content faster.
+Example: Next.js is a popular framework for SSR in React
+
+Static Site Generation (SSG)
+What it is: SSG is similar to SSR but happens at build time rather than on every request. 
+The application generates static HTML pages for each route at build time, which can then be served quickly by a CDN.
+When to Use: SSG is perfect for content-heavy websites, like blogs or documentation sites, where the content doesn't change frequently. 
+It provides fast load times and good SEO, similar to SSR, but with the added benefit of lower server load.
+Example: Next.js supports SSG out of the box.
+
+
+
+
+
+

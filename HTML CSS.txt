@@ -6,8 +6,94 @@ HTML describes the structure of a Web page
 HTML consists of a series of elements
 HTML elements tell the browser how to display the content
 HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
+Document Type Declaration: An HTML document starts with a document type declaration (<!DOCTYPE html>) to define the version of HTML being used.
 
 html4 vs html5 **********
+New Elements and Attributes
+
+HTML4:
+Limited set of elements and attributes.
+No semantic elements like <header>, <footer>, <article>, etc.
+
+HTML5:
+Introduces new semantic elements such as <header>, <footer>, <article>, <section>, <nav>, <aside>.
+New form elements and attributes like <input type="email">, <input type="date">, <datalist>, <output>, <progress>, <meter>.
+
+Multimedia Support
+
+HTML4:
+Requires third-party plugins like Flash or Silverlight for embedding audio and video.
+
+HTML5:
+Native support for audio (<audio>) and video (<video>) elements without the need for plugins.
+New attributes for controlling multimedia, such as controls, autoplay, loop, and muted.
+
+Graphics and Visuals
+
+HTML4:
+No native support for graphics.
+Relies on plugins or images for graphical content.
+
+HTML5:
+Introduces the <canvas> element for 2D drawing.
+Supports scalable vector graphics (SVG) directly in HTML.
+
+4. Forms and Input Types
+
+HTML4:
+Basic form controls like text, password, checkbox, radio, etc.
+Limited input types and validation.
+
+HTML5:
+New input types like email, url, number, range, date, datetime-local, month, week, time, search, tel, color.
+Built-in form validation features.
+
+5. APIs and Scripting
+
+HTML4:
+Limited built-in APIs.
+JavaScript used for dynamic behavior and interaction.
+
+HTML5:
+Rich set of new APIs like Geolocation API, Web Storage API (localStorage and sessionStorage), Web Workers, WebSockets, and more.
+Better support for offline web applications through the Application Cache.
+
+6. Doctype Declaration
+
+HTML4:
+Complex and lengthy doctype declaration.
+
+HTML5:
+Simplified doctype declaration
+
+7. Error Handling
+
+HTML4:
+Less forgiving syntax.
+Stricter rules that often lead to broken pages if not adhered to.
+
+HTML5:
+More forgiving with syntax errors.
+Browsers handle errors more gracefully.
+
+8. Mobile and Responsive Design
+
+HTML4:
+No specific features for mobile or responsive design.
+Relies on CSS and JavaScript for responsiveness.
+
+HTML5:
+Improved support for mobile and responsive design.
+Introduction of the <meta name="viewport"> element for controlling layout on mobile browsers.
+
+9. Deprecated Elements and Attributes
+
+HTML4:
+Contains many presentational elements and attributes like <font>, <center>, and attributes such as bgcolor, which are now considered outdated.
+
+HTML5:
+Deprecated many of the presentational elements and attributes in favor of CSS.
+Encourages the use of CSS for styling and layout.
 
 
 All HTML need to have a DOCTYPE declared. The DOCTYPE is not actually an element or HTML tag. 
@@ -244,43 +330,12 @@ Use em units for sizing that should scale depending on the font size of an eleme
 Use rem units for sizing that doesn't need em units, and that should scale depending on browser font size settings. 
 Use rem units unless you're sure you need em units, including on font sizes.
 
-The float Property
-The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
-The float property can have one of the following values:
-left - The element floats to the left of its container
-right - The element floats to the right of its container
-none - The element does not float (will be displayed just where it occurs in the text). This is default
-inherit - The element inherits the float value of its parent
-In its simplest use, the float property can be used to wrap text around images.
-
-
-
-
-
-The clear property specifies what elements can float beside the cleared element and on which side.
-The clear property can have one of the following values:
-none - Allows floating elements on both sides. This is default
-left - No floating elements allowed on the left side
-right- No floating elements allowed on the right side
-both - No floating elements allowed on either the left or the right side
-inherit - The element inherits the clear value of its parent
-The most common way to use the clear property is after you have used a float property on an element.
-
-
-
-
-
 
 To horizontally center a block element (like <div>), use margin: auto;
 
 
 Diff selectors vs pseudo elements *************
 CSS selectors are used to "find" (or select) the HTML elements you want to style.
-
-
-
-
-
 
 A pseudo-class is used to define a special state of an element.
 For example, it can be used to:
@@ -320,17 +375,45 @@ Linear Gradients (goes down/up/left/right/diagonally)
 Radial Gradients (defined by their center)
 
 
-With the CSS transform property you can use the following 2D transformation methods:
+CSS transform **********
 
-translate()
-rotate()
+rotate(45deg)
+translate(50px, 100px)  /* Moves the element 50px right and 100px down */
+scale(1.5, 0.5) /* Scales width by 1.5 and height by 0.5 */
 scaleX()
 scaleY()
-scale()
-skewX()
-skewY()
 skew()
 matrix()
+
+You can combine multiple transformations by separating them with a space:
+transform: translateX(50px) rotate(45deg) scale(1.5);
+
+
+CSS transitions *******
+transition: property duration timing-function delay;
+
+property: The CSS property you want to animate (e.g., width, background-color). You can use all to apply the transition to all animatable properties.
+duration: The duration of the transition (e.g., 0.5s for half a second).
+timing-function: Describes how the transition progresses over time. Common values include linear, ease, ease-in, ease-out, and ease-in-out.
+delay: The time to wait before the transition starts (e.g., 0.2s for a 200ms delay).
+
+ <style>
+	.button {
+		background-color: #3498db;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s ease, transform 0.3s ease;
+	}
+
+	.button:hover {
+		background-color: #2980b9;
+		transform: scale(1.1);
+	}
+</style>
 
 
 Animation**********

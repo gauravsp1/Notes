@@ -1,5 +1,67 @@
 Redux
 
+Redux is a popular state management library for JavaScript applications, particularly those built with React. 
+It helps manage the state of an application in a predictable way, enabling easier debugging, testing, and scaling of applications.
+
+
+Key Concepts of Redux
+
+Single Source of Truth:
+The entire state of the application is stored in a single JavaScript object called the store. This makes the state management more predictable and easier to debug.
+
+State is Read-Only:
+The only way to change the state is to emit an action, an object describing what happened. This ensures that the state is not modified directly, 
+which helps in tracking changes and maintaining predictability.
+
+Changes are Made with Pure Functions:
+To specify how the state tree is transformed by actions, you write pure functions called reducers. Reducers take the current state and an action as arguments and return a new state.
+
+Core Components of Redux
+
+Store:
+The store holds the whole state tree of the application. There is only one store in a Redux application.
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
+
+Actions:
+Actions are payloads of information that send data from the application to the store. They are the only source of information for the store.
+const increment = () => {
+  return {
+    type: 'INCREMENT'
+  };
+};
+
+Reducers:
+Reducers specify how the application's state changes in response to actions sent to the store. They are pure functions.
+const counter = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+Dispatch:
+dispatch is the method used to send actions to the store.
+store.dispatch(increment());
+
+Selectors:
+Selectors are functions that extract and transform pieces of the state. They help in decoupling the state shape from the component logic.
+const getCounterValue = (state) => state.counter;
+
+Connecting Redux to React
+To connect Redux with React, you typically use the react-redux library, which provides two main features: Provider and connect.
+
+Middleware in Redux
+Middleware is a way to extend Redux with custom functionality. Middleware allows you to intercept actions 
+before they reach the reducer and perform additional logic such as logging, asynchronous API calls, etc.
+
+
 npm install redux
 
 Action - describes the changes in the sate
@@ -34,4 +96,37 @@ Redux Thunk is a middleware that allows you to call the action creators that ret
 which takes the store's dispatch method as the argument and which is afterwards used to dispatch the synchronous action after the API 
 or side effects has been finished.
 
-logger middleware 
+Why Use redux-thunk?
+By default, Redux actions must be plain objects. This limitation means that asynchronous logic, such as API calls or complex computations, 
+cannot be handled directly within action creators. redux-thunk addresses this limitation by allowing action creators to return a function instead of an action. 
+This function receives the store's dispatch method as an argument, allowing you to dispatch actions asynchronously.
+
+
+thunk vs saga
+
+Simplicity vs. Power
+Redux Thunk: Simpler to set up and use, especially for straightforward asynchronous tasks.
+Redux Saga: More powerful and better suited for complex tasks, but comes with a steeper learning curve.
+
+Learning Curve
+Redux Thunk: Easier to learn for those familiar with JavaScript Promises and async/await.
+Redux Saga: Requires understanding of generator functions and the additional concepts provided by the library.
+
+Use Case Suitability
+Redux Thunk: Best for simpler or smaller applications where async logic is not too complex.
+Redux Saga: Better for larger applications with complex async logic, where more powerful control over side effects is needed.
+
+Testing
+Redux Thunk: Can be more difficult to test due to being regular functions.
+Redux Saga: Easier to test due to its declarative nature and structured generator functions.
+
+When to Use Redux Thunk
+When your async logic is straightforward and doesn't involve complex workflows.
+When you need a lightweight solution with minimal setup.
+When you're building a small to medium-sized application.
+
+When to Use Redux Saga
+When your application has complex async workflows, such as multiple dependent requests, retries, parallel execution, etc.
+When you need advanced side effect management features like task cancellation and concurrency control.
+When you want easier testing of your async logic.
+

@@ -1,76 +1,55 @@
 
 
-
-******Top***********
-
-Factory/Constructor functions
-Javascript class
-Custom hooks
-Hands on practice in React and Redux syntax
-server-side rendering
-Unit Testing.
-useMemo syntax with examples
-useCallback syntax with examples
-useReducer syntax with examples
-React Router syntax
-Nested Router examples
-Practice HOC examples
-PropTypes syntax
-Redux syntax both hooks and class based
-How to monitor how many times our component is re-rendering
-Intersection observer
-CSS Home
-CSS object model
-Pollyfill
-Debouncer
-Pure Components
-StopWatch Component in React
-Add custom events
-useReducer syntax
+Linkdin snippits
+youtube new concepts
+New React features ---
+React 19
+Tailwind ---
+TypeScript ---
+React Router latest 
+Next js ---
+Office project details ---
 
 
-******* First *****
+--------------------------
+Arrow Functions
+Closure Examples
 
-Pass data to I-frame
-Why are HOC needed?
+***********
 
-How Http/Https works
+useReducer
+React Router
+SSR
 
 
 
-******************************************
-difference between ContextAPI and Redux store
-why do we need controlled and uncontrolled componets
-what are Security Attack- SQL injection,
-Web performance
-Props delegation
-If we have useContext hook y we need Redux?
-Pure functions
-Why is it imp to have pure Functions
-Pure function/HOC in Redux?
-Learn More about Objects
-javascript converts objects to "[object Object]" why??
-React class based life cycle Component will recive props
-Read more about "this"
-Practice about Promise
-Practical eg. of Closure
-More about Middleware Redux.
-Custom Hooks
+*********
+Consumer.
 
-Performance monitoring
-Why do we need pure functions/ Pure components
-Core Web Vitals  ****
-Compose from react
-export vs module.export
+
+**********************
+ngnix
+cdn
+
+
+***************************************
+
+Redux hands on
 
 
 
-************Project****************
-skeleton
 
-***************Why this componay***********
 
-i have experience in developing websites using react and i think "Company Name" would be a greate place to learn more about Frontend technolgy,
-i think working at "Company Name" will help me grow technically and professionally as well.
 
-Accnt no , Accnt type, Account opening date, peak balance , 31st March 2021, zipcode, address
+
+
+
+
+
+
+
+
+
+
+
+
