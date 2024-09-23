@@ -49,6 +49,14 @@ const greet = <h1>Hello, {name}</h1>;
 
 The above code shows how JSX is implemented in React. It is neither a string nor HTML. Instead, it embeds HTML into JavaScript code
 
+ReactDOM.render(
+  React.createElement(
+    'div',
+    id,
+    'Hello React',
+  ),
+  document.getElementById('mountNode2'),
+);
 
 Virtual DOM ********
 React keeps a lightweight representation of the “real” DOM in the memory, and that is known as the “virtual” DOM (VDOM).
@@ -190,6 +198,9 @@ UseEffect ******
 By using this Hook, you tell React that your component needs to do something after render. 
 React will remember the function you passed (we’ll refer to it as our “effect”), and call it later after performing the DOM updates. 
 
+It is a replacement for componentDidMount,componentDidUpdate,componentWillUnmount
+
+
 useEffect accepts two arguments:
 1. A function that contains the side effect code.
 2. An optional dependencies array that specifies when the effect should re-run.
@@ -240,29 +251,13 @@ function Timer() {
 export default Timer;
 
 
-useEffect allows you to perform side effects in functional components.
-Dependencies array controls when the effect runs.
-Cleanup function handles any necessary cleanup when the component unmounts or before the effect re-runs.
-Common use cases include data fetching, event listeners, and subscriptions.
-
-
-It is a replacement for componentDidMount,componentDidUpdate,componentWillUnmount
-
 Common Side Effects in Functional Components
 Data Fetching
 Event Listeners
-Subscriptions
 Timers
+Subscriptions
 Direct DOM Manipulation
 Logging and Analytics
-
-
-Why is useEffect called inside a component? ***** 
-Component Lifecycle Management:
-Mounting: useEffect runs after the initial render.
-Updating: useEffect runs after every update (re-render) if the specified dependencies have changed.
-Unmounting: Cleanup logic defined within useEffect runs before the component is unmounted.
-Access to Component State and Props
 
 
 Does useEffect run after every render? *********
@@ -381,6 +376,13 @@ The useRef hook in React is used to create a mutable object that persists across
 useRef gives us a mutable object whose current property refers to the passed initial value. 
 If we don't change it manually, the value will persist for the entire lifetime of the component.
 
+Use Cases
+Accessing DOM Elements
+Storing Mutable Values:-useRef can hold mutable values that don’t trigger a re-render when updated. 
+			This is useful for keeping track of previous state values or counters without affecting the render flow.
+Persisting Previous State Values
+
+
 
 useReducer *****
 It is used for state management
@@ -430,7 +432,6 @@ Set interval syntax ****
 
 
 Reasons to Clear setInterval or setTimeout ********
-
 Avoid Memory Leaks:
 If you don't clear a setInterval or a long setTimeout, it will continue to exist in memory, even if the component or object that initiated it has been removed
 or is no longer relevant.
@@ -463,18 +464,12 @@ while dependencies are modules which are also required at runtime.
 To save a dependency as a devDependency on installation we need to do an npm install --save-dev , instead of just an npm install --save.
 
 
-Diff algorithm **************
-The diff command is invoked from the command line, passing it the names of two files: diff original new . 
-The output of the command represents the changes required to transform the original file into the new file. 
-If original and new are directories, then diff will be run on each file that exists in both directories.
-
-
 Use of "Key" in Component...if not provided then which error (also used in Virtual DOM) **************
 In React, the key attribute is a special attribute you need to include when creating lists of elements. 
 Keys help React identify which items have changed, are added, or are removed, which is crucial for efficient updates and maintaining the correct order of elements in the virtual DOM.
 It also helps to determine which components in a collection needs to be re-rendered instead of re-rendering the entire set of components every time.
 Keys should be given inside the array to give the elements a stable identity. 
-The best way to pick a key as a string that uniquely identifies the items in the list. It can be understood with the below example.
+The best way to pick a key as a string that uniquely identifies the items in the list.
 If key is not provided then we get a warning msg but the component is displayed
 
 
@@ -516,39 +511,13 @@ function Counter() {
 <Counter />
 
 
-Single page Routing *******
-Use Link from react Router.
-
-
-
 Link vs NavLink ******
 The Link component allows navigating the different routes on the websites, whereas 
 NavLink component is used to add styles to the active routes has activeClassName for css
 
 
-
-React Router vs traditional Router ********
-traditional Router uses server side rendering
-React Router uses client side rendering
-
-
-
-browser-router vs hashrouter **********
-<BrowserRouter>: It is used for handling the dynamic URL.
-<HashRouter>: It is used for handling the static request.
-browser-router A <Router> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
-hashrouter  A <Router> that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL.
-<MemoryRouter>  A <Router> that keeps the history of your “URL” in memory (does not read or write to the address bar). 
-Useful in tests and non-browser environments like React Native.
-
-
-
 Nested Router ************
 Using route inside route
-
-
-Route ******
-It is used to define and render component based on the specified path
 
 
 How to prevent Rerendering of child component *******
@@ -624,7 +593,6 @@ Server-side rendering.
 Errors thrown in the error boundary itself.
 
 
-
 Pure Component *******
 A Pure Component in React is a type of component that implements a shallow comparison of props and state to decide whether the component should re-render. 
 This can optimize performance by avoiding unnecessary re-renders when the props and state have not changed.
@@ -686,16 +654,16 @@ Controlled: Can result in more boilerplate code due to state management.
 Uncontrolled: Simpler and less code for basic forms.
 
 Use Controlled Components:
-
 When you need to control the form data in real-time.
 When you need to implement complex form validation.
 When the form data needs to be manipulated or transformed before submission.
 When you need to dynamically enable/disable fields or change their values based on user interaction.
-Use Uncontrolled Components:
 
+Use Uncontrolled Components:
 When you have simple forms with minimal validation.
 When you need quick access to form data without state management.
 When you want to leverage the native form handling capabilities of the browser.
+
 
 Conditional Rendering *********
 if else
@@ -714,7 +682,7 @@ use context for long chain
 
 How to pass data from child to parent ***********
 Create a callback function in the parent component. This callback function will get the data from the child component.
-Pass the callback function in the parent as a prop to the child component.
+Pass the callback function from the parent as a prop to the child component.
 The child component calls the parent callback function using props.
 
 
@@ -761,6 +729,16 @@ Adding memoization or caching to prevent unnecessary re-renders and improve perf
 Enhancing Component Behavior:
 Adding behavior like logging, error handling, analytics, etc.
 
+const withExtraProps = (WrappedComponent) => {
+  return (props) => {
+    // Modify or add new props
+    const newProps = { extraProp: 'This is an extra prop' };
+    
+    // Return the original component with new props
+    return <WrappedComponent {...props} {...newProps} />;
+  };
+};
+
 const WithComponent=OriginalComponent=> {
     function NewComponent(props){
         const [state,setState]=useState(0)
@@ -783,6 +761,7 @@ export default WithComponent
 
 
 In built HOC in react*********
+React.memo
 connect from react-redux
 It allows you to map state and dispatch to props, enabling your component to interact with the Redux store.
 
@@ -793,13 +772,12 @@ allowing you to access these props in any component.
 
 Render Props  ***********
 https://www.youtube.com/watch?v=EZil2OTyB4w&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=37
-The term “render prop” refers to a technique for sharing code between React components using a prop whose value is a function.
-The Render Props pattern involves passing a function as a prop to a component, allowing that component to render or provide data to its child components. 
-The parent component provides a function as a prop, and the child component invokes that function, typically passing relevant data or state back to the parent. 
-This pattern promotes reusability and flexibility by allowing components to be composed in different ways.
-Render props is a pattern in React that involves sharing code between components using a prop whose value is a function. 
-This function allows you to dynamically determine what UI to render. 
-The render props pattern can help you achieve more reusable and flexible components by allowing you to inject customized rendering logic.
+Render Props is a pattern in React for sharing logic between components. 
+A component with a render prop takes a function that returns JSX as a prop, allowing flexible code reuse by dynamically controlling what gets rendered.
+The main idea is that instead of hardcoding the component's children or markup, you pass a function to the component, which decides how it should render its UI.
+A render prop is simply a function prop that a component uses to know what to render.
+Instead of creating a new Higher-Order Component (HOC) to share logic between components, 
+you can use the render props pattern to achieve similar flexibility without creating new components.
 
 function Counter({ render }) {
     const [count, setCount] = useState(0);
@@ -825,6 +803,16 @@ function App() {
     );
 }
 
+Advantages of Render Props:
+Reusability: By abstracting the logic (like mouse tracking, authentication, etc.) and passing a function to determine what should be rendered, 
+			you make the component highly reusable.
+Flexibility: The parent component fully controls how the child component renders based on the shared state or logic.
+No Component Hierarchy Changes: Unlike HOCs, render props don't need to wrap components. They don't alter the component tree, making debugging easier.
+
+Both Higher-Order Components (HOCs) and Render Props are ways to share logic between components, but they do it differently:
+HOC: Enhances a component by wrapping it and passing new props.
+Render Props: Allows dynamic control over what is rendered by passing a function as a prop.
+
 
 React.memo() *****
 React.memo is a higher-order component that optimizes functional components by memoizing their rendered output.
@@ -836,18 +824,10 @@ function MyComponent({ name }) {
 }
 export default React.memo(MyComponent);
 
-When you have functional components that receive the same props over time and do not need to re-render unless their props change.
-To optimize components that do not rely on state or context changes.
-
-const MyComponent = React.memo(Component, (prevProps, nextProps) => {
-  // Custom comparison logic
-  return boolean;
-});
-
-
 
 uesMemo ****
-useMemo is a hook that memoizes the result of a function. It is used to optimize expensive calculations by caching the result and only recalculating it when the dependencies change.
+useMemo is a hook that memoizes the result of a function. It is used to optimize expensive calculations by caching the result and 
+only recalculating it when the dependencies change.
 useMemo can help prevent unnecessary re-renders by memoizing values or objects used in the component.
 When you have expensive calculations or functions that you want to avoid recalculating on every render.
 When you need to memoize objects or arrays to prevent unnecessary re-renders of child components.
@@ -856,15 +836,14 @@ When you need to memoize objects or arrays to prevent unnecessary re-renders of 
 React.memo() vs uesMemo ****
 
 Purpose:
-
 React.memo: Used to memoize entire functional components to prevent re-renders when props have not changed.
 useMemo: Used to memoize the result of a function or value to avoid recalculating it on every render.
-Usage Context:
 
+Usage Context:
 React.memo: Wraps a functional component.
 useMemo: Used within functional components to memoize values or calculations.
-Performance:
 
+Performance:
 React.memo: Reduces the number of renders for a component.
 useMemo: Reduces the number of recalculations for a value or result.
 
@@ -873,8 +852,6 @@ server side rendering(SSR) ***********
 In Client-side rendering, your browser downloads a minimal HTML page. It renders the JavaScript and fills the content into it.
 Server-side rendering, on the other hand, renders the React components on the server. The output is HTML content.
 You can combine these two to create an isomorphic app.
-
-
 
 
 package.lock.json ******
@@ -903,7 +880,6 @@ Employee.propTypes = {
   name: PropTypes.string,
   salary: PropTypes.number
 }
-
 
 
 Life Cycle Methods of react ***********
@@ -982,20 +958,18 @@ useEffect(() => {
 DOM ***********
 
 The DOM provides a structured way of accessing, storing, and manipulating different parts of a document. 
-At a high level, the DOM is a tree structure that reflects the hierarchy of an XML document. This tree structure is comprised of subtrees
+At a high level, the DOM is a tree structure that reflects the hierarchy of an XML document. This tree structure is comprised of subtrees 
 that are in turn made of nodes. You’ll probably know these as the divs and other elements that make up your web pages and applications.
-You’ve probably used the DOM API before—but you may not have known you were
-using it. Whenever you use a method in JavaScript that accesses, modifies, or stores
-information related to something in an HTML document, you’re almost certainly using
-the DOM or its related APIs. This means that not all the methods you’ve used in JavaScript are
-necessarily part of the JavaScript language itself (document.findElemenyById,
-querySelectorAll, alert, and so on). They’re part of the bigger collection of web
-APIs—the DOM and other APIs that go into a browser—that allow you to interact with
-documents.
+You’ve probably used the DOM API before—but you may not have known you wereusing it. 
+Whenever you use a method in JavaScript that accesses, modifies, or stores information related to something in an HTML document, you’re almost certainly using
+the DOM or its related APIs. This means that not all the methods you’ve used in JavaScript are necessarily part of the JavaScript language itself 
+(document.findElemenyById, querySelectorAll, alert, and so on). They’re part of the bigger collection of web APIs—the DOM and other APIs 
+that go into a browser—that allow you to interact with documents.
 
 
 Auth Token (How, Where, When ) ***********
-An auth token is a piece of data that represents a user's credentials and permissions. 
+An Auth Token (Authentication Token) is a small piece of data that is used to identify and authenticate a user in a web application. 
+These tokens are typically passed between the client and server to verify that the user is authenticated and authorized to perform certain actions.
 It is used to verify that a request is made by an authenticated user. Common types of auth tokens include JSON Web Tokens (JWT), OAuth tokens, and custom tokens.
 Client-Side: Tokens can be stored in localStorage, sessionStorage, or as a cookie.
 

@@ -186,26 +186,33 @@ LG - 1024px (laptop)
 XL - 1280px
 2XL - 1536px
 
-A semantic element clearly describes its meaning to both the browser and the developer.
+
+Semantic element ******
+They help both browsers and developers understand the structure and meaning of web content, providing clear and meaningful labels for different parts of a webpage.
+
+Key Purposes of Semantic Elements:
+1. Improves Readability for Developers
+2. Better Accessibility:
+3. Search Engine Optimization (SEO):
+4. Maintains a Consistent Structure:
 
 Examples of non-semantic elements: <div> and <span> - Tells nothing about its content.
 
 Examples of semantic elements: <form>, <table>, and <article> ,nav,footer- Clearly defines its content.
 
 
-<script src="demo_async.js" async></script>
-If async is present: The script is fetched simultaneouly with HTML parsing and immediately executed.
-If async is not present and defer is present: The script is fetched simultaneouly with HTML parsing but executed when the page has finished parsing
-If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
-https://www.youtube.com/watch?v=IrHmpdORLu8
-Wise to use Defer as it maintains the order of excecution
+Feature				async																		defer
+Loading behavior	Script is loaded asynchronously												Script is loaded asynchronously
+Execution timing	Script is executed as soon as it's ready, may interrupt HTML parsing		Script is executed after HTML parsing is complete
+Execution order		Order of execution is not guaranteed (executes as soon as it's downloaded)	Scripts are executed in the order they are included in the document
+Best for			Independent scripts like analytics											Scripts that rely on the DOM being fully parsed
 
+When to Use:
+async: Use for scripts that are independent of other scripts and the DOM, such as third-party scripts (e.g., Google Analytics or ads).
+defer: Use for scripts that rely on the entire DOM being ready before execution (e.g., DOM manipulation scripts, libraries like jQuery).
+<script async src="analytics.js"></script>
+<script defer src="app.js"></script>
 
-
-To enrich the semantic content of documents, new page structure elements such as <main>, <section>, <article>, <header>, <footer>, <aside>, 
-<nav>, and <figure> are added.
-<video>, <audio> and <canvas> elements were added
-Web APIS drag and drop
 
 tag vs element *******
 HTML Tags: Tags are the starting and ending parts of an HTML element. 
@@ -250,7 +257,16 @@ Padding - Clears an area around the content. The padding is transparent
 Border - A border that goes around the padding and content
 Margin - Clears an area outside the border. The margin is transparent
 
+box-sizing ****
+content-box (default): Width and height apply only to the content area. Padding and borders are added to the outside, increasing the total size of the element.
+border-box: The padding and borders are included within the specified width and height, making the total element size easier to predict and manage.
+
+
 why we use box-model***********
+The CSS box model is critical for determining the overall size and layout of an element. It controls how elements are sized, spaced, and aligned on a webpage. 
+Proper use of the box model ensures that web pages are responsive, visually appealing, and maintain proper layout structure across various devices. 
+Understanding it is essential for both layout design and debugging layout issues in web development.
+
 
 The display Property
 display: inline;
@@ -297,22 +313,25 @@ visibility	Specifies whether or not an element should be visible
 
 
 
-
-
-
 The position Property
 There are five different position values:
-static(By Default)
-relative
+static(By Default): Elements are positioned according to the normal document flow.
+relative: The element is positioned relative to its original place in the document flow.
 fixed : is positioned relative to the viewport
 absolute---- position: absolute; is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
 sticky : is positioned based on the user's scroll position.
 
 
+Value		Behavior																	Use case
+static		Default, follows the normal document flow.									General content placement.
+relative	Positioned relative to its normal position, moves within document flow.		Slight adjustments or nudging of elements.
+absolute	Positioned relative to its nearest positioned ancestor or the viewport.		Modals, tooltips, dropdowns, precise control.
+fixed		Positioned relative to the viewport and does not move with scrolling.		Sticky headers/footers, floating elements.
+sticky		Switches from relative to fixed after scrolling past a point.				Sticky navigation bars or sidebars.
 
 
 
-overflow property controls what happens to content that is too big to fit into an area.
+overflow property controls what happens to content that is too big to fit into an area. *******
 The overflow property has the following values:
 visible - Default. The overflow is not clipped. The content renders outside the element's box
 hidden - The overflow is clipped, and the rest of the content will be invisible
@@ -337,27 +356,12 @@ To horizontally center a block element (like <div>), use margin: auto;
 Diff selectors vs pseudo elements *************
 CSS selectors are used to "find" (or select) the HTML elements you want to style.
 
-A pseudo-class is used to define a special state of an element.
-For example, it can be used to:
-Style an element when a user mouses over it
-Style visited and unvisited links differently
-Style an element when it gets focus
-selector:pseudo-class {
-  property: value;
-}
-a:focus
-a:hover
+Aspect		Selectors													Pseudo-Elements
+Targeting	Targets entire HTML elements based on tag, class, ID, etc.	Targets parts of an element or inserts virtual elements
+Usage		Applied directly to the selected HTML elements				Applied to parts of an element (like ::before, ::first-letter)
+Syntax		Written directly as tag, class, ID, or attribute selectors	Prefixed with :: (e.g., ::before, ::after)
+Examples	.class, #id, div > p, [attr=value]							::before, ::after, ::first-line
 
-
-A CSS pseudo-element is used to style specified parts of an element.
-
-For example, it can be used to:
-
-Style the first letter, or line, of an element
-Insert content before, or after, the content of an element	
-selector::pseudo-element {
-  property: value;
-}
 
 Selector		Example				Example description
 ::after			p::after			Insert something after the content of each <p> element
@@ -390,8 +394,8 @@ transform: translateX(50px) rotate(45deg) scale(1.5);
 
 
 CSS transitions *******
-transition: property duration timing-function delay;
-
+transition: [property] [duration] [timing-function] [delay];
+ 
 property: The CSS property you want to animate (e.g., width, background-color). You can use all to apply the transition to all animatable properties.
 duration: The duration of the transition (e.g., 0.5s for half a second).
 timing-function: Describes how the transition progresses over time. Common values include linear, ease, ease-in, ease-out, and ease-in-out.
@@ -416,12 +420,6 @@ delay: The time to wait before the transition starts (e.g., 0.2s for a 200ms del
 </style>
 
 
-Animation**********
-
-
- box-sizing: border-box;
-
-
 CSS Specificity
 If there are two or more conflicting CSS rules that point to the same element, the browser follows some rules to determine 
 which one is most specific and therefore wins out.
@@ -432,9 +430,11 @@ The universal selector (*) has low specificity, while ID selectors are highly sp
 10 Class
 100 ID
 1000 inline css
-10000 !important
+!important will override all css properties expect inline css
 
-
+More Specific Rules Win: When conflicting rules apply to the same element, the rule with the higher specificity value takes precedence.
+Equal Specificity: If two rules have the same specificity, the last defined rule in the CSS will take precedence.
+Importance of Order: In case of equal specificity, the order of the rules matters—the last one defined in the CSS will override the others.
 
 1em is 16px.
 

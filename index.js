@@ -1,4 +1,3 @@
-
 //  sum of array
 
 // arr=[1,5,6,4,10]
@@ -7,29 +6,25 @@
 // })
 // console.log(newarr)
 
-
 // Staircase
 
 // let n=4
 // for (let index = 0; index<n; index++) {
 //   let sentence="#"
 //   for (let index2 = 0; index2<index; index2++) {
-//    sentence= sentence+"#"   
+//    sentence= sentence+"#"
 // }
 // console.log(sentence)
 // }
 
-
 // Reverse an array
 
 // arr=[1,2,3,4,5]
-// console.log(arr.reverse()); 
+// console.log(arr.reverse());
 
 //     const reversed = arr.reduce((acc, curr) => {
 //   return [current, ...acc];
 // }, []);
-
-
 
 // Reverse a String
 
@@ -39,14 +34,13 @@
 // return str.split("").reduce((acc,item)=>item+acc,"")
 // }
 
-// Kth smallest 
+// Kth smallest
 
 // arr=[1,22,3,-4,5]
 
 //  arr.sort((a, b) => a - b)
 
 // console.log(arr[k]);
-
 
 // Best Time to Buy and Sell Stock
 
@@ -59,8 +53,7 @@
 // }
 // console.log(profit);
 
-
-// Find First Duplicate 
+// Find First Duplicate
 
 // let nums = [2, 3, 55, 4, 8, 10, 55, 5, 3];
 
@@ -73,8 +66,15 @@
 
 // firstDuplicate(nums);
 
+// const duplicates = [];
+// nums.forEach((item, index) => {
+//   if (nums.indexOf(item) !== index) {
+//     duplicates.push(item);
+//   }
+// });
+// console.log("Duplicate", duplicates[0]);
 
-// Maximum Product of Three Numbers    
+// Maximum Product of Three Numbers
 
 // arr=[1,2,10,3,4,5]
 // newarr=[]
@@ -90,23 +90,6 @@
 // let product=newarr[0]*newarr[1]*newarr[2]
 // console.log(newarr);
 // console.log(product);
-
-
-// Longest Continuous Increasing Subsequence Answer not complete
-
-// nums = [1,3,5,4,7]
-// len=1
-// max=0
-// prev=0
-// for (let n of nums) {
-//  if (prev<n) len++
-//  else{
-//    len=1
-//  }
-//   }
-
-//   console.log(len);
-
 
 //     Factorial
 
@@ -126,19 +109,6 @@
 //   if (n <= 1) return 1;
 //   return n * factorial(n - 1);
 // };
-
-// trapping-rain-water
-
-// arr = [7,4,0,9]
-
-// let limit= arr[0]>arr[arr.length-1] ? arr[arr.length-1]: arr[0];
-// let sum=0
-// for(i=1;i<arr.length-1;i++){
-//     sum=sum + limit- arr[i]
-// }
-
-// console.log(sum);
-
 
 // palindrome
 
@@ -172,15 +142,7 @@
 // let newsentence=Counter(sentence)
 //  console.log(newsentence)
 
-// for(const key in newsentence){
-//     if(newsentence[key]>1){
-//     console.log(key)
-//     }
-// }
-
-
 // First Unique Character in a String
-
 
 // let sentence="Gurav"
 
@@ -192,14 +154,12 @@
 //     }
 //     console.log(frequency);
 //     // console.log(s[1]);
-//     for (let item in frequency) {
-//         if (frequency[item] === 1){
-          // return console.log(item);
-// } 
-//     } 
+//     for (let key in frequency) {
+//         if (frequency[key] === 1){
+// return console.log(item);
+// }
+//     }
 // };
-
-
 
 // Sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 // Find the sum of first 100 prime numbers
@@ -213,10 +173,10 @@
 
 // num = numArray.filter((number) => {
 //     if(number<2>){
-//       return false  
+//       return false
 //     }
 //    else if(number===2){
-//       return true  
+//       return true
 //     }
 //   for (var i = 2; i <= Math.sqrt(number); i++) {
 //     if (number % i === 0) return false;
@@ -231,10 +191,8 @@
 
 // sumprime(10)
 
-
 // write a function to find strings appearing an odd number of times
 // arr=['aa','bb','aa','bb','aa','cc','cc','ddd'] ===> ['aa','ddd'] because aa appears 3x and ddd 1x
-
 
 // function Counter(sentence){
 //   let array= sentence.reduce((total, letter) => {
@@ -245,7 +203,7 @@
 //   for(const property in array){
 //       if(array[property]%2!==0){
 //            newarr.push(property)
-//       } 
+//       }
 //   }
 //   return newarr
 // };
@@ -254,10 +212,9 @@
 
 // Counter(arr)
 
-
 // Find the number start and end positin of "556013604"
 
-// mystring = 
+// mystring =
 // "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450"
 // let find="556013604"
 // console.log(mystring.search(find))
@@ -266,16 +223,15 @@
 
 // console.log(`start at ${start} and end at ${end}`)
 
-
-// tricky ques 
+// tricky ques
 //     1 + true  // 2
 //     true + true // 2
 //     "1" + true // "1true"
 //     "2" > "3" // false
-//     "two" > "three" // true it compares letters with highest number 
-    // "true"==true  // ans is false as "true" converted into NaN and true into 1
+//     "two" > "three" // true it compares letters with highest number
+// "true"==true  // ans is false as "true" converted into NaN and true into 1
 
-// loop in react 
+// loop in react
 // function App() {
 //   const list = []
 
@@ -298,8 +254,6 @@
 // }
 
 // export default App;
-
-
 
 // var arr = [[1,2],[3,4],[4,5]] //[1,2,3,4,5]
 
@@ -336,17 +290,10 @@
 // }
 // brunch.order();
 
-
-
-
-
 // var trees = ["xyz","xxxx","test","ryan","apple"];
 // delete trees[3];
 // console.log(trees.length);  //5
 // console.log(trees);   //  ['xyz', 'xxxx', 'test', empty, 'apple']
-
-
-
 
 // function display() {
 //   var a = b = 10;
@@ -364,10 +311,6 @@
 
 // The reason a is undefined is that a is a local variable to that self-executing anonymous function
 
-
-
-
-
 // const items = [
 //   {name: 'a', price: 100},
 //   {name: 'b', price: 10},
@@ -381,10 +324,6 @@
 
 // console.log(newitems);
 
-
-
-
-
 // let arr = [1.34567,2.34,3.6,8,9.05676]
 
 // arr.map((item)=>{
@@ -397,16 +336,12 @@
 //       return a
 // }))       ==> 2
 
-
-
-
 // let a = [1,20,33,100,22,1000,2]
+// a.sort()
+
 // a.sort((a,b)=>{
 //    return a-b
 // })
-
-
-
 
 // function a(){
 //   console.log("a")
@@ -415,9 +350,9 @@
 //   console.log("c2")
 //   console.log("c3")
 // }
-// a()    
+// a()
 
-// ==> 
+// ==>
 //a
 //c2
 //c3
@@ -433,7 +368,6 @@
 // }
 
 // a.call(obj)
-
 
 // let a =3;
 // let b=5;
@@ -454,24 +388,15 @@
 //   }
 // }
 
-
-
 // let a={a:1}
 // let b={a:1}
 // let c=a
 // console.log(a===c) //true   here comparison of reference is done
 // console.log(a==b) //false
 
-
-
-
-
 // const a=[1, [2], [3, [[4]]],[5,6]]
 
-// console.log(a.flat(Infinity));  
-
-
-
+// console.log(a.flat(Infinity));
 
 // obj = {
 // 	a: 1,
@@ -485,30 +410,18 @@
 // console.log(obj);
 // console.log(obj2);
 
-
-
 // var a = 5;
-// console.log(a); 
+// console.log(a); //5
 // function abc(){
 //     var a = 3;
-//     console.log(a); 
+//     console.log(a); //3
 // }
 // abc();
-// console.log(a);
-
-
-
-// for(let i=0; i<5; i++){
-// 	setTimeout(()=>{
-// 		console.log(i)
-// 	},0);
-// }
-
+// console.log(a); //5
 
 // let counter = 1;
-// let a = counter++; 
+// let a = counter++;
 // alert(a);  //1
-
 
 // state = {
 // 	a: 100
@@ -518,42 +431,15 @@
 // 	setState({
 // 		a :200
 // 	});
-// 	console.log(this.state.a);	
+// 	console.log(this.state.a);
 // }
 
 // changeState();
 
-
-// Second Max
-
-// arr = [1, 180, 10, 7, 56, 90,140,200]
-
-// function largest(arr){
-//     let max=0
-//     let secondMax=0
-//     arr.forEach((item)=>{
-//          secondMax = max < item ? max : secondMax < item ? item : secondMax;
-//          max = max < item ? item : max;
-//           })
-//     console.log("secondMax",secondMax)
-//     console.log("max",max)
-// }
-
-// largest(arr)
-
-
-// const array = [-1, 10, 6, 5];
-// const max = array.reduce((max, num) => (max > num ? max : num));
-// const min = array.reduce((min, num) => (min < num ? min : num));
-
 // var a={name:"Gaurav",surname:"Pawar"}
 // var b={name:"Varun",state:"Hs"}
-
 // var c={...a,...b}
-
 // console.log(c)
-
-
 
 // const arr =[{age: 15, isSelected: false}, {age:20, isSelected: false},
 //     { age: 25 , isSelected:false}]
@@ -568,47 +454,31 @@
 
 // console.log("newarray",arry4);
 
-
-
-
-// function outer(){
-//     var name="Gaurav"
-//   return  inner=()=>{
-//         var surname="pawar"
-//         console.log(name+surname);
-//         console.log(this);
+// const series = (inputNumber) => {
+//     if (inputNumber <= 0) {
+//       console.log("grt than zero");
+//     } else if (inputNumber.toString().includes(".")) {
+//       const twoNumbers = inputNumber.toString().split(".");
+//       const greaterNumber =
+//         twoNumbers[0] > twoNumbers[1] ? twoNumbers[0] : twoNumbers[1];
+//       console.log(`greater Number ${greaterNumber}`);
+//     } else {
+//       console.log(inputNumber);
 //     }
-// }
-
-// var check=outer()
-// check()
-
-
-//     // if its -ve or zewro msg- grt than zero
-//     //if +ve return num as it
-//     //if decial return grt part of the decimal
-//   const series = (inputValue) => {
-//   const inputArray = inputValue.toString().split(".");
-//   if (inputArray.length >= 2) {
-//     const grtNum =
-//       inputArray[0] > inputArray[1] ? inputArray[0] : inputArray[1];
-
-//     console.log("Decimaal", grtNum);
-//   } else if (inputValue > 0) console.log("inputValue", inputValue);
-//   else if (inputValue <= 0) console.log("Grt than zero");
-// };
+//   };
 
 // series(55.657)
 // series(-25)
 // series(100)
 // series(25.13)
 
+// --------------------------------------------------------------------------------------------------------------------
+
 // let array=[3,5,4,3,5,3]
 
 // value 3 is dup at index 3
 // value 5 is dup at index 4
 // value 3 is dup at index 5
-
 
 // function Duplicate(arr){
 //       arr.forEach((value,index)=>{
@@ -630,7 +500,6 @@
 //         Our Api call
 //     }
 // },[Fetchdata])
-
 
 // Filter duplicate id
 // const arr = [
@@ -661,32 +530,31 @@
 // console.log(newArray);
 // console.log(filteredArr);
 
-
 // class Calculator{
 //     count =0
 //     add(value){
 //        ;
 //        this.count=value+this.count
 //        console.log(this.count)
-//        return this 
+//        return this
 //     }
 //     subtract(value){
 //        ;
 //        this.count= this.count-value
 //        console.log(this.count)
-//        return this 
+//        return this
 //     }
 //     divide(value){
 //        ;
 //        this.count= this.count/value
 //        console.log(this.count)
-//        return this 
+//        return this
 //     }
 //     multiply(value){
 //        ;
 //        this.count= value*this.count
 //        console.log(this.count)
-//        return this 
+//        return this
 //     }
 //     reset(){
 //         this.count=0
@@ -716,38 +584,34 @@
 
 // c.reset();
 
-
 // var myObject = {
-//     foo: "bar", 
+//     foo: "bar",
 //     func: function() {
-//          var self = this; 
+//          var self = this;
 //          console.log("outer func: this.foo = " + this.foo);
-//          console.log("outer func: self.foo = " + self.foo); 
-     
-//          (function() { 
+//          console.log("outer func: self.foo = " + self.foo);
+
+//          (function() {
 //            console.log("inner func: this.foo = " + this.foo);
-//             console.log("inner func: self.foo = " + self.foo); 
-//             }()); 
-//           }   
-//       }; 
-        
+//             console.log("inner func: self.foo = " + self.foo);
+//             }());
+//           }
+//       };
+
 //     myObject.func();
 
-
 // Bar
-// bar 
+// bar
 
 // undefined
 // bar
-
-
 
 //   var b=15;
 // function foo(){
 //     var b=5;
 
 //     function baz (){
-//         console.log(b)  
+//         console.log(b)
 //     }
 //     exec(baz);
 // }
@@ -775,8 +639,7 @@
 
 // sum(1)(2)(3)(4)()
 
--------------------------------------------------------------------------------------
-
+// -------------------------------------------------------------------------------------
 
 // Polyfills
 
@@ -787,24 +650,24 @@
 //       let temp=[]
 //       for (let index = 0; index < this.length; index++) {
 //         temp.push(cb(this[index],index,this))
-      
+
 //       }
 //       return temp;
 // }
 
-// Filter 
+// Filter
 // Array.prototype.myFilter= function(cb){
 //   let temp=[]
 //       for (let index = 0; index < this.length; index++) {
 //         if(cb(this[index],index,this)){
 //           temp.push(this[index])
 //         }
-      
+
 //       }
 //       return temp;
 // }
 
-// Reduce 
+// Reduce
 // arr.reduce((acc,item,arr)=>{
 //   return acc+item
 // },initialValue)
@@ -812,7 +675,7 @@
 //   let accumulator=initialValue
 //   for (let index = 0; index < this.length; index++) {
 //     accumulator=accumulator? cb(accumulator,this[index],this):this[index]
-  
+
 //   }
 
 //   return first
@@ -829,9 +692,7 @@
 //     }
 // }
 
-
 // console.log(sum(1)(2)(3)())  //6
-
 
 // Deep comparison
 // const obj1 = {
@@ -875,7 +736,7 @@
 //     //Compare objects
 //     const KeyA = Object.keys(objA);
 //     const KeyB = Object.keys(objB);
-  
+
 //     if (KeyA.length !== KeyB.length) {
 //       return false;
 //     }
@@ -915,6 +776,3 @@
 // }
 
 // printPattern(4);
-
-
-

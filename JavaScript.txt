@@ -38,9 +38,6 @@ By handling tasks on the client side, JavaScript reduces the processing burden o
 
 Simplicity. JavaScript is relatively simple to learn and implement.
 
-Reduced Server Load:
-By handling tasks on the client side, JavaScript reduces the processing burden on the server. This can lead to better scalability and lower server costs.
-
 Rich Ecosystem
 Libraries and Frameworks: JavaScript has a vast ecosystem of libraries and frameworks that simplify development.
 Popular ones include React, Angular, Vue.js for front-end development, and Node.js, Express for back-end development.
@@ -80,6 +77,105 @@ JavaScript is single-threaded by design to ensure simplicity and a responsive us
 It uses an event-driven model and asynchronous mechanisms like callbacks, promises, and async/await to achieve concurrency,
 allowing it to handle multiple tasks efficiently without blocking the main thread. For heavier computations, Web Workers provide a way to run scripts in the background.
 This design makes JavaScript well-suited for web development and interactive applications.
+
+
+Callback Hell*****
+Callback Hell refers to a situation in JavaScript where multiple nested callbacks are used to handle asynchronous operations, making the code difficult to read and maintain. 
+It occurs when each callback depends on the result of the previous one, leading to deeply nested structures that resemble a "pyramid of doom."
+
+function fetchData(url, callback) {
+    setTimeout(() => {
+        console.log(`Fetching data from ${url}`);
+        callback(null, `${url} data`);
+    }, 1000);
+}
+
+function processData(data, callback) {
+    setTimeout(() => {
+        console.log(`Processing ${data}`);
+        callback(null, `processed ${data}`);
+    }, 1000);
+}
+
+function saveData(data, callback) {
+    setTimeout(() => {
+        console.log(`Saving ${data}`);
+        callback(null, `saved ${data}`);
+    }, 1000);
+}
+
+// Example of Callback Hell
+fetchData('https://api.example.com', (err, data) => {
+    if (err) {
+        console.error('Error fetching data');
+    } else {
+        processData(data, (err, processedData) => {
+            if (err) {
+                console.error('Error processing data');
+            } else {
+                saveData(processedData, (err, savedData) => {
+                    if (err) {
+                        console.error('Error saving data');
+                    } else {
+                        console.log('Success:', savedData);
+                    }
+                });
+            }
+        });
+    }
+});
+
+******With Promise ***********
+
+function fetchData(url) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Fetching data from ${url}`);
+            resolve(`${url} data`);
+        }, 1000);
+    });
+}
+
+function processData(data) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Processing ${data}`);
+            resolve(`processed ${data}`);
+        }, 1000);
+    });
+}
+
+function saveData(data) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Saving ${data}`);
+            resolve(`saved ${data}`);
+        }, 1000);
+    });
+}
+
+// Using Promises
+fetchData('https://api.example.com')
+    .then(data => processData(data))
+    .then(processedData => saveData(processedData))
+    .then(savedData => console.log('Success:', savedData))
+    .catch(err => console.error('Error:', err));
+
+**********With Async/Await **********
+
+async function handleData() {
+    try {
+        const data = await fetchData('https://api.example.com');
+        const processedData = await processData(data);
+        const savedData = await saveData(processedData);
+        console.log('Success:', savedData);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+handleData();
+
 
 
 How Promise works******
@@ -206,12 +302,12 @@ When to use:
 
 First Resolved Wins: When you need the result of the first promise that resolves or rejects, and the others can be ignored or cancelled.
 Timeout Handling: Implementing a timeout for a promise. You want either the result or an error indicating that the operation took too long.
-
+Load the Fastest Response:. For example, if two servers provide the same data, you can race them and use the one that responds first.
 
 Promise.allSettled()
 Promise.allSettled() takes an iterable of Promises and returns a single Promise that resolves when all of the input Promises have settled (each may resolve or reject).
 The returned Promise resolves with an array of objects that each describe the outcome of each Promise.
-The returned Promise adopts the state (resolved/rejected) of the first settled Promise.
+
 let promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'First'));
 let promise2 = new Promise((_, reject) => setTimeout(reject, 2000, 'Error in Second'));
 let promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'Third'));
@@ -287,7 +383,7 @@ https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/
 
 
 Two types of Queue ********
-CallBack Queue ---setTimeout and other callback functions
+Macrotask/CallBack Queue ---setTimeout and other callback functions
 Microtask Queue ---Promises
 
 Microtask Queue has higer priority over callBack Queue
@@ -339,13 +435,18 @@ Before  JavaScript had only two types of scope: Global Scope and Function Scope.
 Global variables can be accessed from anywhere in a JavaScript program. Variables declared  (inside a function) have Function Scope.
 LET and CONST declared inside a block {} cannot be accessed from outside the block: var keyword cannot have Block Scope.
 Can reassign values in LET but not in CONST.Rest all same between LET and CONST.
+
 The const keyword makes a variable itself immutable, not its assigned content.
 When the content is an object, this means the object itself can still be altered. 
 Therefore, it's possible to change the content of the object that is declared with const variable, 
 but you cannot assign a new object to a const variable.
 This is possible because obj is refrenceType and not primitive data type.
 
-
+Feature				Primitive Types							Non-Primitive (Reference) Types
+Mutability			Immutable (values can't be changed)		Mutable (values can be changed)
+Storage				Stored by value							Stored by reference
+Copying Behavior	Creates a copy of the value				Copies the reference, not the value
+Examples			Number, String, Boolean, Null, etc.		Object, Array, Function, etc.
 
 
 Default Parameter Values **********
@@ -446,6 +547,25 @@ const john = new Person('John', 30);
 john.greet(); // Hello, my name is John
 
 
+JS 2016
+JavaScript Exponentiation (**)
+JavaScript Exponentiation assignment (**=)
+JavaScript Array includes()
+
+JS 2017
+JavaScript String padding
+JavaScript Object entries()
+JavaScript Object values()
+JavaScript async and await
+Trailing Commas in Functions
+
+JS 2018
+JS 2019
+JS 2020
+JS 2021
+
+
+
 Hoisting ********
 Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (function or global scope) before code execution.
 This means that you can use variables and functions before they are actually declared in the code.
@@ -457,13 +577,25 @@ For let and const they are stored in different way in seperate memory space in S
 so we cannot acces them without intializing them.
 
 Temporal Dead Zone (TDZ)
-The TDZ is the time between entering the scope (such as a block) and the point where the variable is declared.
-Variables declared with let and const cannot be accessed during this time.
+The Temporal Dead Zone (TDZ) is the period between entering a scope and when a variable is initialized.
+Variables declared with let, const, and class are hoisted but not initialized during the TDZ.
+The TDZ exists to ensure that variables are not used before they are declared, which helps avoid unexpected behavior and bugs. 
+It encourages cleaner, more predictable code by preventing the use of variables until they are properly initialized.
 
+Accessing these variables in the TDZ results in a ReferenceError.
 2 Golden Rules:
 1. Variable declarations are scanned and are made undefined
 2. Function declarations are scanned and are made available
 
+var variables are hoisted but initialized to undefined.
+let and const variables are hoisted but remain in the temporal dead zone (TDZ) until initialization.
+Function declarations are hoisted entirely, allowing them to be used before their declaration.
+
+Unlike function declarations, function expressions (when functions are assigned to variables) are not hoisted with their initialization. 
+This is because they follow the variable hoisting rules.
+
+Classes declared with the class keyword are not hoisted in the same way as functions. 
+They behave more like let and const, existing in the temporal dead zone until the declaration is evaluated.
 
 
 Lexical  scope **********
@@ -488,35 +620,31 @@ With ES6, let and const introduced block-scoped variables, which are only access
 
 
 Closure ***********
+A closure in JavaScript is created when a function is defined inside another function, and the inner function has access to the variables of the outer function, 
+even after the outer function has finished executing. 
+In simpler terms, a closure allows an inner function to "remember" and access its lexical scope, even when the outer function is no longer active.
+
+commonly used for data encapsulation, function factories, callbacks, and event handlers, and maintaining private variables.
+
+When an inner function is returned from an outer function, it preserves the environment (or lexical scope) in which it was created. 
+This environment includes any variables that were in scope at the time the closure was created.
 
 function outerFunction() {
-  var name = 'Gaurav';
-  function innerFunction() {
-  var surname = 'Pawar';
-    console.log(name+surname)
-  }
-  return innerFunction;
+    let outerVariable = 'I am from outer';
+
+    function innerFunction() {
+        console.log(outerVariable);  // Accessing a variable from the outer scope
+    }
+
+    return innerFunction;
 }
 
-var output = outerFunction();
-output();
+const closureFunc = outerFunction();  // outerFunction() returns innerFunction
+closureFunc();  // Output: 'I am from outer'
 
-var outerValue = "samurai";
-var later;
-function outerFunction(){
-var innerValue = "ninja";
-function innerFunction(){
-assert(outerValue === "samurai", "I can see the samurai.");
-assert(innerValue === "ninja", "I can see the ninja.")
-}
-later = innerFunction;
-}
-outerFunction();
-later();
-
-A closure is the combination of a function bundled together  with   its  lexical environment
-When we return the inner function it not only returns values of inner function but also its lexical environment
-Disadvantages...it uses more memory
+Disadvantages
+it uses more memory
+Careful attention is needed to avoid accidental variable sharing in loops and similar constructs.
 
 
 Use Strict *********
@@ -539,7 +667,18 @@ JavaScript supports different kinds of loops:
 
 for - loops through a block of code a number of times
 for/in - loops through the properties of an object or gives the index value of array
+for (key in object) {
+  // code to be executed
+}
+for (let index in arr) {
+    console.log(index + ": " + arr[index]);
+}
+
 for/of - loops through the values of an iterable object or gives the  value of array
+for (value of iterable) {
+  // code to be executed
+}
+
 while - loops through a block of code while a specified condition is true
 do/while - also loops through a block of code while a specified condition is true
 forEach-array.forEach(function(currentValue, index, arr), thisValue)
@@ -717,6 +856,9 @@ Using slice()
 const originalArray = [1, 2, 3];
 const shallowCopy = originalArray.slice();
 console.log(shallowCopy); // [1, 2, 3]
+array.slice(start, end);
+start (optional): The index at which to begin extraction. The default is 0.
+end (optional): The index before which to end the extraction. The slice extracts up to, but not including, this index. If omitted, it slices until the end of the array.
 
 Using Spread Operator (...)
 Using Array.from()
@@ -726,10 +868,7 @@ Deep Copy
 Using structuredClone()
 const originalObject = { a: 1, b: { c: 2 } };
 const deepCopy = structuredClone(originalObject);
-
 console.log(deepCopy); // { a: 1, b: { c: 2 } }
-
-
 
 
 forEach vs Map ***********
@@ -760,6 +899,13 @@ forEach: Can modify the original array.
 map: Does not modify the original array.
 
 
+Difference Between slice() and splice()*********
+slice() does not modify the original array; it returns a shallow copy of the selected portion.
+splice() modifies the original array by removing or replacing existing elements.
+array.slice(start, end);
+array.splice(start, deleteCount, item1, item2, ..., itemN);
+
+
 JavaScript Array Methods **********
 shift()method removes the first item of an array.
 slice().....var citrus = fruits.slice(1, 3);......The slice() method selects the elements starting at the given start argument, and ends at, but does not include, the given end argument.
@@ -783,18 +929,8 @@ array.splice(index, howmany, item1, ....., itemX)...for array only
 var fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.splice(2, 0, "Lemon", "Kiwi");
 
-The slice method is a built-in JavaScript method that is available for both strings and arrays.
-It is used to extract a portion of an array or a string and create a new array or string containing the selected elements or characters.
-The slice method takes one or two arguments:
-
-start (required): The index at which to begin extraction. This argument specifies where the slice should start.
-	If the start argument is negative, it counts from the end of the string or array. If start is not provided, or if it's undefined, the slice starts from the beginning (index 0).
-
-end (optional): The index at which to stop extraction. The end index is not included in the slice.
-	If end is not provided, or if it's undefined, the slice continues to the end of the string or array. Like start, if end is negative, it counts from the end of the string or array.
-
 array methods which modify old array and which provide new array *******
-Modify - splice,push, pop(),shift(),unshift(),splice(),sort(),reverse()
+Modify - push(), pop(),shift(),unshift(),splice(),sort(),reverse()
 dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includes(),every(),some()
 
 
@@ -802,14 +938,21 @@ dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includ
 
 event bubbling ********
 
-Event bubbling is the concept in which an event triggers at the deepest  element, and triggers on parent elements in nesting order. 
-When we have  div1 inside div2 inside div3 when event in div3 is triggered it goes till div1  
-In event bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.
-It is a process that starts with the element that triggered the event and then bubbles up to the containing elements in the hierarchy.
+Event bubbling is a mechanism in the DOM (Document Object Model) that describes how events propagate through the hierarchy of elements. 
+When an event occurs on an element, it first triggers the event handler on that element, then it bubbles up to its parent elements, 
+and continues until it reaches the root of the document or is stopped.
+Event bubbling is a powerful feature of the DOM that allows events to propagate from child elements to parent elements.
+You can stop this propagation using stopPropagation().
+It's commonly used for event delegation, which helps improve performance and organization in JavaScript applications.
+Instead of adding event listeners to multiple child elements, you can add a single listener to a parent element. This is efficient and helps manage events dynamically.
+ 
+Advantages of Event Bubbling:
+Efficiency: Reduces the number of event listeners required, especially for lists or dynamically generated content.
+Cleaner Code: Helps keep the codebase organized by managing events at a higher level.
 
-One way to prevent event bubbling is using event.stopPropagation()
-Event bubbling is a method of event propagation in the HTML DOM API when an event is in an element inside another element,
-and both elements have registered a handle to that event.
+Disadvantages of Event Bubbling:
+Unintended Effects: If not managed properly, it can lead to unexpected behaviors if both parent and child elements have event handlers for the same event.
+Difficulty in Debugging: Event flow can become complicated, especially in large applications.
 
 Event delegate **************
 Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
@@ -820,8 +963,7 @@ In event capturing, an event propagates from the outermost element to the target
 It is the opposite of event bubbling, where events propagate outwards from the target to the outer elements. 
 
 Event Propogation **********
-event delegation is the technique, bubbling is what the event itself does, and capturing is a way of using event delegation 
-on events that don’t bubble.
+Event propagation is the process by which events travel through the DOM when they occur. There are two main phases of event propagation: capturing and bubbling.
 
 
 Currying ******
@@ -838,17 +980,61 @@ function curriedAdd(a) {
 
 console.log(curriedAdd(1)(2)(3)); // Output: 6
 
+Currying is often used in libraries like Lodash and frameworks like React to simplify function creation. Here’s an example using a curried function for a simple configuration object:
+function configure(setting) {
+  return function(value) {
+    return function(callback) {
+      console.log(`Setting ${setting} to ${value}`);
+      callback();
+    };
+  };
+}
+
+// Usage
+const setTheme = configure('theme')('dark');
+setTheme(() => console.log('Theme has been applied!'));
+
+Currying is a powerful technique that transforms multi-argument functions into a series of unary functions.
+It enables partial application, leading to more reusable and modular code.
+Currying can improve readability and aligns with functional programming principles, making it a valuable tool in JavaScript development.
+
+// A regular function that adds three numbers
+function add(a, b, c) {
+  return a + b + c;
+}
+
+// Curried version of the add function
+function curriedAdd(a) {
+  return function(b) {
+    return function(c) {
+      return a + b + c;
+    };
+  };
+}
+
+// Usage
+const add5 = curriedAdd(5); // Fix the first argument to 5
+const add5And3 = add5(3);   // Fix the second argument to 3
+const result = add5And3(2);  // Now add the third argument (2)
+
+console.log(result); // Output: 10
+
 
 JSON ********
-JSON is a format for storing and transporting data.
-JSON is often used when data is sent from a server to a web page.
-JSON stands for JavaScript Object Notation
+JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.
+
+Key Characteristics of JSON:
+Lightweight: JSON is compact and easy to transfer over the web.
+Human-readable: The structure is easy to understand and read.
+Language-independent: Although based on JavaScript syntax, JSON can be used with various programming languages, including Python, Java, and C#.
+ A collection of key-value pairs, similar to JavaScript objects.
 
 JSON Syntax Rules-
-Data is in name/value pairs
-Data is separated by commas
-Curly braces hold objects
-Square brackets hold arrays
+Data is in key/value pairs: "key": "value"
+Objects are enclosed in curly braces {}.
+Arrays are enclosed in square brackets [].
+Keys must be strings, and strings must be in double quotes.
+Values can be of types: string, number, boolean, array, object, or null.
 
 use the JavaScript built-in function JSON.parse() to convert the string into a JavaScript object
 
@@ -992,83 +1178,36 @@ Deep copy: It makes a copy of all the members of X, allocates different memory l
 deep copy. In this way, if X vanishes Y is still valid in the memory.
 Nested arrays/objects ****
 JSON.parse(JSON.stringify(someArray))
-
+const deepCopy = structuredClone(original);
 
 local storage vs session storage ********
+
+
+Feature				Local Storage	Session Storage
+Scope				Available across all tabs and windows of the same origin (domain).					Available only within the current tab (or window).
+Persistence			Data persists even after the browser is closed and reopened.						Data is cleared when the tab or browser window is closed.
+Lifetime			Data remains until explicitly removed (or until the browser's storage is cleared).	Data is available only for the duration of the page session (tab or window).
+Storage Limit		Generally 5-10 MB (varies slightly by browser).										Similar to local storage, typically 5-10 MB (depending on the browser).
+Shared Across Tabs	Yes, shared across all tabs and windows for the same domain.						No, unique to each tab or window.
+Use Case			Useful for storing data that needs to persist across sessions, 						Useful for storing temporary data like session-specific state or data that
+					like user preferences, themes, or tokens.											only needs to exist for the current session.
+API					localStorage.setItem(), localStorage.getItem(), localStorage.removeItem(),			sessionStorage.setItem(), sessionStorage.getItem(),
+					localStorage.clear()																sessionStorage.removeItem(), sessionStorage.clear()
 
 Local Storage is suitable for long-term storage needs where data should persist across multiple browser sessions.
 Session Storage is ideal for short-term storage needs where data should only persist for the duration of a page session.
 
-Local Storage
-Local Storage is designed for storage that spans multiple sessions. Data stored in local storage is persistent and will remain until explicitly deleted,
-even if the browser is closed and reopened.
-
-Characteristics of Local Storage
-
-Persistence:
-Data stored in local storage persists even after the browser is closed and reopened.
-
-Scope:
-Local storage is scoped to the origin (protocol, hostname, and port). This means data stored in local storage is accessible only within the same origin.
-
-Capacity:
-Typically, local storage can hold up to 5-10 MB of data per origin, but this limit can vary depending on the browser.
-
-Usage:
-Local storage is often used for long-term storage of data that needs to be accessible across multiple sessions, such as user preferences, theme settings,
-or other application state data, user Details(non-sensitive)
-
-// Storing data in local storage
-localStorage.setItem('username', 'Alice');
-
-// Retrieving data from local storage
-const username = localStorage.getItem('username');
-console.log(username); // Output: Alice
-
-// Removing data from local storage
-localStorage.removeItem('username');
-
-// Clearing all data from local storage
-localStorage.clear();
-
-
-Session Storage
-Session Storage is designed for storage that lasts only for the duration of a page session. Data stored in session storage is available only while the page (or tab) is open.
-When the page is closed, the data is deleted.
-
-Characteristics of Session Storage
-
-Persistence:
-Data stored in session storage is only available for the duration of the page session. It is cleared when the page (or tab) is closed.
-
-Scope:
-Session storage is also scoped to the origin and additionally scoped to the specific tab or window. 
-Data stored in one tab or window is not accessible in another tab or window, even if they are from the same origin.
-
-Capacity:
-Like local storage, session storage typically allows up to 5-10 MB of data per origin.
-
-Usage:
-Session storage is useful for storing temporary data that needs to persist only for the duration of the user's session on a particular page, 
-such as form data being filled out, temporary state of a multi-step process, or other short-term information.
-
-// Storing data in session storage
-sessionStorage.setItem('sessionKey', 'value123');
-
-// Retrieving data from session storage
-const sessionValue = sessionStorage.getItem('sessionKey');
-console.log(sessionValue); // Output: value123
-
-// Removing data from session storage
-sessionStorage.removeItem('sessionKey');
-
-// Clearing all data from session storage
-sessionStorage.clear();
-
 
 Cookies ****
-Cookies are small pieces of data stored by a web browser on behalf of a website.
-They are primarily used for session management, storing user preferences, and tracking user behavior across sessions and sites.
+Cookies are small pieces of data stored in the user's browser and sent to the server with every HTTP request. 
+They are mainly used to remember information about the user between different requests or visits, such as authentication tokens, user preferences, or session data.
+
+Key Features of Cookies:
+Size Limit: Cookies have a size limit of about 4KB per cookie.
+Expiration: Cookies can have an expiration date. If no expiration is set, the cookie is deleted when the browser is closed (session cookies). 
+			Otherwise, cookies persist until the specified expiration date (persistent cookies).
+Domain and Path: Cookies are associated with a specific domain and path, meaning they are sent only to the server that set them.
+Can be accessed by both the client and server
 
 Types of Cookies
 
@@ -1142,16 +1281,33 @@ You can create it as function expression but not as regular function/statement f
 
 
 First Class Function ********
-Ability to pass function as argument or return a function from function is called first class function
+They can be assigned to variables, passed as arguments to other functions, returned from functions, and stored in data structures like arrays and objects.
 A programming language is said to have First-class functions when functions in that language are treated like any other variable. 
-For example, in such a language, a function can be passed as an argument to other functions, 
-can be returned by another function and can be assigned as a value to a variable.
+UseFull for- Higher-Order Functions,Callbacks,	
 
 
 Pure Function *******
-Pure functions are functions that accept an input and returns a value without modifying any data outside its scope(Side Effects). 
-Its output or return value must depend on the input/arguments and pure functions must return a value.
-Not only must pure function return a value but it must depend on the input.
+A Pure Function is a concept from functional programming that refers to a function which meets two key criteria:
+
+Deterministic: Given the same input, a pure function always returns the same output.
+No Side Effects: A pure function does not cause any observable side effects outside its scope, such as modifying external variables, changing the state of a program, 
+or performing actions like logging, writing to files, or making HTTP requests.
+
+Key Characteristics of Pure Functions:
+
+Same Input, Same Output:
+A pure function always returns the same result if given the same arguments. This makes it predictable and easy to test.
+No Side Effects:
+A pure function does not modify any external state or interact with the outside world. It works solely with its input parameters and returns a value based on them.
+No Dependency on External State:
+Pure functions do not rely on external data or states that might change, like a global variable or a database.
+
+Benefits of Pure Functions:
+Easier to Test: Since pure functions do not depend on external state and always return the same output for the same input, they are easier to test.
+Predictable Behavior: Pure functions make programs more predictable, which means that debugging is easier because the function behaves consistently.
+Easier to Reason About: Pure functions focus solely on their input and output, making them easier to understand.
+Immutability: Pure functions promote immutability by not modifying their inputs or external states, which leads to fewer bugs related to state mutations.
+Concurrency-Friendly: Pure functions can be run in parallel or across different threads without risk of conflicts, since they do not depend on or modify shared state.
 
 function pure(arg) {
     return arg * 4
@@ -1159,12 +1315,8 @@ function pure(arg) {
 Its return value is only determined by its input values
 Its return value is always the same for the same input values
 There are no state changes in pure functions
-map is an example of pure function
+example of pure function- map,filter,reduce
 
-The goal of our pure function is to keep our code predictable. To make sure of this, 
-a pure function should return the same output based on the same input; if a function does anything else it's no longer pure. 
-Here, we're always going to take in a number and receive that number multiplied by two
-Pure components in React should follow suit and never manipulate global state that other components maybe depending on as well. 
 
 
 There are 3 JavaScript methods that can be used to convert variables to numbers:
@@ -1175,8 +1327,10 @@ The parseFloat() method
 
 
 Nullish coalescing operator (??) *****
-The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand 
-when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+The nullish coalescing operator (??) in JavaScript is a logical operator that returns the right-hand operand when the left-hand operand is null or undefined, 
+and otherwise returns the left-hand operand. It’s useful for providing default values when dealing with null or undefined without accidentally defaulting 
+on falsy values like 0, false, or '' (empty string).
+
 const result = leftOperand ?? rightOperand;
 If leftOperand is null or undefined, result will be equal to rightOperand.
 If leftOperand is any other falsy value (e.g., 0, false, "", NaN), result will be leftOperand.
@@ -1185,6 +1339,11 @@ If leftOperand is any other falsy value (e.g., 0, false, "", NaN), result will b
 Optional chaining (?.) *****
 Optional chaining is a feature introduced in ECMAScript 2020 (ES11) that allows you to safely access nested properties of an object 
 without the need for a series of null/undefined checks.
+
+The optional chaining operator (?.) in JavaScript is used to safely access 
+deeply nested properties of an object without having to check if each reference in the chain is null or undefined. 
+If a reference is null or undefined, the expression short-circuits and returns undefined instead of throwing an error.
+
 
 let nestedProp = obj.first?.second;
 You can use optional chaining when attempting to call a method which may not exist. This can be helpful, for example, 
@@ -1195,7 +1354,7 @@ Array item access with optional chaining
 let arrayItem = arr?.[42];
 
 Debounce
-https://www.freecodecamp.org/news/debounce-and-throttle-in-react-with-hooks/
+Debouncing ensures that a function is only executed after a specified delay has passed since the last time it was invoked.
 
 Debounce
  const [inputValue, setInputValue] = useState();
@@ -1218,6 +1377,49 @@ Debounce
 
 
 Throttleing *****
+Throttling ensures that a function is only executed at most once every specified time period, regardless of how often the event is triggered.
+It limits the execution of the function to a fixed rate.
+Use Case: Throttling is useful for events that are triggered frequently and you want to control the maximum rate at which the function is called, 
+such as scroll or window resizing events.
+
+function throttle(func, limit) {
+	let inThrottle;
+	return function(){
+	if(!inThrottle){
+		inThrottle=true
+		func()
+		setTimeout(()=>{
+			inThrottle=false
+		},limit)
+	}
+	
+	}
+	
+
+}
+const logScrollPosition = () => {
+  console.log("Logging scroll position:", window.scrollY);
+};
+
+const throttledScroll = throttle(logScrollPosition, 100);
+
+// Adding the throttled function to a scroll event
+window.addEventListener('scroll', throttledScroll);
+
+Aspect					Debouncing												Throttling
+Purpose					Delays execution until after event stops firing.		Limits the execution to once per time interval.
+Triggering				Function runs after the user stops triggering events.	Function runs at most once every interval.
+Typical Use Cases		Search boxes, input fields, resize events.				Scroll events, API calls on window resizing.
+Execution Frequency		Executes once after the delay.							Executes at regular intervals (e.g., every 100ms).
+Implementation			Resets a timer after every event trigger.				Uses a flag to limit the rate of function calls.
+
+Debouncing: Imagine you’re typing in a search box, and the search function only fires after you've stopped typing for a set amount of time (e.g., 500ms). 
+Every keystroke resets the timer.
+Throttling: Imagine you're scrolling through a page, and the scroll event handler only fires once every 100 milliseconds, no matter how fast or often you scroll.
+
+When to Use:
+Debouncing: Use it when you only want to execute a function after an event stops firing (e.g., after the user has finished typing).
+Throttling: Use it when you want to limit how often a function is called while an event is continuously firing (e.g., to handle scroll events or resizing efficiently).
 
 
 What is CORS issue *****
@@ -1252,91 +1454,6 @@ Simple Requests: Requests that meet certain criteria, such as using only safe me
 are considered simple requests and may not trigger a preflight request.
 
 
-
-Polyfills *************
-A polyfill is a piece of code (usually JavaScript) that implements modern functionality on older browsers that do not natively support it. 
-It "fills in" the gap in browser support, allowing developers to use newer features without breaking the website on older or less-capable browsers.
-
-Map ****
-Array.Prototype.MyMap= function(cb){
-	let temp=[]
-	for(let i=0;i<this.length;i++){
-	temp.push(cb(this[i],i,this))
-	}
-	return temp
-}
-
-Filter ****
-Array.Prototype.MyMap= function(cb){
-	let temp=[]
-	for(let i=0;i<this.length;i++){
-	if(cb(this[i],i,this)){
-		temp.push(this[i])
-		}
-	}
-	return temp
-}
-
-Reduce ***
-Array.Prototype.MyReducer= function(cb,initialValue){
-	let accumulator=initialValue
-	for(let i=0;i<this.length;i++){
-		accumulator= accumulator? cb(accumulator,this[i],i,this): this[i]
-	}
-	return accumulator	
-
-}
-
-
-Call ****
-Function.Prototype.MyCall=function(context,...arg){
-	context.fn=this
-	context.fn(...arg)
-
-}
-
-Apply ****
-Function.Prototype.MyApply=function(context,arg){
-	context.fn=this
-	context.fn(arg)
-}
-
-Bind ****
-Function.Prototype.MyBind=function(context,...arg){
-	context.fn=this
-	return function (...newArgs){
-		return context.fn(...arg,...newArgs)
-	}
-}
-
-Web Vitals **********
-
-
-Web Workers********
-
-Web Workers provide a way to run scripts in background threads in web applications, allowing for parallel execution of code.
-This helps in improving performance and responsiveness by offloading computationally intensive tasks from the main thread, which is responsible for updating the user interface.
-Web Workers let JavaScript do more than one thing at a time.
-These helpers, called Worker threads, can keep working even if the main part is busy with other things.
-
-Types of Web Workers
-Dedicated Workers: Used by a single script. They are simpler and more commonly used.
-Shared Workers: Can be accessed by multiple scripts, even if they are in different windows, iframes, or tabs.
-Service Workers: Act as a proxy between the web application, the browser, and the network (when available). They enable features like offline caching and push notifications.
-
-
-Service Workers********
- 
-Service Workers are a type of Web Worker in JavaScript that act as a proxy between web applications, the browser, and the network (when available).
-They enable advanced features like offline caching, background sync, and push notifications, significantly enhancing web app performance and capabilities,
-especially in unreliable network conditions.
-
-Offline Caching: Service Workers can cache assets and API responses, allowing web applications to function offline or with limited connectivity.
-Background Sync: They enable tasks to be deferred until the user has stable connectivity, ensuring data consistency.
-Push Notifications: Service Workers can handle push notifications, allowing web apps to re-engage users even when the app is not active.
-
-
-
 WebPack bunderler analyses *********
 https://www.youtube.com/watch?v=5IG4UmULyoA timestamp 7:38
 
@@ -1359,24 +1476,6 @@ mostly static contain
 CSR-
 SEO not so imp
 lots of user interaction
-
-
-WEB in General
-
-
-How to measure speed *******
-https://web.dev/what-is-speed/
-
-
-Semantic Elements **************
-Semantic elements in HTML are used to give meaning to the content they surround, rather than just specifying how the content should be presented.
-They help describe the structure of the web page, making it more accessible to different devices and users, including those using assistive technologies like screen readers.
-These elements help browsers, search engines, and other software understand the purpose of each part of the page. 
-Using semantic elements appropriately not only improves the structure and readability of your HTML code but also 
-enhances accessibility and search engine optimization (SEO) of your website.
-
-
-How for loop works exactly **********
 
 
 Encapsulation ******
@@ -1430,6 +1529,8 @@ LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec
 FID(First Input Delay) -- Interactive below 100ms
 CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
 
+How to measure speed *******
+https://web.dev/what-is-speed/
 
 Core Web Vitals
 

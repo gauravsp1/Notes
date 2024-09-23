@@ -37,19 +37,38 @@ cdn
 Redux hands on
 
 
+*************************///////////////////////**************************//////////////////*******************
+All HTML tags details - <meta>,<link>
+constructor
+Polyfills-structuredClone
+Behaviour of this
+JavaScript Class
+Closure with examples
+Use Strict
+Recursion coding problems
+Prototype
+Constructor Function, Factory Function
+WebPack
+Lighthouse
+--------------------------
+Counter example in coding 
+--------------------------
+New hooks
+Custom Hooks- handsOn
+React Router
+Props data prev and next store
+error boundary react
+HOC - handsOn
+--------------------------
+Redux - handsOn
+--------------------------
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+============Flow============
+Coding problems
+Remaining points
+RoadSideCoder YT videos
+LLD problems
+HLD problems
