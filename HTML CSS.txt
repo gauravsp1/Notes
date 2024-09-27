@@ -285,8 +285,12 @@ Diff between display: inline; and display: inline-block *******
 we give height and width to inline-block  but not to inline elements
 
 
+Grid CSS****
+CSS Grid Layout is a powerful 2-dimensional layout system for the web, allowing you to create responsive layouts with ease.
+It enables you to organize elements in rows and columns, providing more control over layout compared to older methods like floats or flexbox.
 
-flex properties
+
+flex properties****
 
 The flex container properties are:
 flex-direction
@@ -303,6 +307,13 @@ flex-basis
 flex
 align-self
 
+
+Flexbox vs Grid *****
+Flexbox										Grid
+One-dimensional layout (rows or columns)	Two-dimensional layout (rows and columns)
+Best for components and aligning items		Best for page layouts or more complex designs
+Easier for simple layouts					More powerful for large-scale layouts
+Flexible in distributing space				Precise control over row and column sizes
 
 
 visibility: hidden; vs display: none;

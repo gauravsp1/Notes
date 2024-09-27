@@ -472,25 +472,19 @@
 // series(100)
 // series(25.13)
 
-// --------------------------------------------------------------------------------------------------------------------
-
 // let array=[3,5,4,3,5,3]
 
 // value 3 is dup at index 3
 // value 5 is dup at index 4
 // value 3 is dup at index 5
 
-// function Duplicate(arr){
-//       arr.forEach((value,index)=>{
-//         for(i=index+1;i<arr.length;i++){
-//           if(value==arr[i]){
-//             return console.log(`value ${value} is dup at index ${i}`);
-//           }
-//         }
-//       })
-// }
-
-// Duplicate(array)
+// array.forEach((item, index, arr) => {
+//     for (let i = 0; i < array.length; i++) {
+//       if (item === array[i] && index < i) {
+//         return console.log(`value ${item} is dup at index ${i}`);
+//       }
+//     }
+//   });
 
 // data=[2,5]
 // data.length>0?
@@ -513,76 +507,16 @@
 //   { id: 6, name: "test8" }
 // ]
 
-// let newArray = arr.filter((value, index, array) => {
-//      return index ===array.findIndex((item)=>item.id===value.id)
-//   )
-// })
-
 // const filteredArr = arr.reduce((acc, current) => {
 //   const x = acc.find(item => item.id === current.id);
 //   if (!x) {
-//     return acc.concat([current]);
-//   } else {
-//     return acc;
+//    acc.push(current);
 //   }
+//     return acc;
+//
 // }, []);
 
-// console.log(newArray);
 // console.log(filteredArr);
-
-// class Calculator{
-//     count =0
-//     add(value){
-//        ;
-//        this.count=value+this.count
-//        console.log(this.count)
-//        return this
-//     }
-//     subtract(value){
-//        ;
-//        this.count= this.count-value
-//        console.log(this.count)
-//        return this
-//     }
-//     divide(value){
-//        ;
-//        this.count= this.count/value
-//        console.log(this.count)
-//        return this
-//     }
-//     multiply(value){
-//        ;
-//        this.count= value*this.count
-//        console.log(this.count)
-//        return this
-//     }
-//     reset(){
-//         this.count=0
-//         return this
-//     }
-// }
-
-// const c = new Calculator();
-
-// c.add(5);
-
-// c.reset(); // resets value to 0;
-
-// c.subtract(5);
-
-// c.reset();
-
-// c.add(10).subtract(5).divide(2);
-
-// c.reset();
-
-// c.add(10).subtract(5).divide(2);
-
-// c.reset();
-
-// c.add(10).subtract(5).divide(2).multiply(5);
-
-// c.reset();
 
 // var myObject = {
 //     foo: "bar",
@@ -623,6 +557,13 @@
 // foo();
 
 //5
+// Inside exec, another variable b is declared with the value 10, but this b is local to exec.
+// When func() (which is actually baz) is called, it does not refer to the variable b inside exec,
+// because baz was defined in the lexical scope of foo, not exec.
+// So, when baz runs, it looks for the value of b in the scope where it was defined (inside foo), where b = 5.
+// Closures allow functions to "remember" the scope in which they were created. Even though baz is executed inside exec,
+//  it still refers to the variable b from the foo function's scope, which is 5.
+// The variable b = 10 inside exec is not used by baz because baz is bound to the scope where it was defined (foo).
 
 // function sum(a){
 //     return function (b){
@@ -680,19 +621,6 @@
 
 //   return first
 // }
-
-//Currying + Recursion
-
-//     let sum= (a)=>{
-//     return (b)=>{
-//         if(b){
-//             return sum(a+b)
-//         }
-//         return a
-//     }
-// }
-
-// console.log(sum(1)(2)(3)())  //6
 
 // Deep comparison
 // const obj1 = {

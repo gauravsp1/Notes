@@ -514,6 +514,16 @@ obj1.foo();     // "obj1"
 foo.call( obj2 );  // "obj2"
 new foo();       // undefined
 
+Traditional Functions and this
+In a regular (non-arrow) function, the value of this is determined by how the function is called. For instance:
+If a method is called as a property of an object, this refers to the object.
+If a function is called standalone (e.g., in a callback or inside setTimeout), this defaults to the global object (window in browsers, global in Node.js)
+ in non-strict mode. In strict mode, this is undefined.
+
+Arrow Functions and Lexical this
+Arrow functions differ in that they do not have their own this. 
+Instead, they lexically inherit this from the surrounding scope where the arrow function is defined. 
+This is called lexical scoping. The value of this in the arrow function is "locked" to the value of this in the context where the arrow function was created.
 
 
 Object Literal **********
@@ -545,6 +555,14 @@ class Person {
 
 const john = new Person('John', 30);
 john.greet(); // Hello, my name is John
+
+
+Class Declaration: A more readable and structured way to define constructor functions and prototype methods.
+Constructor Method: Used to initialize objects.
+Instance Methods: Defined within the class and shared by all instances.
+Inheritance: Implemented using the extends keyword to create hierarchical class structures.
+Static Methods: Belong to the class itself, not instances.
+Getters and Setters: Provide controlled access to properties.
 
 
 JS 2016
@@ -648,17 +666,20 @@ Careful attention is needed to avoid accidental variable sharing in loops and si
 
 
 Use Strict *********
-With strict mode, you can not, for example, use undeclared variables.
-You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
 Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
-Strict mode makes it easier to write "secure" JavaScript.
-Strict mode changes previously accepted "bad syntax" into real errors.
-The this keyword in functions behaves differently in strict mode.
-The this keyword refers to the object that called the function.
-If the object is not specified, functions in strict mode will return undefined and functions in normal mode will return the global object (window):
 
-"Strict mode" in JavaScript is a way to opt into a restricted variant of JavaScript,
-which can help catch common coding mistakes and "unsafe" actions such as accessing global objects or using undeclared variables.
+Prevents the use of undeclared variables: In normal JavaScript, assigning a value to an undeclared variable automatically creates it as a global variable.
+In strict mode, it throws an error.
+Eliminates this coercion: In normal JavaScript, this can point to the global object in functions if not explicitly bound.
+In strict mode, this will be undefined in such cases.
+Disallows duplicate parameter names: In strict mode, functions cannot have duplicate parameter names. This helps prevent ambiguity in code.
+
+Helps prevent accidental errors (e.g., creating global variables, using this in unintended ways).
+Enhances security and predictability in code.
+Makes it easier to optimize code, as some problematic behaviors are disallowed.
+Aids in identifying bad practices early by throwing errors during development.
+You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
+Strict mode changes previously accepted "bad syntax" into real errors.
 
 
 Different Kinds of Loops ***********
@@ -1088,26 +1109,70 @@ Tail Call Optimization: In languages that support tail call optimization (TCO), 
 
 
 Prototype ********
-The prototype property is for functions (specifically constructor functions), not for plain objects.
-All JavaScript objects inherit properties and methods from a prototype.
-The JavaScript prototype property allows you to add new properties to object constructors:
+In JavaScript, the prototype is a mechanism that allows objects to inherit properties and methods from another object.
+It’s one of the core concepts of the language's object-oriented programming model.
 
-Objects vs. Functions: Remember that the prototype property is for functions (specifically constructor functions), not for plain objects.
-Direct Assignment: For plain objects, you can directly assign properties using the dot notation or bracket notation.
+Key Concepts:
+Prototype Chain: Every JavaScript object has a hidden internal property called [[Prototype]] (commonly accessed using __proto__ in modern browsers), 
+which points to another object. This other object is called the prototype. 
+If an object tries to access a property or method that doesn't exist on the object itself, the JavaScript engine looks for it on the object's prototype, 
+then on that prototype's prototype, and so on, forming a "prototype chain".
+
+Constructor Functions and prototype Property: In JavaScript, when you create an object using a constructor function, 
+each instance of that object inherits from the constructor’s prototype. The prototype property of the constructor is an object, 
+and properties or methods attached to this prototype will be shared among all instances.
+
+Object Creation: When creating an object using new or object literals, the object automatically gets its prototype set, 
+allowing it to inherit behaviors from the prototype.
 
 
-function Animal(type) {
-    this.type = type;
+
+// Constructor function for a Person
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 }
 
-Animal.prototype.speak = function() {
-    console.log(`${this.type} makes a sound.`);
+// Adding a method to the prototype
+Person.prototype.sayHello = function() {
+  console.log(`Hello, my name is ${this.name}`);
 };
 
-const dog = new Animal("Dog");
-dog.speak(); // Output: Dog makes a sound.
+// Creating instances of Person
+const person1 = new Person("Alice", 25);
+const person2 = new Person("Bob", 30);
 
-In this example:
+// Both instances can use the sayHello method
+person1.sayHello(); // "Hello, my name is Alice"
+person2.sayHello(); // "Hello, my name is Bob"
+
+// The method is not on the instance itself but on the prototype
+console.log(person1.hasOwnProperty('sayHello')); // false
+console.log(Person.prototype.hasOwnProperty('sayHello')); // true
+
+
+
+
+Constructor Function *****
+Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
+The this object is returned implicitly if the function does not return another object explicitly.
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+const person1 = new Person("Alice", 30);
+console.log(person1.name); // Output: "Alice"
+console.log(person1.age);  // Output: 30
+
+When a function is called without new, it executes as a regular function.
+When a function is called with new, it creates a new object and binds this to that new object.
+
+Regular Functions: Perform tasks and do not create objects. Called without new.
+Constructor Functions: Create and initialize objects. Called with new.
+Arrow Functions: Cannot be used as constructors and lack their own this context.
+
+
 
 Constructor Function: Animal is a constructor function.
 Prototype Method: speak is added to Animal.prototype.
@@ -1128,24 +1193,52 @@ Prototype is object (_proto_) which gets bind to our defined object,array,functi
 Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
 
 
-prototype chain *****
+Factory Function*****
+A factory function is a function in JavaScript that returns a new object without using the new keyword or a constructor function.
+It is an alternative way to create objects and is more flexible than constructor functions because it does not rely on the new keyword 
+or the complexities of the this keyword.
 
-function Mobile() {
-  this.a=10;
+Key Characteristics of Factory Functions:
+Returns a new object: A factory function explicitly returns a new object, allowing you to avoid the pitfalls of this.
+No new keyword needed: Unlike constructor functions, factory functions don’t require the new keyword for object creation.
+Encapsulation: Factory functions can use closures to encapsulate private variables or functions, making them more secure and modular.
+More flexibility: Since there’s no reliance on the this keyword, factory functions can be used in more flexible and dynamic ways.
+
+// Factory function to create a Car object
+function createCar(make, model, year) {
+  return {
+    make: make,
+    model: model,
+    year: year,
+    
+    // Method inside the object
+    displayInfo: function() {
+      console.log(`Car: ${this.make} ${this.model}, Year: ${this.year}`);
+    },
+  };
 }
 
-Mobile.prototype.z = 20;
+// Using the factory function to create objects
+const car1 = createCar("Toyota", "Camry", 2020);
+const car2 = createCar("Honda", "Civic", 2018);
 
-function Nokia() {
-  this.b=100;
-}
+// Accessing properties and calling methods
+console.log(car1.make); // Output: Toyota
+car1.displayInfo();     // Output: Car: Toyota Camry, Year: 2020
 
-Nokia.prototype=Object.create(Mobile.prototype)
+console.log(car2.model); // Output: Civic
+car2.displayInfo();      // Output: Car: Honda Civic, Year: 2018
 
-var nokiaMobile= new Nokia()
-Now, nokiaMobile.z=20
-nokiaMobile can ascess value of z but not of a
+Benefits of Factory Functions:
+Avoids Pitfalls of this: Since factory functions don't use this, there's no need to worry about the context (this binding issues).
+Private Variables: Factory functions can leverage JavaScript closures to create private variables, making them more secure and modular.
+Flexibility: Factory functions can be more flexible and can easily return different types of objects based on conditions.
+No new Keyword: You don’t need to remember to use new, avoiding errors that arise from omitting it in constructor functions.
 
+When to Use Factory Functions:
+When you want to create objects with encapsulated, private data.
+When you don’t want to rely on the new keyword or worry about the complexities of this.
+When you need more flexibility in object creation, such as dynamically creating objects based on certain conditions.
 
 
 Babel *****
@@ -1246,24 +1339,6 @@ Typically used for data that must be sent to the server with each HTTP request (
 how to use - document.cookie
 
 
-Constructor Function, Factory Function*****
-Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
-The this object is returned implicitly if the function does not return another object explicitly.
-function Person(name, age) {
-    this.name = name;
-    this.age = age;
-}
-
-const person1 = new Person("Alice", 30);
-console.log(person1.name); // Output: "Alice"
-console.log(person1.age);  // Output: 30
-
-When a function is called without new, it executes as a regular function.
-When a function is called with new, it creates a new object and binds this to that new object.
-
-Regular Functions: Perform tasks and do not create objects. Called without new.
-Constructor Functions: Create and initialize objects. Called with new.
-Arrow Functions: Cannot be used as constructors and lack their own this context.
 
 
 How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********

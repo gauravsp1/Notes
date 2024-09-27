@@ -135,8 +135,8 @@ console.log("Result",result);
 
 // Sentence case 
 // Write a method which take one parameter that is string containing sentence and return a string with first letter of word is capital and rest is in lower case ?
-// const name = 'deepaK khanDelwal PqR;
-// Expected result -> Deepak Khandelwal Pqr
+// const name = 'gauraV pAwaR PqR;
+// Expected result -> Gaurav Pawar PqR
 
 
 // function CapitalFistLetter(value){

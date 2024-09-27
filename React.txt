@@ -739,7 +739,7 @@ const withExtraProps = (WrappedComponent) => {
   };
 };
 
-const WithComponent=OriginalComponent=> {
+const WithComponent=(OriginalComponent)=> {
     function NewComponent(props){
         const [state,setState]=useState(0)
         function Increament(){

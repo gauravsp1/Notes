@@ -549,6 +549,38 @@ c.reset();
 Calculator.factorial(5); // Class function
 
 
+
+class Calculator {
+  initalValue = 0;
+  operationalResult = 0;
+  constructor(initalValue) {
+    this.initalValue = initalValue ? initalValue : this.initalValue;
+    this.operationalResult = initalValue ? initalValue : this.operationalResult;
+  }
+  add(inputValue) {
+    this.operationalResult = this.operationalResult + inputValue;
+    console.log("operationalResult", this.operationalResult);
+    return this;
+  }
+  subtract(inputValue) {
+    this.operationalResult = this.operationalResult - inputValue;
+    console.log("operationalResult", this.operationalResult);
+    return this;
+  }
+  reset() {
+    this.operationalResult = this.initalValue;
+    console.log("operationalResult", this.operationalResult);
+    return this;
+  }
+  divide(inputValue) {
+    this.operationalResult = this.operationalResult / inputValue;
+    console.log("operationalResult", this.operationalResult);
+    return this;
+  }
+}
+
+
+
 // const clothes = ['jacket', 't-shirt'];
 // clothes.length = 0;
 // console.log(clothes[0]) //undefined

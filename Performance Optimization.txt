@@ -78,20 +78,16 @@ Resource hinting is a technique used by web developers to optimize the loading o
 By specifying resource hints, developers can guide the browser to prefetch, preload, or prioritize resources more efficiently, 
 which can significantly improve page load performance and user experience.
 
+Preconnect (<link rel="preconnect">)
+Prefetch (<link rel="prefetch">)
+Preload (<link rel="preload">)
+Prerender (<link rel="prerender">)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+Error Tracking Tools
+Sentry: Tracks errors, exceptions, and performance issues in real time across different platforms.
 
 
 

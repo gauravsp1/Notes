@@ -10,56 +10,55 @@ React Router latest
 Next js ---
 Office project details ---
 
-
---------------------------
-Arrow Functions
-Closure Examples
-
 ***********
 
 useReducer
 React Router
 SSR
 
-
-
-*********
-Consumer.
-
-
 **********************
 ngnix
 cdn
 
-
-***************************************
-
-Redux hands on
-
-
 *************************///////////////////////**************************//////////////////*******************
-All HTML tags details - <meta>,<link>
-constructor
-Polyfills-structuredClone
-Behaviour of this
-JavaScript Class
-Closure with examples
-Use Strict
+New ATS resume
+
+
+---------------------
+
+Different State management
+Redux vs useContext
+useContext - handsOn
+Class vs function component 
+How to handle accessibilities
+memoaisation
+when will we use memoaisation
+ How will you make your component reusable
+TypeScript
+How to manage Authentications
+How you mantainer Code quality and consistency- Is react providing any tool?
+Deployment
+Next.js
+Docker images
+any Thrid party library used
+How do you measure web application performance
+Security related  attacks xrr crsd etc.
+How to review code.
+Security videos
+
+
+
+-----------------Javacript---------
 Recursion coding problems
-Prototype
-Constructor Function, Factory Function
 WebPack
 Lighthouse
---------------------------
-Counter example in coding 
---------------------------
+Polyfills-structuredClone, promise
+
+-----------------Coding---------
+
+-------------React-------------
 New hooks
-Custom Hooks- handsOn
-React Router
-Props data prev and next store
-error boundary react
-HOC - handsOn
---------------------------
+-------------Redux-------------
 Redux - handsOn
 --------------------------
 
@@ -72,3 +71,9 @@ Remaining points
 RoadSideCoder YT videos
 LLD problems
 HLD problems
+
+
+
+
+
+

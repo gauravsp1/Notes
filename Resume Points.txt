@@ -1,3 +1,33 @@
+
+
+Intro 
+
+Hi, I have 5 years of experience into frontend technology. Currently i am working with Nobroker as a React developer.
+Here i am working on a project called Social Hub.
+In it Developing a platform to manage customer queries, complaints, and feedback across multiple social media accounts. 
+The platform provided a 360-degree view of customer information (orders, payments, calls, chats, and social media posts),
+integrating AI-powered 60-day call summaries for enhanced insights. 
+
+Project Points
+
+Social Hub
+
+ Created a platform to manage customer queries, complaints, and appreciation across multiple social media accounts.
+ Delivered a 360-degree view of customer information and integrated AI-powered call summaries.
+Dashboard is enabled with ticket filtering, mapping customer, replying directly to social media accounts form dashboard
+facility to make notes
+customer history - orders ,payment , calls, chats
+customer social media post
+customer 60 days call summary AI generated
+
+
+Developed a comprehensive platform to manage customer queries, complaints, and feedback across multiple social media accounts. 
+The platform provided a 360-degree view of customer information, integrating AI-powered 60-day call summaries for enhanced insights. 
+It included features like ticket filtering, customer mapping, direct responses from the dashboard, note-taking, 
+and access to detailed customer history (orders, payments, calls, chats, and social media posts).
+
+
+ 
 Resume Points
 
 
@@ -31,10 +61,10 @@ Gaurav
 
 200 characters
 
-Hi, I hope you're well. I'm inquiring about Frontend Developer roles.
+Hi, I'm inquiring about Frontend Developer roles.
 With 5+ years in React.js, JavaScript, HTML, and CSS, I'd love to contribute to your team.
 Please let me know of any openings.
-Thanks!
+Thanks.
 
 
 Hi, I hope you're well. I'm inquiring about React Developer roles.
@@ -44,3 +74,13 @@ Please let me know of any openings.
 
 
 Referal
+
+
+
+
+5 min intro
+10min code snippits
+10min code snippits
+10-15 min theory
+20-30 min coding problem
+

@@ -1,0 +1,197 @@
+const arr=[null, 2,5,'',"ello",4,undefined,8,null];
+
+console.log("Find",arr.find(i=>i)); 
+console.log("Filter",arr.filter(i=>i)); 
+console.log("Reduce",arr.reduce(i=>i)); 
+console.log("Map",arr.map(i=>i)); 
+
+arr=[1,2,3,4,6]
+console.log("Mapss",arr.map(i=>i>3)); 
+
+
+
+const arr=[null, 2,5,'',"ello",4,undefined,8,null];
+
+console.log("Find",arr.find(i=>i));  //Find 2
+console.log("Filter",arr.filter(i=>i));  // Filter (5) [2, 5, "ello", 4, 8]
+console.log("Reduce",arr.reduce(i=>i));  // Reduce null
+console.log("Map",arr.map(i=>i));  //  Map (9) [null, 2, 5, "", "ello", 4, undefined, 8, null]
+If we write condition in map it returns true or false according to the condition
+arr=[1,2,3,4,6]
+console.log("Mapss",arr.map(i=>i>3));  // [false, false, false, true, true]
+
+****************************
+
+fun1();
+fun2();
+function fun1() {
+    console.log("fun1")
+}
+
+const fun2 = () => {
+    console.log("fun2")
+}
+*******************
+
+print a value for particular time continuosly 
+let timer = setInterval(() => {
+  console.log("hello");
+}, 0);
+setTimeout(() => {
+  clearInterval(timer);
+}, 2000);
+
+
+
+*****************
+Second Max
+arr = [1, 180, 10, 7, 56, 90,140,200]
+
+function largest(arr){
+    let max=0
+    let secondMax=0
+    arr.forEach((value)=>{
+        secondMax=max>value?secondMax<value?value:secondMax :max
+         max=max<value?value:max
+          })
+    console.log("secondMax",secondMax)
+    console.log("max",max)
+}
+
+largest(arr)
+
+**********************************
+
+
+let array=[1, 2, 3, 4 ,5, 6, 7, 8, 9, 10]
+// {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]}
+
+let result=array.reduce((acc,item)=>{
+        // acc["even"]=[]
+        // acc["odd"]=[]
+
+        if(item %2===0){
+             acc.even.push(item)   
+        } else{
+            acc.odd.push(item)
+        }
+        return acc
+},{
+    even:[],
+    odd:[]
+})
+
+console.log("Result",result);
+
+******************************************
+
+
+
+// Sentence case 
+// Write a method which take one parameter that is string containing sentence and return a string with first letter of word is capital and rest is in lower case ?
+// const name = 'gauraV pAwaR PqR;
+// Expected result -> Gaurav Pawar PqR
+
+
+// function CapitalFistLetter(value){
+    
+//    const result= value.toLowerCase().split(" ").map((item)=>{
+//                     return  newsentence= newsentence.charAt(0).toUpperCase() +newsentence.slice(1)
+//         }).join(" ")
+
+//         console.log(result);
+   
+// }
+
+
+***********************************
+
+// function a(){
+//   console.log("a")
+//   setTimeout(()=>{console.log("b")}, 0)
+//   Promise.resolve().then(() => console.log("c"))
+//   console.log("c2")
+//   console.log("c3")
+// }
+// a()
+
+
+**********************************
+
+// const arr =[{age: 15, isSelected: false}, {age:20, isSelected: false},
+//     { age: 25 , isSelected:false}]
+
+//     let arry4=arr.reduce((total,value)=>{
+//     if(value.age>18){
+//          value.isSelected=true
+//    total.push(value)
+//     }
+//    return total
+// },[])
+
+
+*****************************
+
+// obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: {
+// 		d: 4
+// 	}
+// }
+// obj2 = {...obj};
+// obj2.b = 33;
+// obj2.c.d = 5;
+// console.log(obj);
+// console.log(obj2);
+
+
+************************React **************
+
+React LifeCycle *******
+
+Different React Hooks******
+
+
+useState: Manage state in functional components.
+useEffect: Perform side effects.
+useContext: Access context values.
+useReducer: Manage complex state logic.
+useCallback: Memoize functions.
+useMemo: Memoize values.
+useRef: Access mutable ref objects.
+useImperativeHandle: Customize ref instance values.
+useLayoutEffect: Synchronous side effects after DOM mutations.
+useDebugValue: Label custom hooks for debugging.
+
+
+Use of "Key" in Component ******
+
+How to pass data from parent to child (props) ***********
+
+How to pass data from child to parent ***********
+
+
+************************Javascript **************
+
+What are promises ****
+
+
+Event Loop *******
+
+
+
+New ES6 features **********
+
+let and const keyword
+JavaScript Arrow Functions
+JavaScript Class
+Template Strings
+Destructuring
+Default Parameter Values
+Rest and spread Operator
+Array.find()
+Array.findIndex()
+
+
+

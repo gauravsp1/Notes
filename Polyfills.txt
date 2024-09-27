@@ -17,7 +17,7 @@ Array.Prototype.MyMap= function(cb){
 Filter ****
 // Array.filter((item,index,arr)=>{})
 
-Array.Prototype.MyMap= function(cb){
+Array.Prototype.MyFilter= function(cb){
 	let temp=[]
 	for(let i=0;i<this.length;i++){
 	if(cb(this[i],i,this)){
@@ -97,48 +97,6 @@ console.timeEnd("Second Call");
 
 
 Promise *************
-
-function myPromise(executor) {
-  let onResolve;
-  let resolvedValue;
-  let onResolveAssigned = false;
-  let onReject;
-  let rejectedValue;
-  let onRejectAssigned = false;
-
-  function resolve(value) {
-    resolvedValue = value;
-    if (onResolveAssigned) {
-      onResolve(value);
-    }
-  }
-
-  this.then = function (cb) {
-    onResolve = cb;
-    onResolveAssigned = true;
-    if (resolvedValue) {
-      onResolve(resolvedValue);
-    }
-    return this;
-  };
-
-  function reject(value) {
-    rejectedValue = value;
-    if (onRejectAssigned) {
-      onReject(value);
-    }
-  }
-  this.catch = function (cb) {
-    onReject = cb;
-    onRejectAssigned = true;
-    if (rejectedValue) {
-      onReject(rejectedValue);
-    }
-    return this;
-  };
-
-  executor(resolve, reject);
-}
 
 
 Promise.all ***********
