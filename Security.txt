@@ -1,0 +1,47 @@
+
+XSS (Cross site scripting)*****
+
+Security headers******
+X-powered-by
+Reference-policy
+X-Content-Type-Options
+X-XSS-Protection
+
+
+Client Storage Security *****
+
+Storing sensitive data on client storage 
+Authentication
+Data Integrity
+Storage Limit
+Session Management
+
+Secure Communication ****
+
+
+Dependecy security*****
+
+
+Input validation***
+
+SSRF****
+
+SSJI ***
+
+CORS ****
+
+Method:Option ****
+What is preflight****
+
+CSRF****
+
+
+
+
+
+
+
+
+
+
+

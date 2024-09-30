@@ -245,6 +245,13 @@ while (value>0) {
 
 console.log(sum);
 
+const sumOfDigits = (inputNumber) => {
+  if (inputNumber === 0) {
+    return 0;
+  }
+  return (inputNumber % 10) + sumOfDigits(Math.floor(inputNumber / 10));
+};
+
 
 Delete from Object ******
 

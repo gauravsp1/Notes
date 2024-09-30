@@ -26,29 +26,17 @@ New ATS resume
 
 ---------------------
 
-Different State management
-Redux vs useContext
-useContext - handsOn
-Class vs function component 
-How to handle accessibilities
-memoaisation
-when will we use memoaisation
- How will you make your component reusable
-TypeScript
-How to manage Authentications
-How you mantainer Code quality and consistency- Is react providing any tool?
-Deployment
-Next.js
-Docker images
-any Thrid party library used
-How do you measure web application performance
-Security related  attacks xrr crsd etc.
-How to review code.
+Micro-frontend
 Security videos
-
-
+Next.js
+TypeScript
 
 -----------------Javacript---------
+new Map()
+new Set()
+Compose and Pipe
+
+
 Recursion coding problems
 WebPack
 Lighthouse
@@ -56,10 +44,12 @@ Polyfills-structuredClone, promise
 
 -----------------Coding---------
 
+
 -------------React-------------
 New hooks
 -------------Redux-------------
 Redux - handsOn
+useContext - handsOn
 --------------------------
 
 
@@ -68,10 +58,13 @@ Redux - handsOn
 ============Flow============
 Coding problems
 Remaining points
-RoadSideCoder YT videos
+RoadSideCoder YT videos interview ques
+YT interview videos
 LLD problems
 HLD problems
 
+Daily practice 10 code snippits
+Daily one react component
 
 
 

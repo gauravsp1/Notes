@@ -123,6 +123,16 @@ Functional Components also know as stateless , dumb, presentational
 Class Components also know as stateful, smart, container
 
 
+Feature					Class Component																		Function Component
+Syntax					Uses ES6 class syntax (extends React.Component)										Simple function declaration
+State Management		Managed with this.state and this.setState()											Managed with useState hook
+Lifecycle Methods		Uses methods like componentDidMount, componentDidUpdate, componentWillUnmount		Handled using the useEffect hook
+this Keyword			Required to access state, props, and methods										Not required, no need for this
+Performance				Slightly more memory usage due to additional methods								More optimized and faster due to less overhead
+Code Readability		More verbose, requiring constructor, this, and lifecycle methods					Cleaner, simpler, and easier to maintain
+React Hooks Support		Not required (pre-Hooks)															Required for advanced features (post-Hooks)
+
+
 Functional Components *************
 These components have no state of their own and only contain a render method, so they are also called stateless components. 
 They may derive data from other components as props (properties).
@@ -1041,3 +1051,20 @@ Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a
 in current and older browsers or environments
 Babel is a JavaScript compiler and not a webpack loader. It compiles (transpiles) higher JavaScript code (ES6+) to lower JavaScript code (such as ES5).
 Because of babble we can write html inside Js
+
+
+How will you make your component reusable********
+Props: Pass dynamic values into the component.
+Default Props/PropTypes: Ensure proper and safe use of components.
+Children Prop: Allow content composition within the component.
+Composition: Combine smaller components to form complex ones.
+Higher-Order Components (HOC): Inject reusable logic into components.
+Custom Hooks: Encapsulate reusable logic into hooks.
+Render Props: Pass rendering logic as props for flexibility.
+Styling Flexibility: Accept styling via className or style props.
+Avoid Hardcoding: Make dynamic values like URLs and IDs configurable.
+TypeScript: Use strict typing for safer reusability.
+
+Memoization****************
+Memoization is a powerful optimization technique to improve the performance of your application by caching computed values and preventing unnecessary re-renders.
+In React, useMemo and React.memo are common tools for achieving memoization in functional components.

@@ -704,3 +704,34 @@
 // }
 
 // printPattern(4);
+
+//Check if Two Arrays Are Equal
+// function arraysEqual(arr1, arr2) {
+//     if (arr1.length !== arr2.length) return false;
+//     const sortedArr1 = arr1.slice().sort();
+//     const sortedArr2 = arr2.slice().sort();
+//     return sortedArr1.every((value, index) => value === sortedArr2[index]);
+//   }
+
+//   // Usage:
+//   console.log(arraysEqual([1, 2, 3], [3, 2, 1])); // Output: true
+//   console.log(arraysEqual([1, 2, 3], [4, 5, 6])); // Output: false
+
+// Generate All Permutations of a String
+
+// function permute(str) {
+//     if (str.length <= 1) return [str];
+
+//     let result = [];
+//     for (let i = 0; i < str.length; i++) {
+//       let char = str[i];
+//       let remainingStr = str.slice(0, i) + str.slice(i + 1);
+//       for (let perm of permute(remainingStr)) {
+//         result.push(char + perm);
+//       }
+//     }
+//     return result;
+//   }
+
+//   // Usage:
+//   console.log(permute('abc')); // Output: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']

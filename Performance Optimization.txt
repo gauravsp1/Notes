@@ -90,6 +90,8 @@ Error Tracking Tools
 Sentry: Tracks errors, exceptions, and performance issues in real time across different platforms.
 
 
+Tools for Measuring Web Performance
 
-
-
+Lighthouse
+Google PageSpeed Insights
+GTmetrix
