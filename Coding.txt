@@ -755,18 +755,14 @@ const input = {
 
 function flattenObject(obj) {
   const result = [];
-
-  function traverse(obj) {
-    for (const key in obj) {
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
-        traverse(obj[key]);
-      } else {
-        result.push(obj[key]);
-      }
+ for (let key in inputValue) {
+    if (typeof inputValue[key] !== "object") {
+      result.push(inputValue[key]);
+    } else {
+      const outPut = flatObj(inputValue[key]);
+      result.push(...outPut);
     }
   }
-
-  traverse(obj);
   return result;
 }
 
@@ -809,3 +805,28 @@ Write a function in JavaScript that takes a string as input and returns a new st
 // Example usage:
 const str = "This is a test string with vowels";
 console.log(removeVowels(str)); // Output: Ths s  tst strng wth vwls
+
+
+
+function countdown(n) {
+  setTimeout(function tick() {
+    if (n > 0) {
+      console.log(n);
+      setTimeout(tick, 1000);
+    }
+    n--;
+  }, 1000);
+}
+
+countdown(5);
+// Output: 5, 4, 3, 2, 1 (each after 1 second)
+
+
+function countdown(n) {
+  for (let i = 5; i > 0; i--) {
+    setTimeout(() => {
+      console.log(i);
+    }, 1000 * (6 - i));
+  }
+}
+

@@ -487,13 +487,6 @@ Why React uses className instead of class ********
 class is a Reserved keyword in javascript
 
 
-React Router **********
-React Router, and dynamic, client-side routing, allows us to build a single-page web application with navigation without the page refreshing 
-as the user navigates
-React Router plays an important role to display multiple views in a single page application
-history.replace prevents going back from brower button.
-
-
 Props data prev and next store ****
 https://blog.logrocket.com/how-to-get-previous-props-state-with-react-hooks/
 
@@ -524,10 +517,6 @@ function Counter() {
 Link vs NavLink ******
 The Link component allows navigating the different routes on the websites, whereas 
 NavLink component is used to add styles to the active routes has activeClassName for css
-
-
-Nested Router ************
-Using route inside route
 
 
 How to prevent Rerendering of child component *******
@@ -703,7 +692,7 @@ Redux
 HOC(High order Component) ***********
 
 An HOC is a function that takes a component as an argument and returns a new component that wraps the original one.
-This allows you to add additional behavior or props to the wrapped component.
+This allows us to add additional behavior or props to the wrapped component.
 Its used to enchance the input component and is reusable.
 it is used to share common functionality between component without repeating code
 These functions are pure, which means they are receiving data and returning values according to that data.
@@ -781,11 +770,13 @@ allowing you to access these props in any component.
 
 
 Render Props  ***********
-https://www.youtube.com/watch?v=EZil2OTyB4w&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=37
-Render Props is a pattern in React for sharing logic between components. 
-A component with a render prop takes a function that returns JSX as a prop, allowing flexible code reuse by dynamically controlling what gets rendered.
+Render Props is a pattern in React where a function is passed as a prop to a component, and the component uses this function to determine what to render.
+It's a way of sharing logic between components while maintaining reusability and flexibility.
+The term "render props" refers to a function prop that a component uses to "render" something dynamically based on what is passed to it.
+
+Instead of passing static content or JSX, you pass a function as a prop, and the receiving component calls this function, typically passing some data back to it.
+This allows you to control what should be rendered.
 The main idea is that instead of hardcoding the component's children or markup, you pass a function to the component, which decides how it should render its UI.
-A render prop is simply a function prop that a component uses to know what to render.
 Instead of creating a new Higher-Order Component (HOC) to share logic between components, 
 you can use the render props pattern to achieve similar flexibility without creating new components.
 
@@ -818,6 +809,14 @@ Reusability: By abstracting the logic (like mouse tracking, authentication, etc.
 			you make the component highly reusable.
 Flexibility: The parent component fully controls how the child component renders based on the shared state or logic.
 No Component Hierarchy Changes: Unlike HOCs, render props don't need to wrap components. They don't alter the component tree, making debugging easier.
+
+Drawbacks of Render Props:
+Prop Drilling:
+If many components depend on the same behavior, you may find yourself passing the render prop down multiple layers, which can result in prop drilling.
+
+Performance:
+A new function is created on every render because the render prop is usually defined inline.
+This can lead to performance issues unless optimizations like React.memo are used.
 
 Both Higher-Order Components (HOCs) and Render Props are ways to share logic between components, but they do it differently:
 HOC: Enhances a component by wrapping it and passing new props.

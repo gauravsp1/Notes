@@ -25,16 +25,11 @@ New ATS resume
 
 
 ---------------------
-
-Micro-frontend
-Security videos
+Security notes
 Next.js
 TypeScript
 
 -----------------Javacript---------
-new Map()
-new Set()
-Compose and Pipe
 
 
 Recursion coding problems
@@ -48,8 +43,8 @@ Polyfills-structuredClone, promise
 -------------React-------------
 New hooks
 -------------Redux-------------
-Redux - handsOn
-useContext - handsOn
+
+
 --------------------------
 
 

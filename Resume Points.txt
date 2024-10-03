@@ -49,7 +49,7 @@ Resume Points
 React Developer with 5+years of experience
 
 Hi ,
-I hope you're doing well. I wanted to reach out and inquire if there are any openings for a Frontend Software Developer
+I wanted to reach out and inquire if there are any openings for a Frontend Software Developer
 With over 5 years of experience working with React.js, JavaScript, HTML, and CSS, I have developed a strong proficiency in building responsive and dynamic web applications.
 I’d love to contribute my skills and expertise to your team. If any relevant roles are available, I’d appreciate the chance to discuss further.
 Thank you for your time, and I look forward to hearing from you.
@@ -67,7 +67,7 @@ Please let me know of any openings.
 Thanks.
 
 
-Hi, I hope you're well. I'm inquiring about React Developer roles.
+Hi,I wanted to inquire about React Developer roles.
 With 5+ years in React.js, JavaScript, HTML, and CSS, I'd love to contribute to your team.
 Please let me know of any openings.
 
@@ -75,7 +75,11 @@ Please let me know of any openings.
 
 Referal
 
-
+Hi,
+I hope you're doing well! With over 5 years of hands-on experience in React.js, JavaScript, HTML, and CSS, I’ve built a strong proficiency in developing dynamic,
+responsive web applications.
+I’m currently exploring new opportunities and was wondering if you could refer me for a Senior Frontend Developer role at your company.
+I’ve attached my CV for your reference and would greatly appreciate your support. Thank you in advance for your consideration!
 
 
 5 min intro
@@ -83,4 +87,5 @@ Referal
 10min code snippits
 10-15 min theory
 20-30 min coding problem
+
 

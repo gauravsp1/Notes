@@ -15,7 +15,7 @@ Object-Oriented:
 JavaScript is object-oriented but with a prototype-based inheritance model, unlike the class-based inheritance of languages like Java or C++.
 
 First-Class Functions: 
-Functions in JavaScript are first-class citizens, meaning they can be assigned to variables, passed as arguments to other functions, and returned from other functions.
+Functions in JavaScript are first-class citizens, meaning they can be assigned to variables, passed as arguments to other functions,and returned from other functions.
 
 Event-Driven:
 JavaScript is designed to respond to user actions and events, such as clicks, key presses, and mouse movements, making it ideal for interactive web pages.
@@ -44,7 +44,7 @@ Popular ones include React, Angular, Vue.js for front-end development, and Node.
 
 
 
-What is  interpreted programming language ************
+What is interpreted programming language ************
 An interpreted programming language is one in which most of its implementations execute instructions directly,
 without the need for compiling a program into machine-language instructions beforehand.
 In other words, interpreted languages are typically executed by an interpreter, which reads the program code and executes it line-by-line or statement-by-statement.
@@ -955,6 +955,56 @@ Modify - push(), pop(),shift(),unshift(),splice(),sort(),reverse()
 dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includes(),every(),some()
 
 
+new Map() *****
+
+In JavaScript, Map is a built-in object introduced in ES6 (ECMAScript 2015), which allows you to store key-value pairs.
+Unlike objects, which use strings as keys, Map can use any data type (including objects, arrays, and functions) as keys.
+const myMap = new Map();
+
+Key Features of Map
+Any value can be used as a key: Strings, numbers, arrays, objects, functions, etc.
+Maintains insertion order: The order in which you insert elements is preserved when you iterate over the map.
+Iterable: A Map is iterable, meaning you can directly loop over it using a for...of loop.
+
+Feature				Map																		Object
+Key types			Can be any data type (objects, arrays).									Only strings or symbols as keys.
+Iteration			Preserves insertion order.												No guaranteed order for iteration.
+Size property		size property gives number of items.									No direct size property; must count manually.
+Performance			Optimized for frequent additions and deletions of key-value pairs.		May not be as optimized for frequent changes.
+
+
+Objects: In modern JavaScript (since ES6), plain objects preserve the insertion order for string keys and symbol keys.
+However, for numeric keys, they are automatically ordered numerically (not based on the order of insertion).
+
+const obj = {
+  a: 1,
+  b: 2,
+  1: 'numeric key',
+};
+
+console.log(Object.keys(obj)); 
+// Output: ['1', 'a', 'b'] - Numeric key comes first due to auto-sorting
+
+
+new Set() ******
+In JavaScript, the Set object is a collection of unique values. It was introduced in ES6 (ECMAScript 2015) and is similar to an array,
+but it only allows unique values (i.e., no duplicates). A Set maintains insertion order, meaning elements are iterated in the order they were inserted.
+
+const mySet = new Set();
+
+Key Features of Set
+Unique Values: A Set ensures all values are unique, meaning it will not allow duplicate values.
+Insertion Order: A Set preserves the order of elements based on how they were added.
+No Key-Value Pairs: Unlike Map, a Set does not store key-value pairs, only values.
+
+Feature				Set									Array
+Duplicates			Does not allow duplicates.			Allows duplicates.
+Insertion Order		Preserves insertion order.			Preserves insertion order.
+Access by Index		No index-based access.				Can access elements by index.
+Methods				Limited (add, delete, has, etc.)	Rich set of array methods (push, pop, slice, etc.).
+Use Cases			Unique values, efficient lookup		Ordered collection with duplicates allowed
+
+Set is useful when you need a collection of unique values, such as ensuring no duplicate entries in a list or quickly checking if a value exists in a collection.
 
 
 event bubbling ********
@@ -1276,7 +1326,7 @@ const deepCopy = structuredClone(original);
 local storage vs session storage ********
 
 
-Feature				Local Storage	Session Storage
+Feature				Local Storage																		Session Storage
 Scope				Available across all tabs and windows of the same origin (domain).					Available only within the current tab (or window).
 Persistence			Data persists even after the browser is closed and reopened.						Data is cleared when the tab or browser window is closed.
 Lifetime			Data remains until explicitly removed (or until the browser's storage is cleared).	Data is available only for the duration of the page session (tab or window).
@@ -1525,8 +1575,8 @@ Preflight Requests: For certain types of cross-origin requests (e.g., requests w
 the browser first sends a preflight OPTIONS request to the server to determine if the actual request is safe to send.
 The server responds with CORS headers indicating whether the actual request is allowed.
 
-Simple Requests: Requests that meet certain criteria, such as using only safe methods (e.g., GET, POST) and not including custom headers other than those allowed by the server, 
-are considered simple requests and may not trigger a preflight request.
+Simple Requests: Requests that meet certain criteria, such as using only safe methods (e.g., GET, POST)
+and not including custom headers other than those allowed by the server,are considered simple requests and may not trigger a preflight request.
 
 
 WebPack bunderler analyses *********

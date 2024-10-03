@@ -329,7 +329,7 @@ There are five different position values:
 static(By Default): Elements are positioned according to the normal document flow.
 relative: The element is positioned relative to its original place in the document flow.
 fixed : is positioned relative to the viewport
-absolute---- position: absolute; is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
+absolute: is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
 sticky : is positioned based on the user's scroll position.
 
 
@@ -366,6 +366,9 @@ To horizontally center a block element (like <div>), use margin: auto;
 
 Diff selectors vs pseudo elements *************
 CSS selectors are used to "find" (or select) the HTML elements you want to style.
+Pseudo-elements are used to style specific parts of an element, like the first letter or first line of a block, 
+or to insert content into an element without adding it to the HTML.
+
 
 Aspect		Selectors													Pseudo-Elements
 Targeting	Targets entire HTML elements based on tag, class, ID, etc.	Targets parts of an element or inserts virtual elements
