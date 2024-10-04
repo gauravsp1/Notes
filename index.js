@@ -565,6 +565,70 @@
 //  it still refers to the variable b from the foo function's scope, which is 5.
 // The variable b = 10 inside exec is not used by baz because baz is bound to the scope where it was defined (foo).
 
+// // You have an array of products, each with a type and name. Group the products by their type.
+// const products = [
+//   { id: 1, type: "electronics", name: "TV" },
+//   { id: 2, type: "clothing", name: "T-shirt" },
+//   { id: 3, type: "electronics", name: "Laptop" },
+//   { id: 4, type: "clothing", name: "Jeans" },
+//   { id: 5, type: "furniture", name: "Sofa" },
+// ];
+
+// const result = products.reduce((acc, curr) => {
+//   const type = curr.type;
+//   if (!acc[type]) {
+//     acc[type] = [];
+// }
+//     acc[type].push(curr);
+//   return acc;
+// }, {});
+// console.log("result", result);
+
+// function Person(name) {
+//     this.name = name;
+//   }
+
+//   Person.prototype.getName = function () {
+//     return this.name;
+//   };
+
+//   const person1 = new Person("Alice");
+//   const person2 = Person("Bob");
+
+//   console.log(person1.getName()); // Alice
+//   console.log(person2.getName()); // error
+
+// const animal = {
+//   type: "Animal",
+//   speak() {
+//     console.log("Roar!");
+//   },
+// };
+// const lion = Object.create(animal);
+// lion.speak(); // Roar
+
+// Write a function to find the longest word in a sentence.
+
+// const scent = "I love JavaScript programming";
+
+// function longestWord(inputValue) {
+//   const outPut = inputValue.split(" ").reduce((acc, curr) => {
+//     acc = curr.length>acc.length?curr:acc;
+//     return acc;
+//   }, "");
+//return outPut
+// }
+// console.log(longestWord(scent));
+
+// console.log([] == ![]) //true
+// console.log(typeof undefined)  //undefined
+// console.log([] + []) //
+// console.log(1 < 2 < 3) // true
+// console.log( 3 > 2 > 1) //false
+
+// var b = 9 || 1 || 3;
+// console.log(b) // 9
+
 // function sum(a){
 //     return function (b){
 //       if(b){
@@ -581,46 +645,6 @@
 // sum(1)(2)(3)(4)()
 
 // -------------------------------------------------------------------------------------
-
-// Polyfills
-
-// Maps
-// let arr=[1,2,3,4]
-// arr.map((item,index,arr)=>{})
-// Array.prototype.myMap = finction(cb){
-//       let temp=[]
-//       for (let index = 0; index < this.length; index++) {
-//         temp.push(cb(this[index],index,this))
-
-//       }
-//       return temp;
-// }
-
-// Filter
-// Array.prototype.myFilter= function(cb){
-//   let temp=[]
-//       for (let index = 0; index < this.length; index++) {
-//         if(cb(this[index],index,this)){
-//           temp.push(this[index])
-//         }
-
-//       }
-//       return temp;
-// }
-
-// Reduce
-// arr.reduce((acc,item,arr)=>{
-//   return acc+item
-// },initialValue)
-// Array.prototype.myReducer= function(cb,initialValue){
-//   let accumulator=initialValue
-//   for (let index = 0; index < this.length; index++) {
-//     accumulator=accumulator? cb(accumulator,this[index],this):this[index]
-
-//   }
-
-//   return first
-// }
 
 // Deep comparison
 // const obj1 = {

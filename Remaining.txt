@@ -25,9 +25,27 @@ New ATS resume
 
 
 ---------------------
+Coersion
 Security notes
 Next.js
 TypeScript
+
+
+when a user navigates to different route before api data returns 
+// useEffect(() => {
+//     let isMounted = true;
+//     fetchData().then(data => {
+//       if (isMounted) {
+//         setData(data);
+//       }
+//     });
+
+//     return () => {
+//       isMounted = false; // Cleanup on unmount
+//     };
+//   }, []);
+
+
 
 -----------------Javacript---------
 
