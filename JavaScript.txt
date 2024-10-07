@@ -69,7 +69,19 @@ Variables are often explicitly bound to a specific type, and attempting to use a
 
 
 data types:  *******
-numbers, strings, objects, Boolean, Undefined, Null
+Primitive Data Types: Primitive types are simple, immutable values. They are stored directly in memory, and when you work with these types, JavaScript operates on their actual values.
+1.Number
+2.String
+3.Boolean
+4.Null
+5.Undefined
+6.BigInt: Introduced in ES2020, this type represents integers with arbitrary precision (i.e., larger than Number.MAX_SAFE_INTEGER).
+7.Symbol: Introduced in ES6, it represents a unique and immutable identifier, mainly used for object property keys.
+
+Non-Primitive (Reference) Data Types:
+1.Object
+2.Array
+3.Function
 
 
 Why is JavaScript Single Threaded language *************
@@ -525,6 +537,7 @@ Arrow functions differ in that they do not have their own this.
 Instead, they lexically inherit this from the surrounding scope where the arrow function is defined. 
 This is called lexical scoping. The value of this in the arrow function is "locked" to the value of this in the context where the arrow function was created.
 
+the value of "this" inside a class refers to the instance of the class 
 
 Object Literal **********
 an object literal is a comma-separated list of name-value pairs inside of curly braces.
@@ -1028,6 +1041,7 @@ Difficulty in Debugging: Event flow can become complicated, especially in large 
 Event delegate **************
 Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
 we can add an event listener to a parent element and call an event on a particular target using the . target property of the event object.
+Technique of using a single event listener on a parent to handle events on its children.
 
 Event Capturing ******************
 In event capturing, an event propagates from the outermost element to the target element. 
@@ -1253,6 +1267,9 @@ Returns a new object: A factory function explicitly returns a new object, allowi
 No new keyword needed: Unlike constructor functions, factory functions don’t require the new keyword for object creation.
 Encapsulation: Factory functions can use closures to encapsulate private variables or functions, making them more secure and modular.
 More flexibility: Since there’s no reliance on the this keyword, factory functions can be used in more flexible and dynamic ways.
+When you call Person without the new keyword, it behaves like a regular function and does not create a new instance.
+The value of this depends on the execution context, which can lead to unexpected behavior.
+
 
 // Factory function to create a Car object
 function createCar(make, model, year) {
@@ -1289,6 +1306,80 @@ When to Use Factory Functions:
 When you want to create objects with encapsulated, private data.
 When you don’t want to rely on the new keyword or worry about the complexities of this.
 When you need more flexibility in object creation, such as dynamically creating objects based on certain conditions.
+
+
+Object.create() *****
+Object.create() is a method in JavaScript that allows you to create a new object with a specified prototype object and optionally add properties to it.
+This method is particularly useful for implementing inheritance and establishing a prototype chain in JavaScript.
+
+Object.create(proto, propertiesObject)
+proto: The prototype object that the new object should inherit from. If null is passed, the new object will have no prototype.
+propertiesObject (optional): An object whose properties will be added to the new object.
+							Each property can be defined with specific characteristics (like value, enumerable, writable, and configurable).
+
+Why Use Object.create()?
+Inheritance: It allows for easier creation of objects that inherit from other objects, supporting prototypal inheritance.
+Control: You have fine control over property attributes when creating a new object, allowing for encapsulation and data hiding.
+Clarity: Using Object.create() can make your code clearer by explicitly showing the relationship between objects.
+
+Comparison with Constructor Functions
+Object.create() is used for prototypal inheritance and creates an object directly from another object, 
+while constructor functions create an instance of a class and set this to the new object.
+Object.create() allows you to define the prototype of an object without having to define a full constructor, which can be more concise.
+
+
+Object.freeze() ****
+Object.freeze() is a method in JavaScript that prevents an object from being modified.
+It effectively makes an object immutable by preventing any changes to its properties, including adding new properties, deleting existing ones,
+or modifying the values of the current properties.
+
+Key Features of Object.freeze()
+Prevents adding new properties: You cannot add new properties to the object.
+Prevents removing properties: You cannot delete any existing properties.
+Prevents modifying existing properties: The values of existing properties cannot be changed.
+Prevents changing property attributes: You cannot reconfigure property descriptors (such as making a property writable or configurable).
+You can check if an object has been frozen using the Object.isFrozen() method
+
+Freezing Nested Objects
+Object.freeze() performs a shallow freeze, meaning only the immediate properties of the object are frozen.
+If the object has nested objects, those nested objects can still be modified unless they are explicitly frozen as well.
+
+function deepFreeze(obj) {
+  // Retrieve the property names defined on obj
+  const propNames = Object.getOwnPropertyNames(obj);
+
+  // Freeze properties before freezing the object itself
+  propNames.forEach((name) => {
+    const prop = obj[name];
+
+    // If prop is an object, freeze it recursively
+    if (typeof prop === "object" && prop !== null) {
+      deepFreeze(prop);
+    }
+  });
+
+  // Freeze the original object (non-recursive)
+  return Object.freeze(obj);
+}
+
+const user = {
+  name: "Alice",
+  address: {
+    city: "New York",
+    country: {
+      name: "USA",
+    },
+  },
+};
+
+deepFreeze(user);
+
+user.address.city = "Los Angeles"; // This won't work now
+user.address.country.name = "Canada"; // This also won't work
+
+console.log(user.address.city); // Output: "New York"
+console.log(user.address.country.name); // Output: "USA"
+
 
 
 Babel *****

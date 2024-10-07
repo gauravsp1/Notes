@@ -22,34 +22,18 @@ cdn
 
 *************************///////////////////////**************************//////////////////*******************
 New ATS resume
-
+go through best buy profiles
+arrange notes points 
 
 ---------------------
-Coersion
+𝐂𝐈/𝐂𝐃 𝐏𝐢𝐩𝐞𝐥𝐢𝐧𝐞
+
 Security notes
 Next.js
 TypeScript
 
 
-when a user navigates to different route before api data returns 
-// useEffect(() => {
-//     let isMounted = true;
-//     fetchData().then(data => {
-//       if (isMounted) {
-//         setData(data);
-//       }
-//     });
-
-//     return () => {
-//       isMounted = false; // Cleanup on unmount
-//     };
-//   }, []);
-
-
-
 -----------------Javacript---------
-
-
 Recursion coding problems
 WebPack
 Lighthouse
@@ -60,6 +44,8 @@ Polyfills-structuredClone, promise
 
 -------------React-------------
 New hooks
+React.window
+React 19
 -------------Redux-------------
 
 

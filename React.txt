@@ -276,6 +276,29 @@ Instead of thinking in terms of “mounting” and “updating”, you might fin
 React guarantees the DOM has been updated by the time it runs the effects.
 
 
+useLayoutEffect ****
+useLayoutEffect is a hook in React that works similarly to useEffect, but it fires synchronously after all DOM mutations
+(i.e., after React has calculated the changes and updated the DOM) and before the browser has a chance to paint the screen.
+This means useLayoutEffect runs earlier than useEffect in terms of timing and is useful for operations where you need to read or manipulate the DOM
+before the browser repaints.
+
+Key Differences between useEffect and useLayoutEffect:
+Execution Timing:
+useEffect: Fires after the paint (asynchronously), meaning it runs after the DOM is updated and the browser has repainted.
+useLayoutEffect: Fires synchronously right after the DOM updates but before the browser has painted the changes.
+This is crucial when you need to measure or update the DOM immediately after a mutation.
+
+Use Case:
+useEffect: Use for side effects that don’t directly affect the visual layout (e.g., data fetching, subscriptions, logging).
+useLayoutEffect: Use for reading layout information, performing calculations based on the current layout,
+or synchronously updating DOM properties before the browser repaints.
+
+When to Use useLayoutEffect:
+Layout adjustments: When you need to measure the size or position of elements and need to perform updates synchronously.
+Handling DOM measurements: Use cases where you need to ensure that the measurement is done before the paint to prevent visual flickering
+(e.g., scrolling, animations).
+
+
 useContext ************
 introduced to eliminate nesting complexcity while consuming process	
 1.Create Context.... export const ThemeContext = React.createContext();..it creates context obj
@@ -833,6 +856,10 @@ function MyComponent({ name }) {
 }
 export default React.memo(MyComponent);
 
+React.memo() only does a shallow comparison of the props. If you pass complex objects (like nested objects or arrays),
+it might still cause unnecessary re-renders because the shallow comparison may fail. In those cases,
+you can provide a custom comparison function to React.memo() to control when it should allow re-rendering.
+
 
 uesMemo ****
 useMemo is a hook that memoizes the result of a function. It is used to optimize expensive calculations by caching the result and 
@@ -1067,3 +1094,39 @@ TypeScript: Use strict typing for safer reusability.
 Memoization****************
 Memoization is a powerful optimization technique to improve the performance of your application by caching computed values and preventing unnecessary re-renders.
 In React, useMemo and React.memo are common tools for achieving memoization in functional components.
+
+We need to fetch data from an API and display it in a component, but the user might navigate away before the API response is received and then return.
+How can we handle this to prevent memory leaks?
+// useEffect(() => {
+//     let isMounted = true;
+//     fetchData().then(data => {
+//       if (isMounted) {
+//         setData(data);
+//       }
+//     });
+
+//     return () => {
+//       isMounted = false; // Cleanup on unmount
+//     };
+//   }, []);
+
+
+React 19 features****
+React Compiler
+Server Components
+Use API
+Using ref as Prop: You can now pass ref directly as a prop. This eliminates the need to use forwardRef.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

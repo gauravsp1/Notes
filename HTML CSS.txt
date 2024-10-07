@@ -276,6 +276,19 @@ display: flex;
 display: inline-block
 
 
+display: inline-block*********
+The element does not start on a new line, just like inline elements.
+Width and height properties apply (unlike inline elements).
+Margins and paddings work on all sides.
+The element behaves like an inline element in terms of flow (i.e., it stays in line with other elements),
+but it can have dimensions (width/height) like a block element.
+
+Property			inline									block												inline-block
+Line Break			Does not start a new line.				Starts a new line.									Does not start a new line.
+Width/Height		Cannot set width or height.				Can set width and height.							Can set width and height.
+Margins/Padding		Margins/padding applied horizontally.	Margins/padding applied on all sides.				Margins/padding applied on all sides.
+Default Width		Depends on content width.				Takes up the full width of its parent container.	Depends on content or set width.
+
 can we give height and width to inline elements *****
 No. IF you want to then convert it into display:inline-block
 You cannot set the height and width of inline-level elements in CSS.
@@ -366,9 +379,13 @@ To horizontally center a block element (like <div>), use margin: auto;
 
 Diff selectors vs pseudo elements *************
 CSS selectors are used to "find" (or select) the HTML elements you want to style.
+
 Pseudo-elements are used to style specific parts of an element, like the first letter or first line of a block, 
 or to insert content into an element without adding it to the HTML.
 
+Pseudo-classes are used to define a special state of an element based on user interaction, document structure, or other conditions.
+They do not insert or target specific parts of the content itself but rather apply styles based on states or relationships.
+:hover,:focus
 
 Aspect		Selectors													Pseudo-Elements
 Targeting	Targets entire HTML elements based on tag, class, ID, etc.	Targets parts of an element or inserts virtual elements
