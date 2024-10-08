@@ -23,16 +23,31 @@ and social media posts—and incorporates AI-powered 60-day call summaries to pr
 
 
 the part you dislike about your job ****
-One challenge I face in my job is the lack of long-term planning that sometimes comes with a startup environment.
-For example, I was once working on a feature and had to pause midway because another feature was given higher priority.
-A few days later, I had to shift focus again to yet another feature before fully completing the previous one,
-often having to leave tasks at a basic functional level.
+Situation:
+"In my current role, one challenge I encounter is the frequent shift in priorities that can arise in a fast-paced, startup environment.
+This often impacts long-term planning and project completion."
+
+Task:
+"My task is to work on various features and deliver them on time, but often I’ve had to switch between tasks based on sudden changes in business priorities."
+
+Action:
+"For example, I was once working on an important feature for the platform when I was asked to pause halfway through to focus on a new, high-priority feature.
+After completing the new task, I had to move on to yet another urgent feature without finishing the previous ones.
+To manage this, I stayed flexible and adapted by improving my prioritization skills and collaborating closely with the product team.
+I also initiated conversations with stakeholders to better understand the overall roadmap, allowing me to manage expectations more effectively."
+
+Result:
+"While this constant reprioritization can be frustrating, it taught me to handle dynamic environments with greater agility.
+By improving my communication and adaptability, I’ve been able to deliver functional features even under tight timelines.
+However, I do prefer having more consistency and the opportunity to fully complete tasks with greater depth and quality."
 
 
 the part you love about your job****
 What I love about my job is the flexibility and efficiency in decision-making.
 There's no lengthy approval process—if I have a good idea and the manager supports it, we can start working on it right away.
 The low hierarchy also stands out; I've had the opportunity to collaborate directly with senior leadership, including the CTO, which is quite rewarding.
+During diwali revamp got to work with CTO , learned how buisness works.
+***Backup with a example****
 
 
 1.Tell me about a time you faced a challenging problem at work. How did you handle it? ***********
@@ -262,11 +277,14 @@ Situation: In my current role as a React developer, ensuring high-quality code i
 Task: My responsibility was to maintain high code quality, optimize performance, and ensure the codebase was easy to understand and maintain for future developers.
 
 Action: To achieve this, I followed a multi-step approach:
-I implemented a strict code review process, ensuring that every pull request was reviewed by at least two other developers before being merged. This added an extra layer of scrutiny to catch potential issues early.
+I implemented a strict code review process, ensuring that every pull request was reviewed by at least two other developers before being merged.
+This added an extra layer of scrutiny to catch potential issues early.
 I set up automated tools like ESLint and Prettier to enforce consistent code formatting and linting, ensuring that all developers adhered to the same coding standards.
 I prioritized writing unit and integration tests, making sure no code was deployed without being thoroughly tested.
 For performance optimization, I incorporated code-splitting techniques to load only necessary parts of the application, reducing load times.
-Additionally, I regularly reviewed the code to remove any unused or unnecessary parts and ensured that comments were added to improve code readability and maintainability.
+Additionally, I regularly reviewed the code to remove any unused or unnecessary parts and ensured that comments were added to improve code readability
+and maintainability.
+
 Result: By implementing these measures, we were able to significantly reduce bugs, improve the overall performance of our application, and maintain a clean, 
 efficient codebase that was easy for other developers to work with.
 This approach has also helped in maintaining a high level of consistency and reducing the time spent on debugging.
@@ -347,7 +365,6 @@ This led to a 30% decrease in response times and improved customer satisfaction 
 The project was not only a cost-effective solution but also enhanced the overall user experience on our platform.
 
 
-In our SocialHub project i could see that 
 
 41. Can you share a time when you had to make a trade-off between quality and speed? How did you decide?
 Situation: During the UI revamp for a B2C Home-services project, we were working under a tight deadline, but we also needed to ensure a high-quality design.
@@ -369,14 +386,10 @@ improving the product’s quality in subsequent updates. The outcome was a succe
 
 Hobbies***
 In my free time i like to draw, cook, like this weekend i made pasta. Watch movies.
+Fight Club,Shawshank Redemption,Her ,The Pursuit of Happyness
+
 
 Weakness ***
-I like to analyis things but sometimes i over do it I go into overAnalysis 
-One area I’ve been working on is delegating tasks more effectively.
-Early in my career, I tended to take on too much myself, thinking it would ensure consistency and quality.
-However, I realized this could limit team productivity and slow down larger projects.
-To address this, I’ve been focusing on better communication, setting clear expectations, and trusting my team to take ownership of their responsibilities.
-Over time, this has improved our overall efficiency and collaboration.
 
 I tend to over-analyze certain situations, wanting to ensure I’ve considered all possible angles before making a decision.
 While this can be helpful in avoiding mistakes, I’ve noticed that it can sometimes slow down progress, especially in fast-paced environments.
@@ -389,22 +402,26 @@ good listner, bond easly with people, people feel i am approchable as a result t
 Raise concerns upfronted i don't shy away from speaking up.I like to keep clear communications.
 
 Good Listener and Approachable
-I am a good listener and bond easily with people, which makes me approachable.
-As a Scrum Master I made it a point to actively listen during team meetings, encouraging everyone to share their ideas and concerns.
-In retrospectives meetings as well I encourage everyone to mention the good as well as the bad points about the sprint.
+I consider myself a good listener, which helps me bond easily with people and makes me approachable.
+When I was acting as a Scrum Master, I made it a point to actively listen during team meetings,
+ensuring that everyone had the opportunity to share their ideas and concerns.
+During retrospective meetings, I encouraged the team to openly discuss both the positive and negative aspects of the sprint,
+fostering a culture of transparency and continuous improvement. This approach not only built trust but also helped the team address challenges more effectively
 
 
 Team Player
-I strongly believe that being a team player is essential in any collaborative environment.
-It’s not just about being skilled in your own area; it's also about how well you can work with others.
-Even if someone excels in their specific skill set, if they can't collaborate effectively, it can become a blocker for the entire team.
+I strongly believe that being a team player is crucial in any collaborative environment.
+It's not just about excelling in your own area of expertise but also about how well you can work with others.
+I’ve seen firsthand that even if someone has exceptional skills, if they can't collaborate effectively, it can create blockers for the entire team.
+I make it a point to communicate openly, share knowledge, and ensure that my contributions help the team move forward together,
+rather than just focusing on individual success
 
 
 Raising Concerns Upfront:
-Another strength of mine is that I am not afraid to raise concerns upfront.
-I believe in maintaining transparency within the team. For example, if I notice potential issues in a project timeline,
-I address them directly in team meetings instead of waiting for them to escalate.
-This proactive communication has often led to timely interventions and better project outcomes.
+One of my strengths is being proactive about raising concerns upfront. I believe in maintaining transparency within the team,
+and I approach potential issues early to avoid larger problems down the road. For example, if I notice any risks in the project timeline,
+I make sure to bring them up in team meetings in a constructive manner, rather than waiting for them to escalate.
+This approach has led to timely interventions and has helped in achieving smoother project outcomes.
 
 
 
