@@ -70,18 +70,19 @@ Variables are often explicitly bound to a specific type, and attempting to use a
 
 data types:  *******
 Primitive Data Types: Primitive types are simple, immutable values. They are stored directly in memory, and when you work with these types, JavaScript operates on their actual values.
-1.Number
-2.String
-3.Boolean
-4.Null
-5.Undefined
-6.BigInt: Introduced in ES2020, this type represents integers with arbitrary precision (i.e., larger than Number.MAX_SAFE_INTEGER).
-7.Symbol: Introduced in ES6, it represents a unique and immutable identifier, mainly used for object property keys.
+1.Number  //typeof  number
+2.String  //typeof  string
+3.Boolean  //typeof  boolean
+4.Null  //typeof  object
+5.Undefined  //typeof  undefined
+6.BigInt: Introduced in ES2020, this type represents integers with arbitrary precision (i.e., larger than Number.MAX_SAFE_INTEGER).  //typeof  bigint
+7.Symbol: Introduced in ES6, it represents a unique and immutable identifier, mainly used for object property keys.  //typeof  symbol
 
 Non-Primitive (Reference) Data Types:
-1.Object
-2.Array
-3.Function
+1.Object  //typeof  object
+2.Array  //typeof  object
+3.Function  //typeof  function
+
 
 
 Why is JavaScript Single Threaded language *************
@@ -1042,6 +1043,7 @@ Event delegate **************
 Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
 we can add an event listener to a parent element and call an event on a particular target using the . target property of the event object.
 Technique of using a single event listener on a parent to handle events on its children.
+
 
 Event Capturing ******************
 In event capturing, an event propagates from the outermost element to the target element. 

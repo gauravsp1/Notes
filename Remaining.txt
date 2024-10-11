@@ -26,7 +26,6 @@ go through best buy profiles
 arrange notes points 
 
 ---------------------
-𝐂𝐈/𝐂𝐃 𝐏𝐢𝐩𝐞𝐥𝐢𝐧𝐞
 
 Security notes
 Next.js
@@ -64,6 +63,47 @@ HLD problems
 
 Daily practice 10 code snippits
 Daily one react component
+
+
+
+
+
+****************DSA****************
+Arrays
+Strings
+Linked-List
+Sorting
+Searching
+Stack
+Que
+Heap
+Hash
+
+
+
+******BestBuy**********
+
+Nested comment component with add at any level
+Pangram string checker example coding
+LRU problem
+compose polyfill
+TDD(Test driven development)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

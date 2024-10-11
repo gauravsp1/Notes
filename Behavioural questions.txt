@@ -11,6 +11,8 @@ Calendar view
 Vendor onboarding
 
 All Project Details********
+Why our company ***********
+Any questions for us**********
 
 
 Tell me about yourself****
@@ -20,6 +22,48 @@ Currently, I'm a React developer at Nobroker, where I'm working on a project cal
 and feedback management across various social media channels.
 It offers a comprehensive 360-degree view of customer information—covering orders, payments, calls, chats,
 and social media posts—and incorporates AI-powered 60-day call summaries to provide deeper insights.
+
+
+
+Hobbies***
+In my free time i like to draw, cook, like this weekend i made pasta. Watch movies.
+Fight Club,Shawshank Redemption,Her ,The Pursuit of Happyness
+
+
+Weakness ***
+
+I tend to over-analyze certain situations, wanting to ensure I’ve considered all possible angles before making a decision.
+While this can be helpful in avoiding mistakes, I’ve noticed that it can sometimes slow down progress, especially in fast-paced environments.
+To manage this, I’ve been working on setting specific time limits for research and analysis, and focusing on trusting my initial instincts more.
+This approach has helped me strike a balance between thoroughness and timely decision-making.
+
+
+Strength ***
+good listner, bond easly with people, people feel i am approchable as a result team player.
+Raise concerns upfronted i don't shy away from speaking up.I like to keep clear communications.
+
+Good Listener and Approachable
+I consider myself a good listener, which helps me bond easily with people and makes me approachable.
+When I was acting as a Scrum Master, I made it a point to actively listen during team meetings,
+ensuring that everyone had the opportunity to share their ideas and concerns.
+During retrospective meetings, I encouraged the team to openly discuss both the positive and negative aspects of the sprint,
+fostering a culture of transparency and continuous improvement. This approach not only built trust but also helped the team address challenges more effectively
+
+
+Team Player
+I strongly believe that being a team player is crucial in any collaborative environment.
+It's not just about excelling in your own area of expertise but also about how well you can work with others.
+I’ve seen firsthand that even if someone has exceptional skills, if they can't collaborate effectively, it can create blockers for the entire team.
+I make it a point to communicate openly, share knowledge, and ensure that my contributions help the team move forward together,
+rather than just focusing on individual success
+
+
+Raising Concerns Upfront:
+One of my strengths is being proactive about raising concerns upfront. I believe in maintaining transparency within the team,
+and I approach potential issues early to avoid larger problems down the road. For example, if I notice any risks in the project timeline,
+I make sure to bring them up in team meetings in a constructive manner, rather than waiting for them to escalate.
+This approach has led to timely interventions and has helped in achieving smoother project outcomes.
+
 
 
 the part you dislike about your job ****
@@ -99,6 +143,101 @@ This experience not only taught me how to handle tight deadlines but also deepen
 which I have applied to other projects since then.
 
 
+25. Can you describe a situation where you faced a significant technical challenge? How did you overcome it?
+Situation: During the development process, we encountered a significant challenge: our application was experiencing performance issues,
+especially when loading data from the API, leading to slow response times.
+
+Task:"My responsibility was to identify the root cause of the performance bottlenecks and implement a solution to enhance the application's speed and user experience."
+
+Action: I began by conducting a thorough analysis of the codebase and monitoring network requests using Chrome DevTools.
+I discovered that we were making multiple unnecessary API calls when rendering components, which was causing the lag.
+I implemented a more efficient data-fetching strategy. I also introduced lazy loading for components that didn't need to be rendered immediately,
+improving the initial load time of the application.
+Also all of the data in the api was not required so asked the BE guy to remove it which reduced the api call time.
+Also instead of call all apis in initial render segregated them according to component calls
+
+
+
+5.Tell me about a time when you made a mistake. How did you handle it?
+Situation:
+There was an instance when I misunderstood the requirements for a feature I was working on, which led to a mismatch between the expected output
+and the actual implementation. This mistake resulted in additional rework and delayed the delivery of the feature.
+
+Task:
+My task was to correct the feature implementation according to the revised requirements and ensure that such a misunderstanding didn’t happen again in the future,
+as it affected both project timelines and team efficiency.
+
+Action:
+Upon realizing the error, I took ownership and immediately communicated the issue to my team and manager.
+I scheduled a meeting with the product owner to get clarity on the requirements and made sure to document every detail precisely.
+To avoid similar mistakes in the future, I established a habit of double-checking requirements by holding review sessions before starting the development phase.
+Additionally, I incorporated feedback loops throughout the development process to ensure continuous alignment with stakeholders.
+
+Result:
+By taking proactive steps to clarify and document requirements, I was able to implement the necessary changes swiftly and align the feature as expected.
+This experience taught me the importance of clear communication and thorough documentation.
+Since then, I haven’t encountered any major issues related to requirement misunderstandings,
+and I have been able to deliver more accurate and high-quality features on time.
+
+
+7.Can you share an example of when you had to take initiative in a project? ****
+Situation:
+A friend of mine mentioned that he had posted a complaint about Nobroker on social media but didn’t receive any response,
+which made him feel that the company wasn’t paying attention to customer concerns.
+This prompted me to investigate how social media complaints were being managed.
+
+Task:
+My goal was to identify any gaps in the complaint handling process and propose a solution to ensure that all social media complaints were tracked
+and responded to in a timely manner, thus improving customer satisfaction and brand reputation.
+
+Action:
+I reviewed the existing process and found that a few agents were manually logging into different social media accounts to respond to complaints.
+This manual process led to some complaints being overlooked. I took the initiative to propose a centralized dashboard solution,
+where all complaints from various social media platforms could be tracked in one place. I designed a system to log each complaint,
+track its progress, and assign it to the relevant team members for resolution.
+I also incorporated features to set priorities and monitor response times to ensure every complaint received the attention it deserved.
+
+Result:
+The implementation of the centralized dashboard significantly improved the handling of social media complaints.
+No complaints were missed, and the response time improved, resulting in better customer feedback and higher satisfaction levels.
+The initiative not only streamlined the process but also provided the management with insights into complaint trends,
+which were used to further enhance customer service strategies.
+
+
+21. Tell me about a time when you improved a process or workflow. What was your approach?
+Situation: Our team was developing features without proper organization or tracking, which led to inefficiencies and delays in delivery.
+
+Task: I recognized the need to improve our workflow and ensure that features were delivered in a more structured and timely manner.
+
+Action: I discussed the issue with the manager and proposed adopting the Agile methodology to streamline the process.
+I took on the role of Scrum Master and implemented key Agile practices such as sprint planning, daily stand-up meetings, and retrospectives.
+These processes helped the team prioritize tasks, improve communication, and stay on track.
+I also introduced tools like Jira to better manage the backlog, track progress, and set clear goals for each sprint.
+
+Result: The adoption of Agile significantly improved our productivity and organization. We were able to deliver features more efficiently,
+track progress accurately, and address blockers more quickly. The new workflow also enhanced team collaboration and helped us meet deadlines more consistently.
+
+
+
+37. Describe a situation where you had to think outside the box to solve a problem.****
+Situation: In my previous role as a React developer, we faced a significant issue with our customer query management platform.
+Users were frequently reporting delays in response times, which was impacting customer satisfaction.
+
+Task: My task was to identify the root cause of the delays and find a solution that could improve response times without overhauling the entire system, as that would require considerable resources and time.
+
+Action:Instead of going for a conventional approach, I decided to analyze the user interaction patterns within the application.
+I discovered that many queries were repetitive and could be addressed through an automated response system.
+I proposed developing a simple AI-driven chatbot to handle common queries and provide instant answers.
+To make this happen, I collaborated with the AI team to integrate a basic chatbot feature into our existing platform.
+We held brainstorming sessions to identify the most frequently asked questions and created a streamlined workflow for the bot to follow.
+I also organized user testing to gather feedback and fine-tune the chatbot's responses before launch.
+
+Result: As a result, the chatbot successfully handled around 60% of the common queries, which significantly reduced the workload on our support team.
+This led to a 30% decrease in response times and improved customer satisfaction ratings.
+The project was not only a cost-effective solution but also enhanced the overall user experience on our platform.
+
+
+
 3.Describe a situation where you disagreed with a team member. How did you resolve it?
 Situation:
 I once had a disagreement with a team member regarding the choice of state management in our application.
@@ -123,27 +262,6 @@ However, we decided to use Context API for simpler, more isolated features that 
 This hybrid approach allowed us to leverage the strengths of both solutions and ultimately improved our development efficiency.
 Our decision also prevented potential bottlenecks down the line, as Redux handled the complex state transitions seamlessly.
 
-
-5.Tell me about a time when you made a mistake. How did you handle it?
-Situation:
-There was an instance when I misunderstood the requirements for a feature I was working on, which led to a mismatch between the expected output
-and the actual implementation. This mistake resulted in additional rework and delayed the delivery of the feature.
-
-Task:
-My task was to correct the feature implementation according to the revised requirements and ensure that such a misunderstanding didn’t happen again in the future,
-as it affected both project timelines and team efficiency.
-
-Action:
-Upon realizing the error, I took ownership and immediately communicated the issue to my team and manager.
-I scheduled a meeting with the product owner to get clarity on the requirements and made sure to document every detail precisely.
-To avoid similar mistakes in the future, I established a habit of double-checking requirements by holding review sessions before starting the development phase.
-Additionally, I incorporated feedback loops throughout the development process to ensure continuous alignment with stakeholders.
-
-Result:
-By taking proactive steps to clarify and document requirements, I was able to implement the necessary changes swiftly and align the feature as expected.
-This experience taught me the importance of clear communication and thorough documentation.
-Since then, I haven’t encountered any major issues related to requirement misunderstandings,
-and I have been able to deliver more accurate and high-quality features on time.
 
 
 6.Describe a time when you had to collaborate with cross-functional teams. How did you ensure success?
@@ -172,28 +290,6 @@ stakeholder involvement.
 
 
 
-7.Can you share an example of when you had to take initiative in a project? ****
-Situation:
-A friend of mine mentioned that he had posted a complaint about Nobroker on social media but didn’t receive any response,
-which made him feel that the company wasn’t paying attention to customer concerns.
-This prompted me to investigate how social media complaints were being managed.
-
-Task:
-My goal was to identify any gaps in the complaint handling process and propose a solution to ensure that all social media complaints were tracked
-and responded to in a timely manner, thus improving customer satisfaction and brand reputation.
-
-Action:
-I reviewed the existing process and found that a few agents were manually logging into different social media accounts to respond to complaints.
-This manual process led to some complaints being overlooked. I took the initiative to propose a centralized dashboard solution,
-where all complaints from various social media platforms could be tracked in one place. I designed a system to log each complaint,
-track its progress, and assign it to the relevant team members for resolution.
-I also incorporated features to set priorities and monitor response times to ensure every complaint received the attention it deserved.
-
-Result:
-The implementation of the centralized dashboard significantly improved the handling of social media complaints.
-No complaints were missed, and the response time improved, resulting in better customer feedback and higher satisfaction levels.
-The initiative not only streamlined the process but also provided the management with insights into complaint trends,
-which were used to further enhance customer service strategies.
 
 
 8.Tell me about a time when you had to manage conflicting priorities. How did you handle the situation?
@@ -291,20 +387,6 @@ This approach has also helped in maintaining a high level of consistency and red
 
 
 
-21. Tell me about a time when you improved a process or workflow. What was your approach?
-Situation: Our team was developing features without proper organization or tracking, which led to inefficiencies and delays in delivery.
-
-Task: I recognized the need to improve our workflow and ensure that features were delivered in a more structured and timely manner.
-
-Action: I discussed the issue with the manager and proposed adopting the Agile methodology to streamline the process.
-I took on the role of Scrum Master and implemented key Agile practices such as sprint planning, daily stand-up meetings, and retrospectives.
-These processes helped the team prioritize tasks, improve communication, and stay on track.
-I also introduced tools like Jira to better manage the backlog, track progress, and set clear goals for each sprint.
-
-Result: The adoption of Agile significantly improved our productivity and organization. We were able to deliver features more efficiently,
-track progress accurately, and address blockers more quickly. The new workflow also enhanced team collaboration and helped us meet deadlines more consistently.
-
-
 23. Can you share an experience where you had to deal with conflicting feedback? How did you manage it?
 Situation: During a feature implementation, I received conflicting feedback from the project manager and the lead designer.
 The project manager prioritized a minimalistic design to meet tight deadlines, while the designer wanted to incorporate additional visual elements and animations,
@@ -324,19 +406,6 @@ We successfully met the deadline with a functional version, and the designer's e
 The strategy also provided valuable user feedback, which informed future design decisions.
 
 
-25. Can you describe a situation where you faced a significant technical challenge? How did you overcome it?
-Situation: During the development process, we encountered a significant challenge: our application was experiencing performance issues,
-especially when loading data from the API, leading to slow response times.
-
-Task:"My responsibility was to identify the root cause of the performance bottlenecks and implement a solution to enhance the application's speed and user experience."
-
-Action: I began by conducting a thorough analysis of the codebase and monitoring network requests using Chrome DevTools.
-I discovered that we were making multiple unnecessary API calls when rendering components, which was causing the lag.
-I implemented a more efficient data-fetching strategy. I also introduced lazy loading for components that didn't need to be rendered immediately,
-improving the initial load time of the application.
-Also all of the data in the api was not required so asked the BE guy to remove it which reduced the api call time.
-Also instead of call all apis in initial render segregated them according to component calls
-
 
 
 26. Describe a time when you had to make a tough decision. What factors did you consider?
@@ -345,24 +414,6 @@ Use ans of  trade-off between quality and speed 41 ques
 
 28. Describe a situation where you had to influence others to adopt your idea or solution.
 Use ans of disagreed with a team member. question 3
-
-
-37. Describe a situation where you had to think outside the box to solve a problem.****
-Situation: In my previous role as a React developer, we faced a significant issue with our customer query management platform.
-Users were frequently reporting delays in response times, which was impacting customer satisfaction.
-
-Task: My task was to identify the root cause of the delays and find a solution that could improve response times without overhauling the entire system, as that would require considerable resources and time.
-
-Action:Instead of going for a conventional approach, I decided to analyze the user interaction patterns within the application.
-I discovered that many queries were repetitive and could be addressed through an automated response system.
-I proposed developing a simple AI-driven chatbot to handle common queries and provide instant answers.
-To make this happen, I collaborated with the AI team to integrate a basic chatbot feature into our existing platform.
-We held brainstorming sessions to identify the most frequently asked questions and created a streamlined workflow for the bot to follow.
-I also organized user testing to gather feedback and fine-tune the chatbot's responses before launch.
-
-Result: As a result, the chatbot successfully handled around 60% of the common queries, which significantly reduced the workload on our support team.
-This led to a 30% decrease in response times and improved customer satisfaction ratings.
-The project was not only a cost-effective solution but also enhanced the overall user experience on our platform.
 
 
 
@@ -382,47 +433,6 @@ The less critical design elements were scheduled for future iterations once the 
 Result: This trade-off allowed us to meet the deadline without sacrificing the product's key features.
 We were able to launch on time, and the phased approach enabled us to gradually enhance the design based on user feedback,
 improving the product’s quality in subsequent updates. The outcome was a successful UI revamp that resulted in increased user engagement and satisfaction.
-
-
-Hobbies***
-In my free time i like to draw, cook, like this weekend i made pasta. Watch movies.
-Fight Club,Shawshank Redemption,Her ,The Pursuit of Happyness
-
-
-Weakness ***
-
-I tend to over-analyze certain situations, wanting to ensure I’ve considered all possible angles before making a decision.
-While this can be helpful in avoiding mistakes, I’ve noticed that it can sometimes slow down progress, especially in fast-paced environments.
-To manage this, I’ve been working on setting specific time limits for research and analysis, and focusing on trusting my initial instincts more.
-This approach has helped me strike a balance between thoroughness and timely decision-making.
-
-
-Strength ***
-good listner, bond easly with people, people feel i am approchable as a result team player.
-Raise concerns upfronted i don't shy away from speaking up.I like to keep clear communications.
-
-Good Listener and Approachable
-I consider myself a good listener, which helps me bond easily with people and makes me approachable.
-When I was acting as a Scrum Master, I made it a point to actively listen during team meetings,
-ensuring that everyone had the opportunity to share their ideas and concerns.
-During retrospective meetings, I encouraged the team to openly discuss both the positive and negative aspects of the sprint,
-fostering a culture of transparency and continuous improvement. This approach not only built trust but also helped the team address challenges more effectively
-
-
-Team Player
-I strongly believe that being a team player is crucial in any collaborative environment.
-It's not just about excelling in your own area of expertise but also about how well you can work with others.
-I’ve seen firsthand that even if someone has exceptional skills, if they can't collaborate effectively, it can create blockers for the entire team.
-I make it a point to communicate openly, share knowledge, and ensure that my contributions help the team move forward together,
-rather than just focusing on individual success
-
-
-Raising Concerns Upfront:
-One of my strengths is being proactive about raising concerns upfront. I believe in maintaining transparency within the team,
-and I approach potential issues early to avoid larger problems down the road. For example, if I notice any risks in the project timeline,
-I make sure to bring them up in team meetings in a constructive manner, rather than waiting for them to escalate.
-This approach has led to timely interventions and has helped in achieving smoother project outcomes.
-
 
 
 

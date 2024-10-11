@@ -1112,13 +1112,13 @@ How can we handle this to prevent memory leaks?
 
 
 React 19 features****
-React Compiler
+React Compiler: Performance Optimizations,Dead Code Elimination,analyzes your code and creates more optimized versions. 
 Server Components
 Use API
 Using ref as Prop: You can now pass ref directly as a prop. This eliminates the need to use forwardRef.
 
 
-
+we have a list item in a component, when we add a new item the entire list re-renders causing a performance issue. how to optimise this using React.memo
 
 
 

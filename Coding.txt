@@ -32,6 +32,30 @@ function close(x){
 close(i)
 }-----will print 1 to 10
 
+
+function countdown(n) {
+  setTimeout(function tick() {
+    if (n > 0) {
+      console.log(n);
+      setTimeout(tick, 1000);
+    }
+    n--;
+  }, 1000);
+}
+
+countdown(5);
+// Output: 5, 4, 3, 2, 1 (each after 1 second)
+
+
+function countdown(n) {
+  for (let i = 5; i > 0; i--) {
+    setTimeout(() => {
+      console.log(i);
+    }, 1000 * (6 - i));
+  }
+}
+
+
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
  numArray.length=0
 
@@ -808,25 +832,33 @@ console.log(removeVowels(str)); // Output: Ths s  tst strng wth vwls
 
 
 
-function countdown(n) {
-  setTimeout(function tick() {
-    if (n > 0) {
-      console.log(n);
-      setTimeout(tick, 1000);
-    }
-    n--;
-  }, 1000);
-}
-
-countdown(5);
-// Output: 5, 4, 3, 2, 1 (each after 1 second)
 
 
-function countdown(n) {
-  for (let i = 5; i > 0; i--) {
-    setTimeout(() => {
-      console.log(i);
-    }, 1000 * (6 - i));
+function convertTo24Hour(time) {
+ const [timePart, modifier] = time.split(' ');
+let [hours, minutes] = timePart.split(':')
+ if (modifier === 'PM' && hours !== 12) {
+    hours += 12;
   }
+    if (modifier === 'AM' && hours === 12) {
+    hours = 0;
+  }
+ return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
 }
+
+
+function convertTo12Hour(time) {
+  let [hours, minutes] = time.split(':').map(Number);
+const period = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12 || 12;
+ return `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
+
+
+
+
+
+
+
+
+
 
