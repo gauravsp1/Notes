@@ -1,5 +1,70 @@
 
+
+
 XSS (Cross site scripting)*****
+1. Stored (Persistent) XSS:
+In a blog comment system, imagine there's no validation or sanitization of user input. An attacker might leave the following comment:
+<script>alert('You have been hacked!');</script>
+Since this input is saved in the database, every time another user views the page containing this comment, the script will execute in their browser.
+This can be used to steal cookies, deface the page, or redirect users to malicious sites.
+A user posts a comment containing malicious JavaScript.
+The script gets stored on the server.
+Every subsequent visitor who views the page sees the comment, and the script is executed in their browsers.
+
+2. Reflected (Non-persistent) XSS:
+An attacker sends a victim a malicious link like the one below:
+http://example.com/search?query=<script>alert('Your session has expired!');</script>
+The web application takes the "query" parameter from the URL and displays it on the search results page without sanitizing it.
+When the victim clicks the link, the page reflects the malicious input back to the browser and runs the script, showing the fake alert message.
+The attacker sends an email with a crafted malicious link.
+The victim clicks the link.
+The malicious script is executed in the victim’s browser.
+
+3. DOM-based XSS:
+DOM-based XSS occurs entirely in the client-side JavaScript of the webpage. For example, suppose a web page has a search function like this:
+<script>
+    var search = location.search.substring(1);
+    document.write("You searched for: " + search);
+</script>
+Here, the script directly takes the value from the URL and writes it into the webpage. An attacker could trick a user into visiting a URL like:
+http://example.com/search.html?<script>alert('DOM XSS attack');</script>
+In this case, the script executes directly in the user's browser without being sent to the server, leading to the XSS attack.
+The attacker sends a URL containing a script.
+The user clicks the link.
+The browser executes the script without any interaction with the server.
+
+Stored XSS: Attacker injects a script that is stored on the server and executed when other users load the page.
+Reflected XSS: Malicious script is reflected off a vulnerable web server via a URL and immediately executed in the victim’s browser.
+DOM-based XSS: Malicious script is executed by manipulating the client-side code (JavaScript/DOM) without needing to interact with the server.
+
+1. Stored (Persistent) XSS Mitigation:
+Sanitize Input: Ensure that any input coming from users is thoroughly validated and sanitized before it is stored.
+This includes comments, profile information, or any form input.
+Output Encoding: When displaying user input (e.g., blog comments), make sure to encode the output before it's rendered in the browser.
+This prevents any injected scripts from being executed.
+HTML encoding: Replace characters like <, >, &, ' with their HTML-encoded equivalents (e.g., &lt;, &gt;, &amp;, etc.).
+
+2. Reflected (Non-persistent) XSS Mitigation:
+Avoid Dynamic Content in URLs: Where possible, avoid directly using user-supplied input in HTML responses. Use server-side logic to safely return data.
+Validate URLs: Implement input validation and sanitization for any part of the URL that might accept user input, especially query strings.
+Use Security Frameworks: Web frameworks like Django, Rails, and ASP.NET come with built-in protection against XSS. Use these security features whenever possible.
+
+3. DOM-based XSS Mitigation:
+Use Safe DOM Manipulation Methods: Avoid directly inserting untrusted data into the DOM.
+Instead, use safe functions like textContent, innerText, or createTextNode that treat input as text rather than HTML.
+
+General Best Practices for XSS Mitigation:
+Use Web Framework Security Features: Many modern frameworks come with built-in defenses against XSS, including automatic output escaping.
+Always take advantage of these features.
+Content Security Policy (CSP): A CSP can block XSS attacks by preventing the execution of unauthorized scripts.
+It allows only trusted sources of scripts, styles, and other content.
+Disable Inline JavaScript Execution: Ensure that inline scripts are disabled and that your web application does not rely on inline JavaScript
+(e.g., by setting script-src 'self'; in your CSP).
+Use HTTP-Only and Secure Cookies: HTTP-only cookies cannot be accessed via JavaScript, limiting the impact of XSS attacks on sensitive session information.
+Regularly Test for XSS Vulnerabilities: Use automated tools (like static analysis tools, penetration testing tools,
+or browser extensions like the XSS Auditor) to regularly test your code for potential vulnerabilities.
+
+
 
 Security headers******
 X-powered-by
@@ -25,19 +90,106 @@ Dependecy security*****
 Input validation***
 
 SSRF****
+SSRF (Server-Side Request Forgery) is a web security vulnerability that allows an attacker to make requests from a vulnerable server.
+In an SSRF attack, an attacker tricks a server into making unauthorized HTTP or other protocol requests to internal or external resources
+that the server has access to. This can lead to sensitive information disclosure, internal network access, or other exploits.
+
+Typically, SSRF occurs when a web application accepts a user-controlled URL or IP address and sends a request to that resource on the backend
+without proper validation. Attackers can exploit this to send requests to:
+
+Internal services (e.g., localhost, 127.0.0.1, private IP ranges like 10.x.x.x or 192.168.x.x).
+Cloud metadata services (e.g., AWS EC2’s metadata service at 169.254.169.254).
+External systems with malicious payloads.
+
+SSRF Mitigation Techniques:
+Allowlist Valid URLs: Only allow connections to a specific set of trusted or allowlisted domains or IP addresses.
+If users are supposed to input URLs, restrict the domain to known safe addresses.
+Deny Internal IP Ranges: Prevent requests to internal/private IP addresses (e.g., 127.0.0.1, localhost, 10.x.x.x, 192.168.x.x) or
+internal network ranges to stop attackers from accessing internal resources.
+Avoid User Input in Direct Requests: Avoid using user-controlled input to directly perform backend requests. Always sanitize and validate any user input.
+Use Web Application Firewalls
+Restrict Access to Internal Services:Ensure that internal services are not exposed externally. Configure firewalls to prevent unauthorized access to private networks from untrusted sources.
+Timeouts and Rate Limiting:Implement timeouts and rate limits on backend requests to avoid excessive or long-running requests triggered by SSRF attacks.
 
 SSJI ***
+SSJI (Server-Side JavaScript Injection) is a type of security vulnerability where an attacker injects malicious JavaScript code into a server-side environment
+that processes JavaScript. The injected code is executed on the server, potentially allowing the attacker to execute arbitrary code,
+access sensitive data, or compromise the server.
+
+SSJI happens when:
+User input is included in a dynamic JavaScript expression or evaluated by functions like eval(), setTimeout(), Function(), or vm.runInNewContext().
+The server does not properly sanitize or validate user-supplied data, leading to the injection of malicious JavaScript code.
+This code is executed in the server environment, allowing an attacker to potentially:
+Access sensitive data stored on the server.
+Perform server-side operations (e.g., file system access, database queries).
+Compromise the underlying system.
+
+Risks of SSJI:
+Arbitrary Code Execution: Attackers can execute arbitrary JavaScript code on the server, potentially gaining control over the entire server.
+Sensitive Data Exposure: Attackers might access sensitive data such as environment variables, configuration files, database credentials, and user data.
+Denial of Service (DoS): Attackers can crash the server or exhaust system resources through malicious payloads.
+File System Manipulation: SSJI could allow attackers to read, modify, or delete files on the server.
+
+SSJI Mitigation Techniques:
+Avoid Using eval() and Similar Functions:
+Input Validation and Sanitization:
+Use a Security Library or Framework:
+Limit the Scope of Executable Code:
+
+
 
 CORS ****
+
+CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to prevent web pages from making requests to a different domain
+than the one that served the web page. CORS is designed to protect users from malicious websites attempting to steal data or perform actions on their behalf,
+known as Cross-Origin attacks.
+Same-Origin Policy:
+Before diving into CORS, it’s important to understand the Same-Origin Policy (SOP),
+which is a security model used by browsers to restrict how documents or scripts loaded from one origin can interact with resources from another origin.
+Two URLs are considered of the same origin if they share the same protocol, host, and port.
+Same-Origin Policy helps prevent malicious scripts from stealing sensitive data from other sites,
+but it can be too restrictive for legitimate cross-origin resource sharing (e.g., fetching APIs or using CDNs), which is where CORS comes into play.
+
+CORS allows servers to specify which origins (domains) are allowed to access their resources via specific HTTP headers.
+When a web page makes a cross-origin request (e.g., using fetch, XMLHttpRequest, or Axios),
+the browser sends an HTTP request with special CORS headers to determine if the request is safe.
+
+
+
+
+
+
+
 
 Method:Option ****
 What is preflight****
 
 CSRF****
+CSRF (Cross-Site Request Forgery) is a web security vulnerability that allows an attacker to trick users into performing actions
+they didn’t intend to take on a web application in which they are authenticated. CSRF exploits the trust a web application has in the user's browser,
+causing the browser to send unwanted requests (such as making changes or initiating transactions) on behalf of the authenticated user.
 
+How CSRF Works:
+In a CSRF attack, an attacker tricks a victim into submitting a malicious request to a web application where the victim is already authenticated.
+Since the browser automatically includes session cookies, authentication tokens, or other credentials with every request to the application,
+the server executes the request, believing it came from the authenticated user.
 
+Key elements of a CSRF attack:
+Victim is authenticated: The user is logged in to a website and has an active session.
+Malicious request: The attacker crafts a malicious request, often embedded in a link, image, or form.
+User interaction: The victim unknowingly triggers the malicious request by visiting a webpage, clicking a link, or submitting a form.
+Trusted by server: The web server receives the request along with the victim’s credentials (session cookie) and executes it as though it came from the
+legitimate user.
 
-
+CSRF Mitigation Techniques:
+Anti-CSRF Tokens:
+Double Submit Cookies:
+In this approach, the CSRF token is stored both in a cookie and as a hidden field in the form.
+When the form is submitted, both the cookie and the form’s token are compared by the server. If they match, the request is considered valid.
+Custom Headers (for API requests):
+For AJAX or API requests, it’s a good practice to use custom headers (e.g., X-CSRF-Token) to pass the CSRF token.
+Since attackers cannot set custom headers in cross-origin requests, this helps prevent CSRF attacks.
+Limit Request Methods:
 
 
 

@@ -84,6 +84,60 @@ Non-Primitive (Reference) Data Types:
 3.Function  //typeof  function
 
 
+null vs undefiend ********
+
+null
+Type: null is an object.
+Meaning: null explicitly indicates the absence of any object value. It is a value that a programmer can assign to a variable to denote that it is intentionally empty.
+Use Cases:
+To explicitly indicate that a variable should be empty.
+To reset or clear a variable's value.
+
+undefined
+Type: undefined is a primitive type.
+Meaning: undefined indicates that a variable has been declared but has not yet been assigned a value. It is the default value for uninitialized variables.
+Use Cases:
+Variables that are declared but not assigned any value.
+Function parameters that are not provided.
+Properties that do not exist on an object.
+The return value of functions that do not explicitly return a value.
+
+Key Differences
+Initialization and Assignment:
+
+null is an assignment value. It can be explicitly assigned to a variable to indicate "no value."
+undefined is the default value for variables that have been declared but not initialized.
+Type:
+
+null is an object.
+undefined is a primitive type.
+Usage:
+
+Use null when you want to explicitly indicate the absence of a value.
+Use undefined to indicate that a variable has not been initialized.
+Comparison:
+
+null == undefined is true because they are loosely equal.
+null === undefined is false because they are of different types.
+
+
+
+Something hasn't been initialized but memory is alocated to it : undefined.(declared but not initialized)
+Something is currently unavailable: null.
+null is an assingment value
+
+typeof undefined           // undefined
+typeof null                // object
+
+null === undefined         // false
+null == undefined          // true
+
+typeOf function is function
+
+typeOf null ********
+n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
+Unfortunately, in JavaScript, the data type of null is an object. You can consider it a bug in JavaScript that typeof null is an object.
+
 
 Why is JavaScript Single Threaded language *************
 JavaScript is single-threaded by design to ensure simplicity and a responsive user interface, avoiding the complexities associated with multi-threading.
@@ -422,6 +476,16 @@ Array.find()
 Array.findIndex()
 
 
+Object Literal **********
+an object literal is a comma-separated list of name-value pairs inside of curly braces.
+const person = {
+    name: 'John',
+    age: 30,
+    greet: function() {
+        console.log('Hello, my name is ' + this.name);
+    }
+};
+
 
 Template Strings *******
 We don't need to concate string and variable with + symbole anymore
@@ -440,6 +504,12 @@ obj{a:1,b:2,c:{d:4,e:5}}
 const {a,b,c:{d}} = obj
 
 
+Default Parameter Values **********
+function myFunction(x, y = 10) {
+  // y is 10 if not passed or undefined
+  return x + y;
+}
+myFunction(5); // will return 15
 
 
 The let keyword **********
@@ -448,6 +518,14 @@ Before  JavaScript had only two types of scope: Global Scope and Function Scope.
 Global variables can be accessed from anywhere in a JavaScript program. Variables declared  (inside a function) have Function Scope.
 LET and CONST declared inside a block {} cannot be accessed from outside the block: var keyword cannot have Block Scope.
 Can reassign values in LET but not in CONST.Rest all same between LET and CONST.
+
+Feature			var									let								const
+Scope			Function-scoped						Block-scoped					Block-scoped
+Hoisting		Yes (initialized with undefined)	Yes (with Temporal Dead Zone)	Yes (with Temporal Dead Zone)
+Re-declaration	Allowed								Not allowed in the same scope	Not allowed in the same scope
+Reassignment	Allowed								Allowed							Not allowed (for primitive values)
+Mutability		Mutable								Mutable							Immutable binding (but mutable for objects and arrays)
+
 
 The const keyword makes a variable itself immutable, not its assigned content.
 When the content is an object, this means the object itself can still be altered. 
@@ -462,13 +540,85 @@ Copying Behavior	Creates a copy of the value				Copies the reference, not the va
 Examples			Number, String, Boolean, Null, etc.		Object, Array, Function, etc.
 
 
-Default Parameter Values **********
-function myFunction(x, y = 10) {
-  // y is 10 if not passed or undefined
-  return x + y;
-}
-myFunction(5); // will return 15
+Hoisting ********
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (function or global scope) before code execution.
+This means that you can use variables and functions before they are actually declared in the code.
+All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined ,
+but let and const declarations remain uninitialized.
+They are in a "temporal dead zone" (TDZ) from the start of the block until the declaration is encountered. Accessing them before the declaration results in a ReferenceError.
 
+For let and const they are stored in different way in seperate memory space in Script and not in Global 
+so we cannot acces them without intializing them.
+
+Temporal Dead Zone (TDZ)
+The Temporal Dead Zone (TDZ) is the period between entering a scope and when a variable is initialized.
+Variables declared with let, const, and class are hoisted but not initialized during the TDZ.
+The TDZ exists to ensure that variables are not used before they are declared, which helps avoid unexpected behavior and bugs. 
+It encourages cleaner, more predictable code by preventing the use of variables until they are properly initialized.
+
+Accessing these variables in the TDZ results in a ReferenceError.
+2 Golden Rules:
+1. Variable declarations are scanned and are made undefined
+2. Function declarations are scanned and are made available
+
+var variables are hoisted but initialized to undefined.
+let and const variables are hoisted but remain in the temporal dead zone (TDZ) until initialization.
+Function declarations are hoisted entirely, allowing them to be used before their declaration.
+
+Unlike function declarations, function expressions (when functions are assigned to variables) are not hoisted with their initialization. 
+This is because they follow the variable hoisting rules.
+
+Classes declared with the class keyword are not hoisted in the same way as functions. 
+They behave more like let and const, existing in the temporal dead zone until the declaration is evaluated.
+
+
+
+Lexical  scope **********
+A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
+inside another function defined after the variable declaration. 
+But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
+Inner functions can acces outer variables but outter cannot access inner function variables
+
+In JavaScript, functions create their own scope. The variables defined inside a function are not accessible outside of it.
+However, functions defined within another function have access to the variables of the outer function. This nested structure defines the lexical scope.
+
+Key Points of Lexical Scope
+Scope Chain:
+When a variable is referenced, JavaScript looks up the scope chain starting from the innermost scope and moving outward until it finds the variable or reaches the global scope.
+
+Function Scope:
+Each function creates a new scope. Variables declared within a function are not accessible outside it.
+
+Block Scope:
+With ES6, let and const introduced block-scoped variables, which are only accessible within the block they are defined in (e.g., within a loop or an if statement).
+
+
+Closure ***********
+A closure in JavaScript is created when a function is defined inside another function, and the inner function has access to the variables of the outer function, 
+even after the outer function has finished executing. 
+In simpler terms, a closure allows an inner function to "remember" and access its lexical scope, even when the outer function is no longer active.
+
+commonly used for data encapsulation, function factories, callbacks, and event handlers, and maintaining private variables.
+
+When an inner function is returned from an outer function, it preserves the environment (or lexical scope) in which it was created. 
+This environment includes any variables that were in scope at the time the closure was created.
+
+function outerFunction() {
+    let outerVariable = 'I am from outer';
+
+    function innerFunction() {
+        console.log(outerVariable);  // Accessing a variable from the outer scope
+    }
+
+    return innerFunction;
+}
+
+const closureFunc = outerFunction();  // outerFunction() returns innerFunction
+closureFunc();  // Output: 'I am from outer'
+
+Disadvantages
+it uses more memory
+Careful attention is needed to avoid accidental variable sharing in loops and similar constructs.
 
 
 JavaScript Arrow Functions **********
@@ -540,18 +690,6 @@ This is called lexical scoping. The value of this in the arrow function is "lock
 
 the value of "this" inside a class refers to the instance of the class 
 
-Object Literal **********
-an object literal is a comma-separated list of name-value pairs inside of curly braces.
-const person = {
-    name: 'John',
-    age: 30,
-    greet: function() {
-        console.log('Hello, my name is ' + this.name);
-    }
-};
-
-
-
 
 JavaScript Class ****************
 When we want same obj properties for many objs we create a blueprint of it that is called class
@@ -579,185 +717,135 @@ Static Methods: Belong to the class itself, not instances.
 Getters and Setters: Provide controlled access to properties.
 
 
-JS 2016
-JavaScript Exponentiation (**)
-JavaScript Exponentiation assignment (**=)
-JavaScript Array includes()
+Prototype ********
+In JavaScript, the prototype is a mechanism that allows objects to inherit properties and methods from another object.
+It’s one of the core concepts of the language's object-oriented programming model.
 
-JS 2017
-JavaScript String padding
-JavaScript Object entries()
-JavaScript Object values()
-JavaScript async and await
-Trailing Commas in Functions
+Key Concepts:
+Prototype Chain: Every JavaScript object has a hidden internal property called [[Prototype]] (commonly accessed using __proto__ in modern browsers), 
+which points to another object. This other object is called the prototype. 
+If an object tries to access a property or method that doesn't exist on the object itself, the JavaScript engine looks for it on the object's prototype, 
+then on that prototype's prototype, and so on, forming a "prototype chain".
 
-JS 2018
-JS 2019
-JS 2020
-JS 2021
+Constructor Functions and prototype Property: In JavaScript, when you create an object using a constructor function, 
+each instance of that object inherits from the constructor’s prototype. The prototype property of the constructor is an object, 
+and properties or methods attached to this prototype will be shared among all instances.
 
+Object Creation: When creating an object using new or object literals, the object automatically gets its prototype set, 
+allowing it to inherit behaviors from the prototype.
 
-
-Hoisting ********
-Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (function or global scope) before code execution.
-This means that you can use variables and functions before they are actually declared in the code.
-All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined ,
-but let and const declarations remain uninitialized.
-They are in a "temporal dead zone" (TDZ) from the start of the block until the declaration is encountered. Accessing them before the declaration results in a ReferenceError.
-
-For let and const they are stored in different way in seperate memory space in Script and not in Global 
-so we cannot acces them without intializing them.
-
-Temporal Dead Zone (TDZ)
-The Temporal Dead Zone (TDZ) is the period between entering a scope and when a variable is initialized.
-Variables declared with let, const, and class are hoisted but not initialized during the TDZ.
-The TDZ exists to ensure that variables are not used before they are declared, which helps avoid unexpected behavior and bugs. 
-It encourages cleaner, more predictable code by preventing the use of variables until they are properly initialized.
-
-Accessing these variables in the TDZ results in a ReferenceError.
-2 Golden Rules:
-1. Variable declarations are scanned and are made undefined
-2. Function declarations are scanned and are made available
-
-var variables are hoisted but initialized to undefined.
-let and const variables are hoisted but remain in the temporal dead zone (TDZ) until initialization.
-Function declarations are hoisted entirely, allowing them to be used before their declaration.
-
-Unlike function declarations, function expressions (when functions are assigned to variables) are not hoisted with their initialization. 
-This is because they follow the variable hoisting rules.
-
-Classes declared with the class keyword are not hoisted in the same way as functions. 
-They behave more like let and const, existing in the temporal dead zone until the declaration is evaluated.
-
-
-Lexical  scope **********
-A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
-inside another function defined after the variable declaration. 
-But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
-Inner functions can acces outer variables but outter cannot access inner function variables
-
-In JavaScript, functions create their own scope. The variables defined inside a function are not accessible outside of it.
-However, functions defined within another function have access to the variables of the outer function. This nested structure defines the lexical scope.
-
-Key Points of Lexical Scope
-Scope Chain:
-When a variable is referenced, JavaScript looks up the scope chain starting from the innermost scope and moving outward until it finds the variable or reaches the global scope.
-
-Function Scope:
-Each function creates a new scope. Variables declared within a function are not accessible outside it.
-
-Block Scope:
-With ES6, let and const introduced block-scoped variables, which are only accessible within the block they are defined in (e.g., within a loop or an if statement).
-
-
-
-Closure ***********
-A closure in JavaScript is created when a function is defined inside another function, and the inner function has access to the variables of the outer function, 
-even after the outer function has finished executing. 
-In simpler terms, a closure allows an inner function to "remember" and access its lexical scope, even when the outer function is no longer active.
-
-commonly used for data encapsulation, function factories, callbacks, and event handlers, and maintaining private variables.
-
-When an inner function is returned from an outer function, it preserves the environment (or lexical scope) in which it was created. 
-This environment includes any variables that were in scope at the time the closure was created.
-
-function outerFunction() {
-    let outerVariable = 'I am from outer';
-
-    function innerFunction() {
-        console.log(outerVariable);  // Accessing a variable from the outer scope
-    }
-
-    return innerFunction;
+// Constructor function for a Person
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 }
 
-const closureFunc = outerFunction();  // outerFunction() returns innerFunction
-closureFunc();  // Output: 'I am from outer'
+// Adding a method to the prototype
+Person.prototype.sayHello = function() {
+  console.log(`Hello, my name is ${this.name}`);
+};
 
-Disadvantages
-it uses more memory
-Careful attention is needed to avoid accidental variable sharing in loops and similar constructs.
+// Creating instances of Person
+const person1 = new Person("Alice", 25);
+const person2 = new Person("Bob", 30);
 
+// Both instances can use the sayHello method
+person1.sayHello(); // "Hello, my name is Alice"
+person2.sayHello(); // "Hello, my name is Bob"
 
-Use Strict *********
-Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
-
-Prevents the use of undeclared variables: In normal JavaScript, assigning a value to an undeclared variable automatically creates it as a global variable.
-In strict mode, it throws an error.
-Eliminates this coercion: In normal JavaScript, this can point to the global object in functions if not explicitly bound.
-In strict mode, this will be undefined in such cases.
-Disallows duplicate parameter names: In strict mode, functions cannot have duplicate parameter names. This helps prevent ambiguity in code.
-
-Helps prevent accidental errors (e.g., creating global variables, using this in unintended ways).
-Enhances security and predictability in code.
-Makes it easier to optimize code, as some problematic behaviors are disallowed.
-Aids in identifying bad practices early by throwing errors during development.
-You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
-Strict mode changes previously accepted "bad syntax" into real errors.
+// The method is not on the instance itself but on the prototype
+console.log(person1.hasOwnProperty('sayHello')); // false
+console.log(Person.prototype.hasOwnProperty('sayHello')); // true
 
 
-Different Kinds of Loops ***********
-
-JavaScript supports different kinds of loops:
-
-for - loops through a block of code a number of times
-for/in - loops through the properties of an object or gives the index value of array
-for (key in object) {
-  // code to be executed
-}
-for (let index in arr) {
-    console.log(index + ": " + arr[index]);
+Constructor Function *****
+Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
+The this object is returned implicitly if the function does not return another object explicitly.
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
 }
 
-for/of - loops through the values of an iterable object or gives the  value of array
-for (value of iterable) {
-  // code to be executed
+const person1 = new Person("Alice", 30);
+console.log(person1.name); // Output: "Alice"
+console.log(person1.age);  // Output: 30
+
+When a function is called without new, it executes as a regular function.
+When a function is called with new, it creates a new object and binds this to that new object.
+
+Regular Functions: Perform tasks and do not create objects. Called without new.
+Constructor Functions: Create and initialize objects. Called with new.
+Arrow Functions: Cannot be used as constructors and lack their own this context.
+
+
+Constructor Function: Animal is a constructor function.
+Prototype Method: speak is added to Animal.prototype.
+Instance: dog is an instance of Animal and can use the speak method via prototype inheritance.
+
+
+Benefits of Constructor Functions
+Code Reusability: Create multiple objects with shared properties and methods.
+Memory Efficiency: Methods defined on the prototype are shared across instances, saving memory.
+OOP Principles: They enable Object-Oriented Programming (OOP) principles like inheritance and encapsulation.
+
+Constructor Functions: Special functions for creating and initializing objects.
+Prototype: Used to add methods that are shared across all instances of a constructor function.
+The new Keyword: Facilitates the creation of a new object, setting up inheritance from the constructor's prototype.
+Constructor functions and prototypes are foundational concepts in JavaScript, enabling efficient object creation and method sharing.
+
+Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
+Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
+
+
+Factory Function*****
+A factory function is a function in JavaScript that returns a new object without using the new keyword or a constructor function.
+It is an alternative way to create objects and is more flexible than constructor functions because it does not rely on the new keyword 
+or the complexities of the this keyword.
+
+Key Characteristics of Factory Functions:
+Returns a new object: A factory function explicitly returns a new object, allowing you to avoid the pitfalls of this.
+No new keyword needed: Unlike constructor functions, factory functions don’t require the new keyword for object creation.
+Encapsulation: Factory functions can use closures to encapsulate private variables or functions, making them more secure and modular.
+More flexibility: Since there’s no reliance on the this keyword, factory functions can be used in more flexible and dynamic ways.
+When you call Person without the new keyword, it behaves like a regular function and does not create a new instance.
+The value of this depends on the execution context, which can lead to unexpected behavior.
+
+
+// Factory function to create a Car object
+function createCar(make, model, year) {
+  return {
+    make: make,
+    model: model,
+    year: year,
+    
+    // Method inside the object
+    displayInfo: function() {
+      console.log(`Car: ${this.make} ${this.model}, Year: ${this.year}`);
+    },
+  };
 }
 
-while - loops through a block of code while a specified condition is true
-do/while - also loops through a block of code while a specified condition is true
-forEach-array.forEach(function(currentValue, index, arr), thisValue)
+// Using the factory function to create objects
+const car1 = createCar("Toyota", "Camry", 2020);
+const car2 = createCar("Honda", "Civic", 2018);
 
+// Accessing properties and calling methods
+console.log(car1.make); // Output: Toyota
+car1.displayInfo();     // Output: Car: Toyota Camry, Year: 2020
 
-Lazy loading ****
-Lazy loading is a design pattern and optimization technique used to improve the performance and resource management of applications, particularly in the context of web development.
-It involves delaying the loading of non-critical resources until they are actually needed,
-which can lead to faster initial load times and more efficient use of bandwidth and system resources.
+console.log(car2.model); // Output: Civic
+car2.displayInfo();      // Output: Car: Honda Civic, Year: 2018
 
-How Lazy Loading Works
-The main idea behind lazy loading is to load resources only when they are required. For instance, in a web application, images, scripts, or other components 
-might only be loaded when they come into the user's viewport (i.e., they are visible on the screen).
+Benefits of Factory Functions:
+Avoids Pitfalls of this: Since factory functions don't use this, there's no need to worry about the context (this binding issues).
+Private Variables: Factory functions can leverage JavaScript closures to create private variables, making them more secure and modular.
+Flexibility: Factory functions can be more flexible and can easily return different types of objects based on conditions.
+No new Keyword: You don’t need to remember to use new, avoiding errors that arise from omitting it in constructor functions.
 
-const LazyComponent = React.lazy(() => import('./LazyComponent'));
-
-Benefits of Lazy Loading
-Improved Performance: By loading only the necessary resources initially, the initial page load time is reduced, making the application appear faster to users.
-Reduced Bandwidth Usage: Only the resources that are needed are downloaded, which can save bandwidth, especially important for users with limited or slow internet connections.
-Better Resource Management: Lazy loading can help in managing memory and CPU usage more efficiently, as fewer resources are loaded and processed at any given time.
-Enhanced User Experience: Users get a quicker response time and the content they need without waiting for the entire page to load.
-
-
-Disadvantages of Lazy loading:
-
-Firstly, the extra lines of code, to be added to the existing ones, to implement lazy load makes the code a bit complicated.
-Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
-
-
-Lazy loading is a powerful optimization technique that can greatly enhance the performance and user experience of web applications. 
-By delaying the loading of non-essential resources, you can reduce initial load times, save bandwidth, and improve the overall responsiveness of your application. 
-Implementing lazy loading requires a thoughtful approach to determine which resources can be loaded on demand and ensuring that the user experience remains seamless.
-
-
-
-Minification-(bundle multiple files in a group) ***********
-Minification is the process of minimizing code and markup in your web pages and script files. 
-It's one of the main methods used to reduce load times and bandwidth usage on websites. 
-Minification dramatically improves site speed and accessibility, directly translating into a better user experience
-
-Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
-Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
-Minification is performed on the web server before a response is sent.
-
+When to Use Factory Functions:
+When you want to create objects with encapsulated, private data.
+When you don’t want to rely on the new keyword or worry about the complexities of this.
+When you need more flexibility in object creation, such as dynamically creating objects based on certain conditions.
 
 
 call() vs apply() vs bind() *******
@@ -809,14 +897,80 @@ Helps in scenarios like partial function application, where you create a new fun
 
 
 
-partial classes **********
-A “partial class” is a class whose methods and variables are parceled out into multiple files. 
-When the files are compiled, the class reassembles itself into the full class definition
-in general JavaScript is a class-less language. Everything is an object. 
-And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
-Purpose of partial classes is to allow a class's definition to span across multiple files. 
-This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
+JS 2016
+JavaScript Exponentiation (**)
+JavaScript Exponentiation assignment (**=)
+JavaScript Array includes()
 
+JS 2017
+JavaScript String padding
+JavaScript Object entries()
+JavaScript Object values()
+JavaScript async and await
+Trailing Commas in Functions
+
+JS 2018
+JS 2019
+JS 2020
+JS 2021
+
+
+Use Strict *********
+Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
+
+Prevents the use of undeclared variables: In normal JavaScript, assigning a value to an undeclared variable automatically creates it as a global variable.
+In strict mode, it throws an error.
+Eliminates this coercion: In normal JavaScript, this can point to the global object in functions if not explicitly bound.
+In strict mode, this will be undefined in such cases.
+Disallows duplicate parameter names: In strict mode, functions cannot have duplicate parameter names. This helps prevent ambiguity in code.
+
+Helps prevent accidental errors (e.g., creating global variables, using this in unintended ways).
+Enhances security and predictability in code.
+Makes it easier to optimize code, as some problematic behaviors are disallowed.
+Aids in identifying bad practices early by throwing errors during development.
+You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
+Strict mode changes previously accepted "bad syntax" into real errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Different Kinds of Loops ***********
+
+JavaScript supports different kinds of loops:
+
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object or gives the index value of array
+for (key in object) {
+  // code to be executed
+}
+for (let index in arr) {
+    console.log(index + ": " + arr[index]);
+}
+
+for/of - loops through the values of an iterable object or gives the  value of array
+for (value of iterable) {
+  // code to be executed
+}
+
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+forEach-array.forEach(function(currentValue, index, arr), thisValue)
 
 
 Comparing two Objects ***********
@@ -825,62 +979,6 @@ Again, let me stress, it is comparing the references to the objects, not the key
 Same for array.
 structuredClone()
 const clone = structuredClone(originalObject);
-
-
-
-null vs undefiend ********
-
-null
-Type: null is an object.
-Meaning: null explicitly indicates the absence of any object value. It is a value that a programmer can assign to a variable to denote that it is intentionally empty.
-Use Cases:
-To explicitly indicate that a variable should be empty.
-To reset or clear a variable's value.
-
-undefined
-Type: undefined is a primitive type.
-Meaning: undefined indicates that a variable has been declared but has not yet been assigned a value. It is the default value for uninitialized variables.
-Use Cases:
-Variables that are declared but not assigned any value.
-Function parameters that are not provided.
-Properties that do not exist on an object.
-The return value of functions that do not explicitly return a value.
-
-Key Differences
-Initialization and Assignment:
-
-null is an assignment value. It can be explicitly assigned to a variable to indicate "no value."
-undefined is the default value for variables that have been declared but not initialized.
-Type:
-
-null is an object.
-undefined is a primitive type.
-Usage:
-
-Use null when you want to explicitly indicate the absence of a value.
-Use undefined to indicate that a variable has not been initialized.
-Comparison:
-
-null == undefined is true because they are loosely equal.
-null === undefined is false because they are of different types.
-
-
-
-Something hasn't been initialized but memory is alocated to it : undefined.(declared but not initialized)
-Something is currently unavailable: null.
-null is an assingment value
-
-typeof undefined           // undefined
-typeof null                // object
-
-null === undefined         // false
-null == undefined          // true
-
-typeOf function is function
-
-typeOf null ********
-n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
-Unfortunately, in JavaScript, the data type of null is an object. You can consider it a bug in JavaScript that typeof null is an object.
 
 
 How to make a copy of array or object *******
@@ -938,7 +1036,7 @@ Difference Between slice() and splice()*********
 slice() does not modify the original array; it returns a shallow copy of the selected portion.
 splice() modifies the original array by removing or replacing existing elements.
 array.slice(start, end);
-array.splice(start, deleteCount, item1, item2, ..., itemN);
+array.splice(start, addCount, item1, item2, ..., itemN);
 
 
 JavaScript Array Methods **********
@@ -1173,143 +1271,6 @@ Divide and Conquer: Problems that can be solved by breaking them down into small
 Tail Call Optimization: In languages that support tail call optimization (TCO), recursion can be efficient for iterative processes.
 
 
-
-Prototype ********
-In JavaScript, the prototype is a mechanism that allows objects to inherit properties and methods from another object.
-It’s one of the core concepts of the language's object-oriented programming model.
-
-Key Concepts:
-Prototype Chain: Every JavaScript object has a hidden internal property called [[Prototype]] (commonly accessed using __proto__ in modern browsers), 
-which points to another object. This other object is called the prototype. 
-If an object tries to access a property or method that doesn't exist on the object itself, the JavaScript engine looks for it on the object's prototype, 
-then on that prototype's prototype, and so on, forming a "prototype chain".
-
-Constructor Functions and prototype Property: In JavaScript, when you create an object using a constructor function, 
-each instance of that object inherits from the constructor’s prototype. The prototype property of the constructor is an object, 
-and properties or methods attached to this prototype will be shared among all instances.
-
-Object Creation: When creating an object using new or object literals, the object automatically gets its prototype set, 
-allowing it to inherit behaviors from the prototype.
-
-
-
-// Constructor function for a Person
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-}
-
-// Adding a method to the prototype
-Person.prototype.sayHello = function() {
-  console.log(`Hello, my name is ${this.name}`);
-};
-
-// Creating instances of Person
-const person1 = new Person("Alice", 25);
-const person2 = new Person("Bob", 30);
-
-// Both instances can use the sayHello method
-person1.sayHello(); // "Hello, my name is Alice"
-person2.sayHello(); // "Hello, my name is Bob"
-
-// The method is not on the instance itself but on the prototype
-console.log(person1.hasOwnProperty('sayHello')); // false
-console.log(Person.prototype.hasOwnProperty('sayHello')); // true
-
-
-
-
-Constructor Function *****
-Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
-The this object is returned implicitly if the function does not return another object explicitly.
-function Person(name, age) {
-    this.name = name;
-    this.age = age;
-}
-
-const person1 = new Person("Alice", 30);
-console.log(person1.name); // Output: "Alice"
-console.log(person1.age);  // Output: 30
-
-When a function is called without new, it executes as a regular function.
-When a function is called with new, it creates a new object and binds this to that new object.
-
-Regular Functions: Perform tasks and do not create objects. Called without new.
-Constructor Functions: Create and initialize objects. Called with new.
-Arrow Functions: Cannot be used as constructors and lack their own this context.
-
-
-
-Constructor Function: Animal is a constructor function.
-Prototype Method: speak is added to Animal.prototype.
-Instance: dog is an instance of Animal and can use the speak method via prototype inheritance.
-
-
-Benefits of Constructor Functions
-Code Reusability: Create multiple objects with shared properties and methods.
-Memory Efficiency: Methods defined on the prototype are shared across instances, saving memory.
-OOP Principles: They enable Object-Oriented Programming (OOP) principles like inheritance and encapsulation.
-
-Constructor Functions: Special functions for creating and initializing objects.
-Prototype: Used to add methods that are shared across all instances of a constructor function.
-The new Keyword: Facilitates the creation of a new object, setting up inheritance from the constructor's prototype.
-Constructor functions and prototypes are foundational concepts in JavaScript, enabling efficient object creation and method sharing.
-
-Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
-Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
-
-
-Factory Function*****
-A factory function is a function in JavaScript that returns a new object without using the new keyword or a constructor function.
-It is an alternative way to create objects and is more flexible than constructor functions because it does not rely on the new keyword 
-or the complexities of the this keyword.
-
-Key Characteristics of Factory Functions:
-Returns a new object: A factory function explicitly returns a new object, allowing you to avoid the pitfalls of this.
-No new keyword needed: Unlike constructor functions, factory functions don’t require the new keyword for object creation.
-Encapsulation: Factory functions can use closures to encapsulate private variables or functions, making them more secure and modular.
-More flexibility: Since there’s no reliance on the this keyword, factory functions can be used in more flexible and dynamic ways.
-When you call Person without the new keyword, it behaves like a regular function and does not create a new instance.
-The value of this depends on the execution context, which can lead to unexpected behavior.
-
-
-// Factory function to create a Car object
-function createCar(make, model, year) {
-  return {
-    make: make,
-    model: model,
-    year: year,
-    
-    // Method inside the object
-    displayInfo: function() {
-      console.log(`Car: ${this.make} ${this.model}, Year: ${this.year}`);
-    },
-  };
-}
-
-// Using the factory function to create objects
-const car1 = createCar("Toyota", "Camry", 2020);
-const car2 = createCar("Honda", "Civic", 2018);
-
-// Accessing properties and calling methods
-console.log(car1.make); // Output: Toyota
-car1.displayInfo();     // Output: Car: Toyota Camry, Year: 2020
-
-console.log(car2.model); // Output: Civic
-car2.displayInfo();      // Output: Car: Honda Civic, Year: 2018
-
-Benefits of Factory Functions:
-Avoids Pitfalls of this: Since factory functions don't use this, there's no need to worry about the context (this binding issues).
-Private Variables: Factory functions can leverage JavaScript closures to create private variables, making them more secure and modular.
-Flexibility: Factory functions can be more flexible and can easily return different types of objects based on conditions.
-No new Keyword: You don’t need to remember to use new, avoiding errors that arise from omitting it in constructor functions.
-
-When to Use Factory Functions:
-When you want to create objects with encapsulated, private data.
-When you don’t want to rely on the new keyword or worry about the complexities of this.
-When you need more flexibility in object creation, such as dynamically creating objects based on certain conditions.
-
-
 Object.create() *****
 Object.create() is a method in JavaScript that allows you to create a new object with a specified prototype object and optionally add properties to it.
 This method is particularly useful for implementing inheritance and establishing a prototype chain in JavaScript.
@@ -1382,6 +1343,24 @@ user.address.country.name = "Canada"; // This also won't work
 console.log(user.address.city); // Output: "New York"
 console.log(user.address.country.name); // Output: "USA"
 
+
+Minification-(bundle multiple files in a group) ***********
+Minification is the process of minimizing code and markup in your web pages and script files. 
+It's one of the main methods used to reduce load times and bandwidth usage on websites. 
+Minification dramatically improves site speed and accessibility, directly translating into a better user experience
+
+Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
+Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
+Minification is performed on the web server before a response is sent.
+
+
+partial classes **********
+A “partial class” is a class whose methods and variables are parceled out into multiple files. 
+When the files are compiled, the class reassembles itself into the full class definition
+in general JavaScript is a class-less language. Everything is an object. 
+And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
+Purpose of partial classes is to allow a class's definition to span across multiple files. 
+This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
 
 
 Babel *****
@@ -1800,3 +1779,62 @@ Cumulative Layout Shift (CLS):
 Include size attributes on your images and video elements.
 Ensure ads, embeds, and iframes have reserved space.
 Avoid inserting content above existing content except in response to user interaction.
+
+
+using fetch get/post/put/delete syntax
+
+fetch('https://api.example.com/data', {
+  method: 'GET', // Default method
+})
+  .then(response => response.json()) // Parse the JSON response
+  .then(data => console.log(data)) // Handle the data
+  .catch(error => console.error('Error:', error)); // Handle the error
+
+
+fetch('https://api.example.com/data', {
+  method: 'POST', // Method is POST
+  headers: {
+    'Content-Type': 'application/json', // Set the content type to JSON
+  },
+  body: JSON.stringify({
+    name: 'John Doe',
+    age: 30,
+  }), // Convert the data into JSON string
+})
+  .then(response => response.json()) // Parse the JSON response
+  .then(data => console.log(data)) // Handle the data
+  .catch(error => console.error('Error:', error)); // Handle the error
+
+
+fetch('https://api.example.com/data/1', {
+  method: 'PUT', // Method is PUT
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: 'Jane Doe',
+    age: 25,
+  }),
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+
+fetch('https://api.example.com/data/1', {
+  method: 'DELETE', // Method is DELETE
+})
+  .then(response => {
+    if (response.ok) {
+      console.log('Item deleted');
+    } else {
+      console.error('Failed to delete');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+
+
+
+
+
+

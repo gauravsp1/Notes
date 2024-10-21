@@ -12,9 +12,8 @@ Proxy
 Communications
 
 Short Polling *****
-Short polling is a technique used in client-server communication where the client repeatedly makes requests to the server at regular intervals to check for updates or new data.
-It's a simple but inefficient method for handling asynchronous data updates or real-time events.
-Its short live connect
+Short polling is a technique used in client-server communication where the client repeatedly makes requests to the server at regular intervals 
+to check for updates or new data. It's a simple but inefficient method for handling asynchronous data updates or real-time events. Its short live connect
 
 How Short Polling Works:
 Client Request: The client sends an HTTP request to the server.
@@ -27,7 +26,8 @@ Simplicity: It’s easy to implement since it relies on standard HTTP requests.
 No Special Setup: Works with regular HTTP servers without needing WebSockets or long-polling configurations.
 
 Disadvantages of Short Polling
-Inefficiency: Polling too frequently can put a strain on both the client and the server, leading to high bandwidth usage and unnecessary load, especially when there’s no new data.
+Inefficiency: Polling too frequently can put a strain on both the client and the server, leading to high bandwidth usage and unnecessary load,
+			especially when there’s no new data.
 Latency: Data may not be received in real-time, as the client only checks for updates at set intervals.
 Scalability Issues: For large-scale applications with many clients, frequent polling can overwhelm the server.
 
@@ -518,6 +518,31 @@ Example: Next.js supports SSG out of the box.
 
 
 
+Test-Driven Development (TDD) is a software development methodology where tests are written before the actual code is implemented.
+The idea is to write small, specific test cases that describe the desired functionality or behavior of a feature,
+and then implement the code to make those tests pass. TDD follows a short, iterative cycle known as the Red-Green-Refactor loop:
 
+TDD Workflow: Red-Green-Refactor
+Red: Write a Failing Test
+The developer starts by writing a test for a small piece of functionality that doesn’t yet exist.
+This test is expected to fail because no code has been written to fulfill the requirement yet.
+
+Green: Write Minimal Code to Pass the Test
+Next, the developer writes just enough code to make the test pass.
+This stage focuses on implementing the functionality as simply as possible without worrying about optimization or structure.
+
+Refactor: Improve the Code
+After the test passes, the developer refactors the code.
+The goal is to clean up the implementation while keeping all tests passing, ensuring that the code is maintainable, efficient, and adheres to good design principles.
+
+Repeat
+The process repeats as more tests are added, incrementally growing the functionality while maintaining a
+robust suite of tests that ensure the code behaves as expected.
+
+Benefits of TDD:
+Improved Code Quality: Writing tests first forces developers to think through the design and requirements carefully before coding.
+Fewer Bugs: Since every piece of functionality is tested, there's less room for bugs to sneak into the system.
+Faster Debugging: When a new issue arises, having a comprehensive test suite makes it easier to pinpoint the problem.
+Continuous Feedback: Developers get immediate feedback about whether their code works correctly.
 
 

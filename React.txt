@@ -10,6 +10,14 @@ Reconciliation *****
 Reconciliation is the process through which React updates the DOM. When a component's state changes, 
 React has to calculate if it is necessary to update the DOM. It does this by creating a virtual DOM and comparing it with the current DOM. 
 In this context, the virtual DOM will contain the new state of the component.
+React reconciliation follows a depth-first search (DFS) strategy.
+It first traverses down to the child nodes before moving to sibling components, optimizing memory and performance in large component trees.
+
+Why DFS Instead of BFS? ******
+Memory Efficiency: DFS uses less memory than BFS because it doesn't need to keep track of all sibling nodes at each level before diving into child nodes.
+React benefits from this efficiency since it's dealing with large component trees.
+Tree-Like Component Structure: Component trees in React are often deeply nested, and DFS works well with recursive structures like trees, making it a natural fit.
+
 
 React commands *****
 create-react-app myfirstreact
@@ -781,6 +789,13 @@ const WithComponent=(OriginalComponent)=> {
 
 export default WithComponent
 
+Drawbacks of HOCs
+Wrapper Hell (Nested HOCs) - export default withAuth(withTheme(withAnalytics(MyComponent)));
+Props Collision - Since an HOC typically passes down props to the wrapped component, there's a risk of prop name collisions.
+The HOC and the wrapped component may accidentally use the same prop names, leading to unintended behavior.
+Unnecessary Re-renders - HOCs can cause unnecessary re-renders of wrapped components if they don’t carefully manage shouldComponentUpdate or
+optimize their re-rendering logic. Every time the HOC re-renders, it can trigger a re-render of the wrapped component, even if props haven’t changed.
+Context and Hook Limitations - While HOCs are compatible with hooks, using hooks within HOCs can become complicated. 
 
 In built HOC in react*********
 React.memo
@@ -790,6 +805,7 @@ It allows you to map state and dispatch to props, enabling your component to int
 withRouter from react-router-dom
 withRouter is an HOC provided by the react-router-dom library. It injects the router-related props (history, location, match) into the wrapped component,
 allowing you to access these props in any component.
+
 
 
 Render Props  ***********
@@ -1054,30 +1070,6 @@ which should be a div at the top level of your HTML file:
 
 
 
-Bundling ********
-Most React apps will have their files “bundled” using tools like Webpack, Rollup or Browserify. 
-Bundling is the process of following imported files and merging them into a single file: a “bundle”. 
-This bundle can then be included on a webpage to load an entire app at once.
-
-
-bundler (Webpack) **************
-Webpack is an aggressive and powerful module bundler for JavaScript applications. ... It takes in various assets, 
-such as JavaScript, CSS, Fonts, Images, and HTML, and then transforms these assets into a format that's convenient to consume through a browser.
-Webpack is a tool that lets you compile JavaScript modules, also known as module bundler. Given a large number of files, 
-it generates a single file (or a few files) that run your app.It can perform many operations: helps you bundle your resources.
-
-
-transpiler **************
-A source-to-source translator, source-to-source compiler (S2S compiler), transcompiler, or transpiler is a type of translator that 
-takes the source code of a program written in a programming language as its input and produces an equivalent source code in the same 
-or a different programming language.
-
-(Babble) *******************
-Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript 
-in current and older browsers or environments
-Babel is a JavaScript compiler and not a webpack loader. It compiles (transpiles) higher JavaScript code (ES6+) to lower JavaScript code (such as ES5).
-Because of babble we can write html inside Js
-
 
 How will you make your component reusable********
 Props: Pass dynamic values into the component.
@@ -1119,6 +1111,76 @@ Using ref as Prop: You can now pass ref directly as a prop. This eliminates the 
 
 
 we have a list item in a component, when we add a new item the entire list re-renders causing a performance issue. how to optimise this using React.memo
+
+
+
+create 1 to 10 number array ****
+const arr = new Array(10).fill(0).map((_, i) => i + 1);
+console.log(arr);
+[...Array(10)].map((_,index)=>index+1)
+
+
+const[state,setState]=useState() here pass the same state into setState will it re-render ****
+if you pass the same state value to the setState function returned by useState, React will not trigger a re-render.
+React uses a shallow comparison to determine whether the state has changed.
+If the new value passed to setState is the same as the current state, React will avoid re-rendering the component for performance optimization.
+
+
+
+
+Lazy loading ****
+Lazy loading is a design pattern and optimization technique used to improve the performance and resource management of applications, particularly in the context of web development.
+It involves delaying the loading of non-critical resources until they are actually needed,
+which can lead to faster initial load times and more efficient use of bandwidth and system resources.
+
+How Lazy Loading Works
+The main idea behind lazy loading is to load resources only when they are required. For instance, in a web application, images, scripts, or other components 
+might only be loaded when they come into the user's viewport (i.e., they are visible on the screen).
+
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+Benefits of Lazy Loading
+Improved Performance: By loading only the necessary resources initially, the initial page load time is reduced, making the application appear faster to users.
+Reduced Bandwidth Usage: Only the resources that are needed are downloaded, which can save bandwidth, especially important for users with limited or slow internet connections.
+Better Resource Management: Lazy loading can help in managing memory and CPU usage more efficiently, as fewer resources are loaded and processed at any given time.
+Enhanced User Experience: Users get a quicker response time and the content they need without waiting for the entire page to load.
+
+
+Disadvantages of Lazy loading:
+
+Firstly, the extra lines of code, to be added to the existing ones, to implement lazy load makes the code a bit complicated.
+Secondly, lazy loading may affect the website’s ranking on search engines sometimes, due to improper indexing of the unloaded content.
+
+
+Lazy loading is a powerful optimization technique that can greatly enhance the performance and user experience of web applications. 
+By delaying the loading of non-essential resources, you can reduce initial load times, save bandwidth, and improve the overall responsiveness of your application. 
+Implementing lazy loading requires a thoughtful approach to determine which resources can be loaded on demand and ensuring that the user experience remains seamless.
+
+
+What Is Batching in React? **************
+Batching refers to grouping multiple state updates or DOM updates together and applying them at once in a single render cycle,
+rather than rendering the component multiple times for each update. This allows React to optimize performance by avoiding multiple re-renders.
+For instance, if you have several setState calls in a function or a lifecycle method, React won’t re-render the component immediately for every single update.
+Instead, it batches all these updates and triggers only one re-render after all updates are completed.
+
+How Does Batching Work?
+State Updates Are Queued: When setState or the updater function of useState is called, React doesn’t immediately update the state.
+Instead, it pushes the state updates to a queue.
+Scheduling Updates: React then schedules a re-render based on these queued updates.
+During the next render cycle, React will process all the queued updates in one go.
+Rendering: Once the updates are processed, React performs the reconciliation process, updating the Virtual DOM and diffing it with the previous Virtual DOM.
+Applying DOM Changes: Finally, React applies the minimal DOM changes necessary to keep the real DOM in sync with the Virtual DOM.
+This process allows React to delay the updates until the current event loop cycle ends or until React decides it’s the right time to re-render,
+which helps in avoiding unnecessary renders and optimizing performance.
+
+Why Batching Is Important
+Batching updates reduces the number of renders that need to happen by grouping multiple state changes into a single render cycle.
+Without batching, each state update would cause a separate render, leading to:
+Poor Performance: Multiple re-renders in the same event loop could cause significant performance issues, especially for complex UIs.
+Visual Jank: Without batching, you might see unnecessary re-renders, causing flickering or unexpected visual updates in the UI.
+
+
+
 
 
 

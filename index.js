@@ -296,6 +296,32 @@
 // }
 // console.log(flatten(arr,2));
 
+// let obj = {
+//     name: "gaurav",
+//     surname: "pawar",
+//     address: {
+//       building: "XYZ",
+//       street: "123",
+//     },
+//   };
+// let obj2 = {
+//   name: "gaurav",
+//   surname: "pawar",
+//   addressBuilding: "XYZ",
+//   addressStreet: "123",
+// };
+
+//   function flatenObj(inputObj, result = {}, parent = "") {
+//     for (let key in inputObj) {
+//       if (typeof inputObj[key] === "object") {
+//         flatenObj(inputObj[key], result, parent + key + "_");
+//       } else {
+//         result[parent + key] = inputObj[key];
+//       }
+//     }
+//     return result;
+//   }
+
 // const brunch = {
 //     food: 'Dim sum',
 //     beverage: 'Jasmine tea',
@@ -774,57 +800,3 @@
 
 //   // Usage:
 //   console.log(permute('abc')); // Output: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
-
-// Given an integer array nums, find the subarray with the largest sum, and return its sum.
-// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-// Output: 6
-// Explanation: The subarray [4,-1,2,1] has the largest sum 6.
-
-// function maxSubArray(nums) {
-//     let currentSum = nums[0]; // Initialize with the first element
-//     let maxSum = nums[0]; // Initialize with the first element
-
-//     for (let i = 1; i < nums.length; i++) {
-//       // Either add the current element to the existing subarray, or start a new subarray
-//       currentSum = Math.max(nums[i], currentSum + nums[i]);
-//       // Update maxSum if currentSum is greater than the previously recorded maxSum
-//       maxSum = Math.max(maxSum, currentSum);
-//     }
-
-//     return maxSum;
-//   }
-
-// Given an array of N integers where each value represents the number of chocolates in a packet.
-// Each packet can have a variable number of chocolates.
-// There are m students, the task is to distribute chocolate packets such that:
-// Each student gets one packet.
-// The difference between the number of chocolates in the packet with maximum chocolates and the
-// packet with minimum chocolates given to the students is minimum.
-// Input : arr[] = {7, 3, 2, 4, 9, 12, 56} , m = 3
-// Output: Minimum Difference is 2
-// Input : arr[] = {3, 4, 1, 9, 56, 7, 9, 12} , m = 5
-// Output: Minimum Difference is 6
-
-// function findMinDiff(arr, n, m) {
-//     // If there are no chocolates or students
-//     if (m === 0 || n === 0) return 0;
-
-//     // Sort the array to get the chocolates in order
-//     arr.sort((a, b) => a - b);
-
-//     // If there are fewer packets than students, we cannot distribute
-//     if (n < m) return -1;
-
-//     // Initialize the minimum difference as a large value
-//     let minDiff = Infinity;
-
-//     // Find the subarray of size `m` where the difference between the maximum and minimum chocolates is minimized
-//     for (let i = 0; i + m - 1 < n; i++) {
-//       let diff = arr[i + m - 1] - arr[i]
-//  // Update the minimum difference if this subarray has a smaller difference
-//       if (diff < minDiff) {
-//         minDiff = diff;
-//       }
-//   }
-// return minDiff;
-// }

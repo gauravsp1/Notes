@@ -151,12 +151,16 @@ const myDebounce = (cb, delay) => {
 
 Throttle ****
 const myThrottle = (cb, delay) => {
-  let last = 0;
+  let inThrottle=true;
   return function (...args) {
-    let now = new Date().getTime();
-    if (now - last < delay) return;
-    last = now;
-    return cb(...args);
+     if(inThrottle){
+		inThrottle=false
+		cb(...args)
+		setTimeout(()=>{
+			inThrottle=true
+		},delay)
+		
+		}
   };
 };
 

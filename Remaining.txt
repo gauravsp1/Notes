@@ -22,28 +22,25 @@ cdn
 
 *************************///////////////////////**************************//////////////////*******************
 New ATS resume
-go through best buy profiles
+Apply on linkedin
 arrange notes points 
 
 ---------------------
 
-Security notes
 Next.js
 TypeScript
 
-
------------------Javacript---------
-Recursion coding problems
-WebPack
-Lighthouse
+----------------Javacript---------
 Polyfills-structuredClone, promise
+Create a deepCopy
+How micro-frontend are connected
+What is micro-frontend
 
 -----------------Coding---------
 
 
 -------------React-------------
 New hooks
-React.window
 React 19
 -------------Redux-------------
 
@@ -55,8 +52,6 @@ React 19
 
 ============Flow============
 Coding problems
-Remaining points
-RoadSideCoder YT videos interview ques
 YT interview videos
 LLD problems
 HLD problems
@@ -67,45 +62,15 @@ Daily one react component
 
 
 
-
-****************DSA****************
-Arrays
-Strings
-Linked-List
-Sorting
-Searching
-Stack
-Que
-Heap
-Hash
+***********Revision*********
+Theory- Html,Js,React.js,Redux,SystemDesign,Performance,Security
+Coding- Polyfills,Coding notepad, vsCode file
+LLD practice
+Redux handsOn
+Route handsOn
 
 
 
-******BestBuy**********
-
-Nested comment component with add at any level
-Pangram string checker example coding
-LRU problem
-compose polyfill
-TDD(Test driven development)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**********Left*******
 
 
