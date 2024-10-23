@@ -165,7 +165,7 @@ media query**********
 @media not|only mediatype and (expressions) {
   CSS-Code;
 }
-@media screen and (min-width: 480px) {
+@media screen and (max-width: 600px) {
   body {
     background-color: lightgreen;
   }
@@ -332,6 +332,7 @@ Flexible in distributing space				Precise control over row and column sizes
 visibility: hidden; vs display: none;
 display removes the element complete and next element occupies it's position
 visibility: hidden means that element is just not visible but present
+
 display	 	Specifies how an element should be displayed
 visibility	Specifies whether or not an element should be visible
 

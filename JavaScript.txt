@@ -695,13 +695,14 @@ JavaScript Class ****************
 When we want same obj properties for many objs we create a blueprint of it that is called class
 
 class Person {
+	surname="Test"
     constructor(name, age) {
         this.name = name;
         this.age = age;
     }
 
     greet() {
-        console.log(`Hello, my name is ${this.name}`);
+        console.log(`Hello, my name is ${this.name} ${this.surname}`);
     }
 }
 
@@ -1280,6 +1281,15 @@ proto: The prototype object that the new object should inherit from. If null is 
 propertiesObject (optional): An object whose properties will be added to the new object.
 							Each property can be defined with specific characteristics (like value, enumerable, writable, and configurable).
 
+// const animal = {
+//   type: "Animal",
+//   speak() {
+//     console.log("Roar!");
+//   },
+// };
+// const lion = Object.create(animal);
+// lion.speak(); // Roar
+
 Why Use Object.create()?
 Inheritance: It allows for easier creation of objects that inherit from other objects, supporting prototypal inheritance.
 Control: You have fine control over property attributes when creating a new object, allowing for encapsulation and data hiding.
@@ -1361,15 +1371,6 @@ in general JavaScript is a class-less language. Everything is an object.
 And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
 Purpose of partial classes is to allow a class's definition to span across multiple files. 
 This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
-
-
-Babel *****
-Transpilers give us access to tomorrow’s JavaScript today
-Because of the rapid release cycles of browsers, we usually don’t have to wait long for a JavaScript feature to be supported. 
-But what happens if we want to take advantage of all the benefits of the newest JavaScript features but are taken hostage by a harsh reality:
-The users of our web applications may still be using older browsers? One answer to this problem is to use transpilers (“transformation + compiling”),
-tools that take cutting-edge JavaScript code and transform it into equivalent (or, if that’s not possible, similar) code that works properly 
-in most current browsers. Today’s most popular transpilers are Traceur (https://github.com/google/ traceur-compiler) and Babel (https://babeljs.io/).
 
 
 valueTpye and refrenceType ******

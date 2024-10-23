@@ -35,15 +35,20 @@ Polyfills-structuredClone, promise
 Create a deepCopy
 How micro-frontend are connected
 What is micro-frontend
-
+GraphQL
 -----------------Coding---------
 
-
+How to create a dropdown with filter, 
 -------------React-------------
 New hooks
 React 19
+React portal practice
 -------------Redux-------------
+More redux practice
 
+-------------DSA-------------
+Union of arrays
+intersection of arrays
 
 --------------------------
 
@@ -74,3 +79,7 @@ Route handsOn
 **********Left*******
 
 
+The candidate has a strong understanding of key concepts in React and an average level of proficiency in JavaScript.
+He performed well on tasks related to Form creation and data fetching on react.
+Also on JavaScript task ,He completed his task and handling of logic is good.
+He is average on HTML5 & CSS. Sass – He understands the purpose and concept of usage but lacks hands-on experience.

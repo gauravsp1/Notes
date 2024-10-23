@@ -1,21 +1,71 @@
 SASS
+Sass (Syntactically Awesome Stylesheets) is a powerful CSS preprocessor that extends CSS with additional features, making it easier to write and manage stylesheets.
 
-create variable for multiple purpose
-$color-blue: blue;
+Variables
+Sass allows you to define variables, which can store values like colors, fonts, sizes, or any other CSS value.
+This helps in maintaining consistency and making global changes easier.
 
-Easy nesting
+$primary-color: #3498db;
+$font-stack: Helvetica, sans-serif;
 
-mixin ****
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+}
+
+Nesting
+Sass allows you to nest your CSS selectors in a way that mirrors the HTML structure.
+This makes the code more readable and reduces the need for repeating selectors
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+    }
+  }
+}
+
+Inheritance (Extend/Inheritance)
+Sass allows you to share a set of CSS properties from one selector to another using @extend. This helps in avoiding code repetition.
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend %message-shared;
+  background-color: #e0ffe0;
+}
+
+.error {
+  @extend %message-shared;
+  background-color: #ffe0e0;
+}
+
+Mixins
+Mixins allow you to create reusable chunks of CSS that can include dynamic values (arguments).
+This is useful for properties that require vendor prefixes or recurring code blocks.
 Can write a block a code and reuse it by @include
 Can also pass parameter in it
 
-SASS
-@mixins commonCode($parameter){
-color: blue;
-background:$parameter;
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
 }
 
-@include commonCode(argument)
+.box {
+  @include border-radius(10px);
+}
+
 
 
 

@@ -1,4 +1,23 @@
 
+
+*************Flow***********
+Fist easy from all then medium
+Step 3 : Solve Problems on Arrays [Easy -> Medium -> Hard]
+Step 4 : Binary Search [1D
+Step 5 : Strings [Basic and Medium]
+Step 6 : Learn LinkedList [Single LL, Double LL, Medium, Hard Problems]
+Step 9 : Stack and Queues [Learning, Pre-In-Post-fix, Monotonic Stack, Implementation]
+Step 10 : Sliding Window & Two Pointer Combined Problems
+--------------------------------------------------------------------
+Frequently asked DSA questions
+--------------------------------------------------------------------
+
+Step 11 : Heaps [Learning, Medium, Hard Problems]
+Step 13 : Binary Trees [Traversals, Medium and Hard Problems]
+Step 14 : Binary Search Trees [Concept and Problems]
+Step 12 : Greedy Algorithms [Easy, Medium/Hard]
+
+
 1. Linear Data Structures:
 Arrays
 Stacks
