@@ -1,7 +1,4 @@
 
-
-Linkdin snippits
-youtube new concepts
 New React features ---
 React 19
 Tailwind ---
@@ -10,41 +7,46 @@ React Router latest
 Next js ---
 Office project details ---
 
-***********
-
-useReducer
-React Router
-SSR
-
 **********************
 ngnix
 cdn
 
 *************************///////////////////////**************************//////////////////*******************
-New ATS resume
 Apply on linkedin
 arrange notes points 
+create Revision notes
+HLD practice
+Past projects details HLD
+Interview Audio
+Performance Optimization read more
+Vanilla Js - Basic
+Tailwind - Basic
+DSA
+Next.js - Basic
+TypeScript - Basic
+New hooks
+React 19
+GraphQL
 
----------------------
-
-Next.js
-TypeScript
+------------HTML/CSS---------
+Grid CSS
+meta tag details
 
 ----------------Javacript---------
 Polyfills-structuredClone, promise
 Create a deepCopy
 How micro-frontend are connected
 What is micro-frontend
-GraphQL
+generator functions
 -----------------Coding---------
 
-How to create a dropdown with filter, 
+
 -------------React-------------
-New hooks
-React 19
+
 React portal practice
+
 -------------Redux-------------
-More redux practice
+
 
 -------------DSA-------------
 Union of arrays
@@ -53,33 +55,14 @@ intersection of arrays
 --------------------------
 
 
-
-
-============Flow============
-Coding problems
-YT interview videos
-LLD problems
-HLD problems
-
-Daily practice 10 code snippits
-Daily one react component
+**********Final Flow*******
 
 
 
 
-***********Revision*********
-Theory- Html,Js,React.js,Redux,SystemDesign,Performance,Security
-Coding- Polyfills,Coding notepad, vsCode file
-LLD practice
-Redux handsOn
-Route handsOn
 
 
 
-**********Left*******
 
 
-The candidate has a strong understanding of key concepts in React and an average level of proficiency in JavaScript.
-He performed well on tasks related to Form creation and data fetching on react.
-Also on JavaScript task ,He completed his task and handling of logic is good.
-He is average on HTML5 & CSS. Sass – He understands the purpose and concept of usage but lacks hands-on experience.
+

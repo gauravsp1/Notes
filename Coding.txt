@@ -81,8 +81,6 @@ numArray.sort(function(a, b) {
 
 
 /*
-
-
      1. Given an Array of numbers only, use the array sort API to sort it such that : 
      a. The even numbers come to the left of array.
      b. The odd numbers come to the right of array.
@@ -386,44 +384,6 @@ var cnt = 0;
 var result = cnt++; // The current value of cnt (which is 0) is assigned to result, and then cnt is incremented to 1
 // Now, cnt = 1, and result = 0
 
-
-new Counter().add(1).add(2).add(3).get() == 6 
-new Counter().add(1).add(10).reset().add(5).get() == 5 
-
-function Counter() {
-    this.count = 0,
-        this.add = function (value) {
-            this.count = this.count + value;
-            return this
-        },
-        this.get = function () {
-            return this.count
-        },
-        this.reset = function () {
-            this.count = 0;
-            return this
-        }
-}
-
-console.log(new Counter().add(1).add(2).add(3).get())
-console.log("second",new Counter().add(1).add(10).reset().add(5).get())
-
-function Counter() {
-    var count = 0;
-        this.add = function (value) {
-            count = count + value;
-            return this
-        };
-        this.get = function () {
-            return count
-        };
-        this.reset = function () {
-            count = 0;
-            return this
-        }
-}
-
-
 	
 const arr=[null, 2,5,'',"ello",4,undefined,8,null];
 
@@ -603,6 +563,42 @@ class Calculator {
   }
 }
 
+
+new Counter().add(1).add(2).add(3).get() == 6 
+new Counter().add(1).add(10).reset().add(5).get() == 5 
+
+function Counter() {
+    this.count = 0,
+        this.add = function (value) {
+            this.count = this.count + value;
+            return this
+        },
+        this.get = function () {
+            return this.count
+        },
+        this.reset = function () {
+            this.count = 0;
+            return this
+        }
+}
+
+console.log(new Counter().add(1).add(2).add(3).get())
+console.log("second",new Counter().add(1).add(10).reset().add(5).get())
+
+function Counter() {
+    var count = 0;
+        this.add = function (value) {
+            count = count + value;
+            return this
+        };
+        this.get = function () {
+            return count
+        };
+        this.reset = function () {
+            count = 0;
+            return this
+        }
+}
 
 
 // const clothes = ['jacket', 't-shirt'];
@@ -821,9 +817,6 @@ const str = "This is a test string with vowels";
 console.log(removeVowels(str)); // Output: Ths s  tst strng wth vwls
 
 
-
-
-
 function convertTo24Hour(time) {
  const [timePart, modifier] = time.split(' ');
 let [hours, minutes] = timePart.split(':')
@@ -843,57 +836,5 @@ const period = hours >= 12 ? 'PM' : 'AM';
 hours = hours % 12 || 12;
  return `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
 }
-
-
-
-async function async1() {
-  console.log("async1 start");
-  await async2();
-  console.log("async1 end");
-}
-
-async function async2() {
-  console.log("async2");
-}
-
-console.log("Start");
-
-setTimeout(function () {
-  console.log("setTimeout");
-}, 0);
-
-async1();
-
-new Promise(function (resolve) {
-  console.log("promise1");
-  resolve();
-}).then(function () {
-  console.log("promise2");
-});
-
-console.log("End");
-
-----------------------------------
-console.log("begins");
-
-setTimeout(() => {
-  console.log("setTimeout 1");
-  Promise.resolve().then(() => {
-    console.log("promise 1");
-  });
-}, 0);
-
-new Promise(function (resolve, reject) {
-  console.log("promise 2");
-  setTimeout(function () {
-    console.log("setTimeout 2");
-    resolve("resolve 1");
-  }, 0);
-}).then((res) => {
-  console.log("dot then 1");
-  setTimeout(() => {
-    console.log(res);
-  }, 0);
-});
 
 

@@ -68,39 +68,7 @@ Function.Prototype.MyBind=function(context,...arg){
 }
 
 
-Memoise ********
-
-function myMemoize(fn) {
-  const memo = {};
-  return function (...args) {
-    let argsCache = JSON.stringify(args);
-    if (!memo[argsCache]) {
-      memo[argsCache] = fn(...args);
-    }
-    return memo[argsCache];
-  };
-}
-
-const clumsyproduct = (num1, num2) => {
-  for (let index = 0; index < 100000000; index++) {}
-  return num1 * num2;
-};
-
-const newFunction = myMemoize(clumsyproduct);
-
-console.time("First Call");
-console.log("First", newFunction(121, 121));
-console.timeEnd("First Call");
-console.time("Second Call");
-console.log("Second", newFunction(121, 121));
-console.timeEnd("Second Call");
-
-
-Promise *************
-
-
 Promise.all ***********
-
 Promise.allPolyfill = function (promises) {
   return new Promise((resolve, reject) => {
     const result = [];
@@ -130,6 +98,37 @@ Promise.allPolyfill([p1, p2, p3])
   .catch((error) => {
     console.error(error);
   });
+  
+
+Memoise ********
+
+function myMemoize(fn) {
+  const memo = {};
+  return function (...args) {
+    let argsCache = JSON.stringify(args);
+    if (!memo[argsCache]) {
+      memo[argsCache] = fn(...args);
+    }
+    return memo[argsCache];
+  };
+}
+
+const clumsyproduct = (num1, num2) => {
+  for (let index = 0; index < 100000000; index++) {}
+  return num1 * num2;
+};
+
+const newFunction = myMemoize(clumsyproduct);
+
+console.time("First Call");
+console.log("First", newFunction(121, 121));
+console.timeEnd("First Call");
+console.time("Second Call");
+console.log("Second", newFunction(121, 121));
+console.timeEnd("Second Call");
+
+
+Promise *************
 
 
 Debounce ****

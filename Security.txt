@@ -137,33 +137,6 @@ Use a Security Library or Framework:
 Limit the Scope of Executable Code:
 
 
-
-CORS ****
-
-CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to prevent web pages from making requests to a different domain
-than the one that served the web page. CORS is designed to protect users from malicious websites attempting to steal data or perform actions on their behalf,
-known as Cross-Origin attacks.
-Same-Origin Policy:
-Before diving into CORS, it’s important to understand the Same-Origin Policy (SOP),
-which is a security model used by browsers to restrict how documents or scripts loaded from one origin can interact with resources from another origin.
-Two URLs are considered of the same origin if they share the same protocol, host, and port.
-Same-Origin Policy helps prevent malicious scripts from stealing sensitive data from other sites,
-but it can be too restrictive for legitimate cross-origin resource sharing (e.g., fetching APIs or using CDNs), which is where CORS comes into play.
-
-CORS allows servers to specify which origins (domains) are allowed to access their resources via specific HTTP headers.
-When a web page makes a cross-origin request (e.g., using fetch, XMLHttpRequest, or Axios),
-the browser sends an HTTP request with special CORS headers to determine if the request is safe.
-
-
-
-
-
-
-
-
-Method:Option ****
-What is preflight****
-
 CSRF****
 CSRF (Cross-Site Request Forgery) is a web security vulnerability that allows an attacker to trick users into performing actions
 they didn’t intend to take on a web application in which they are authenticated. CSRF exploits the trust a web application has in the user's browser,
@@ -190,6 +163,29 @@ Custom Headers (for API requests):
 For AJAX or API requests, it’s a good practice to use custom headers (e.g., X-CSRF-Token) to pass the CSRF token.
 Since attackers cannot set custom headers in cross-origin requests, this helps prevent CSRF attacks.
 Limit Request Methods:
+
+
+CORS ****
+
+CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to prevent web pages from making requests to a different domain
+than the one that served the web page. CORS is designed to protect users from malicious websites attempting to steal data or perform actions on their behalf,
+known as Cross-Origin attacks.
+Same-Origin Policy:
+Before diving into CORS, it’s important to understand the Same-Origin Policy (SOP),
+which is a security model used by browsers to restrict how documents or scripts loaded from one origin can interact with resources from another origin.
+Two URLs are considered of the same origin if they share the same protocol, host, and port.
+Same-Origin Policy helps prevent malicious scripts from stealing sensitive data from other sites,
+but it can be too restrictive for legitimate cross-origin resource sharing (e.g., fetching APIs or using CDNs), which is where CORS comes into play.
+
+CORS allows servers to specify which origins (domains) are allowed to access their resources via specific HTTP headers.
+When a web page makes a cross-origin request (e.g., using fetch, XMLHttpRequest, or Axios),
+the browser sends an HTTP request with special CORS headers to determine if the request is safe.
+
+
+
+Method:Option ****
+What is preflight****
+
 
 
 

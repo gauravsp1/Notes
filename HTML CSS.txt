@@ -213,7 +213,10 @@ defer: Use for scripts that rely on the entire DOM being ready before execution 
 <script async src="analytics.js"></script>
 <script defer src="app.js"></script>
 
-
+Without async or defer:- The script is fetched and executed immediately, as soon as the browser encounters it during parsing of the HTML.
+The browser halts parsing when it encounters the <script> tag, fetches and executes script.js, and then continues parsing the HTML document.
+It doesn't do it asynchronously.
+ 
 tag vs element *******
 HTML Tags: Tags are the starting and ending parts of an HTML element. 
 They begin with < symbol and end with > symbol. Whatever written inside < and > are called tags.
@@ -375,9 +378,6 @@ Use rem units for sizing that doesn't need em units, and that should scale depen
 Use rem units unless you're sure you need em units, including on font sizes.
 
 
-To horizontally center a block element (like <div>), use margin: auto;
-
-
 Diff selectors vs pseudo elements *************
 CSS selectors are used to "find" (or select) the HTML elements you want to style.
 
@@ -487,6 +487,7 @@ Using Positioning
   transform: translate(-50%, -50%); /* Moves the element back by 50% of its width and height */
 }
 
+To horizontally center a block element (like <div>), use margin: auto;
 
 
 

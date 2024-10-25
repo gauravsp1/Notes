@@ -1,0 +1,75 @@
+
+
+Clients
+Designers
+Product manager
+StakeHolders
+
+Key Aspects
+Requirement analysis
+System architechture
+Data Design/ Interfaces/Api schema
+Technology selection
+
+
+Function 
+Whatever is related to the product
+
+Non-Functional
+Device Support - Desktop/Mobile
+Responsive
+Accessibility
+Asset Optimization
+Performance
+CSR/SSR
+Caching
+SEO
+Offline Support
+
+
+Tech choice
+Library/framework
+State management
+Folder structure
+pakages
+dependancies
+Built tools
+Design System
+
+Scope
+P0
+P1
+P2
+
+Component
+Component Hierarchy
+Routing
+Data sharing
+
+Implementation
+Pagination/infinite loader
+Debouncing/throttling
+
+APIs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

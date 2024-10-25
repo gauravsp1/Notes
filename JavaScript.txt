@@ -43,7 +43,6 @@ Libraries and Frameworks: JavaScript has a vast ecosystem of libraries and frame
 Popular ones include React, Angular, Vue.js for front-end development, and Node.js, Express for back-end development.
 
 
-
 What is interpreted programming language ************
 An interpreted programming language is one in which most of its implementations execute instructions directly,
 without the need for compiling a program into machine-language instructions beforehand.
@@ -57,6 +56,16 @@ Flexibility: Dynamic typing and execution allow for more flexible programming pa
 Disadvantages:
 Performance: Typically slower execution compared to compiled languages due to the overhead of interpretation.
 Runtime Errors: Errors are detected at runtime, which can lead to issues being discovered later in the development process.
+
+
+Higher-Order function *********
+Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
+
+It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
+Ex. map, filter, and reduce.
+
+A parameter is a variable that we list as part of a function definition.
+An argument is a value that we pass to the function when we invoke it.
 
 
 loosly type and strongly type ************
@@ -119,8 +128,6 @@ Comparison:
 
 null == undefined is true because they are loosely equal.
 null === undefined is false because they are of different types.
-
-
 
 Something hasn't been initialized but memory is alocated to it : undefined.(declared but not initialized)
 Something is currently unavailable: null.
@@ -242,7 +249,6 @@ async function handleData() {
 }
 
 handleData();
-
 
 
 How Promise works******
@@ -435,7 +441,6 @@ Promise.allSettled(): Use when you need to handle the results of all promises, r
 Promise.any(): Use when you need the first successful result among multiple promises and want to ignore rejections unless all promises fail.
 
 
-
 Event Loop *****
 The event loop ensures that JavaScript can perform non-blocking, asynchronous operations even though it is single-threaded. 
 
@@ -540,6 +545,24 @@ Copying Behavior	Creates a copy of the value				Copies the reference, not the va
 Examples			Number, String, Boolean, Null, etc.		Object, Array, Function, etc.
 
 
+
+Function Expression *************
+create a function and assign it to a variable
+wile hosting it behaves like var and not like function
+
+
+Anonymous Function *******
+Function without name
+You can create it as function expression but not as regular function/statement function
+
+
+First Class Function ********
+They can be assigned to variables, passed as arguments to other functions, returned from functions, and stored in data structures like arrays and objects.
+A programming language is said to have First-class functions when functions in that language are treated like any other variable. 
+UseFull for- Higher-Order Functions,Callbacks,	
+
+
+
 Hoisting ********
 Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (function or global scope) before code execution.
 This means that you can use variables and functions before they are actually declared in the code.
@@ -570,7 +593,6 @@ This is because they follow the variable hoisting rules.
 
 Classes declared with the class keyword are not hoisted in the same way as functions. 
 They behave more like let and const, existing in the temporal dead zone until the declaration is evaluated.
-
 
 
 Lexical  scope **********
@@ -632,7 +654,6 @@ hello = function() {
 }
 After:
 hello = () => "Hello World!";
-
 
 In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
 Arrow functions, unlike traditional functions, do not have their own this context. Instead, they inherit this from the surrounding (lexical) scope. 
@@ -933,47 +954,6 @@ You can use strict mode in all your programs. It helps you to write cleaner code
 Strict mode changes previously accepted "bad syntax" into real errors.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Different Kinds of Loops ***********
-
-JavaScript supports different kinds of loops:
-
-for - loops through a block of code a number of times
-for/in - loops through the properties of an object or gives the index value of array
-for (key in object) {
-  // code to be executed
-}
-for (let index in arr) {
-    console.log(index + ": " + arr[index]);
-}
-
-for/of - loops through the values of an iterable object or gives the  value of array
-for (value of iterable) {
-  // code to be executed
-}
-
-while - loops through a block of code while a specified condition is true
-do/while - also loops through a block of code while a specified condition is true
-forEach-array.forEach(function(currentValue, index, arr), thisValue)
-
-
 Comparing two Objects ***********
 Comparing objects is easy, use === or Object.is(). This function returns true if they have the same reference and false if they do not. 
 Again, let me stress, it is comparing the references to the objects, not the keys and values of the objects.
@@ -1003,6 +983,92 @@ Using structuredClone()
 const originalObject = { a: 1, b: { c: 2 } };
 const deepCopy = structuredClone(originalObject);
 console.log(deepCopy); // { a: 1, b: { c: 2 } }
+
+valueTpye and refrenceType ******
+
+When we assign values from these variables to other variables , we copy the value to the new variable. They are copied by value.
+Changing one does not change the other. Think of the variables as having no relationship to each other.
+Variables that are assigned a non-primitive value are given a reference to that value. 
+That reference points to the object’s location in memory. The variables don’t actually contain the value.
+
+Javascript has 5 data types that are passed by value: Boolean, null, undefined, String, and Number. We’ll call these primitive types.
+Javascript has 3 data types that are passed by reference: Array, Function, and Object. These are all technically Objects, 
+so we’ll refer to them collectively as Objects.
+
+
+deep copying and shallow copying *****
+A deep copy means that all of the values of the new variable are copied and disconnected from the original variable. 
+A shallow copy means that certain (sub-)values are still connected to the original variable.
+Shallow Copy: It makes a copy of the reference to X into Y. Think about it as a copy of X’s Address. 
+So, the addresses of X and Y will be the same i.e. they will be pointing to the same memory location.
+Deep copy: It makes a copy of all the members of X, allocates different memory location for Y and then assigns the copied members to Y to achieve 
+deep copy. In this way, if X vanishes Y is still valid in the memory.
+Nested arrays/objects ****
+JSON.parse(JSON.stringify(someArray))
+const deepCopy = structuredClone(original);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JavaScript Array Methods **********
+shift()method removes the first item of an array.
+slice().....var citrus = fruits.slice(1, 3);......The slice() method selects the elements starting at the given start argument, and ends at, but does not include, the given end argument.
+some()
+sort()
+splice()....fruits.splice(2, 0, "Lemon", "Kiwi");.....The splice() method adds/removes items to/from an array, and returns the removed item(s).
+Note: This method changes the original array.
+
+toString()
+unshift() method adds new items to the beginning of an array, and returns the new length.
+valueOf()  array.valueOf()
+
+Splice vs slice ********
+slice(start, end)..........for both string and array 
+The slice() method selects from a given start, up to a (not inclusive) given end.
+
+substring(start, end)
+substr(start, length)
+
+array.splice(index, howmany, item1, ....., itemX)...for array only
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi");
+
+array methods which modify old array and which provide new array *******
+Modify - push(), pop(),shift(),unshift(),splice(),sort(),reverse()
+dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includes(),every(),some()
+
+
+Different Kinds of Loops ***********
+
+JavaScript supports different kinds of loops:
+
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object or gives the index value of array
+for (key in object) {
+  // code to be executed
+}
+for (let index in arr) {
+    console.log(index + ": " + arr[index]);
+}
+
+for/of - loops through the values of an iterable object or gives the  value of array
+for (value of iterable) {
+  // code to be executed
+}
+
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+forEach-array.forEach(function(currentValue, index, arr), thisValue)
 
 
 forEach vs Map ***********
@@ -1038,34 +1104,6 @@ slice() does not modify the original array; it returns a shallow copy of the sel
 splice() modifies the original array by removing or replacing existing elements.
 array.slice(start, end);
 array.splice(start, addCount, item1, item2, ..., itemN);
-
-
-JavaScript Array Methods **********
-shift()method removes the first item of an array.
-slice().....var citrus = fruits.slice(1, 3);......The slice() method selects the elements starting at the given start argument, and ends at, but does not include, the given end argument.
-some()
-sort()
-splice()....fruits.splice(2, 0, "Lemon", "Kiwi");.....The splice() method adds/removes items to/from an array, and returns the removed item(s).
-Note: This method changes the original array.
-
-toString()
-unshift() method adds new items to the beginning of an array, and returns the new length.
-valueOf()  array.valueOf()
-
-Splice vs slice ********
-slice(start, end)..........for both string and array 
-The slice() method selects from a given start, up to a (not inclusive) given end.
-
-substring(start, end)
-substr(start, length)
-
-array.splice(index, howmany, item1, ....., itemX)...for array only
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.splice(2, 0, "Lemon", "Kiwi");
-
-array methods which modify old array and which provide new array *******
-Modify - push(), pop(),shift(),unshift(),splice(),sort(),reverse()
-dont modify - concat(),slice(),map(),filter(),reduce(),find(),findIndex(),includes(),every(),some()
 
 
 new Map() *****
@@ -1142,7 +1180,6 @@ Event delegate **************
 Event Delegation is basically a pattern to handle events efficiently. Instead of adding an event listener to each and every similar element, 
 we can add an event listener to a parent element and call an event on a particular target using the . target property of the event object.
 Technique of using a single event listener on a parent to handle events on its children.
-
 
 Event Capturing ******************
 In event capturing, an event propagates from the outermost element to the target element. 
@@ -1241,15 +1278,6 @@ JSON Example
 falsy valuse *******
 false, 0, -0, 0n, "", null, undefined, and NaN
 
-
-Higher-Order function *********
-Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
-
-It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
-Ex. map, filter, and reduce.
-
-A parameter is a variable that we list as part of a function definition.
-An argument is a value that we pass to the function when we invoke it.
 
 
 Recursion JavaScript *************
@@ -1353,48 +1381,9 @@ user.address.country.name = "Canada"; // This also won't work
 console.log(user.address.city); // Output: "New York"
 console.log(user.address.country.name); // Output: "USA"
 
+How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********
+Object.keys(obj).length === 0;
 
-Minification-(bundle multiple files in a group) ***********
-Minification is the process of minimizing code and markup in your web pages and script files. 
-It's one of the main methods used to reduce load times and bandwidth usage on websites. 
-Minification dramatically improves site speed and accessibility, directly translating into a better user experience
-
-Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
-Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
-Minification is performed on the web server before a response is sent.
-
-
-partial classes **********
-A “partial class” is a class whose methods and variables are parceled out into multiple files. 
-When the files are compiled, the class reassembles itself into the full class definition
-in general JavaScript is a class-less language. Everything is an object. 
-And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
-Purpose of partial classes is to allow a class's definition to span across multiple files. 
-This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
-
-
-valueTpye and refrenceType ******
-
-When we assign values from these variables to other variables , we copy the value to the new variable. They are copied by value.
-Changing one does not change the other. Think of the variables as having no relationship to each other.
-Variables that are assigned a non-primitive value are given a reference to that value. 
-That reference points to the object’s location in memory. The variables don’t actually contain the value.
-
-Javascript has 5 data types that are passed by value: Boolean, null, undefined, String, and Number. We’ll call these primitive types.
-Javascript has 3 data types that are passed by reference: Array, Function, and Object. These are all technically Objects, 
-so we’ll refer to them collectively as Objects.
-
-
-deep copying and shallow copying *****
-A deep copy means that all of the values of the new variable are copied and disconnected from the original variable. 
-A shallow copy means that certain (sub-)values are still connected to the original variable.
-Shallow Copy: It makes a copy of the reference to X into Y. Think about it as a copy of X’s Address. 
-So, the addresses of X and Y will be the same i.e. they will be pointing to the same memory location.
-Deep copy: It makes a copy of all the members of X, allocates different memory location for Y and then assigns the copied members to Y to achieve 
-deep copy. In this way, if X vanishes Y is still valid in the memory.
-Nested arrays/objects ****
-JSON.parse(JSON.stringify(someArray))
-const deepCopy = structuredClone(original);
 
 local storage vs session storage ********
 
@@ -1460,28 +1449,6 @@ E-commerce sites use cookies to keep track of items added to the cart, even if t
 
 Typically used for data that must be sent to the server with each HTTP request (like session identifiers or CSRF tokens).
 how to use - document.cookie
-
-
-
-
-How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********
-Object.keys(obj).length === 0;
-
-
-Function Expression *************
-create a function and assign it to a variable
-wile hosting it behaves like var and not like function
-
-
-Anonymous Function *******
-Function without name
-You can create it as function expression but not as regular function/statement function
-
-
-First Class Function ********
-They can be assigned to variables, passed as arguments to other functions, returned from functions, and stored in data structures like arrays and objects.
-A programming language is said to have First-class functions when functions in that language are treated like any other variable. 
-UseFull for- Higher-Order Functions,Callbacks,	
 
 
 Pure Function *******
@@ -1551,7 +1518,8 @@ let result = someInterface.customMethod?.();
 Array item access with optional chaining
 let arrayItem = arr?.[42];
 
-Debounce
+
+Debounce****
 Debouncing ensures that a function is only executed after a specified delay has passed since the last time it was invoked.
 
 Debounce
@@ -1782,7 +1750,7 @@ Ensure ads, embeds, and iframes have reserved space.
 Avoid inserting content above existing content except in response to user interaction.
 
 
-using fetch get/post/put/delete syntax
+using fetch get/post/put/delete syntax ********
 
 fetch('https://api.example.com/data', {
   method: 'GET', // Default method
@@ -1836,6 +1804,23 @@ fetch('https://api.example.com/data/1', {
 
 
 
+Minification-(bundle multiple files in a group) ***********
+Minification is the process of minimizing code and markup in your web pages and script files. 
+It's one of the main methods used to reduce load times and bandwidth usage on websites. 
+Minification dramatically improves site speed and accessibility, directly translating into a better user experience
+
+Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
+Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
+Minification is performed on the web server before a response is sent.
+
+
+partial classes **********
+A “partial class” is a class whose methods and variables are parceled out into multiple files. 
+When the files are compiled, the class reassembles itself into the full class definition
+in general JavaScript is a class-less language. Everything is an object. 
+And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
+Purpose of partial classes is to allow a class's definition to span across multiple files. 
+This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
 
 
 
