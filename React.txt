@@ -466,6 +466,50 @@ function ApplicationComponent() {
 The Custom Hook above is returning some values
 The Custom Hook can then be Re-used
 
+useDebounce 
+import { useState, useEffect } from 'react';
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+export default useDebounce;
+
+import useDebounce from './useDebounce';
+
+function SearchComponent() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      // Call search API
+      console.log('Searching for', debouncedSearchTerm);
+    }
+  }, [debouncedSearchTerm]);
+
+  return (
+    <input
+      type="text"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+}
+
 
 Set interval syntax ****
  var myVar = setInterval(alertFunc, 3000);
@@ -623,6 +667,30 @@ Server-side rendering.
 Errors thrown in the error boundary itself.
 
 
+Handle exceptions in react  *********
+React provides a few ways to handle exceptions, including Error Boundaries, try-catch within component logic, and custom error handling hooks.
+
+import { useState } from 'react';
+
+function useErrorHandler() {
+  const [error, setError] = useState(null);
+
+  const handleError = (fn) => {
+    try {
+      fn();
+    } catch (err) {
+      setError(err.message);
+      console.error("Error:", err);
+    }
+  };
+
+  return { error, handleError };
+}
+
+export default useErrorHandler;
+
+
+ 
 Pure Component *******
 A Pure Component in React is a type of component that implements a shallow comparison of props and state to decide whether the component should re-render. 
 This can optimize performance by avoiding unnecessary re-renders when the props and state have not changed.

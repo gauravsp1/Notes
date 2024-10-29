@@ -56,6 +56,15 @@ function countdown(n) {
 }
 
 
+print a value for particular time continuosly ******
+let timer = setInterval(() => {
+  console.log("hello");
+}, 0);
+setTimeout(() => {
+  clearInterval(timer);
+}, 2000);
+
+
 var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
  numArray.length=0
 
@@ -126,6 +135,22 @@ const uniqueArray = array.reduce((accumulator, currentValue) => {
 console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
 
 const uniqueArray2 = array.reduce((acc, it) => acc.includes(it) ? acc : [ ...acc, it ], [])
+
+
+const removeDuplicates = (arr) => {
+  const uniqueArray = [];
+  const seen = {};  // Use an object to track seen elements
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!seen[arr[i]]) {  // If the element is not in 'seen', add it
+      uniqueArray.push(arr[i]);
+      seen[arr[i]] = true;  // Mark the element as seen
+    }
+  }
+
+  return uniqueArray;
+};
+
 
 
 How to find prime no in array ********
@@ -671,13 +696,6 @@ const len = array.length
 console.log(array[ len - 1 ]) // fish
 
 
-print a value for particular time continuosly ******
-let timer = setInterval(() => {
-  console.log("hello");
-}, 0);
-setTimeout(() => {
-  clearInterval(timer);
-}, 2000);
 
 
 

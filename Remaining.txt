@@ -15,8 +15,8 @@ cdn
 Apply on linkedin
 arrange notes points 
 create Revision notes
-HLD practice
 Past projects details HLD
+HLD practice
 Interview Audio
 Performance Optimization read more
 Vanilla Js - Basic
@@ -27,6 +27,12 @@ TypeScript - Basic
 New hooks
 React 19
 GraphQL
+
+
+********Interview Questions **********
+useImperativeHandle 
+forwardRef
+jest unit testing 
 
 ------------HTML/CSS---------
 Grid CSS
@@ -55,7 +61,6 @@ intersection of arrays
 --------------------------
 
 
-**********Final Flow*******
 
 
 

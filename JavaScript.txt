@@ -595,7 +595,7 @@ Classes declared with the class keyword are not hoisted in the same way as funct
 They behave more like let and const, existing in the temporal dead zone until the declaration is evaluated.
 
 
-Lexical  scope **********
+Lexical scope **********
 A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
 inside another function defined after the variable declaration. 
 But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
@@ -779,6 +779,19 @@ person2.sayHello(); // "Hello, my name is Bob"
 console.log(person1.hasOwnProperty('sayHello')); // false
 console.log(Person.prototype.hasOwnProperty('sayHello')); // true
 
+
+const obj = {
+  name: "gaurav",
+};
+
+obj.prototype.sayHello = function () {
+  console.log(`My name is ${this.name}`);
+};
+obj.sayHello();
+
+JavaScript objects don’t have a prototype property that allows you to directly add methods to them.
+The prototype property is specific to constructor functions and classes.
+For a regular object like obj, if you want to add a method, you can define it directly on the object.
 
 Constructor Function *****
 Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
@@ -1187,6 +1200,11 @@ It is the opposite of event bubbling, where events propagate outwards from the t
 
 Event Propogation **********
 Event propagation is the process by which events travel through the DOM when they occur. There are two main phases of event propagation: capturing and bubbling.
+
+In JavaScript, you can switch from event bubbling (the default behavior) to event capturing by passing an additional argument, { capture: true }
+element.addEventListener("event", eventHandler, { capture: true });
+Or, you can pass true as the third argument to addEventListener (though using the options object is preferred):
+element.addEventListener("event", eventHandler, true);
 
 
 Currying ******

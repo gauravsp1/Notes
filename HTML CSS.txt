@@ -8,6 +8,9 @@ HTML elements tell the browser how to display the content
 HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
 Document Type Declaration: An HTML document starts with a document type declaration (<!DOCTYPE html>) to define the version of HTML being used.
 
+Meta tags in HTML are used to provide metadata about the HTML document.
+This metadata can include information about the page's content, character set, author, keywords, description, and much more.
+
 html4 vs html5 **********
 New Elements and Attributes
 
@@ -489,7 +492,54 @@ Using Positioning
 
 To horizontally center a block element (like <div>), use margin: auto;
 
+1.document.getElementById(id)
+Purpose: Selects a single element by its unique ID.
+Return Type: A single HTMLElement object, or null if no element with that ID is found.
+Usage: Most efficient for selecting a unique element by ID.
+const element = document.getElementById("header");
 
+2. document.getElementsByClassName(className)
+Purpose: Selects all elements that have a specific class.
+Return Type: An HTMLCollection (live collection) of elements with the specified class.
+Usage: Great for selecting multiple elements with the same class name.
+const elements = document.getElementsByClassName('button');
+
+3. document.getElementsByTagName(tagName)
+Purpose: Selects all elements with a specific tag name.
+Return Type: An HTMLCollection (live collection) of elements with the specified tag.
+Usage: Useful when you need to select all instances of a certain element type, such as all <p> or <div> tags.
+const paragraphs = document.getElementsByTagName('p');
+
+4. document.querySelector(selector)
+Purpose: Selects the first element that matches a CSS selector.
+Return Type: A single HTMLElement object, or null if no matching element is found.
+Usage: Allows for more complex selection, such as #id, .class, tag, or attribute selectors.
+const allButtons = document.querySelector('.button');
+
+// Select by ID
+const header = document.querySelector('#header');
+
+// Select by class
+const textClass = document.querySelector('.text');
+
+// Select by tag
+const paragraph = document.querySelector('p');
+
+// Select nested elements
+    const firstListItem = document.querySelector('ul li:first-child');
+
+5. document.querySelectorAll(selector)
+Purpose: Selects all elements that match a CSS selector.
+Return Type: A static NodeList of all matching elements.
+Usage: Useful for selecting multiple elements with more complex selectors. The result is a static NodeList that does not update when the DOM changes.
+const allButtons = document.querySelectorAll('.button');
+
+element[0].style.backgroundColor="#a72b2b"
+
+
+
+If you want to find all HTML elements that match a specified CSS selector (id, class names, types, attributes, values of attributes, etc),
+use the querySelectorAll() method.
 
 
 
