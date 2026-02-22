@@ -4,6 +4,7 @@ A polyfill is a piece of code (usually JavaScript) that implements modern functi
 It "fills in" the gap in browser support, allowing developers to use newer features without breaking the website on older or less-capable browsers.
 
 Map ****
+const sample = [1, 2, 3, 4, 5];
 // Array.map((item,index,arr)=>{})
 
 Array.Prototype.MyMap= function(cb){
@@ -72,12 +73,12 @@ Promise.all ***********
 Promise.allPolyfill = function (promises) {
   return new Promise((resolve, reject) => {
     const result = [];
-    let count = promises.length;
+	let completed = 0;
     promises.forEach((promiseItem, index) => {
       Promise.resolve(promiseItem).then((res) => {
         result[index] = res;
-        count--;
-        if (count === 0) {
+        completed++;
+        if (completed === promises.length) {
           resolve(result);
         }
       }, reject);
@@ -127,6 +128,10 @@ console.time("Second Call");
 console.log("Second", newFunction(121, 121));
 console.timeEnd("Second Call");
 
+Rule of thumb:
+
+In function declaration/parameter list → ... = rest (collect into array).
+In function call/array/object → ... = spread (expand array/object into values).
 
 Promise *************
 
@@ -138,9 +143,7 @@ const debouncedCount= debounce(()=>{ //logic},delay)
 const myDebounce = (cb, delay) => {
   let timer;
   return function (...args) {
-    if (timer) {
       clearTimeout(timer);
-    }
     timer = setTimeout(() => {
       cb(...args);
     }, delay);
@@ -163,66 +166,19 @@ const myThrottle = (cb, delay) => {
   };
 };
 
+String.prototype.toCamelCase = function () {
+  let tempString = "";
+  for (let i = 0; i < this.length; i++) {
+    if (i % 2 === 0) {
+      tempString = tempString + this[i].toUpperCase();
+    } else {
+      tempString = tempString + this[i];
+    }
+  }
+  return tempString;
+};
+console.log("gaurav is my name".toCamelCase());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// "gaurav is my name".toCamelCase();
+//GaUrAv
 

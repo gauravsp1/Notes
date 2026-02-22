@@ -3,7 +3,7 @@
 *************Flow***********
 Fist easy from all then medium
 Step 3 : Solve Problems on Arrays [Easy -> Medium -> Hard]
-Step 4 : Binary Search [1D
+Step 4 : Binary Search [1D]
 Step 5 : Strings [Basic and Medium]
 Step 6 : Learn LinkedList [Single LL, Double LL, Medium, Hard Problems]
 Step 9 : Stack and Queues [Learning, Pre-In-Post-fix, Monotonic Stack, Implementation]
@@ -72,41 +72,325 @@ Map
 
 
 
-Sorting algorithms***
+----------------------xxxxxxxxxx----------xxxxxxxxxx-----------xxxxxxxxxxx-----------xxxxxxxxx--------------
 
-Bubble Sort
-Description: Compares adjacent elements and swaps them if they are in the wrong order. This process is repeated until the list is sorted.
-Time Complexity:
-Worst Case: O(n²)
-Best Case: O(n) (if the list is already sorted)
-Space Complexity: O(1) (in-place)
-Stable: Yes
-When to Use: Simple to implement but inefficient for large datasets. Better suited for small lists or when the list is nearly sorted.
+Time Complexity and Space Complexity ***
+Time Complexity tells you how much time your algorithm takes relative to the input size n.
+It does not give you the actual time (in seconds).
+It gives you how the running time grows as the input grows.
 
-Merge Sort
-Description: A divide-and-conquer algorithm that recursively divides the array into two halves, sorts each half, and then merges the sorted halves.
-Time Complexity: O(n log n) for all cases (worst, best, and average).
-Space Complexity: O(n) (due to the additional space for merging)
-Stable: Yes
-When to Use: Suitable for large datasets, especially when stable sorting is required or when sorting linked lists.
+Notation	Meaning				Explanation															Example
+O(1)		Constant Time		Fastest! Takes the same time no matter the input size.				Accessing an array element
+O(log n)	Logarithmic Time	Cuts problem size in half at each step. Super efficient!			Binary Search 
+O(n)		Linear Time 		Grows directly with input size.										Looping through an array
+O(n log n)	Linearithmic Time	Common in efficient sorting (Merge Sort, Quick Sort).				Merge Sort, Quick Sort
+O(n^2)		Quadratic Time		Bad! Nested loops. Avoid if possible.								Bubble Sort, Nested Loops
+O(2^n)		Exponential Time	Horrible! Used in brute-force recursion (Fibonacci, subsets).		Recursive Fibonacci
+O(n!)		Factorial Time		Worst! Used in permutations & backtracking problems.				Permutations, Backtracking
 
-QuickSort
-Description: A divide-and-conquer algorithm that selects a "pivot" element, partitions the array into two subarrays
-(one with elements less than the pivot and one with elements greater than the pivot), and recursively sorts the subarrays.
-Time Complexity:
-Worst Case: O(n²) (occurs when the pivot is poorly chosen, e.g., always the smallest or largest element)
-Best and Average Case: O(n log n)
-Space Complexity: O(log n) (for recursive call stack)
-Stable: No
-When to Use: One of the most efficient algorithms for large datasets, though care is needed in pivot selection
-(randomized pivot or "median of three" techniques can improve performance).
 
-Heap Sort
-Description: Uses a binary heap data structure to repeatedly extract the maximum (or minimum) element and rebuild the heap.
-Time Complexity: O(n log n) for all cases (worst, best, and average).
-Space Complexity: O(1) (in-place)
-Stable: No
-When to Use: Efficient when memory usage is critical, but it is not stable. Often used in priority queues and large datasets where stability isn't important.
+Space Complexity tells you how much extra memory your algorithm needs to work, relative to input size.
+It includes:
+Temporary variables
+Function call stack
+Data structures used internally
+
+Loops → O(n)
+Nested Loops → O(n^2)
+Divide & Conquer (Binary Search, Merge Sort) → O(log n) or O(n log n)
+
+
+
+1.O(n)
+2.O(n^2)
+3.O(log n)
+4.O()
+5.O(n log n)
+
+✔ Use HashMaps for fast lookups (O(1))
+✔ Use Binary Search instead of Linear Search (O(log n) vs. O(n))
+✔ Avoid Nested Loops when possible (O(n²) is bad)
+✔ Use efficient sorting (Merge Sort, Quick Sort) instead of Bubble Sort
+✔ Use Dynamic Programming to reduce redundant calculations
+
+
+Common Patterns in DSA****
+
+Pattern							Description									Example Problems
+1. Two Pointers					Use two indices to scan data				Pair sum, Reverse array, Remove duplicates
+2. Sliding Window				Track a window of elements in a sequence	Max sum subarray, Longest substring without repeats
+3. Fast & Slow Pointers			Move pointers at different speeds			Linked list cycle, Palindrome linked list
+4. Binary Search				Repeatedly divide search space				Search in sorted array, Peak element
+5. Divide and Conquer			Break problem into sub-problems				Merge Sort, Quick Sort, Binary Search
+6. Recursion & Backtracking		Try all combinations (undoing steps)		N-Queens, Sudoku solver, Subsets
+7. Dynamic Programming (DP)		Store results of overlapping subproblems	Fibonacci, Knapsack, Longest common subsequence
+8. Greedy						Make locally optimal choices				Activity selection, Coin change (if greedy works)
+9. Hashing						Use hash maps or sets for lookup			Two Sum, Anagrams, Frequency counting
+10. BFS / DFS (Graph / Tree)	Traverse trees or graphs					Level order traversal, Maze problems, Cycle detection
+11. Heap / Priority Queue		Access smallest/largest quickly				Kth largest, Merge k sorted lists
+12. Union-Find (Disjoint Set)	Keep track of connected components			Kruskal’s algo, Detect cycle in graph
+13. Bit Manipulation			Work with bits directly						Find single number, Count set bits
+14. Trie (Prefix Tree)			Efficient string prefix searching			Autocomplete, Word dictionary
+15. Topological Sort			Order of tasks with dependencies			Course schedule, Build system
+
+
+ 
+
+Sorting Algorithms ****
+
+1.Selection Sort
+Find the smallest element in the array.
+Swap it with the first element.
+Find the next smallest element and swap it with the second element.
+Repeat until the array is sorted.
+
+function selectionSort(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        let minIndex = i; // Assume the first element is the smallest
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) { // Find smaller element
+                minIndex = j;
+            }
+        }
+        // Swap smallest element with current position
+        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+    }
+    return arr;
+}
+
+// Example Usage
+console.log(selectionSort([64, 25, 12, 22, 11])); 
+// Output: [11, 12, 22, 25, 64]
+
+Case							Complexity
+Best Case (Already Sorted)		O(n²)
+Worst Case (Reverse Sorted)		O(n²)
+Average Case (Random Order)		O(n²)
+
+Why is it O(n²)?
+It has two nested loops:
+Outer loop runs n times → O(n)
+Inner loop runs n, n-1, ..., 2 times → O(n)
+Total: O(n × n) = O(n²)
+
+
+2.Bubble Sort
+Bubble Sort is one of the simplest sorting algorithms.
+It repeatedly swaps adjacent elements if they are in the wrong order, "bubbling" the largest element to the end.
+
+Compare adjacent elements in the array.
+If the left element > right element, swap them.
+Repeat for all elements, pushing the largest element to the right.
+Reduce the range and repeat until sorted.
+
+function bubbleSort(arr) {
+    let n = arr.length;
+    let swapped; // Flag to optimize
+
+    for (let i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (let j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap elements
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                swapped = true;
+            }
+        }
+        // If no swaps, array is already sorted
+        if (!swapped) break;
+    }
+    return arr;
+}
+
+// Example Usage
+console.log(bubbleSort([64, 25, 12, 22, 11]));
+// Output: [11, 12, 22, 25, 64]
+
+Case							Complexity
+Best Case (Already Sorted)		O(n) ✅ (With optimization)
+Worst Case (Reverse Sorted)		O(n²) ❌
+Average Case (Random Order)		O(n²) ❌
+
+Why is it O(n²)?
+Outer loop runs n times → O(n)
+Inner loop runs n-1, n-2, ..., 1 times → O(n)
+Total: O(n × n) = O(n²)
+
+
+3.Insertion Sort
+Start with the second element (since a single element is already "sorted").
+Compare it with elements before it and insert it in the correct position.
+Repeat for all elements until the array is sorted.
+
+function insertionSort(arr) {
+let n = arr.length;
+ for (let i = 1; i < n; i++) {
+        let j = i;
+		 while (j > 0 && arr[j-1] > arr[j]) {
+			let temp= arr[j-1]
+			arr[j-1]= arr[j]
+            arr[j] = temp;
+            j--;
+        }
+	}
+}
+
+Case							Complexity
+Best Case (Already Sorted)		O(n) ✅
+Worst Case (Reverse Sorted)		O(n²) ❌
+Average Case (Random Order)		O(n²) ❌
+
+Why is it O(n²)?
+Outer loop runs n-1 times → O(n)
+Inner loop shifts elements → O(n) in worst case
+Total: O(n × n) = O(n²)
+
+Best Case O(n): If the array is already sorted, we only make n comparisons.
+
+
+4.Merge Sort
+Merge Sort is a divide and conquer sorting algorithm. It recursively splits the array into smaller subarrays, sorts them, and then merges them back together.
+
+Divide: Split the array into two halves until each subarray has one element.
+Conquer: Recursively sort each half.
+Merge: Combine the two sorted halves into one sorted array.
+
+function mergeSort(arr,low, high) {
+	if(low === high) return
+    let mid = Math.floor((low+high)/ 2);
+    mergeSort(arr,low,mid); // Sort left half
+    mergeSort(arr,mid+1,high); // Sort right half
+    merge(arr,low,mid,high); // Merge sorted halves
+}
+
+function merge(arr,low,mid,high) {
+    let result = []
+	let left = low
+	let right = mid+1
+
+    while (left <= mid && right <= high) {
+        if (arr[left] < arr[right]) {
+            result.push(arr[left]);
+            left++;
+        } else {
+            result.push(arr[right]);
+            right++;
+        }
+    }
+	while (left <= mid){
+	result.push(arr[left]);
+	left++;
+	}
+	while(right <= high){
+	result.push(arr[right]);
+	right++;
+	}
+	for(let i=low;i<=high;i++){
+		arr[i]=result[i-low]
+	}
+}
+
+
+let array=[64, 25, 12, 22, 11]
+mergeSort(array,0,array.length-1)
+console.log("array",array)
+// Output: [11, 12, 22, 25, 64]
+
+Case			Complexity
+Best Case		O(n log n)
+Worst Case		O(n log n)
+Average Case	O(n log n)
+
+Why O(n log n)?
+Splitting: The array is divided log n times.
+Merging: Merging takes O(n) time for each level.
+Total: O(n log n).
+
+
+5.Quick Sort
+Quick Sort is a divide and conquer sorting algorithm that selects a pivot, partitions the array into two halves, and sorts them recursively.
+
+Pick a Pivot (usually the last, first, or random element).
+Partition the Array:
+Move all elements smaller than pivot to the left.
+Move all elements greater than pivot to the right.
+Recursively Quick Sort both halves.
+
+function quickSort(arr, low, high) {
+  if (low < high) {
+    let pivotIndex = partition(arr, low, high);
+    quickSort(arr, low, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, high);
+  }
+}
+
+function partition(arr, low, high) {
+  let pivot = arr[low];
+  let i = low;
+  let j = high;
+  while (i < j) {
+    while (arr[i] <= pivot && i < high) {
+      i++;
+    }
+    while (arr[j] > pivot && j > low) {
+      j--;
+    }
+    if (i < j) {
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  [arr[low], arr[j]] = [arr[j], arr[low]];
+
+  return j;
+}
+
+let array = [64, 25, 12, 22, 11];
+quickSort(array, 0, array.length - 1);
+console.log("array", array);
+
+
+Case								Complexity
+Best Case							O(n log n)
+Worst Case (Unbalanced Partitions)	O(n²)
+Average Case						O(n log n)
+
+Why O(n log n) in Best/Average Case?
+Partitioning takes O(n) (we compare each element to pivot).
+Splitting happens log n times (dividing array in half each time).
+Total: O(n × log n) = O(n log n).
+
+❌ Why O(n²) in the Worst Case?
+If the pivot is always smallest/largest element, one side is empty, and recursion runs n times.
+Each level takes O(n), so total becomes O(n²).
+
+Fix: Use Randomized Quick Sort (choose a random pivot).
+
+
+Randomized Quick Sort*****
+
+
+Sliding Window***
+The Sliding Window technique is a powerful way to solve problems involving subarrays, substrings, or contiguous ranges — especially
+when you need to improve performance from O(n²) to O(n).
+
+When to Use It?
+Fixed-size subarrays (e.g. max sum of size k)
+Variable-sized subarrays (e.g. smallest window with sum ≥ target)
+Substrings with unique characters
+Longest/shortest patterns
+
+
+Two Pointers***
+Two Pointers involves using two indices (or pointers) to scan or traverse data — usually in a sorted array, string, or linked list.
+You move the pointers toward each other, away from each other, or in the same direction depending on the problem.
+
+Problem Type		Description
+Pair sum			Check if two numbers sum to a target
+Reverse data		Reverse an array/string in-place
+Remove duplicates	In sorted arrays
+Merge or compare	Two sorted arrays or strings
+Palindromes			Check if string reads same forward/backward
 
 
 Searching algorithms ***
@@ -121,13 +405,513 @@ Space Complexity: O(1)
 When to Use: Best for small or unsorted datasets. Works on any data structure (arrays, linked lists, etc.) and does not require the dataset to be sorted.
 
 2. Binary Search
-Description: A divide-and-conquer algorithm that repeatedly divides the sorted array in half, comparing the middle element with the target value.
-If the middle element is greater or less, it narrows the search to the corresponding half.
-Time Complexity:
-Worst Case: O(log n) (where n is the number of elements)
-Best Case: O(1) (if the middle element is the target)
-Space Complexity: O(1) (iterative) or O(log n) (recursive)
-When to Use: Requires the dataset to be sorted. Ideal for large datasets where the cost of sorting is justified or the data is already sorted.
+Binary Search is a Divide & Conquer algorithm used to efficiently find an element in a sorted array.
+Instead of checking every element like linear search, it cuts the search space in half at each step.
+
+When to Use:
+Array (or search space) is sorted
+Need faster performance than O(n)
+
+How It Works:
+Find the middle element of the array.
+If it's equal to the target, return the index.
+If the target is less, search the left half.
+If the target is greater, search the right half.
+Repeat until low > high.
+
+Operation			Complexity
+Time				O(log n)
+Space (iterative)	O(1)
+Space (recursive)	O(log n) (due to call stack)
+
+
+
+Senario 1
+In Umang i am investing 8000 per month for 25 years 
+and then it will give me fix 200000 per year for 30 years
+
+
+Senario 2
+In Gold i am investing 8000 per month for 22 years with interest rate of 10%
+and then SWP of 200000 per year for 30 years  with interest rate of 10%
+What will be the end corpose
+
+Which Senario is best to do
+
+
+Linked List ****
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+// Example usage:
+const head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+
+
+Trees***
+In data structures, a tree is a hierarchical structure used to represent data in a non-linear way.
+It consists of nodes connected by edges, and is commonly used to model relationships like those in a family tree, organization chart, file systems, etc.
+
+| Term        | Description                                  |
+| ----------- | -------------------------------------------- |
+| **Node**    | Basic unit holding a value or data.          |
+| **Root**    | The topmost node of the tree (no parent).    |
+| **Child**   | A node that descends from another node.      |
+| **Parent**  | A node that has one or more children.        |
+| **Leaf**    | A node with no children.                     |
+| **Edge**    | A connection between a parent and a child.   |
+| **Subtree** | Any node and its descendants.                |
+| **Depth**   | Distance from the root node to a given node. |
+| **Height**  | Distance from a node to its deepest leaf.    |
+
+
+        A       ← root
+      /   \
+     B     C
+    / \     \
+   D   E     F     ← leaves
+   
+A is the root
+B, C are children of A
+D, E are children of B
+D, E, and F are leaves
+B is a subtree with nodes B, D, E
+
+Types of Trees
+Binary Tree – Each node has at most 2 children
+Binary Search Tree (BST) – Binary tree with sorted structure
+AVL Tree / Red-Black Tree – Self-balancing BSTs
+Trie – Tree for prefix matching (used in autocomplete)
+Heap – Tree used for priority queues
+N-ary Tree – Node can have N children (e.g., file system)
+
+
+Binary Tree****
+
+          1
+       /     \
+      2       3
+     / \       \
+    4   5       8
+       / \	   /
+      6   7   9
+           
+            
+
+Heap
+A Heap is a special kind of binary tree used primarily to implement priority queues.It satisfies two main properties:
+
+Complete Binary Tree
+All levels are fully filled except possibly the last, which is filled from left to right.
+This makes heaps easy to store in arrays.
+
+Min-Heap: Parent ≤ children
+(The smallest element is always at the root)
+         1
+       /   \
+      3     5
+     / \   / 
+    4   8 6
+
+
+Max-Heap: Parent ≥ children
+(The largest element is always at the root)
+         100
+       /     \
+     90       80
+    /  \     /  
+  70   60  50
+
+
+
+Common Use-Cases:
+Priority Queues
+Dijkstra’s shortest path
+Heap Sort
+Top K problems (e.g., Top K frequent elements)
+Median finding from a stream (using two heaps)
+
+
+
+
+-----------------****************------Pattern Recognition--------------***********************
+
+Sliding Window
+Two Pointers
+Binary Search
+Binary Search on Answer
+Fast & Slow Pointers
+
+1.Two Pointers
+
+2.Sliding Window
+
+
+3.Binary Search
+
+| Question                                                                                | If YES, then...                    |
+| --------------------------------------------------------------------------------------- | ---------------------------------- |
+| 1. Is there a **range of numeric values** you're trying to minimize or maximize?        | → Might be Binary Search on Answer |
+| 2. Can you write a **function isValid(x)** that tells if a value `x` is acceptable?     | → Key to Binary Search             |
+| 3. Is that function **monotonic** (once true, always true or vice versa)?               | → Binary Search works              |
+| 4. Is the answer a **boundary** between two outcomes (e.g., “smallest x such that...”)? | → Classic binary search            |
+
+
+Type 1: Search in a Sorted Array
+
+💡 Use binary search when:
+The array is sorted
+You’re finding an element or index satisfying some condition
+
+✅ Examples:
+Search in Rotated Sorted Array
+Find first/last occurrence
+Peak Element in mountain array
+
+Type 2: Binary Search on Answer
+💡 Use when:
+You're not given a sorted array
+You're minimizing/maximizing something
+But you can still search over possible values
+
+| Problem                                | Search Space          | isValid(x)                                        |
+| -------------------------------------- | --------------------- | ------------------------------------------------- |
+| Koko Eating Bananas                    | Eating speed          | Can she finish in `h` hours?                      |
+| Minimum # of days to make `m` bouquets | Days                  | Are `m` bouquets possible by day `d`?             |
+| Allocate books to minimize max pages   | Max pages per student | Can we assign books with ≤ `x` pages per student? |
+
+
+| Signal in Problem                             | Pattern                     |
+| --------------------------------------------- | --------------------------- |
+| “Find the minimum/maximum `x` such that…”     | Binary Search on Answer     |
+| “Given a limit, is it possible to…”           | Binary Search               |
+| “Array is sorted”                             | Classic Binary Search       |
+| “Fixed range of values”                       | Binary Search on that range |
+| “Optimize something” + “can you test a value” | Binary Search               |
+
+
+ Common Mistakes
+❌ Looking for binary search only when arrays are sorted
+✅ Instead, look for searchable numeric ranges and monotonic decisions
+
+
+Quick Checklist
+Can I reframe this as "what is the smallest/largest x such that a condition holds?"
+Is there a min/max range to search?
+Can I write a function isValid(x)?
+Is the output of isValid(x) monotonic?
+If yes → 🚀 Binary Search!
+
+
+
+
+
+
+--------------******************-----------------********************
+
+
+Arrays
+1. Sum of Array
+2. Remove Duplicates
+3. Reverse Array In-Place
+4. Reverse Array Immutable
+5. First Duplicate
+6. Print Duplicates with Indices
+7. Best Time to Buy and Sell (single tx)
+8. Chocolate Distribution (min diff)
+9. Pair in Sorted Rotated Array
+10. Two Sum All Unique Pairs
+11. Two Sum Indices (one pair)
+12. Two Sum Sorted (1-based indices)
+13. Two Sum Two-Pointer (values)
+14. 3Sum (triplets sum zero)
+15. Common Elements of Two Arrays
+16. Common Elements in Three Sorted Arrays
+17. Ceiling Index (>= x)
+18. Merge Sorted Arrays In-Place (backwards)
+19. Find Duplicate (Floyd cycle)
+20. Maximum Product of Three Numbers
+21. Top K Frequent Elements
+22. Left Rotate By One
+23. Left Rotate By D (reversal)
+24. Move Zeros to End
+25. Union, Common, Distinct
+26. Maximum Consecutive Ones
+27. Single Number (XOR)
+28. Longest Subarray Sum K (positive)
+29. Longest Subarray Sum K (any)
+30. Count Occurrences in Sorted Array
+31. Check If Array Sorted
+32. Rotate Array By K
+33. Sort 0/1/2 (Dutch Flag)
+34. Product of Array Except Self
+35. isValid Sudoku
+36. Max Profit Multiple Transactions
+37. Majority Elements (> n/3)
+38. Binary Search (classic)
+41. floorIndex
+42. frequencySortChars
+43. Merge Sort
+44. Merge Two Sorted In-Place (buffer)
+46.Longest Consecutive Sequence
+47.Contains Duplicate II
+48.Minimum Size Subarray Sum
+49.kadane logic
+
+
+
+Strings
+1. Valid Palindrome II (remove one)
+2. Last Word Length
+3. Jewels and Stones
+4. Max Vowel & Consonant Frequency
+5. Find Largest Odd Digit in String
+6. Longest Common Prefix
+7. isAnagram
+8. isIsomorphic
+9. Group Anagrams
+10. reverseStr (string rev)
+11. reverseDigits
+12. isPalindromeStr
+13. charFrequency
+14. firstUniqChar
+15. removeConsecutiveChars
+16. reverseWordsInString
+17. countAndSay
+18. Roman to Integer
+19. Compare Version
+
+Two Pointer
+1. isSubsequence
+2. Boats to Save People
+3. Container With Most Water
+4. LongestSubString
+5. LongestRepeatingChar
+
+
+Binary Search
+1. searchInsertPosition
+2. sqrRoot
+3. firstBadVersion
+4. findPeakElement
+5. firstAndLastPosition
+6. findClosestElements
+7. lengthOfLongestSubstring
+8. characterReplacement (longest repeating after k)
+9. Koko Eating Bananas (min speed)
+10. Ship Within D Days
+11. Arrange Coins
+12. singleElement (sorted pairs)
+13. Search in Rotated Sorted Array
+14. needle and HayStack
+15. Find Minimum in Rotated Sorted Array
+
+Linked List
+1.Create a new Linked List Node
+2.convertArrayToLinkedList
+3.Add in a Linked List
+4.Delete a Node
+5.Print Linked List
+6.Length of linked list
+7.Search in linked list
+8.Middle of Node
+9.Reverse Linked List
+10.Check Cyclic Linked List
+11.Palindrom Linked List
+12.Intersection
+13.RemoveElements
+14. Remove Nth Node From End
+15.Remove Duplicate From Sorted List
+16.Odd Even Node
+17.Rotate Node right side
+18.merge Two Sorted Nodes
+19.Add Two Numbers
+20.findStartingPoint
+21.reorderList
+22.reverseBetween 
+
+
+
+Queue && Stack
+1.Stack Implementation
+2.Queue Implementation
+3. Implement Stack with 2 Queues
+4.Implement Stack with 1 queue
+5.Implementation Queue using 2 Stack
+isValidParentheses
+Remove Outermost Parentheses Without Stack
+Remove Outermost Parentheses With Stack
+Evaluate Reverse Polish Notation
+nextGrtElement
+nextGrtElement Circular
+nextSmallestElement
+Daily Temperature
+Sort Stack
+Baseball Game
+asteroidCollision
+carFleet
+simplifyPath
+
+Min Stack
+Rotting Orange
+
+
+Trees 
+Create a tree
+Traversal - preOrderTraversal,inOrderTraversal,postOrderTraversal
+Iterative Apporoch Traversal - preOrderTraversal,inOrderTraversal,postOrderTraversal
+Max Depth - Top-Up, Bottom Up
+pathSum - Top-Up, Bottom Up
+isSymetric- Recursive,Iterative
+invertTree
+sameTree
+isBalanced
+Lowest Common Ancestor of a Binary Tree
+Binary Tree Zigzag Level Order Traversal
+Binary Tree Right Side View
+goodNode
+populateNextRight
+Subtree of Another Tree
+
+Balanced Binary Tree
+Diameter of Binary Tree
+
+
+
+
+Binary Search Tree
+
+
+BackTracking
+
+
+
+Greedy
+
+
+Maths
+
+
+Dynamic Programming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

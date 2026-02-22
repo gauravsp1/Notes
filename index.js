@@ -1,11 +1,3 @@
-//  sum of array
-
-// arr=[1,5,6,4,10]
-// newarr= arr.reduce((total,value)=>{
-//   return total+value
-// })
-// console.log(newarr)
-
 // Staircase
 
 // let n=4
@@ -17,149 +9,35 @@
 // console.log(sentence)
 // }
 
-// Reverse an array
+// const sampleData = [2, 3, 4, 2, 5, 4, 6, 7];
+// //  Output :   [2, 2, 4, 4, 3, 5, 6, 7]
+// const reArrange = (inputData) => {
+//   const seen = {};
 
-// arr=[1,2,3,4,5]
-// console.log(arr.reverse());
-
-//     const reversed = arr.reduce((acc, curr) => {
-//   return [current, ...acc];
-// }, []);
-
-// Reverse a String
-
-// console.log(reverse("Gaurav"))
-
-// function reverse(str){
-// return str.split("").reduce((acc,item)=>item+acc,"")
-// }
-
-// Kth smallest
-
-// arr=[1,22,3,-4,5]
-
-//  arr.sort((a, b) => a - b)
-
-// console.log(arr[k]);
-
-// Best Time to Buy and Sell Stock
-
-// prices = [7,10,5,13,60,4]
-// let min= Infinity
-// let profit=0
-// for(i=0;i<prices.length;i++){
-//   min=Math.min(min,prices[i])
-//   profit=Math.max(profit,prices[i]-min)
-// }
-// console.log(profit);
-
-// Find First Duplicate
-
-// let nums = [2, 3, 55, 4, 8, 10, 55, 5, 3];
-
-// const firstDuplicate = (inputArr) => {
-//   const newArr = inputArr.filter((item, index) => {
-//     return inputArr.indexOf(item) !== index;
-//   });
-//   console.log(newArr[0]);
-// };
-
-// firstDuplicate(nums);
-
-// const duplicates = [];
-// nums.forEach((item, index) => {
-//   if (nums.indexOf(item) !== index) {
-//     duplicates.push(item);
+//   for (let i = 0; i < sampleData.length; i++) {
+//     const value = sampleData[i];
+//     seen[value] = (seen[value] || 0) + 1;
 //   }
-// });
-// console.log("Duplicate", duplicates[0]);
 
-// Maximum Product of Three Numbers
+//   const dups = [];
+//   const unq = [];
 
-// arr=[1,2,10,3,4,5]
-// newarr=[]
-
-// for(j=0;j<3;j++){
-//   let max=0
-// for(i=0;i<arr.length;i++){
-//   max= max<arr[i]?arr[i]:max;
-// }
-// newarr.push(max)
-// arr.splice(arr.indexOf(max), 1);
-// }
-// let product=newarr[0]*newarr[1]*newarr[2]
-// console.log(newarr);
-// console.log(product);
-
-//     Factorial
-
-//     const factorial=(number)=>{
-//   if (number === 0 || number === 1) {
-//     return 1;
-//   }
-//    let product=1
-//    for(var i=1;i<=number;i++){
-//          product=product*i
+//   for (let key in seen) {
+//     if (seen[key] === 1) {
+//       unq.push(Number(key));
+//     } else {
+//       let couter = seen[key];
+//       while (couter > 0) {
+//         dups.push(Number(key));
+//         couter--;
 //       }
-//       return product
-// }
-//     console.log(factorial(5));
-
-// const factorial = (n) => {
-//   if (n <= 1) return 1;
-//   return n * factorial(n - 1);
-// };
-
-// palindrome
-
-// let sentence="abcecba"
-
-// arr= sentence.split("")
-// len=arr.length
-// let flagNP= true
-// for(i=0;i<(len-1)/2;i++){
-//     if(arr[i]!=arr[len-1-i]) flagNP= false
-// }
-
-// if(flagNP){
-//     console.log("A palindrome");
-// }
-// else{
-//     console.log("Not a palindrome");
-// }
-// sentence === sentence.split('').reverse().join('');
-
-// Frequency counter
-
-// let sentence="Gaurav"
-// function Counter(sentence){
-//   return sentence.split("").reduce((total, letter) => {
-//     total[letter] ? total[letter]++ : total[letter] = 1;
-//     return total;
-//   }, {});
-// };
-
-// let newsentence=Counter(sentence)
-//  console.log(newsentence)
-
-// First Unique Character in a String
-
-// let sentence="Gurav"
-
-// var firstUniqChar = function(s) {
-//     let frequency = {}
-
-//     for (let char of s) {
-//         frequency[char] ? frequency[char]++ : frequency[char] = 1
 //     }
-//     console.log(frequency);
-//     // console.log(s[1]);
-//     for (let key in frequency) {
-//         if (frequency[key] === 1){
-// return console.log(item);
-// }
-//     }
+//   }
+
+//   const result = [...dups, ...unq];
+//   return result;
 // };
+// console.log(reArrange(sampleData));
 
 // Sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 // Find the sum of first 100 prime numbers
@@ -231,97 +109,6 @@
 //     "two" > "three" // true it compares letters with highest number
 // "true"==true  // ans is false as "true" converted into NaN and true into 1
 
-// loop in react
-// function App() {
-//   const list = []
-
-//   for(let i=5;i<101;){
-//    list.push(<li>{i}</li>)
-//    i=i+5
-// }
-
-// console.log(list);
-//   return (
-//     <>
-//    <h1>React</h1>
-//    <ul>
-//    {list.map((item)=>{
-//      return <>{item}</>
-//    })}
-//    </ul>
-//     </>
-//   );
-// }
-
-// export default App;
-
-// var arr = [[1,2],[3,4],[4,5]] //[1,2,3,4,5]
-
-// let newarray= arr.flat()
-// let newarray= arr.flat(Infinity)
-
-// const flatten=(arr)=>{
-//     const newArray= arr.reduce((acc,item)=>{
-//   if(Array.isArray(item)){
-//      const flatArray=  flatten(item)
-//      acc.push(...flatArray)
-//       } else{
-//        acc.push(item)
-//       }
-//       return acc
-//    },[])
-//    return newArray
-// }
-// console.log(flatten(arr));
-
-// const flat = (array) => {
-//   return array.reduce(
-//     (acc, it) => acc.concat(Array.isArray(it) ? flat(it) : it),
-//     []
-//   );
-// };
-
-// const flatten=(arr,depth=1)=>{
-//     console.log("depth",depth)
-//     const newArray= arr.reduce((acc,item)=>{
-//   if(Array.isArray(item) && depth>0){
-//      const flatArray=  flatten(item,depth-1)
-//      acc.push(...flatArray)
-//       } else{
-//        acc.push(item)
-//       }
-//       return acc
-//    },[])
-//    return newArray
-// }
-// console.log(flatten(arr,2));
-
-// let obj = {
-//     name: "gaurav",
-//     surname: "pawar",
-//     address: {
-//       building: "XYZ",
-//       street: "123",
-//     },
-//   };
-// let obj2 = {
-//   name: "gaurav",
-//   surname: "pawar",
-//   addressBuilding: "XYZ",
-//   addressStreet: "123",
-// };
-
-//   function flatenObj(inputObj, result = {}, parent = "") {
-//     for (let key in inputObj) {
-//       if (typeof inputObj[key] === "object") {
-//         flatenObj(inputObj[key], result, parent + key + "_");
-//       } else {
-//         result[parent + key] = inputObj[key];
-//       }
-//     }
-//     return result;
-//   }
-
 // const brunch = {
 //     food: 'Dim sum',
 //     beverage: 'Jasmine tea',
@@ -329,7 +116,7 @@
 //         return `I'll have the ${this.food} with ${this.beverage} please.`
 //     }
 // }
-// brunch.order();
+// brunch.order(); //I'll have the undefined with undefined please.
 
 // var trees = ["xyz","xxxx","test","ryan","apple"];
 // delete trees[3];
@@ -378,11 +165,11 @@
 // }))       ==> 2
 
 // let a = [1,20,33,100,22,1000,2]
-// a.sort()
+// a.sort()  // [1, 100, 1000, 2, 20, 22, 33]
 
 // a.sort((a,b)=>{
 //    return a-b
-// })
+// }) // [1, 2, 20, 22, 33, 100, 1000]
 
 // function a(){
 //   console.log("a")
@@ -435,10 +222,6 @@
 // console.log(a===c) //true   here comparison of reference is done
 // console.log(a==b) //false
 
-// const a=[1, [2], [3, [[4]]],[5,6]]
-
-// console.log(a.flat(Infinity));
-
 // obj = {
 // 	a: 1,
 // 	b: 2,
@@ -480,17 +263,17 @@
 // var a={name:"Gaurav",surname:"Pawar"}
 // var b={name:"Varun",state:"Hs"}
 // var c={...a,...b}
-// console.log(c)
+// console.log(c) // { "name": "Varun", "surname": "Pawar", "state": "Hs"}
 
 // const arr =[{age: 15, isSelected: false}, {age:20, isSelected: false},
 //     { age: 25 , isSelected:false}]
 
-//     let arry4=arr.reduce((total,value)=>{
-//     if(value.age>18){
-//          value.isSelected=true
-//    total.push(value)
+//     let arry4=arr.reduce((acc,curr)=>{
+//     if(curr.age>18){
+//          curr.isSelected=true
+//    acc.push(curr)
 //     }
-//    return total
+//    return acc
 // },[])
 
 // console.log("newarray",arry4);
@@ -512,20 +295,6 @@
 // series(-25)
 // series(100)
 // series(25.13)
-
-// let array=[3,5,4,3,5,3]
-
-// value 3 is dup at index 3
-// value 5 is dup at index 4
-// value 3 is dup at index 5
-
-// array.forEach((item, index, arr) => {
-//     for (let i = 0; i < array.length; i++) {
-//       if (item === array[i] && index < i) {
-//         return console.log(`value ${item} is dup at index ${i}`);
-//       }
-//     }
-//   });
 
 // data=[2,5]
 // data.length>0?
@@ -549,8 +318,8 @@
 // ]
 
 // const filteredArr = arr.reduce((acc, current) => {
-//   const x = acc.find(item => item.id === current.id);
-//   if (!x) {
+//   const exists = acc.find(item => item.id === current.id);
+//   if (!exists) {
 //    acc.push(current);
 //   }
 //     return acc;
@@ -659,7 +428,7 @@
 //   }, "");
 //return outPut
 // }
-// console.log(longestWord(scent));
+// console.log(longestWord(scent)); // programming
 
 // console.log([] == ![]) //true
 // console.log(typeof undefined)  //undefined
@@ -686,6 +455,110 @@
 // sum(1)(2)(3)(4)()
 
 // -------------------------------------------------------------------------------------
+
+//flattenArray *****
+// var arr = [[1,2],[3,4],[4,5]] //[1,2,3,4,5]
+
+// let newarray= arr.flat()
+// let newarray= arr.flat(Infinity)
+
+// const flatten=(arr)=>{
+//     const newArray= arr.reduce((acc,item)=>{
+//   if(Array.isArray(item)){
+//      const flatArray=  flatten(item)
+//      acc.push(...flatArray)
+//       } else{
+//        acc.push(item)
+//       }
+//       return acc
+//    },[])
+//    return newArray
+// }
+// console.log(flatten(arr));
+
+// const flattenArray = (inputArray) => {
+//   let result = [];
+//   inputArray.forEach((item) => {
+//     if (Array.isArray(item)) {
+//       const outPut = flattenArray(item);
+//       result.push(...outPut);
+//     } else {
+//       result.push(item);
+//     }
+//   });
+//   return result;
+// };
+// console.log(flattenArray(arr));
+
+// const flatten=(arr,depth=1)=>{
+//     console.log("depth",depth)
+//     const newArray= arr.reduce((acc,item)=>{
+//   if(Array.isArray(item) && depth>0){
+//      const flatArray=  flatten(item,depth-1)
+//      acc.push(...flatArray)
+//       } else{
+//        acc.push(item)
+//       }
+//       return acc
+//    },[])
+//    return newArray
+// }
+// console.log(flatten(arr,2));
+
+//flatenObj ****
+// let obj = {
+//     name: "gaurav",
+//     surname: "pawar",
+//     address: {
+//       building: "XYZ",
+//       street: "123",
+//     },
+//   };
+// let obj2 = {
+//   name: "gaurav",
+//   surname: "pawar",
+//   addressBuilding: "XYZ",
+//   addressStreet: "123",
+// };
+
+//   function flatenObj(inputObj, result = {}, parent = "") {
+//     for (let key in inputObj) {
+//       if (typeof inputObj[key] === "object") {
+//         flatenObj(inputObj[key], result, parent + key + "_");
+//       } else {
+//         result[parent + key] = inputObj[key];
+//       }
+//     }
+//     return result;
+//   }
+
+//flatenObj ****
+// const input = {
+//   a: 1,
+//   b: 2,
+//   c: {
+//     d: "string",
+//     e: [10, 20, [30]],
+//   },
+// };
+
+// // output = [1, 2, "string", 10, 20, 30]
+
+// function flattenObject(inputValue) {
+//   const result = [];
+//   for (let key in inputValue) {
+//     if (typeof inputValue[key] !== "object") {
+//       result.push(inputValue[key]);
+//     } else {
+//       const outPut = flattenObject(inputValue[key]);
+//       result.push(...outPut);
+//     }
+//   }
+//   return result;
+// }
+
+// const output = flattenObject(input);
+// console.log(output); // [1, 2, "string", 10, 20, 30]
 
 // Deep comparison
 // const obj1 = {
@@ -742,6 +615,30 @@
 //   };
 
 // console.log(deepEqual(obj1, obj2));
+
+// const deepCompare = (inputA, inputB) => {
+//   if (typeof inputA !== "object" && typeof inputB !== "object") {
+//     return inputA === inputB;
+//   }
+//   const keyA = Object.keys(inputA);
+//   const keyB = Object.keys(inputB);
+
+//   if (keyA.length !== keyB.length) {
+//     return false;
+//   }
+//   for (let i = 0; i < keyA.length; i++) {
+//     if (
+//       !keyB.includes(keyA[i]) ||
+//       !deepCompare(inputA[keyA[i]], inputB[keyB[i]])
+//     ) {
+//       return false;
+//     }
+//   }
+
+//   return true;
+// };
+
+// console.log(deepCompare(obj1, obj2));
 
 // function printPattern(n) {
 //   let num = 1;
@@ -800,3 +697,260 @@
 
 //   // Usage:
 //   console.log(permute('abc')); // Output: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+
+// const dir = [
+//     {
+//       id: 1,
+//       name: "routes",
+//       parentId: 0,
+//       isDir: true,
+//     },
+//     {
+//       id: 2,
+//       parentId: 1,
+//       isDir: false,
+//       name: "index.js",
+//     },
+//     {
+//       id: 3,
+//       parentId: 1,
+//       name: "links.js",
+//       isDir: false,
+//     },
+//     {
+//       id: 4,
+//       parentId: 1,
+//       name: "component",
+//       isDir: true,
+//     },
+//     {
+//       id: 5,
+//       parentId: 1,
+//       isDir: true,
+//       name: "common",
+//     },
+//     {
+//       id: 6,
+//       name: "messages",
+//       isDir: true,
+//       parentId: 1,
+//     },
+//     {
+//       id: 7,
+//       name: "auth.js",
+//       parentId: 5,
+//       isDir: false,
+//     },
+//     {
+//       id: 8,
+//       name: "posting.js",
+//       isDir: false,
+//       parentId: 5,
+//     },
+//     {
+//       id: 9,
+//       name: "index.js",
+//       isDir: false,
+//       parentId: 5,
+//     },
+//     {
+//       id: 10,
+//       name: "index.js",
+//       isDir: false,
+//       parentId: 4,
+//     },
+//     {
+//       id: 11,
+//       name: "sessions.js",
+//       isDir: false,
+//       parentId: 4,
+//     },
+//     {
+//       id: 12,
+//       parentId: 6,
+//       isDir: false,
+//       name: "messages.js",
+//     },
+//     {
+//       id: 13,
+//       parentId: 6,
+//       isDir: false,
+//       name: "index.js",
+//     },
+//     {
+//       id: 14,
+//       name: "auth.js",
+//       parentId: 6,
+//       isDir: false,
+//     },
+//     {
+//       id: 15,
+//       name: "sdk_customers",
+//       parentId: 6,
+//       isDir: true,
+//     },
+//     {
+//       id: 16,
+//       name: "fandate.js",
+//       isDir: false,
+//       parentId: 15,
+//     },
+//     {
+//       id: 17,
+//       name: "index.js",
+//       isDir: false,
+//       parentId: 15,
+//     },
+//   ];
+
+//   const nestedTree = (inputValue) => {
+//     const temp = {};
+//     inputValue.forEach((item) => {
+//       temp[item.id] = { ...item, ...(item.isDir && { children: [] }) };
+//     });
+//     console.log("inputValue", inputValue);
+//     console.log("temp", temp);
+
+//     const tree = [];
+//     inputValue.forEach((item) => {
+//       if (item.parentId === 0) {
+//         tree.push(temp[item.id]);
+//       } else {
+//         temp[item.parentId].children.push(temp[item.id]);
+//       }
+//     });
+//     console.log("tree", tree);
+//   };
+
+//   nestedTree(dir);
+
+// const sourceObj = {
+//     A: {
+//       b: "c",
+//     },
+//     b: {
+//       a: {
+//         d: "d",
+//       },
+//       b: "b",
+//     },
+//   };
+
+//   const targetObj = {
+//     c: {
+//       a: "a",
+//     },
+//     b: {
+//       c: "c",
+//       a: {
+//         a: "a",
+//       },
+//     },
+//     a: {
+//       d: "d",
+//     },
+//   };
+// const resultObj = {
+//   A: {
+//     b: "c",
+//   },
+//   b: {
+//     a: {
+//       a: "a",
+//       d: "d",
+//     },
+//     b: "b",
+//     c: "c",
+//   },
+//   a: {
+//     d: "d",
+//   },
+//   c: {
+//     a: "a",
+//   },
+// };
+
+// function deepMerge(sourceObj, targetObj) {
+//   for (let key in sourceObj) {
+//     if (sourceObj[key] && typeof sourceObj[key] === "object") {
+//       if (!targetObj[key]) {
+//         targetObj[key] = {};
+//       }
+//       deepMerge(sourceObj[key], targetObj[key]);
+//     } else {
+//       targetObj[key] = sourceObj[key];
+//     }
+//   }
+//   return targetObj;
+// }
+
+// function deepFreeze(obj) {
+//   // Retrieve the property names defined on obj
+//   const propNames = Object.getOwnPropertyNames(obj);
+
+//   // Freeze properties before freezing the object itself
+//   propNames.forEach((name) => {
+//     const prop = obj[name];
+
+//     // If prop is an object, freeze it recursively
+//     if (typeof prop === "object" && prop !== null) {
+//       deepFreeze(prop);
+//     }
+//   });
+
+//   // Freeze the original object (non-recursive)
+//   return Object.freeze(obj);
+// }
+
+// const user = {
+//   name: "Alice",
+//   address: {
+//     city: "New York",
+//     country: {
+//       name: "USA",
+//     },
+//   },
+// };
+
+// deepFreeze(user);
+
+// user.address.city = "Los Angeles"; // This won't work now
+// user.address.country.name = "Canada"; // This also won't work
+
+// console.log(user.address.city); // Output: "New York"
+// console.log(user.address.country.name); // Output: "USA"
+
+// DeepClone Object
+// const original = {
+//   name: "Gaurav",
+//   age: 28,
+//   scores: [90, 80],
+//   nested: { city: "Pune" },
+//   greet() {
+//     console.log("Hi");
+//   },
+// };
+
+// const deepClone = (inputObj) => {
+//   const result = {};
+//   if (typeof inputObj !== "object") {
+//     return inputObj;
+//   }
+//   if (Array.isArray(inputObj)) {
+//     return inputObj.map((item) => {
+//       return deepClone(item);
+//     });
+//   }
+//   for (let key in inputObj) {
+//     const data = deepClone(inputObj[key]);
+//     result[key] = data;
+//     console.log("data", data);
+//   }
+
+//   return result;
+// };
+
+// const newObj = deepClone(original);
+// newObj.nested["test"] = "testValue";
+// console.log("original", original);
+// console.log("newObj", newObj);

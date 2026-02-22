@@ -14,6 +14,12 @@ Promise.resolve().then(() => {
 
 console.log("End");
 
+// Start
+// End
+// promise1
+// promise2
+// setTimeout
+
 //////////////////////////////////////////////
 
 console.log("Start");
@@ -36,6 +42,12 @@ setTimeout(() => {
 
 console.log("End");
 
+// Start
+// End
+// promise1
+// promise2
+// setTimeout1
+// setTimeout2
 //////////////////////////////////////////////
 console.log("Start");
 
@@ -57,6 +69,12 @@ Promise.resolve().then(() => {
 
 console.log("End");
 
+// Start
+// End
+// promise1
+// setTimeout1
+//promise1 inside setTimeout1
+// setTimeout2
 //////////////////////////////////////////////
 async function foo() {
   console.log("foo start");
@@ -85,6 +103,14 @@ new Promise((resolve) => {
 
 console.log("End");
 
+// Start
+// foo start
+// bar
+// promise1
+// End
+// foo end
+// promise2
+// setTimeout
 //////////////////////////////////////////////
 async function async1() {
   console.log("async1 start");
@@ -108,6 +134,13 @@ new Promise((resolve) => {
 setTimeout(() => {
   console.log("setTimeout");
 }, 0);
+
+// async1 start
+// async2
+// promise1
+// async1 end
+// promise2
+// setTimeout
 
 //////////////////////////////////////////////
 
@@ -133,6 +166,13 @@ new Promise((resolve) => {
 
 console.log("End");
 
+// Start
+// async1 start
+// promise inside async1
+// promise1
+// End
+// async1 end
+// promise2
 //////////////////////////////////////////////
 
 async function foo() {
@@ -151,6 +191,11 @@ foo();
 
 console.log("End");
 
+// Start
+// foo start
+// End
+// setTimeout
+// foo end
 //////////////////////////////////////////////
 
 async function first() {
@@ -171,6 +216,11 @@ async function third() {
 third();
 console.log("end");
 
+// third
+// first
+// end
+// second
+// third after awaits
 //////////////////////////////////////////////
 
 console.log("Start");
@@ -194,6 +244,11 @@ setTimeout(() => {
 
 console.log("End");
 
+// Start
+// End
+// promise1
+// promise2
+// setTimeout
 //////////////////////////////////
 
 async function async1() {
@@ -223,6 +278,15 @@ new Promise((resolve) => {
 
 console.log("End");
 
+// Start
+// async1 start
+// async2
+// promise1
+// End
+// async1 end
+// promise2
+// setTimeout
+
 ///////////////////////
 
 async function one() {
@@ -245,6 +309,13 @@ two();
 
 console.log("end of main");
 
+// two start
+// one start
+// end of main
+// timeout done
+// one end
+// two end
+
 ///////////////////////
 async function fetchData() {
   return "Data fetched!";
@@ -263,26 +334,11 @@ processData();
 
 console.log("Main thread");
 
-///////////////////////
+// Main thread
+// Data fetched!
+// Timeout done
 
-async function fetchUser() {
-  return "John Doe";
-}
-
-async function printUser() {
-  const user = await fetchUser();
-  console.log(user);
-}
-
-setTimeout(() => {
-  console.log("Timeout done");
-}, 0);
-
-printUser();
-
-console.log("Script ends");
-
-////
+///////////////////////////////////
 
 console.log("begins");
 
@@ -305,3 +361,11 @@ new Promise(function (resolve, reject) {
     console.log(res);
   }, 0);
 });
+
+// begins
+// promise 2
+// setTimeout 1
+// promise 1
+// setTimeout 2
+// dot then 1
+// resolve 1

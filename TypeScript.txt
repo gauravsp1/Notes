@@ -1,0 +1,364 @@
+TypeScript
+
+
+Interface ****
+an interface is a way to define the shape of an object — a contract that an object (or class) must follow.
+
+It describes:
+What properties the object must have
+The types of those properties
+Optional fields, readonly fields, function signatures, index signatures, and inheritance behavior
+
+interface User {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
+
+const u: User = {
+  id: 1,
+  name: "Gaurav",
+  isActive: true
+};
+
+Always add the type in smallCase --> "number" not as "Number"
+
+Features of interface****
+
+1. Optional properties (?)
+interface User {
+  id: number;
+  email?: string; // optional
+}
+
+2. Readonly properties
+interface Config {
+  readonly version: string;
+}
+
+5.Extending other interfaces
+interface Base {
+  id: number;
+}
+
+interface User extends Base {
+  name: string;
+}
+
+
+Why Use Interface?
+Safer and more readable object structures
+Works well with tooling (autocompletion, IntelliSense)
+Supported natively by the TypeScript compiler
+Better for large, extensible codebases
+
+
+When not to use interface?
+Use type instead when:
+You need a union type (A | B)
+You want to define tuple, conditional, or mapped types
+
+| Feature        | `interface`                           |
+| -------------- | ------------------------------------- |
+| Object shape   | ✅ Yes                                 |
+| Extendable     | ✅ Yes (`extends`)                     |
+| Mergeable      | ✅ Yes (declaration merging)           |
+| Class-friendly | ✅ Yes (`implements`)                  |
+| Limited logic  | ❌ Can't do unions/tuples/conditionals |
+
+Interface Merging***
+if you declare the same interface name multiple times, TypeScript will automatically merge them into one unified interface.
+This only works with interface — not with type.
+
+interface User {
+  id: number;
+}
+
+interface User {
+  name: string;
+}
+
+// Now `User` is:
+interface User {
+  id: number;
+  name: string;
+}
+
+const user: User = {
+  id: 1,
+  name: "Gaurav",
+};
+
+
+Type****
+type is a keyword used to create type aliases — a way to give a name to any type: primitive, object, union, intersection, tuple, function, etc.
+It’s like creating a shortcut or alias to describe complex or reusable type logic.
+
+1. Basic Type Alias
+type UserID = string;
+
+const id: UserID = "abc123"; // Same as writing `string`, but clearer
+
+🧩 2. Object Type Alias
+type User = {
+  id: number;
+  name: string;
+  isAdmin?: boolean;
+};
+It's functionally the same as using interface, but more flexible in composition.
+
+🔗 3. Union and Intersection Types
+This is where type shines — interface cannot do this.
+
+✅ Union:
+
+type Status = "loading" | "success" | "error";
+
+let s: Status = "success";
+
+✅ Intersection:
+
+type Person = { name: string };
+type Employee = { employeeId: number };
+
+type EmployeeInfo = Person & Employee;
+
+const e: EmployeeInfo = {
+  name: "John",
+  employeeId: 101,
+};
+
+🧪 4. Tuples and Arrays
+
+type RGB = [number, number, number]; // Tuple
+
+const color: RGB = [255, 100, 50];
+
+You cannot redeclare a type
+
+Use interface for structured object types.
+Use type for compositions, logic, and non-object types.
+
+Arrays in TS are homogeneous (same type for all elements):
+let arr: string[] = ["a", "b"];  // ✅ only strings
+
+Tuples are heterogeneous (different types allowed but fixed positions):
+let data: [string, number, boolean] = ["id", 101, true];
+
+
+What is Record ****
+In TypeScript, Record is a built-in utility type that lets you create an object type with a specific set of keys and a uniform value type.
+
+Record<Keys, ValueType>
+Keys → Union of literal types (string, number, etc.)
+ValueType → Type of the values assigned to those keys
+
+type Roles = "admin" | "user" | "guest";
+
+const permissions: Record<Roles, number> = {
+  admin: 3,
+  user: 2,
+  guest: 1,
+};
+
+type Config = Record<string, { enabled: boolean; retries: number }>;
+
+const features: Config = {
+  featureA: { enabled: true, retries: 3 },
+  featureB: { enabled: false, retries: 0 },
+};
+
+
+TypeScript Key Benefits:-
+TypeScript catches type errors at compile time, before the code runs.
+Auto-completion
+Scales Better for Large Projects
+
+
+Generic Function
+
+function identity<T>(value: T): T {
+  return value;
+}
+
+const num = identity<number>(10);     // T = number
+const str = identity("hello");        // T = string (inferred)
+
+
+
+
+// Props interface
+interface UserCardProps {
+  userId: number;
+  greeting?: string; // optional prop
+}
+
+// User type
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function UserCard({ userId, greeting = "Hello" }: UserCardProps) {
+  const [user, setUser] = useState<User | null>(null);
+  const [nameInput, setNameInput] = useState<string>("");
+
+  useEffect(() => {
+    fetchUserData(userId).then((data) => setUser(data));
+  }, [userId]);
+
+  // Updates the name locally
+  const updateName = (newName: string): void => {
+    if (user) {
+      setUser({ ...user, name: newName });
+    }
+  };
+
+  // Returns a formatted message
+  const getGreetingMessage = (name?: string): string => {
+    return `${greeting}, ${name ?? "Guest"}!`;
+  };
+
+  return (
+    <div className="user-card">
+      {user ? (
+        <>
+          <h2>{getGreetingMessage(user.name)}</h2>
+          <p>Email: {user.email}</p>
+          <input
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
+            placeholder="Update name"
+          />
+          <button onClick={() => updateName(nameInput)}>Update Name</button>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
+
+export default UserCard;
+
+
+1. Basic Object with Primitives
+interface User {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
+
+
+2. Object with Array of Primitives
+interface UserWithTags {
+  id: number;
+  tags: string[];
+}
+
+
+3. Object with Array of Objects
+interface Post {
+  title: string;
+  content: string;
+}
+
+interface Blog {
+  author: string;
+  posts: Post[];
+}
+
+
+4. Nested Object
+interface Address {
+  city: string;
+  zipCode: string;
+}
+
+interface Employee {
+  id: number;
+  name: string;
+  address: Address;
+}
+
+5.Recursive Object (Tree-like structure)
+interface Category {
+  id: number;
+  name: string;
+  children?: Category[];
+}
+
+6.Object with Mixed Data Types
+interface SurveyResponse {
+  respondentId: string;
+  answers: Array<string | number | boolean>; // Mixed array
+}
+const response: SurveyResponse = {
+  respondentId: "user123",
+  answers: ["Yes", 5, true, "Blue", 27]
+};
+
+
+Comparing unknown vs any
+unknown is like a type-safe version of any.
+let value: unknown;
+value = 10;
+value = "hello";
+value = [1, 2, 3];
+Everything can go into unknown.
+
+But you cannot use it directly without narrowing its type.
+let val: unknown = "Gaurav";
+
+console.log(val.toUpperCase()); // ❌ Error: Object is of type 'unknown'
+
+Why unknown Exists
+The any type disables type checking entirely:
+let value: any = "hello";
+value.toFixed();  // ✅ no error (even though it's invalid)
+
+unknown is stricter — it forces you to handle the type properly:
+let value: unknown = "hello";
+value.toFixed(); // ❌ compile-time error
+unknown = anything assignable, nothing usable without checking
+
+
+| Feature               | `any` | `unknown`       |
+| --------------------- | ----- | --------------- |
+| Assign anything to it | ✅     | ✅               |
+| Assign it to anything | ✅     | ❌ (must narrow) |
+| Access properties     | ✅     | ❌               |
+| Call as function      | ✅     | ❌               |
+| Use in expressions    | ✅     | ❌               |
+| Forces type checking  | ❌     | ✅               |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

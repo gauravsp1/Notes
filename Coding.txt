@@ -1,26 +1,24 @@
 Coding
 
 
-for(var i=0;i<10;i++){
-    setTimeout(()=>{
-        console.log(i)
-    },1000)
-}-----will print 10 10times
+Scoping & Closures ****
+var vs. let in loops
+
+for (var i = 0; i < 10; i++) {
+  setTimeout(() => console.log(i), 1000);
+}
+// prints “10” ten times
 
 if we use let then it will print normally..but Y?
-
 In the first example, using var, the variable declared in the loop redeclares the variable outside the loop.
-
 In the second example, using let, the variable declared in the loop does not redeclare the variable outside the loop.
-
 When let is used to declare the i variable in a loop, the i variable will only be visible within the loop.
 This happens because of block level scope.
 
-for(let i=0;i<10;i++){
-    setTimeout(()=>{
-        console.log(i)
-    },1000)
-}-----will print 1 to 10
+for (let i = 0; i < 10; i++) {
+  setTimeout(() => console.log(i), 1000);
+}
+// prints 0,1,…,9
 
 for(var i=0;i<10;i++){
 function close(x){
@@ -30,7 +28,24 @@ function close(x){
     },1000)
 }
 close(i)
-}-----will print 1 to 10
+}-----will print 0 to 9
+
+Immediately Invoked Function Expression
+
+for (var i = 0; i < 10; i++) {
+  (function (j) {
+    setTimeout(() => {
+      console.log(j);
+    }, 1000);
+  })(i);
+}
+
+let i;
+for (i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}-----will print 10 10times
 
 
 function countdown(n) {
@@ -69,7 +84,6 @@ var numArray = [1,2, 3, 4, 5, 6, 7, 8, 9, 10]
  numArray.length=0
 
 console.log(numArray) //[]
-
 
 
 Sort array- high to low,low to high *******
@@ -115,42 +129,38 @@ array to String *******
 array.toString()
 
 
-Remove duplicate from array *******
+Remove Duplicate ***
+let num = [0, 0, 1, 1, 2, 2, 3, 3, 4];
 
-const array = [1, 2, 2, 3, 3, 4, 5, 5];
-const uniqueArray = [...new Set(array)];
-console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
-
-uniqueArray = array.filter(function(item, index,self) {
-    return self.indexOf(item) === index;
-})
-
-const array = [1, 2, 2, 3, 3, 4, 5, 5];
-const uniqueArray = array.reduce((accumulator, currentValue) => {
-  if (!accumulator.includes(currentValue)) {
-    accumulator.push(currentValue);
+let j = 0;
+for (let i = 0; i < num.length; i++) {
+  if (num[j] !== num[i]) {
+    j++;
+    num[j] = num[i];
   }
-  return accumulator;
-}, []);
-console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
+}
+num.length = j + 1;
 
-const uniqueArray2 = array.reduce((acc, it) => acc.includes(it) ? acc : [ ...acc, it ], [])
+console.log(num);
+console.log(num.length);
+console.log(j + 1);
 
 
-const removeDuplicates = (arr) => {
-  const uniqueArray = [];
-  const seen = {};  // Use an object to track seen elements
-
-  for (let i = 0; i < arr.length; i++) {
-    if (!seen[arr[i]]) {  // If the element is not in 'seen', add it
-      uniqueArray.push(arr[i]);
-      seen[arr[i]] = true;  // Mark the element as seen
-    }
+Remove given Element
+let num = [0, 1, 2, 2, 3, 0, 4, 2, 5];
+let val = 2;
+let j = 0;
+for (let i = 0; i < num.length; i++) {
+  if (num[i] !== val) {
+    num[j] = num[i];
+    j++;
   }
+}
+num.length = j;
 
-  return uniqueArray;
-};
-
+console.log(num);
+console.log(num.length);
+console.log(j + 1);
 
 
 How to find prime no in array ********
@@ -164,7 +174,7 @@ const primeNumber = (inputArray) => {
     for (let i = 2; i <= Math.sqrt(item); i++) {
       if (item % i === 0) return false;
     }
-    return item;
+    return true;
   });
   console.log("result", result);
 };
@@ -224,11 +234,14 @@ for (var i = 1; i < 16; i++) {
 
 Fibonachi series **********
 
-const fib =(num)=> {
+const fib =(inputNums)=> {
     let memo = []
-    memo[0] = 0
+    memo[0] = 1
+	if (inputNums <= 1) {
+    return memo;
+  }
     memo[1] = 1
-    for(let i = 2; i <= num; i++){
+    for(let i = 2; i <= inputNums; i++){
         memo[i] = memo[i - 1] + memo[i - 2]
     }
     return memo
@@ -260,13 +273,6 @@ const reversedStr = str.split('').reduce((accumulator, currentValue) => {
   return currentValue + accumulator;
 }, '');
 console.log(reversedStr); // Output: dlrow olleh
-
-
-Destructuring **********
-var gaurav={first:{city:100,city2:20},to:30};
-let {first:{city},to:me}=gaurav
-console.log(city)
-console.log(me)
 
 
 Swap 2 numbers **********
@@ -362,17 +368,37 @@ arr.forEach((item) => {
 console.log(maxNumber);
 
 Second Max
-arr = [1, 180, 10, 7, 56, 90,140,200]
 
-let maxNumber = arr[0];
-let secondMaxNumber = arr[0];
+let max = -Infinity;
+let secondMax = -Infinity;
+
 arr.forEach((item) => {
-  secondMaxNumber = secondMaxNumber < item ?( maxNumber < item ? maxNumber : item) : secondMaxNumber;
-  maxNumber = maxNumber < item ? item : maxNumber;
+  if (max < item) {
+    secondMax = max;
+    max = item;
+  } else if (secondMax < item && max !== item) {
+    secondMax = item;
+  }
 });
-console.log("maxNumber", maxNumber);
-console.log("secondMaxNumber", secondMaxNumber);
+console.log("max", max, secondMax);
 
+----
+let min = Infinity;
+let secondMin = Infinity;
+
+arr.forEach((item) => {
+  if (item < min) {
+    secondMin = min; // Store the previous min as second min
+    min = item; // Update min
+  } else if (item > min && item < secondMin) {
+    secondMin = item; // Update secondMin only if it's greater than min
+  }
+});
+
+arr.forEach((item) => {
+  secondMin = item > min && item < secondMin ? item : secondMin;
+  min = item < min ? (secondMin = min, item) : min;
+});
 
 **********************************
 var cnt = 0;
@@ -420,13 +446,7 @@ If we write condition in map it returns true or false according to the condition
 arr=[1,2,3,4,6]
 console.log("Mapss",arr.map(i=>i>3));  // [false, false, false, true, true]
 
-    
 
-this.setState({​​​​​count:1}​​​​​);
-console.log("Value of count :",this.state.count);
-
-
-    
 let a={​​​​​a:1}​​​​​;
 let b={​​​​​a:1}​​​​​;
 let c=a;
@@ -437,8 +457,6 @@ a===b; // false
 
 Tricky ********
 
-To check palindrom
-str == str.split('').reverse().join('')
 console.log(false == '0') // true
 console.log(false === '0') //false 
 
@@ -481,34 +499,25 @@ function foo(){
 foo()
 console.log("o",a); //o,1
 
+function foo() {
+  a = 2;
+  console.log("i", a); // i,2
+}
+foo();
+console.log("o", a); //o,2
+
+function foo() {
+  a = 2;
+  console.log("i", a); // i,2
+}
+console.log("o", a); //o, a is not defined
+foo();
 
 function foo(){
     a = 2
   }
   foo()
   console.log(a); //2
-
-
-let arr =[1,2]
-function test(array){
-    
-  array.push(3)
-}
-test([...arr])
-console.log(arr) //  arr=[1,2]
-
-
-let arr =[1,2]
-function test(array){
-  array = [1,2,3]
-}
-test(arr)
-console.log(arr)
-
-The answer is [1,2]. I know that after all the explanations on references, it seems weird. 
-Still, there is a good reason for it, The = Operator creates a new reference (you can look in this discussion for more information), 
-The array exist in the local scope and don't influence the global variables in this case.
-
 
 
 const carDetails = {
@@ -630,12 +639,9 @@ function Counter() {
 // clothes.length = 0;
 // console.log(clothes[0]) //undefined
 
-// b=10
 // function display() {
-//     var b=10
-//     var a;
-// 
-// // var a=b
+//      b=10
+//  var a=b
 
 //     }
 //     display();
@@ -689,66 +695,11 @@ const array = [ 'fatfish', 'medium', 'blog', 'fat', 'fish' ]
 
 console.log(array.at(-1)) // fish
 
-
 Instead of 
 const len = array.length
-
 console.log(array[ len - 1 ]) // fish
 
 
-
-
-
-const sampleArry = [1, 2, 3, 4, 5, 2, 7, 8, 4];
-
-// dup=[2,4]
-// nonDup=[1,3,5,7,8]
-// uniqueElemnet=[1,2,3,4,5,7,8]
-
-// const dup = sampleArry.filter((item, index) => {
-//   return sampleArry.indexOf(item) !== index;
-// });
-// console.log("dup", dup);
-
-// const nonDup = sampleArry
-//   .filter((item, index) => {
-//     return sampleArry.indexOf(item) === index;
-//   })
-//   .filter((itemValue, index) => {
-//     return !dup.includes(itemValue);
-//   });
-
-// console.log("dup", nonDup);
-
-// const uniqElemnet = sampleArry.filter((item, index) => {
-//   return sampleArry.indexOf(item) === index;
-// });
-// console.log("uniqElemnet", uniqElemnet);
-
-const result = sampleArry.reduce(
-  (acc, item) => {
-    const { dup, nonDup, uniqueElemnet } = acc;
-    if (uniqueElemnet.includes(item)) {
-      if (!dup.includes(item)) {
-        dup.push(item);
-      }
-      acc.nonDup = nonDup.filter((filterItem) => {
-        return filterItem !== item;
-      });
-    } else {
-      uniqueElemnet.push(item);
-      nonDup.push(item);
-    }
-    return acc;
-  },
-  {
-    dup: [],
-    nonDup: [],
-    uniqueElemnet: [],
-  }
-);
-
-console.log("result", result);
 
 
 convert a string like "aabbcc" to "a2b2c2"
@@ -770,35 +721,6 @@ const coverter = (inputString) => {
 coverter("Aabbca");
 
 
-const input = {
-  a: 1,
-  b: 2,
-  c: {
-    d: "string",
-    e: [10, 20, [30]],
-  },
-};
-
-// output = [1, 2, "string", 10, 20, 30]
-
-function flattenObject(obj) {
-  const result = [];
- for (let key in inputValue) {
-    if (typeof inputValue[key] !== "object") {
-      result.push(inputValue[key]);
-    } else {
-      const outPut = flatObj(inputValue[key]);
-      result.push(...outPut);
-    }
-  }
-  return result;
-}
-
-const output = flattenObject(input);
-console.log(output); // [1, 2, "string", 10, 20, 30]
-
-
-
 const person = {
        name: "John"
     }
@@ -807,15 +729,15 @@ const person = {
     console.log(personsArray[1].name)
 
  
-fun1();
-fun2();
+fun1(); // fun1
+fun2();  //  Uncaught ReferenceError: Cannot access 'fun2' before initialization
 function fun1() {
     console.log("fun1")
 }
 
 const fun2 = () => {
     console.log("fun2")
-}
+} 
 	
 Write a function in JavaScript that takes a string as input and returns a new string with all the vowels removed *******
  
@@ -854,5 +776,449 @@ const period = hours >= 12 ? 'PM' : 'AM';
 hours = hours % 12 || 12;
  return `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
 }
+
+
+
+// const data = [
+//   { category: "fruit", name: "apple" },
+//   { category: "fruit", name: "banana" },
+//   { category: "vegetable", name: "carrot" },
+//   { category: "fruit", name: "orange" },
+//   { category: "vegetable", name: "spinach" },
+// ];
+
+// function groupAndCount(inputArray, key) {
+//   const outPut = inputArray.reduce((acc, curr) => {
+//    const catgry = curr.category;
+	  acc[catgry] = (acc[catgry] || 0) + 1;
+//     return acc;
+//   }, {});
+//   return outPut;
+// }
+
+// const result = groupAndCount(data, "category");
+// console.log(result); // { fruit: 3, vegetable: 2 }
+
+let config = {
+  alert: setInterval(() => {
+    console.log("--->Alert");
+  }, 1000),
+};
+
+clearInterval(config.alert);
+config = null;
+
+// A: Callback won't be invoked
+
+// B: Callback gets invoked once.
+
+// C: Callback will be called every sec.
+
+// D: Not invoked config.alert()
+
+
+console.log([] + []);    // ""
+console.log([] + {});    // "[object Object]"
+console.log({} + []);    // 0
+
+const transactions = [
+  { id: 1, category: "Food", amount: 50 },
+  { id: 2, category: "Travel", amount: 100 },
+  { id: 3, category: "Food", amount: 30 },
+  { id: 4, category: "Travel", amount: -20 },
+  { id: 5, category: "Food", amount: "invalid" },
+];
+// Returns: { Food: 80, Travel: 80}
+
+const summary = (inputArray) => {
+  const result = inputArray?.reduce((acc, curr) => {
+    if (typeof curr.amount !== "string") {
+      acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
+    }
+    return acc;
+  }, {});
+  return result;
+};
+
+console.log(summary(transactions));
+
+
+const obj = { a: 1, b: 2, c: 3 }; // Output: "1 2 3"
+
+const result = Object.values(obj).join(" ");
+console.log(result); // "1 2 3"
+
+let obj = {
+  name: "gaurav",
+  surname: "pawar",
+  address: {
+    building: "XYZ",
+    street: "123",
+    road: {
+      namePlate: "Test",
+    },
+  },
+};
+
+function flatenObj(inputObj, result = {}, parent = "") {
+  for (let key in inputObj) {
+    if (typeof inputObj[key] === "object") {
+      flatenObj(inputObj[key], result, parent + key + ".");
+    } else {
+      result[parent + key] = inputObj[key];
+    }
+  }
+  return result;
+}
+console.log("flatenObj", flatenObj(obj));
+
+
+const nestedToString = (obj) => {
+  const result = [];
+
+  const traverse = (value) => {
+    if (typeof value === "object" && value !== null) {
+      Object.values(value).forEach(traverse);
+    } else {
+      result.push(value);
+    }
+  };
+
+  traverse(obj);
+  return result.join(" ");
+};
+
+console.log(nestedToString({ name: "John", address: { city: "NY", zip: 123 } }));
+// "John NY 123"
+
+
+// Deep comparison
+// const obj1 = {
+//   a: "test1",
+//   b: "test2",
+//   c: "test3",
+//   d: [1, 2, 3],
+//   e: {
+//     a: 22,
+//   },
+// };
+
+// const obj2 = {
+//   a: "test1",
+//   b: "test2",
+//   c: "test3",
+//   d: [1, 2, 3],
+//   e: {
+//     a: 22,
+//   },
+// };
+
+// const deepEqual = (objA, objB) => {
+//     //Compare actual value break recursion
+//     if (typeof objA !== "object" || typeof objB !== "object") {
+//       return objA === objB;
+//     }
+//     //Compare array
+//     if (Array.isArray(objA) && Array.isArray(objA)) {
+//       //Compare array length
+//       if (objA.length !== objB.length) {
+//         return false;
+//       }
+//       for (let i = 0; i < objA.length; i++) {
+//         if (!deepEqual(objA[i], objB[i])) {
+//           return false;
+//         }
+//       }
+//       return true;
+//     }
+//     //Compare objects
+//     const KeyA = Object.keys(objA);
+//     const KeyB = Object.keys(objB);
+
+//     if (KeyA.length !== KeyB.length) {
+//       return false;
+//     }
+//     for (let key of KeyA) {
+//       if (!KeyB.includes(key) || !deepEqual(objA[key], objB[key])) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+
+// console.log(deepEqual(obj1, obj2));
+
+
+// DeepClone Object
+// const original = {
+//   name: "Gaurav",
+//   age: 28,
+//   scores: [90, 80],
+//   nested: { city: "Pune" },
+//   greet() {
+//     console.log("Hi");
+//   },
+// };
+
+// const deepClone = (inputObj) => {
+//   const result = {};
+//   if (typeof inputObj !== "object") {
+//     return inputObj;
+//   }
+//   if (Array.isArray(inputObj)) {
+//     return inputObj.map((item) => {
+//       return deepClone(item);
+//     });
+//   }
+//   for (let key in inputObj) {
+//     const data = deepClone(inputObj[key]);
+//     result[key] = data;
+//     console.log("data", data);
+//   }
+
+//   return result;
+// };
+
+// const newObj = deepClone(original);
+// newObj.nested["test"] = "testValue";
+// console.log("original", original);
+// console.log("newObj", newObj);
+
+
+How to read or update a deeply nested property dynamically based on a “path”
+
+function setPath(obj, path, value) {
+  const keys = path.split("."); // ["a", "b", "c"]
+  let current = obj;
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+
+    // If it's not the last key, ensure the key exists and is an object
+    if (i < keys.length - 1) {
+      if (typeof current[key] !== "object" || current[key] === null) {
+        current[key] = {}; // create nested object if missing
+      }
+      current = current[key];
+    } 
+    // Last key — assign value
+    else {
+      current[key] = value;
+    }
+  }
+
+  return obj; // optional, for chaining
+}
+
+
+const data = [
+  { name: "Andy", score: 90 },
+  { name: "John", score: 80 },
+  { name: "Andy", score: 70 },
+  { name: "Rita", score: 95 },
+];
+
+{ name: "Rita", average: 95 }
+
+
+function highestAverageStudent(data) {
+  // Step 1: Aggregate scores using reduce
+  const studentMap = data.reduce((acc, { name, score }) => {
+    if (!acc[name]) acc[name] = { total: 0, count: 0 };
+    acc[name].total += score;
+    acc[name].count += 1;
+    return acc;
+  }, {});
+
+  // Step 2: Convert to averages and find the highest
+  return Object.entries(studentMap).reduce((top, [name, { total, count }]) => {
+    const average = total / count;
+    if (!top || average > top.average) {
+      return { name, average };
+    }
+    return top;
+  }, null);
+}
+
+
+const arr = [2, 3, 2, 5, 3, 2];
+console.log(averageOccurrenceIndex(arr));
+// { 2: 2.3333333333333335, 3: 2.5, 5: 3 }
+
+
+function averageOccurrenceIndex(arr) {
+  const map = arr.reduce((acc, num, idx) => {
+    if (!acc[num]) acc[num] = { totalIndex: 0, count: 0 };
+    acc[num].totalIndex += idx;
+    acc[num].count += 1;
+    return acc;
+  }, {});
+
+  // Convert to averages
+  const result = {};
+  for (const [num, { totalIndex, count }] of Object.entries(map)) {
+    result[num] = Math.round(totalIndex / count);
+
+  }
+
+  return result;
+}
+
+
+// function a(){
+//   console.log("a")
+//   setTimeout(()=>{console.log("b")}, 0)
+//   Promise.resolve().then(_ => console.log("c"))
+//   console.log("c2")
+//   console.log("c3")
+// }
+// a()
+
+// ==>
+//a
+//c2
+//c3
+//c
+//b
+
+apply/bind/call
+
+
+// obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: {
+// 		d: 4
+// 	}
+// }
+// obj2 = {...obj};
+// obj2.c.d = 5;
+// console.log(obj);
+// console.log(obj2);
+
+
+
+// const arr =[{age: 15, isSelected: false}, {age:20, isSelected: false},
+//     { age: 25 , isSelected:false}]
+
+//     let arry4=arr.reduce((acc,curr)=>{
+//     if(curr.age>18){
+//          curr.isSelected=true
+//    acc.push(curr)
+//     }
+//    return acc
+// },[])
+
+
+// You have an array of products, each with a type and name. Group the products by their type.
+// const products = [
+//   { id: 1, type: "electronics", name: "TV" },
+//   { id: 2, type: "clothing", name: "T-shirt" },
+//   { id: 3, type: "electronics", name: "Laptop" },
+//   { id: 4, type: "clothing", name: "Jeans" },
+//   { id: 5, type: "furniture", name: "Sofa" },
+// ];
+
+// const result = products.reduce((acc, curr) => {
+//   const type = curr.type;
+//   if (!acc[type]) {
+//     acc[type] = [];
+// }
+//     acc[type].push(curr);
+//   return acc;
+// }, {});
+// console.log("result", result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -1,0 +1,362 @@
+
+
+Time Complexity and Space Complexity
+
+
+Core Data Structures-
+Array
+String
+Linked List
+Stack
+Queue
+Hash Map / Hash Table
+Set
+
+
+Algorithms
+Sorting: Bubble, Selection, Insertion, Merge, Quick Sort
+Searching: Linear Search, Binary Search
+Recursion (Very Important)
+Two-pointer Technique
+Sliding Window
+Prefix Sum
+Mathematics for DSA (GCD, Prime Numbers, Modular Arithmetic)
+
+
+Intermediate Data Structures
+Heap / Priority Queue
+Graph (BFS, DFS)
+Tree (Binary Tree, BST, Traversals)
+Trie (optional but useful)
+Hashing Techniques
+
+
+Advanced Algorithms
+Dynamic Programming (DP)
+Backtracking
+Greedy Algorithms
+Graph Algorithms (Dijkstra, Floyd-Warshall, MST)
+
+
+Patterns to study ***
+
+Sliding Window
+Two Pointers
+Binary Search
+Binary Search on Answer
+Fast & Slow Pointers
+
+
+
+ 📌 Cyclic Sort
+ 📌 Topological Sorting
+ 📌 Subsets (Backtracking)
+ 📌 Two Heaps
+ 📌 BFS/DFS
+ 📌 Dynamic Programming
+ 📌 Trie & String Manipulation
+ 📌 Graph Traversal
+ 📌 Bit Manipulation
+
+
+Basic Topics ***
+Array
+String
+Linked List
+Stack
+Queue
+Hash Table
+
+Advance Topics ****
+Binary Trees
+BST
+Heap/Priority Queue
+Backtracking
+Greedy Algorithms
+Dynamic Programming
+Graph
+Trie
+
+
+Left
+Graph
+Trie
+
+Easy/ Medium Done
+Array
+String
+Linked List
+Stack
+Queue
+Hash Table
+Binary Trees
+BST
+
+Easy Done
+Backtracking
+Greedy Algorithms
+Dynamic Programming
+
+
+How to Approach ****
+
+1. Read & Understand
+Identify inputs, outputs, constraints 
+Clarify ambiguities: e.g. “Can the array be empty?”, “Are values negative?”
+Work through small examples by hand to ensure you fully grasp what’s being asked.
+
+2.Brute-Force & Baseline
+
+3.Spot Patterns & Optimize
+
+1. Two-Pointers
+When: Sorted arrays/linked-lists; pairing, partitioning, reverse-iteration.
+Idea: Maintain two indices (often one at start, one at end) and move them based on comparison.
+Complexity: O(n) time, O(1) extra space.
+
+function hasPairWithSum(nums, target) {
+  if (!Array.isArray(nums) || nums.length < 2) return false;
+  let i = 0, j = nums.length - 1;
+  while (i < j) {
+    const sum = nums[i] + nums[j];
+    if (sum === target) return true;
+    if (sum < target) i++;
+    else j--;
+  }
+  return false;
+}
+
+2. Sliding Window
+When: Subarrays/substring problems asking for max/min/average, or variable-size conditions.
+Idea: Expand a window [i…j], track a running state (sum, freq), and shrink when constraint violated.
+Complexity: O(n) time, O(1) or O(k) space (for a fixed-size window).
+
+function maxSubarraySum(nums, k) {
+  if (nums.length < k) return null;
+  let sum = 0;
+  for (let i = 0; i < k; i++) sum += nums[i];
+  let max = sum;
+  for (let i = k; i < nums.length; i++) {
+    sum += nums[i] - nums[i - k];
+    max = Math.max(max, sum);
+  }
+  return max;
+}
+
+3. Hashing / Frequency Map
+When: Lookups by value, counting frequencies, detecting duplicates, anagrams.
+Idea: Use an object or Map for O(1) average lookups/inserts.
+Complexity: O(n) time, O(n) space.
+
+function isAnagram(s, t) {
+  if (s.length !== t.length) return false;
+  const freq = {};
+  for (let c of s) freq[c] = (freq[c] || 0) + 1;
+  for (let c of t) {
+    if (!freq[c]) return false;
+    freq[c]--;
+  }
+  return true;
+}
+
+4. Recursion / DFS / BFS
+When: Trees, graphs, backtracking, exhaustive search.
+Idea: Explore one branch fully (DFS) or level by level (BFS), often with a call stack or queue.
+Complexity: O(V+E) on graphs; on trees O(n). Space is O(height) for DFS or O(width) for BFS.
+
+function inorder(root, res = []) {
+  if (!root) return res;
+  inorder(root.left, res);
+  res.push(root.val);
+  inorder(root.right, res);
+  return res;
+}
+
+5. Divide & Conquer / Binary Search
+When: Sorted data, search problems, “find pivot,” or reduce problem size by half.
+Idea: Split input in two (or more), solve subproblems, then combine results.
+Complexity: O(log n) for binary search; many divide-&-conquer algorithms are O(n log n).
+
+function binarySearch(nums, target) {
+  let lo = 0, hi = nums.length - 1;
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (nums[mid] === target) return mid;
+    if (nums[mid] < target) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return -1;
+}
+
+6. Dynamic Programming (DP)
+When: Overlapping subproblems with optimal substructure (e.g., knapsack, LIS, edit distance).
+Idea: Build up a table (or use memoization) so each subproblem is solved once.
+Complexity: Varies—often O(n²) or O(n × k) time, O(n × k) space. Can optimize to O(n) space.
+
+function fib(n, memo = {}) {
+  if (n <= 1) return n;
+  if (memo[n] !== undefined) return memo[n];
+  memo[n] = fib(n-1, memo) + fib(n-2, memo);
+  return memo[n];
+}
+
+7. Backtracking
+When: Generate permutations, combinations, subsets, solve puzzles (N-Queens).
+Idea: Build candidates incrementally, “backtrack” when a path can’t lead to a valid solution.
+Complexity: Exponential in worst case (e.g., O(n!) for permutations).
+
+function subsets(nums) {
+  const res = [];
+  function dfs(i, path) {
+    if (i === nums.length) {
+      res.push([...path]);
+      return;
+    }
+    // exclude
+    dfs(i+1, path);
+    // include
+    path.push(nums[i]);
+    dfs(i+1, path);
+    path.pop();
+  }
+  dfs(0, []);
+  return res;
+}
+
+8. Greedy
+When: Interval scheduling, activity selection, coin/change problems with canonical denominations.
+Idea: Make the locally optimal choice at each step, hoping for a global optimum.
+Complexity: Often O(n log n) due to sorting, O(1) or O(n) space.
+
+function maxNonOverlap(intervals) {
+  intervals.sort((a,b) => a[1] - b[1]); // end times
+  let count = 0, lastEnd = -Infinity;
+  for (let [s,e] of intervals) {
+    if (s >= lastEnd) {
+      count++;
+      lastEnd = e;
+    }
+  }
+  return count;
+}
+
+9. Monotonic Stack / Queue
+When: “Next greater/smaller element,” sliding-window min/max in O(n).
+Idea: Maintain a stack/queue whose elements are in strictly increasing/decreasing order.
+Complexity: O(n) time, O(n) space.
+
+function nextGreater(nums) {
+  const res = Array(nums.length).fill(-1), stack = [];
+  for (let i = 0; i < nums.length; i++) {
+    while (stack.length && nums[i] > nums[stack[stack.length-1]]) {
+      res[stack.pop()] = nums[i];
+    }
+    stack.push(i);
+  }
+  return res;
+}
+
+10. Union-Find (Disjoint Set)
+When: Connectivity queries, cycle detection in undirected graphs, MST (Kruskal).
+Idea: Maintain sets with find (with path compression) and union (by rank).
+Complexity: Near-O(1) (amortized α(n)) per operation, O(n) space.
+
+class DSU {
+  constructor(n) {
+    this.p = Array.from({length:n}, (_,i)=>i);
+    this.r = Array(n).fill(0);
+  }
+  find(x) {
+    if (this.p[x] !== x) this.p[x] = this.find(this.p[x]);
+    return this.p[x];
+  }
+  union(a,b) {
+    a = this.find(a); b = this.find(b);
+    if (a === b) return false;
+    if (this.r[a] < this.r[b]) [a,b] = [b,a];
+    this.p[b] = a;
+    if (this.r[a] === this.r[b]) this.r[a]++;
+    return true;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

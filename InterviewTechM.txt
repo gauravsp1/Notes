@@ -1,0 +1,240 @@
+
+
+HTML
+
+What are the new features in HTML5?
+Semantic element ?
+What is async / defer?
+If there are two or more conflicting CSS rules applied to the same element?
+
+
+JS
+
+What is Event Loop
+How Asynchronous calls are handled
+Difference between promise and async/await
+callBack hell vs promise vs async/await
+Promise.all Polyfill
+
+ES6 features
+Difference between var let and const
+Closure
+Prototype
+
+Promises/ SetTimeOut
+
+async function one() {
+  console.log("one start");
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  console.log("one end");
+}
+
+async function two() {
+  console.log("two start");
+  await one();
+  console.log("two end");
+}
+
+setTimeout(() => {
+  console.log("timeout done");
+}, 100);
+
+two();
+
+console.log("end of main");
+
+// two start
+// one start
+// end of main
+// timeout done
+// one end
+// two end
+
+
+
+Coding Snippits
+
+for (let i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}
+
+var cnt = 0;
+
+var fnFalse = function () {
+	 ++cnt;
+   return false;
+};
+
+var fnTrue = function () {
+	 ++cnt;
+   return true;
+}
+
+cnt = 0;
+var output1 = fnFalse() || fnTrue();
+console.log( "1st log :: cnt = " + cnt );    // 2
+console.log( "2nd log :: output1 = " + output1 );  // true
+
+
+
+cnt = 0;
+var output2 = fnTrue() || fnFalse();
+console.log( "3rd log :: cnt = " + cnt ); // 1
+console.log( "4th log :: output2 = " + output2 ); // true
+
+
+
+var b = 1;
+function outer(){
+   	var b = 2
+    function inner(){
+        b++;
+        var b = 3;
+        console.log(b)
+    }
+    inner();
+}
+outer();
+
+fun1(); // fun1
+fun2();  //  Uncaught ReferenceError: Cannot access 'fun2' before initialization
+function fun1() {
+    console.log("fun1")
+}
+
+const fun2 = () => {
+    console.log("fun2")
+} 
+
+// const data = [
+//   { category: "fruit", name: "apple" },
+//   { category: "fruit", name: "banana" },
+//   { category: "vegetable", name: "carrot" },
+//   { category: "fruit", name: "orange" },
+//   { category: "vegetable", name: "spinach" },
+// ];
+
+// function groupAndCount(inputArray, key) {
+//   const outPut = inputArray.reduce((acc, curr) => {
+//    const catgry = curr.category;
+	  acc[catgry] = (acc[catgry] || 0) + 1;
+//     return acc;
+//   }, {});
+//   return outPut;
+// }
+
+// const result = groupAndCount(data, "category");
+// console.log(result); // { fruit: 3, vegetable: 2 }
+
+
+convert a string like "aabbcc" to "a2b2c2"
+
+const coverter = (inputString) => {
+  let newString = "";
+  let counter = 1;
+  for (let index = 0; index < inputString.length; index++) {
+    if (inputString[index] === inputString[index + 1]) {
+      counter++;
+    } else {
+      newString = newString + inputString[index] + counter;
+      counter = 1;
+    }
+  }
+  console.log(newString);
+};
+
+
+
+React
+
+Different Hooks
+useMemo vs useCallback
+Optimization Techniques
+
+Create a useDebounce hook that delays updating a value until a specified time (300ms) has passed without changes.
+Build a SearchApp component with an input field and a list of items (e.g., fruits) filtered by a debounced search query.
+Use the debounced query to filter the list, ensuring performance optimization.
+
+
+-----
+
+
+Remove given Element
+let num = [0, 1, 2, 2, 3, 0, 4, 2, 5];
+let val = 2;
+let j = 0;
+for (let i = 0; i < num.length; i++) {
+  if (num[i] !== val) {
+    num[j] = num[i];
+    j++;
+  }
+}
+num.length = j;
+
+console.log(num);
+console.log(num.length);
+console.log(j + 1);
+
+
+
+Second Max
+
+arr = [1, 8, 101, 7, 56, 90]
+
+let max = -Infinity;
+let secondMax = -Infinity;
+
+arr.forEach((item) => {
+  if (max < item) {
+    secondMax = max;
+    max = item;
+  } else if (secondMax < item && max !== item) {
+    secondMax = item;
+  }
+});
+console.log("max", max, secondMax);
+
+
+
+
+
+
+// Sentence case 
+// Write a method which take one parameter that is string containing sentence and return a string with first letter of word is capital and rest is in lower case ?
+// const name = 'deepaK khanDelwal PqR;
+// Expected result -> Deepak Khandelwal Pqr
+
+
+function CapitalFistLetter(value) {
+  const result = value.toLowerCase().split(" ").map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    }).join(" ");
+	
+  console.log(result);
+}
+
+// const namesentence = "deepaK khanDelwal PqR GauRaV"
+
+// CapitalFistLetter(namesentence)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

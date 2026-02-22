@@ -3,13 +3,7 @@ HTML
 HTML stands for Hyper Text Markup Language
 HTML is the standard markup language for creating Web pages
 HTML describes the structure of a Web page
-HTML consists of a series of elements
-HTML elements tell the browser how to display the content
-HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
-Document Type Declaration: An HTML document starts with a document type declaration (<!DOCTYPE html>) to define the version of HTML being used.
 
-Meta tags in HTML are used to provide metadata about the HTML document.
-This metadata can include information about the page's content, character set, author, keywords, description, and much more.
 
 html4 vs html5 **********
 New Elements and Attributes
@@ -99,6 +93,63 @@ Deprecated many of the presentational elements and attributes in favor of CSS.
 Encourages the use of CSS for styling and layout.
 
 
+Core Objectives of HTML5 ******
+🧱 Better Semantics → More meaningful tags like <article>, <section>, etc.
+🎥 Rich Media Support → Native audio/video tags (<video>, <audio>)
+📱 Mobile-First Web → Responsive, fast, offline-capable apps
+🛠️ New APIs → Location, Drag-and-Drop, Web Storage, Canvas, etc.
+⚡ Performance & Interactivity → Real-time features without plugins
+
+
+| API               | Use Case                               |
+| ----------------- | -------------------------------------- |
+| **Geolocation**   | Get user's physical location           |
+| **Web Storage**   | `localStorage`, `sessionStorage`       |
+| **Offline**       | AppCache (deprecated), Service Workers |
+| **Drag and Drop** | Native drag-drop interactions          |
+| **WebSockets**    | Real-time communication                |
+| **History API**   | Single Page Apps routing support       |
+| **Media Capture** | Access webcam/mic                      |
+
+localStorage was introduced with HTML5. It did not exist in HTML4.
+
+| Feature                 | HTML4     | HTML5                            	|
+| ----------------------- | --------- | --------------------------------	|
+| Semantic Tags           | ❌         | ✅ `<section>`, `<article>`, etc. |
+| Multimedia Support      | ❌ (Flash) | ✅ Native audio/video             |
+| New Input Types         | ❌         | ✅ Yes                            |
+| Form Validation         | ❌         | ✅ Built-in                       |
+| Canvas / Graphics       | ❌         | ✅ `<canvas>`                     |
+| Local Storage           | ❌         | ✅ `localStorage`                 |
+| Geolocation             | ❌         | ✅                                |
+| Drag and Drop           | ❌         | ✅                                |
+| Web Workers             | ❌         | ✅                                |
+| Mobile/Responsive Focus | ❌         | ✅ Better semantics & APIs        |
+
+
+Meta tags in HTML are used to provide metadata about the HTML document.
+This metadata can include information about the page's content, character set, author, keywords, description, and much more.
+ <meta name="viewport">
+  
+What <meta name="viewport"> Does ****
+Tells the browser how to scale and size the page based on the device’s screen size.
+Ensures that your layout is not zoomed out or rendered as a tiny desktop page on mobile.
+💡 It sets the stage for responsive design, but doesn't change the layout.
+
+What Media Queries Do ****
+Media queries allow you to apply different CSS styles based on the screen size, orientation, resolution, etc.
+
+| Feature                     | Viewport Meta Tag | Media Queries |
+| --------------------------- | ----------------- | ------------- |
+| Controls page scaling       | ✅ Yes             | ❌ No          |
+| Changes layout/styles       | ❌ No              | ✅ Yes         |
+| Required for responsiveness | ✅ Essential       | ✅ Essential   |
+
+✅ Use <meta name="viewport" content="width=device-width, initial-scale=1.0"> to enable responsiveness.
+✅ Use media queries to adapt the layout to different screen sizes.
+
+
+Document Type Declaration: An HTML document starts with a document type declaration (<!DOCTYPE html>)
 All HTML need to have a DOCTYPE declared. The DOCTYPE is not actually an element or HTML tag. 
 It lets the browser know how the document should be interpreted, by indicating what version or standard of HTML (or other markup language)
 is being used.
@@ -106,8 +157,27 @@ is being used.
 The <!DOCTYPE html> declaration defines that this document is an HTML5 document
 The <html> element is the root element of an HTML page
 
-<tagname style="property:value;">
+What Happens If You Omit It?
+Browsers don’t crash, but:
+You might get unexpected layouts or broken styles.
+Some CSS rules may not work as expected.
+JavaScript may behave inconsistently (especially older code).
 
+ 
+tag vs element *******
+HTML Tags: Tags are the starting and ending parts of an HTML element. 
+They begin with < symbol and end with > symbol. Whatever written inside < and > are called tags.
+<b> </b>
+
+HTML elements: Elements enclose the contents in between the tags. They consist of some kind of structure or expression. 
+It generally consists of a start tag, content and an end tag.
+<b>This is the content.</b>
+
+HTML Attributes: It is used to define the character of an HTML element. It always placed in the opening tag of an element. 
+It generally provides additional styling (attribute) to the element.
+
+
+<tagname style="property:value;">
 
 <b> - Bold text
 <strong> - Important text
@@ -119,7 +189,6 @@ The <html> element is the root element of an HTML page
 <ins> - Inserted text
 <sub> - Subscript text
 <sup> - Superscript text
-
 
 
 Here are the block-level elements in HTML:
@@ -157,51 +226,33 @@ Here are the inline elements in HTML:
 <textarea>
 
 
-There are two display values: block and inline
-A block-level element always starts on a new line and takes up the full width available
-An inline element does not start on a new line and it only takes up as much width as necessary
-The <div> element is a block-level and is often used as a container for other HTML elements
-The <span> element is an inline container used to mark up a part of a text, or a part of a document
-
-
-media query**********
-@media not|only mediatype and (expressions) {
-  CSS-Code;
-}
-@media screen and (max-width: 600px) {
-  body {
-    background-color: lightgreen;
-  }
-}
-
-laptop 1200*1080 (x*y)
-tablet 880*
-mobile 576*
-
-
-laptop,desktop 1280 
-table 768 to 1024 pixels
-mobile  320 to 414 pixels
-XS - 475px
-SM - 640px
-MD - 768px
-LG - 1024px (laptop)
-XL - 1280px
-2XL - 1536px
-
-
 Semantic element ******
 They help both browsers and developers understand the structure and meaning of web content, providing clear and meaningful labels for different parts of a webpage.
 
 Key Purposes of Semantic Elements:
 1. Improves Readability for Developers
-2. Better Accessibility:
-3. Search Engine Optimization (SEO):
-4. Maintains a Consistent Structure:
+2. Better Accessibility
+3. Search Engine Optimization (SEO)
+4. Maintains a Consistent Structure
 
 Examples of non-semantic elements: <div> and <span> - Tells nothing about its content.
-
 Examples of semantic elements: <form>, <table>, and <article> ,nav,footer- Clearly defines its content.
+
+
+Script async / defer *****
+Normally, when you include a <script> tag
+The browser will:
+Pause HTML parsing.
+Download the script.
+Execute the script.
+Then continue rendering the page.
+
+| Feature             | No Attribute       | `async`            | `defer`         |
+| ------------------- | ------------------ | ------------------ | --------------- |
+| HTML parsing paused | ✅ Yes              | ❌ No               | ❌ No            |
+| Executes when ready | ✅ Immediately      | ✅ As soon as ready | ❌ After parsing |
+| Order guaranteed    | ✅ Yes (but blocks) | ❌ No               | ✅ Yes           |
+| Good for DOM access | ✅ Yes              | ❌ Not always       | ✅ Yes           |
 
 
 Feature				async																		defer
@@ -219,22 +270,9 @@ defer: Use for scripts that rely on the entire DOM being ready before execution 
 Without async or defer:- The script is fetched and executed immediately, as soon as the browser encounters it during parsing of the HTML.
 The browser halts parsing when it encounters the <script> tag, fetches and executes script.js, and then continues parsing the HTML document.
 It doesn't do it asynchronously.
- 
-tag vs element *******
-HTML Tags: Tags are the starting and ending parts of an HTML element. 
-They begin with < symbol and end with > symbol. Whatever written inside < and > are called tags.
-<b> </b>
-
-HTML elements: Elements enclose the contents in between the tags. They consist of some kind of structure or expression. 
-It generally consists of a start tag, content and an end tag.
-<b>This is the content.</b>
-
-HTML Attributes: It is used to define the character of an HTML element. It always placed in the opening tag of an element. 
-It generally provides additional styling (attribute) to the element.
 
 
 CSS-
-
 
 CSS stands for Cascading Style Sheets
 CSS describes how HTML elements are to be displayed on screen, paper, or in other media
@@ -274,12 +312,37 @@ Proper use of the box model ensures that web pages are responsive, visually appe
 Understanding it is essential for both layout design and debugging layout issues in web development.
 
 
-The display Property
+The position Property *****
+There are five different position values:
+static(By Default): Elements are positioned according to the normal document flow.
+relative: The element is positioned relative to its original place in the document flow.
+fixed : is positioned relative to the viewport
+absolute: is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
+sticky : is positioned based on the user's scroll position.
+
+
+Value		Behavior																	Use case
+static		Default, follows the normal document flow.									General content placement.
+relative	Positioned relative to its normal position, moves within document flow.		Slight adjustments or nudging of elements.
+absolute	Positioned relative to its nearest positioned ancestor or the viewport.		Modals, tooltips, dropdowns, precise control.
+fixed		Positioned relative to the viewport and does not move with scrolling.		Sticky headers/footers, floating elements.
+sticky		Switches from relative to fixed after scrolling past a point.				Sticky navigation bars or sidebars.
+
+
+The display Property ****
 display: inline;
 display: block;
 display: none;
 display: flex;
 display: inline-block
+
+
+
+block vs inline *****
+A block-level element always starts on a new line and takes up the full width available
+An inline element does not start on a new line and it only takes up as much width as necessary
+The <div> element is a block-level and is often used as a container for other HTML elements
+The <span> element is an inline container used to mark up a part of a text, or a part of a document
 
 
 display: inline-block*********
@@ -300,15 +363,6 @@ No. IF you want to then convert it into display:inline-block
 You cannot set the height and width of inline-level elements in CSS.
 
 
-Diff between display: inline; and display: inline-block *******
-we give height and width to inline-block  but not to inline elements
-
-
-Grid CSS****
-CSS Grid Layout is a powerful 2-dimensional layout system for the web, allowing you to create responsive layouts with ease.
-It enables you to organize elements in rows and columns, providing more control over layout compared to older methods like floats or flexbox.
-
-
 flex properties****
 
 The flex container properties are:
@@ -327,6 +381,41 @@ flex
 align-self
 
 
+Grid CSS****
+CSS Grid Layout is a powerful 2-dimensional layout system for the web, allowing you to create responsive layouts with ease.
+It enables you to organize elements in rows and columns, providing more control over layout compared to older methods like floats or flexbox.
+
+Advantages of display: grid
+
+1. 🧭 Two-Dimensional Layout Control
+Unlike Flexbox (which is 1D), Grid lets you control rows and columns at once.
+You can create rows and columns that line up naturally.
+
+2. 🎯 Precise Placement of Items
+You can place elements anywhere in the grid — even non-sequentially.
+Great for dashboards, magazine layouts, split screens, etc.
+
+| Feature                 | Grid                 | Flexbox         |
+| ----------------------- | -------------------- | --------------- |
+| Layout Type             | 2D (row & col)       | 1D (row or col) |
+| Best For                | Full page, dashboard | Toolbars, menus |
+| Item placement          | Absolute control     | Flow-based      |
+| Reordering layout       | ✅ Easy               | ⚠️ Hard        |
+| Semantic layout (areas) | ✅ Yes                | ❌ No          |
+
+
+Real-World Use Cases for Grid ****
+
+Maintain structure, proper responsive
+Responsive web page layouts
+Admin dashboards
+Photo galleries
+Magazine/newspaper-style designs
+Centering items both vertically and horizontally
+E-commerce product listing pages
+Split-screen interfaces (login/register, chat UIs)
+
+
 Flexbox vs Grid *****
 Flexbox										Grid
 One-dimensional layout (rows or columns)	Two-dimensional layout (rows and columns)
@@ -336,30 +425,11 @@ Flexible in distributing space				Precise control over row and column sizes
 
 
 visibility: hidden; vs display: none;
-display removes the element complete and next element occupies it's position
-visibility: hidden means that element is just not visible but present
+display: none - removes the element complete and next element occupies it's position
+visibility: hidden - means that element is just not visible but present
 
 display	 	Specifies how an element should be displayed
 visibility	Specifies whether or not an element should be visible
-
-
-
-The position Property
-There are five different position values:
-static(By Default): Elements are positioned according to the normal document flow.
-relative: The element is positioned relative to its original place in the document flow.
-fixed : is positioned relative to the viewport
-absolute: is positioned relative to the nearest positioned ancestor.if an absolute positioned element has no positioned ancestors, it uses the document body, 
-sticky : is positioned based on the user's scroll position.
-
-
-Value		Behavior																	Use case
-static		Default, follows the normal document flow.									General content placement.
-relative	Positioned relative to its normal position, moves within document flow.		Slight adjustments or nudging of elements.
-absolute	Positioned relative to its nearest positioned ancestor or the viewport.		Modals, tooltips, dropdowns, precise control.
-fixed		Positioned relative to the viewport and does not move with scrolling.		Sticky headers/footers, floating elements.
-sticky		Switches from relative to fixed after scrolling past a point.				Sticky navigation bars or sidebars.
-
 
 
 overflow property controls what happens to content that is too big to fit into an area. *******
@@ -389,7 +459,7 @@ or to insert content into an element without adding it to the HTML.
 
 Pseudo-classes are used to define a special state of an element based on user interaction, document structure, or other conditions.
 They do not insert or target specific parts of the content itself but rather apply styles based on states or relationships.
-:hover,:focus
+:hover,:focus, :active
 
 Aspect		Selectors													Pseudo-Elements
 Targeting	Targets entire HTML elements based on tag, class, ID, etc.	Targets parts of an element or inserts virtual elements
@@ -465,13 +535,69 @@ The universal selector (*) has low specificity, while ID selectors are highly sp
 10 Class
 100 ID
 1000 inline css
-!important will override all css properties expect inline css
+!important will override all css properties 
+If the inline style includes !important, it has the highest priority and cannot be overridden by external or internal CSS, even if those rules also use !important.
 
 More Specific Rules Win: When conflicting rules apply to the same element, the rule with the higher specificity value takes precedence.
 Equal Specificity: If two rules have the same specificity, the last defined rule in the CSS will take precedence.
 Importance of Order: In case of equal specificity, the order of the rules matters—the last one defined in the CSS will override the others.
 
-1em is 16px.
+em vs rem
+em and rem are relative CSS units. em is relative to the parent element’s font-size, so nested elements can compound in size.
+rem is relative to the root (html) font-size, giving consistent sizing across the page.
+| Feature        | em                                 | rem                              |
+| -------------- | ---------------------------------- | -------------------------------- |
+| Relative to    | Parent element                     | Root element (`html`)            |
+| Nesting impact | Multiplicative (can compound)      | Consistent, no compounding       |
+| Use case       | Component-specific scaling         | Global font, spacing, layout     |
+| Typical usage  | Padding, margin inside a component | Font-size, global spacing system |
+
+| Unit    | Relative To                                    | Example                          |
+| ------- | ---------------------------------------------- | -------------------------------- |
+| **em**  | The **font-size of the parent element**        | If parent is 20px, `2em = 40px`  |
+| **rem** | The **font-size of the root element (`html`)** | If `html` is 16px, `2rem = 32px` |
+
+
+
+media query**********
+@media not|only mediatype and (expressions) {
+  CSS-Code;
+}
+@media screen and (max-width: 600px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+
+/* Mobile (<= 480px) */
+@media (max-width: 480px) { ... }
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) { ... }
+
+/* Small desktops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) { ... }
+
+/* Large desktops (1025px and up) */
+@media (min-width: 1025px) { ... }
+
+
+laptop,desktop 1280 
+table 768 to 1024 pixels
+mobile  320 to 414 pixels
+XS - 475px
+SM - 640px
+MD - 768px
+LG - 1024px (laptop)
+XL - 1280px
+2XL - 1536px
+
+| Media Type | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| `all`      | Applies to **all** devices (default if omitted)           |
+| `screen`   | Devices with screens — desktops, laptops, tablets, phones |
+| `print`    | Used when printing the document or using print preview    |
+| `speech`   | Screen readers that read the page aloud                   |
 
 
 Centre a div all possible ways
@@ -528,6 +654,9 @@ const paragraph = document.querySelector('p');
 // Select nested elements
     const firstListItem = document.querySelector('ul li:first-child');
 
+const buttonHtml= document.querySelector("button")
+buttonHtml.style.backgroundColor="red"
+
 5. document.querySelectorAll(selector)
 Purpose: Selects all elements that match a CSS selector.
 Return Type: A static NodeList of all matching elements.
@@ -540,6 +669,181 @@ element[0].style.backgroundColor="#a72b2b"
 
 If you want to find all HTML elements that match a specified CSS selector (id, class names, types, attributes, values of attributes, etc),
 use the querySelectorAll() method.
+
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>City</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alice</td>
+      <td>30</td>
+      <td>Bangalore</td>
+    </tr>
+    <tr>
+      <td>Bob</td>
+      <td>28</td>
+      <td>Delhi</td>
+    </tr>
+  </tbody>
+</table>
+
+
+When Inline CSS Is a Good Idea****
+
+1.Dynamic styles based on props/state
+<div style={{ backgroundColor: isActive ? 'green' : 'gray' }}>Status</div>
+
+2.Component-level overrides
+
+Why It’s Often a Bad Idea ****
+
+1.No support for CSS features like:
+Pseudo-classes (:hover, :focus)
+Media queries
+Keyframe animations
+
+2.Harder to read and maintain
+3.No separation of concerns
+4.Debugging in DevTools - You lose meaningful class names (.btn-primary) and only see style objects in the "element" tab.
+
+| Use Case                  | Inline CSS | Better Alternative      |
+| ------------------------- | ---------- | ----------------------- |
+| Dynamic single prop style | ✅          | N/A                     |
+| Hover effects             | ❌          | CSS / CSS Modules       |
+| Responsive layout         | ❌          | Media queries, Tailwind |
+| Theming / Design system   | ❌          | CSS-in-JS, Variables    |
+| Animation keyframes       | ❌          | `@keyframes`, libraries |
+| Utility-heavy styling     | ❌          | Tailwind CSS or similar |
+
+
+CSS adjacent sibling combinator (+)
+<style>
+  .test + div {
+    color: red;
+  }
+</style>
+
+<div class="test">1</div>
+<div>2</div>
+<div>3</div>
+
+
+Stretch the element***
+<div class="parent">
+  <div class="child">Child</div>
+</div>
+
+.parent{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+.child{
+  position: absolute;
+  border: 1px solid black;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+When you specify all four top, bottom, left, and right, the browser tries to stretch the element to fit those bounds
+
+What Actually Happens
+top: 0; bottom: 0; → stretches the height to fill the parent vertically
+left: 0; right: 0; → stretches the width to fill the parent horizontally
+
+
+When we think about making a page responsive , what all should we consider and how to achieve it ****
+1.Viewport & Meta Tags
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+2.Fluid Layouts
+Instead of fixed pixels, use relative units:
+em, rem → for typography and padding
+%, vw, vh → for layout widths/heights
+min(), max(), clamp() → to intelligently cap sizes
+
+3. Breakpoints (Media Queries)
+Plan your breakpoints logically, not just device-based:
+@media (max-width: 1200px) { /* desktop */ }
+@media (max-width: 992px)  { /* tablet */ }
+@media (max-width: 768px)  { /* large phone */ }
+@media (max-width: 576px)  { /* small phone */ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

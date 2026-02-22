@@ -5,7 +5,7 @@ Designers
 Product manager
 StakeHolders
 
-Key Aspects
+Key Aspects *****
 Requirement analysis
 System architechture
 Data Design/ Interfaces/Api schema
@@ -13,7 +13,7 @@ Technology selection
 
 
 Function 
-Whatever is related to the product
+Product requirements
 
 Non-Functional
 Device Support - Desktop/Mobile
@@ -25,6 +25,7 @@ CSR/SSR
 Caching
 SEO
 Offline Support
+Security
 
 
 Tech choice

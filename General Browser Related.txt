@@ -1,0 +1,484 @@
+
+Web APIs**
+Web APIs are built-in browser interfaces (or JavaScript objects/methods) that allow web developers to interact with the browser and the system — such as DOM manipulation,
+storage, network, graphics, device features, etc. They are not part of JavaScript itself, but the environment (mostly browsers) provides them as part of the Web Platform.
+
+| Category                  | API Examples                                   | Description                         |
+| ------------------------- | ---------------------------------------------- | ----------------------------------- |
+| **DOM APIs**              | `document`, `querySelector`, `createElement`   | Manipulate HTML structure           |
+| **Storage APIs**          | `localStorage`, `sessionStorage`, `IndexedDB`  | Client-side key-value or large data |
+| **Network APIs**          | `fetch`, `XMLHttpRequest`, `WebSocket`         | HTTP calls, real-time communication |
+| **Multimedia APIs**       | `AudioContext`, `MediaDevices`, `getUserMedia` | Access mic, camera, sound           |
+| **Canvas & Graphics**     | `Canvas`, `SVG`, `WebGL`, `OffscreenCanvas`    | Drawing, game dev, 3D rendering     |
+| **Location & Sensors**    | `Geolocation`, `DeviceOrientation`             | GPS, motion detection               |
+| **Notifications**         | `Notification`, `Vibration`, `Battery API`     | Alert users, mobile feedback        |
+| **Clipboard API**         | `navigator.clipboard.readText()`               | Access user clipboard               |
+| **Drag and Drop**         | `ondragstart`, `ondrop`, `DataTransfer`        | File and element drag/drop          |
+| **Service Workers**       | `navigator.serviceWorker`                      | Background sync, caching (PWA)      |
+| **Web Storage**           | `localStorage.setItem()`                       | Persistent key-value store          |
+| **Credential Management** | `navigator.credentials`                        | Login autofill, password mgmt       |
+| **Speech APIs**           | `SpeechRecognition`, `SpeechSynthesis`         | Voice input/output                  |
+| **Performance APIs**      | `performance.now()`, `PerformanceObserver`     | Metrics, performance debugging      |
+
+| API             | Description                        |
+| --------------- | ---------------------------------- |
+| `setTimeout`    | Runs a function once after a delay |
+| `setInterval`   | Repeats a function after intervals |
+| `clearTimeout`  | Cancels a timeout                  |
+| `clearInterval` | Cancels an interval                |
+
+| Feature      | Is it a Web API? | Where is it defined?         |
+| ------------ | ---------------- | ---------------------------- |
+| `setTimeout` | ✅ Yes            | Browser / Node runtime       |
+| `Promise`    | ❌ No (JS Core)   | ECMAScript (JavaScript spec) |
+| `fetch`      | ✅ Yes            | Web API (browser only)       |
+
+
+local storage vs session storage ********
+Both Local Storage and Session Storage are part of the Web Storage API, which allows you to store key-value pairs in a user’s browser.
+They are:
+Client-side
+Synchronous
+String-based storage (you can only store strings)
+
+Feature				Local Storage																		Session Storage
+Scope				Available across all tabs and windows of the same origin (domain).					Available only within the current tab (or window).
+Persistence			Data persists even after the browser is closed and reopened.						Data is cleared when the tab or browser window is closed.
+Lifetime			Data remains until explicitly removed (or until the browser's storage is cleared).	Data is available only for the duration of the page session (tab or window).
+Storage Limit		Generally 5-10 MB (varies slightly by browser).										Similar to local storage, typically 5-10 MB (depending on the browser).
+Shared Across Tabs	Yes, shared across all tabs and windows for the same domain.						No, unique to each tab or window.
+Use Case			Useful for storing data that needs to persist across sessions, 						Useful for storing temporary data like session-specific state or data that
+					like user preferences, themes, or tokens.											only needs to exist for the current session.
+API					localStorage.setItem(), localStorage.getItem(), localStorage.removeItem(),			sessionStorage.setItem(), sessionStorage.getItem(),
+					localStorage.clear()																sessionStorage.removeItem(), sessionStorage.clear()
+
+Local Storage is suitable for long-term storage needs where data should persist across multiple browser sessions.
+Session Storage is ideal for short-term storage needs where data should only persist for the duration of a page session.
+
+
+Auth Token (How, Where, When ) ***********
+An Auth Token (Authentication Token) is a small piece of data that is used to identify and authenticate a user in a web application. 
+These tokens are typically passed between the client and server to verify that the user is authenticated and authorized to perform certain actions.
+It is used to verify that a request is made by an authenticated user. Common types of auth tokens include JSON Web Tokens (JWT), OAuth tokens, and custom tokens.
+Client-Side: Tokens can be stored in localStorage, sessionStorage, or as a cookie.
+
+
+Cookies ****
+Cookies are small pieces of data stored in the user's browser and sent to the server with every HTTP request. 
+They are mainly used to remember information about the user between different requests or visits, such as authentication tokens, user preferences, or session data.
+
+Key Features of Cookies:
+Size Limit: Cookies have a size limit of about 4KB per cookie.
+Expiration: Cookies can have an expiration date. If no expiration is set, the cookie is deleted when the browser is closed (session cookies). 
+			Otherwise, cookies persist until the specified expiration date (persistent cookies).
+Domain and Path: Cookies are associated with a specific domain and path, meaning they are sent only to the server that set them.
+Can be accessed by both the client and server
+
+Types of Cookies
+
+Session Cookies:
+These cookies are temporary and are deleted once the user closes the browser.
+They are mainly used to maintain a session, such as keeping a user logged in while navigating different pages of a website.
+
+Persistent Cookies:
+These cookies remain on the user’s device for a set duration defined in the cookie’s expires or max-age attribute.
+They can be used to store login tokens or user preferences for future visits.
+
+First-party Cookies:
+Created by the website the user is visiting.
+They are typically used for functionality like remembering login information or preferences (e.g., language, theme).
+
+Third-party Cookies:
+Set by domains other than the one the user is currently visiting.
+Commonly used for advertising and tracking purposes across different websites.
+
+Common Use Cases
+
+Session Management:
+Cookies store session identifiers to keep a user logged in across page navigations.
+For example, a session ID stored in a cookie allows the server to recognize the user during their visit.
+
+Personalization:
+Cookies can store user preferences (e.g., language or theme), so websites can provide a consistent experience across visits.
+
+Tracking and Analytics:
+Advertisers and analytics services use cookies to track users across different websites, allowing them to serve targeted ads or measure user behavior.
+
+Shopping Carts:
+E-commerce sites use cookies to keep track of items added to the cart, even if the user navigates away or comes back later.
+
+Typically used for data that must be sent to the server with each HTTP request (like session identifiers or CSRF tokens).
+how to use - document.cookie
+
+What is CORS issue *****
+CORS stands for Cross-Origin Resource Sharing. It's a security feature implemented by web browsers to restrict web pages from making requests to a different domain 
+than the one that served the original page. This restriction is in place to prevent malicious websites from accessing sensitive data from other websites without permission.
+
+Origin: An origin is defined by the combination of scheme (protocol), domain, and port of a URL. For example, https://example.com and http://localhost:3000 are different origins.
+
+Same-Origin Policy: By default, web browsers enforce the Same-Origin Policy, which means that a web page served from one origin cannot normally make requests to resources
+from a different origin.
+
+Cross-Origin Requests: When a web page tries to make a request to a different origin (cross-origin request), 
+the browser sends an HTTP request with an Origin header indicating the origin of the requesting page.
+
+CORS Headers: The server hosting the requested resource can include special HTTP headers in its response to indicate whether it allows cross-origin requests 
+from the requesting origin. These headers include:
+
+Access-Control-Allow-Origin: Specifies which origins are allowed to access the resource. It can be a specific origin, * (wildcard) to allow any origin, 
+or null to disallow all cross-origin requests.
+
+Access-Control-Allow-Methods: Specifies the HTTP methods (e.g., GET, POST, etc.) allowed when accessing the resource.
+
+Access-Control-Allow-Headers: Specifies the HTTP headers allowed when accessing the resource.
+
+Access-Control-Allow-Credentials: Indicates whether the resource supports credentials such as cookies or authorization headers in cross-origin requests.
+
+Preflight Requests: For certain types of cross-origin requests (e.g., requests with custom headers or methods other than GET, POST, or HEAD),
+the browser first sends a preflight OPTIONS request to the server to determine if the actual request is safe to send.
+The server responds with CORS headers indicating whether the actual request is allowed.
+
+Simple Requests: Requests that meet certain criteria, such as using only safe methods (e.g., GET, POST)
+and not including custom headers other than those allowed by the server,are considered simple requests and may not trigger a preflight request.
+
+
+WebPack bunderler analyses *********
+https://www.youtube.com/watch?v=5IG4UmULyoA timestamp 7:38
+
+
+Rendering Pattern ****************
+CSR
+SSR
+SSG(Static Site Generation)
+iSSG(Incremental Static Site Generation)
+
+https://www.youtube.com/watch?v=fRgAI3FiYHc&list=PLe3J6mZBq1xVDr297Yg0p1SHbdj_Oceld
+
+CSR vs SSR***********
+
+SSR -
+For SEO
+fast initial load
+mostly static contain
+
+CSR-
+SEO not so imp
+lots of user interaction
+
+
+
+
+Web vitals ************
+
+LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec 
+FID(First Input Delay) -- Interactive below 100ms
+CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
+
+How to measure speed *******
+https://web.dev/what-is-speed/
+
+Core Web Vitals
+
+Largest Contentful Paint (LCP):
+Definition: Measures loading performance. It marks the point in the page load timeline when the main content has likely loaded.
+Good Threshold: LCP should occur within 2.5 seconds of when the page first starts loading.
+
+First Input Delay (FID):
+Definition: Measures interactivity. It quantifies the delay between when a user first interacts with a page (e.g., clicks a button) and when the browser responds to that interaction.
+Good Threshold: FID should be less than 100 milliseconds.
+
+Cumulative Layout Shift (CLS):
+Definition: Measures visual stability. It quantifies the amount of unexpected layout shift of visible page content.
+Good Threshold: CLS should be less than 0.1.
+
+Other Web Vitals
+In addition to the core Web Vitals, there are other important metrics that contribute to overall user experience:
+First Contentful Paint (FCP): Time from when the page starts loading to when any part of the page's content is rendered.
+Time to Interactive (TTI): The time it takes for the page to become fully interactive.
+Total Blocking Time (TBT): The sum of all time periods between FCP and TTI when the main thread was blocked for long enough to prevent input responsiveness.
+
+Importance of Web Vitals
+User Experience: Improving Web Vitals can lead to a better user experience by making websites load faster, respond quicker, and be more visually stable.
+SEO: Google uses these metrics as part of its ranking criteria, so optimizing for Web Vitals can improve search engine visibility and ranking.
+Performance Monitoring: They provide a standardized way to measure and monitor the performance of web pages.
+
+Tools for Measuring Web Vitals
+There are several tools and techniques to measure Web Vitals:
+Lighthouse: An open-source, automated tool for improving the quality of web pages. It provides audits for performance, accessibility, progressive web apps, SEO, and more.
+PageSpeed Insights: Provides insights into the performance of a web page on both mobile and desktop devices and provides suggestions on how to improve.
+Chrome DevTools: Built into the Chrome browser, it offers a variety of tools for developers to analyze and debug web performance.
+Web Vitals Extension: A Chrome extension that provides real-time feedback on the core Web Vitals metrics for any site you visit.
+Search Console: Provides a Core Web Vitals report to help website owners understand how their pages perform based on real-world usage data (field data).
+
+Example of Improving Core Web Vitals
+Here's a brief overview of how you might improve each of the core Web Vitals:
+
+Largest Contentful Paint (LCP):
+Optimize images and videos (use modern formats, compress, lazy load).
+Improve server response times (reduce time to first byte, use a CDN).
+Minimize render-blocking CSS and JavaScript.
+
+First Input Delay (FID):
+Minimize JavaScript execution time.
+Break up long tasks.
+Use web workers to run heavy tasks off the main thread.
+
+Cumulative Layout Shift (CLS):
+Include size attributes on your images and video elements.
+Ensure ads, embeds, and iframes have reserved space.
+Avoid inserting content above existing content except in response to user interaction.
+
+Core Web Vitals Thresholds
+Metric		Good				Needs Improvement		Poor
+LCP			≤ 2.5 seconds		2.5 - 4.0 seconds		> 4.0 seconds
+FID			≤ 100 ms			100 - 300 ms			> 300 ms
+CLS			≤ 0.1				0.1 - 0.25				> 0.25
+
+
+
+| Feature / Aspect          | **React** (by Meta)                           | **Angular** (by Google)                      | 🔍 Who Wins / When?                         |
+| ------------------------- | --------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| **Type**                  | Library (UI-focused)                          | Full-fledged framework                       | React is modular; Angular is complete       |
+| **Learning Curve**        | Moderate                                      | Steep                                        | React easier to start with                  |
+| **Language**              | JavaScript (with optional TypeScript)         | TypeScript by default                        | Angular forces TS; React allows flexibility |
+| **Data Binding**          | One-way                                       | Two-way + One-way                            | Angular suits forms-heavy apps              |
+| **DOM Handling**          | Virtual DOM                                   | Real DOM with change detection zones         | React is faster and more efficient          |
+| **State Management**      | External (Redux, Recoil, Zustand, etc.)       | Built-in (`@ngrx` is common)                 | React has more flexibility                  |
+| **Routing**               | External (`react-router`)                     | Built-in (`@angular/router`)                 | Angular is out-of-the-box complete          |
+| **Form Handling**         | Libraries like Formik, React Hook Form        | Native with Reactive & Template-driven forms | Angular is more powerful for complex forms  |
+| **Testing**               | Jest, React Testing Library                   | Karma, Jasmine                               | React wins for speed & DX                   |
+| **Dependency Injection**  | Not built-in (can simulate with context/hook) | Built-in powerful DI system                  | Angular is better for enterprise apps       |
+| **Code Splitting**        | Supported (dynamic `import()`)                | Built-in lazy loading routes/components      | Angular better integrated out-of-box        |
+| **Performance**           | Excellent (Virtual DOM + fine control)        | Good, but digest cycle adds overhead         | React in large-scale rendering              |
+| **Mobile App Support**    | React Native                                  | NativeScript, Ionic                          | React Native has better adoption            |
+| **Community & Ecosystem** | Massive, flexible, lots of libraries          | Strong, enterprise-friendly                  | React has more community support            |
+| **Opinionated?**          | No (choose your own stack)                    | Yes (enforces structure and conventions)     | React = freedom, Angular = structure        |
+| **SSR Support**           | Next.js (very strong)                         | Angular Universal                            | React ecosystem (Next.js) is more mature    |
+| **Scalability**           | Needs architecture planning                   | Scales better out-of-the-box                 | Angular for enterprise scale                |
+| **Updates / Migration**   | Minimal breaking changes                      | Can be heavy (RxJS/API changes)              | React better for long-term maintenance      |
+
+
+React is Best When**
+
+| Scenario                                  | Why                                                   |
+| ----------------------------------------- | ----------------------------------------------------- |
+| You need a **fast UI library**            | React is lightweight, fast, and focused               |
+| You want to **choose your own stack**     | React works well with Redux, Recoil, Zustand, etc.    |
+| You're building with **Next.js**          | SSR/SSG optimized, amazing ecosystem                  |
+| Your team prefers **flexibility**         | You aren’t forced into a strict file/structure layout |
+| You need to build **cross-platform apps** | React Native is widely adopted                        |
+
+
+Angular is Best When***
+
+| Scenario                                       | Why                                                   |
+| ---------------------------------------------- | ----------------------------------------------------- |
+| You're building a **large enterprise app**     | Angular has DI, modules, form support, full structure |
+| You want **everything built-in**               | Forms, routing, validation, DI, CLI = all included    |
+| You need **strong TypeScript typing**          | Angular was built with TS from the ground up          |
+| You prefer **strict architecture**             | Angular enforces code discipline                      |
+| You have a team familiar with **Java or .NET** | Angular’s structure and DI are familiar               |
+
+
+Developer Experience Comparison***
+| Feature             | React                         | Angular                            |
+| ------------------- | ----------------------------- | ---------------------------------- |
+| DX (Dev Experience) | Lightweight, intuitive JSX    | Verbose, needs understanding       |
+| Boilerplate         | Minimal                       | More boilerplate for setup         |
+| Documentation       | Great, plus tons of tutorials | Comprehensive but complex          |
+| Debugging           | Great with React DevTools     | Angular DevTools exist but heavier |
+| Community Adoption  | Very high                     | Strong, but enterprise-focused     |
+
+
+Performance: Real-World Impact
+| Operation                   | React                         | Angular                        |
+| --------------------------- | ----------------------------- | ------------------------------ |
+| Initial Load Time (bundle)  | Smaller (with code-splitting) | Bigger (built-in dependencies) |
+| Re-renders (large UI trees) | Optimized via Virtual DOM     | Less efficient than React      |
+| Time-to-interactive (TTI)   | Better with SSR/Next.js       | Heavier unless optimized       |
+
+
+
+Rendering patterns ******
+
+
+CSR (Client-Side Rendering)
+
+What it is:
+React runs entirely in the browser.
+Server sends a nearly empty index.html with a <div id="root"></div>.
+Then JavaScript bundles load → React builds the UI in the client.
+
+Flow:
+Browser request → Server sends blank HTML + JS bundle → Browser runs JS → UI appears
+
+Pros ✅
+Rich interactivity, once loaded everything feels fast.
+Simpler to deploy (just static files + API).
+Works great with CDNs.
+
+Cons ❌
+Slow first load → blank screen until JS loads.
+Poor SEO (search engines might not see content immediately).
+Not great for low-bandwidth or low-end devices.
+
+Where used?
+SPAs like Gmail, Facebook (old React style).
+
+
+SSR (Server-Side Rendering)
+
+What it is:
+React components are rendered on the server → HTML is generated and sent to browser.
+Then React “hydrates” (attaches event listeners) on the client.
+
+Flow:
+Browser request → Server runs React → Full HTML sent → Browser shows UI immediately → React JS loads → Hydration attaches interactivity
+
+Pros ✅
+Faster First Contentful Paint (FCP) (user sees content immediately).
+Better SEO → search engines crawl HTML.
+Great for landing pages, blogs, ecommerce (where SEO matters).
+
+Cons ❌
+Server cost (server must run React for every request).
+Hydration overhead (React must “rebuild” client-side tree to attach events).
+Slower navigation between pages (if no client routing).
+
+Where used?
+Next.js, Remix, Gatsby (pre-React 18).
+
+
+Next.js (Hybrid Approach)
+
+What it is:
+A framework built on React that combines CSR + SSR + SSG (Static Site Generation) + RSC (React Server Components).
+Lets you pick per page or per component how rendering should happen.
+
+Modes inside Next.js:
+SSR: getServerSideProps → render fresh HTML on every request.
+SSG: getStaticProps → pre-render HTML at build time, serve from CDN.
+ISR (Incremental Static Regeneration): revalidate static pages after X seconds.
+CSR: Use normal React hooks/components → render in client only.
+RSC (App Router): Some components run fully on server (never shipped to client).
+
+Flow:
+Browser request → Server renders React Server Components + streams HTML → Client hydrates interactive parts → Navigation is instant via client router
+
+Pros ✅
+Best of both worlds: SEO + speed + interactivity.
+Automatic code splitting.
+API routes built-in.
+RSC reduces bundle size (server-only code).
+
+Cons ❌
+More complexity than pure CSR or SSR.
+Lock-in to Next.js conventions.
+Learning curve (especially App Router + RSC).
+
+Where used?
+Production apps at scale: Netflix, TikTok web, Notion’s marketing site, etc.
+
+
+CSR → All rendering in browser.
+SSR → Render HTML on server, hydrate in browser.
+Next.js → Hybrid framework: lets you mix CSR + SSR + SSG + ISR + RSC per need.
+
+
+What is “Cloud” in general?
+Cloud = Renting computing resources (servers, storage, databases, networking, etc.) from a provider instead of managing physical servers yourself.
+Instead of buying/running your own data center, you pay for what you use.
+
+Types of cloud services:
+IaaS (Infrastructure as a Service) → Raw servers, networking, storage.
+PaaS (Platform as a Service) → Managed platforms (deploy apps without worrying about servers).
+SaaS (Software as a Service) → Ready-to-use apps (like Gmail, Salesforce).
+
+
+AWS (Amazon Web Services)
+The biggest cloud provider (by market share).
+
+Services:
+EC2 → Virtual servers
+S3 → File storage (commonly used for frontend builds)
+CloudFront → CDN (distributes content worldwide fast)
+RDS/DynamoDB → Databases
+Lambda → Serverless functions
+
+Example frontend deployment:
+Build React app → Upload build/ folder to S3 → Distribute globally using CloudFront.
+
+
+Why Developers Care
+For a frontend developer:
+AWS, Azure, GCP are where your build artifacts live after deployment.
+Instead of npm start on localhost, production users hit https://myapp.com → served from one of these clouds.
+You rarely manage servers yourself — usually you push via CI/CD and the cloud takes care of scaling, SSL, caching.
+
+
+
+What is a CDN?
+CDN = Content Delivery Network
+
+It’s a network of servers distributed globally.
+Purpose: Deliver your website’s static assets (HTML, CSS, JS, images, videos) fast and reliably to users no matter where they are.
+Instead of serving files from a single server in one location, a CDN caches your content on multiple edge servers around the world.
+
+
+Why CDNs are Important
+
+Speed / Low Latency
+Users get assets from the nearest server, reducing load time.
+Example: User in Mumbai loads JS from Mumbai edge server instead of a server in California.
+
+Scalability / Handling Traffic Spikes
+If thousands of users access your app simultaneously, CDN spreads the load across multiple servers.
+
+Reliability / Uptime
+If one server fails, requests are routed to the next nearest server.
+
+Security
+Many CDNs provide DDoS protection, HTTPS, and Web Application Firewall (WAF) features.
+
+
+How CDNs Work (Simplified)
+
+User requests https://myapp.com/main.js.
+DNS routes the request to the nearest CDN edge server.
+If the file is cached → served immediately.
+If not cached → CDN fetches from origin server, caches it, then serves it.
+
+
+| Feature           | Container Platform                    | Serverless Platform                     |
+| ----------------- | ------------------------------------- | --------------------------------------- |
+| Server management | You manage runtime + OS updates       | Fully managed by cloud                  |
+| Scalability       | Manual/auto-scaling via orchestration | Automatic scaling per request           |
+| Startup time      | Slower (container boot)               | Fast (function cold start)              |
+| Use cases         | Full apps, complex backend services   | Event-driven tasks, APIs, microservices |
+| Cost              | Pay for VM/instance uptime            | Pay only per execution                  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

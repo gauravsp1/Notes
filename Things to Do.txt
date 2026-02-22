@@ -1,0 +1,174 @@
+
+ToDo Next
+
+DSA
+Next.js
+Node.js
+TypeScript
+HLD/Frontend System Design
+MicroFrontend
+GraphQL in depth
+
+
+Per Week --> 1Hr* 7 Days --> 7Hrs
+Started
+
+DSA --> Namaste DSA (Daily 30 min)
+Next.js  --> 16/92 (Daily 30 min)
+
+Done
+
+
+poorao@allegisgroup.com
+
+
+Interview Flow 
+
+Tech Interview***
+
+HTML/CSS - Theory
+Javascript - Theory
+Javascript - Code snippits
+DSA (if asked)
+React - Theory
+React - Component Building
+Resume Question --> Past projects
+
+
+executive certificate program in project management
+create Udemy course
+Write Medium articles
+Own Buisness
+Next.js
+
+
+
+Experience
+Principal- 27
+Neova - 5
+NoBroker - 33
+TekSysyem -12 
+
+
+77 months --> 6 Years 5 months.
+
+Worked with Client HP , on their dashboard for bulk orders of theier products
+Utilized typescript , GraphQL
+Simplified the process 
+
+-------------------------------------
+
+I hope you are doing well.
+I wanted to bring to your attention that I’ve still not received my experience letter, and I request you to please share it at the earliest.
+It has been quite some time since my last working day, and I would appreciate it if you could kindly share the document at the earliest.
+Please let me know if any additional information or formalities are required from my side to process this request.
+Thank you for your support and assistance.
+
+
+✨ Key Contributions on the PriceHub app for HP Inc.:
+
+Modernization: Upgraded a legacy system to a web app using ReactJS, TypeScript, and Material-UI, enhancing front-end development skills.
+
+Dependency Updates: Solely upgraded the project environment by migrating Node.js from v16 to v20, react-scripts from 4 to 5, and React from 17 to 18, ensuring compatibility and stability across all dependencies, Achieved faster startup and lesser build time.
+
+Collaboration: Worked with teams on development, bug fixes, and optimizations to deliver impactful solutions.
+
+Problem Solving: Debugged issues for improved user experience, contributing to global strategic decision-making.
+
+Data Management: Utilized Apollo Client, GraphQL, SQL, and NoSQL databases for efficient data handling.
+
+Hiringy, Quality & Task Planning: Assisted in hiring, onboarding, and code reviews to ensure best practices, time estimates for timely project delivery.
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------
+
+I was going through the quotation — thank you for sharing it. I had a quick question:
+If I go ahead with one of your existing recipes without any changes, and sell it under my brand, what product options do you have,
+and what cost per bar would be. I need 50g with 10g of protein(Soy/Peanut). Also it would be helpfull if you could provide all other costs included
+liked packaging , transport etc. So final amount for first batch
+
+
+
+
+If I go ahead with one of your existing recipes as-is (no changes in formulation), and just sell it under my own brand "HonestBites",
+
+I was going through the quotation — thank you for sharing it. I had a quick question:
+
+If I go ahead with one of your existing recipes as-is (no changes in formulation), and sell it under my own brand:
+
+– What product options do you have in that category?
+– What would be the cost per bar for a 50g bar with 10g protein (preferably soy/peanut-based)?
+
+Also, could you please share a breakdown of all additional costs involved like:
+– Packaging
+– Transport
+– Any one-time charges (if applicable)
+
+Would be really helpful to know the total cost for the first batch(planning 1,000 bars)
+
+
+i would like you go with your existing recipes
+Can you please provide some sample bars for tasting 
+I am currently at Bangalore.
+Also please mention the Nutrition Value of the bars.
+
+Some flavour combinations from my side , also please send your 3 top seller protein bars
+Sample 1:
+– Base: Soy protein, Millet-based, Dates paste as binder
+– Add-ins: Pumpkin seeds, Sunflower seeds, Flax seeds, Dried cranberries
+– Flavor: Coffee + Crushed Hazelnuts + Cocoa powder
+
+Sample 2:
+– Base: Soy protein, Oats-based, Dates paste as binder
+– Add-ins: Pumpkin seeds, Sunflower seeds, Flax seeds, Dried cranberries
+– Flavor: Peanut Butter + Cocoa powder
+
+
+I’d like to go ahead with your existing recipes.
+Could you please provide some sample bars for tasting? I’m currently based in Bangalore.
+Also, kindly share the nutrition values for each of the samples.
+
+Here are two flavour combinations from my side that I would like to try:
+
+Sample 1:
+– Base: Soy protein, Millet-based, Dates paste
+– Add-ins: Pumpkin seeds/Sunflower seeds/Flax seeds/Chia seeds, Dried fruits(cranberries/others) 
+– Flavor: Coffee + Crushed Hazelnuts + Cocoa powder
+
+Sample 2:
+– Base: Soy protein, Oats-based, Dates paste
+– Add-ins: Pumpkin seeds/Sunflower seeds/Flax seeds/Chia seeds, Dried fruits(cranberries/others)
+– Flavor: Peanut Butter + Cocoa powder
+
+Along with these, it would be great if you could also send your 3 top-selling protein bars.
+Also, please let me know the charges for sample tasting, including shipping.
+
+
+
+write a message inquiring details for a protein bar 50g with 10g protein(Soya based)
+
+I am interested in sourcing protein bars with the following specifications:
+Weight: 50g per bar
+Protein Content: 10g per bar
+Protein Source: Soy protein (preferably isolate or concentrate)
+Base: Millet or similar healthy grain
+Binder: Dates paste or natural alternative
+Additional Ingredients (optional): Seeds (pumpkin, sunflower, flax), coffee or cocoa-based flavor, and minimal added sugar
+
+Could you please share the following details:
+Complete ingredient list and nutritional breakdown per bar
+MOQ (Minimum Order Quantity)
+Pricing details, including sample bar charges
+Shelf life and storage instructions
+Shipping timeline and cost (for Bangalore)
+
+------------------------------------------------------
+
+

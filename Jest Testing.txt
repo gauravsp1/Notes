@@ -1,0 +1,314 @@
+
+Jest Testing
+
+function sum(a, b) {
+  return a + b;
+}
+
+module.exports = sum;
+
+TestCase:-
+const sum = require('./sum');
+
+test('adds 2 + 3 to equal 5', () => {
+  expect(sum(2, 3)).toBe(5);
+});
+
+
+Jest Matchers ****
+
+expect(2 + 2).toBe(4);          // strict equality
+expect(2 + 2).not.toBe(5);      // negation
+expect({ a: 1 }).toEqual({ a: 1 }); // deep equality
+expect(null).toBeNull();
+expect([1, 2, 3]).toContain(2);
+expect(() => { throw new Error('err'); }).toThrow('err');
+
+
+Testing Async Code***
+
+Promises
+const fetchData = () => Promise.resolve('karad');
+test('resolves to karad', () => {
+  return fetchData().then(data => {
+    expect(data).toBe('karad');
+  });
+});
+
+Async/Await
+test('resolves to karad', async () => {
+  const data = await fetchData();
+  expect(data).toBe('karad');
+});
+
+
+Mocking in Jest***
+
+const fetchData = require('./api');
+
+jest.mock('./api'); // replaces real with mock
+
+test('mock api', async () => {
+  fetchData.mockResolvedValue('mocked data');
+  const data = await fetchData();
+  expect(data).toBe('mocked data');
+});
+
+
+Test Structure ***
+describe('Math utilities', () => {
+  test('sum works', () => {
+    expect(1 + 2).toBe(3);
+  });
+
+  test('multiplication works', () => {
+    expect(2 * 3).toBe(6);
+  });
+});
+
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import Login from './Login';
+import loginApi from './loginApi';
+
+jest.mock('./loginApi'); // mock the API
+
+describe('Login Page', () => {
+  test('successful login shows welcome message', async () => {
+    // Mock API response
+    loginApi.mockResolvedValue({ user: 'admin', token: 'fake-jwt' });
+
+    render(<Login />);
+
+    fireEvent.change(screen.getByPlaceholderText('Username'), { target: { value: 'admin' } });
+    fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: '1234' } });
+    fireEvent.click(screen.getByText('Login'));
+
+    const message = await screen.findByTestId('message');
+    expect(message).toHaveTextContent('Welcome admin');
+  });
+
+  test('failed login shows error', async () => {
+    loginApi.mockRejectedValue(new Error('Invalid credentials'));
+
+    render(<Login />);
+
+    fireEvent.change(screen.getByPlaceholderText('Username'), { target: { value: 'wrong' } });
+    fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'pass' } });
+    fireEvent.click(screen.getByText('Login'));
+
+    const message = await screen.findByTestId('message');
+    expect(message).toHaveTextContent('Login failed');
+  });
+});
+
+
+Common fireEvent Types
+
+fireEvent.click(buttonElement);
+fireEvent.change(inputElement, { target: { value: 'gaurav' } });
+fireEvent.input(inputElement, { target: { value: 'hello' } });
+fireEvent.submit(formElement);
+fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
+fireEvent.keyUp(inputElement, { key: 'a', code: 'KeyA', charCode: 65 });
+fireEvent.keyPress(inputElement, { key: 'b', code: 'KeyB', charCode: 66 });
+fireEvent.mouseOver(element);
+fireEvent.mouseOut(element);
+fireEvent.mouseEnter(element);
+fireEvent.mouseLeave(element);
+fireEvent.copy(inputElement);
+fireEvent.paste(inputElement, { clipboardData: { getData: () => 'text' } });
+
+fireEvent.change(screen.getByPlaceholderText('Username'), {
+  target: { value: 'admin' },
+});
+fireEvent.change(screen.getByPlaceholderText('Password'), {
+  target: { value: '1234' },
+});
+fireEvent.click(screen.getByText('Login'));
+
+
+Common userEvent Methods
+
+await userEvent.type(input, 'gaurav');
+await userEvent.click(button);
+await userEvent.clear(input);
+await userEvent.keyboard('{Shift>}A{/Shift}'); // simulates Shift+A
+await userEvent.keyboard('{Enter}');           // presses Enter
+
+const button = screen.getByRole("button", { name: /Increment/i });
+  await userEvent.click(button);
+
+
+| Feature               | `fireEvent` ✅        | `userEvent` ✅                       |
+| --------------------- | -------------------- | ----------------------------------- |
+| Speed                 | Fast, low-level      | Slower but realistic                |
+| Simulates typing      | One-shot change      | Character by character              |
+| Simulates clicks      | Just fires `click`   | Focus + mouseDown + mouseUp + click |
+| Good for              | Simple state changes | Realistic user flows                |
+| Auto-wrapped in `act` | Yes                  | Yes                                 |
+
+
+Act ***
+act is a utility from React Test Utils that ensures all React state updates & effects are flushed before assertions.
+It’s like saying: “Wait until React finishes updating the DOM after a state change, then continue.”
+Without it, you might assert too early (before React has re-rendered).
+
+When is it needed?
+Whenever your component triggers state updates, effects, or async updates.
+
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import Counter from './Counter';
+
+test('increments counter with act', () => {
+  render(<Counter />);
+  
+  act(() => {
+    fireEvent.click(screen.getByText('+'));
+  });
+
+  expect(screen.getByText('1')).toBeInTheDocument();
+});
+
+
+
+expect( )functions ****
+
+expect(2 + 2).toBe(4);              // ===
+expect({a:1}).toEqual({a:1});      // deep equality
+expect(true).toBeTruthy();
+expect(false).toBeFalsy();
+expect(null).toBeNull();
+expect(undefined).toBeUndefined();
+expect(5).toBeDefined();
+expect(5).not.toBe(3);             // negation
+
+expect(10).toBeGreaterThan(5);
+expect(10).toBeGreaterThanOrEqual(10);
+expect(5).toBeLessThan(10);
+expect(5).toBeLessThanOrEqual(5);
+expect(0.1 + 0.2).toBeCloseTo(0.3);
+
+expect("React Testing").toMatch(/React/);
+expect("Hello World").toContain("World");
+
+expect([1,2,3]).toContain(2);
+expect([1,2,3]).toHaveLength(3);
+expect(new Set([1,2])).toContain(2);
+
+expect({name:"Gaurav", age:28}).toHaveProperty("age", 28);
+expect({a:1, b:2}).toMatchObject({a:1});
+
+expect(() => {throw new Error("fail")}).toThrow();
+expect(() => {throw new Error("fail")}).toThrow("fail");
+
+await expect(Promise.resolve(5)).resolves.toBe(5);
+await expect(Promise.reject('err')).rejects.toBe('err');
+
+expect(mockFn).toHaveBeenCalled();
+expect(mockFn).toHaveBeenCalledTimes(2);
+expect(mockFn).toHaveBeenCalledWith(1,2);
+
+
+Mock Data ****
+
+Why Use Mock Data?
+Avoid dependency on network/API → your tests run faster and are reliable.
+Test different scenarios:
+Success responses
+Error responses
+Empty responses
+Helps you unit test components without needing backend.
+
+1. For API calls
+import loginApi from './loginApi';
+
+jest.mock('./loginApi');
+
+test("login success", async () => {
+  // Mock data
+  loginApi.mockResolvedValue({ user: "admin", token: "fake-jwt" });
+
+  const data = await loginApi("admin", "1234");
+  expect(data.user).toBe("admin");
+});
+
+Here:
+mockResolvedValue() → returns mock data for async success.
+mockRejectedValue() → simulate API failure.
+
+
+2.For Component Props / State
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" }
+];
+
+render(<UserList users={users} />);
+expect(screen.getByText("Alice")).toBeInTheDocument();
+
+
+3. For Files / Inputs
+const file = new File(['hello'], 'hello.txt', { type: 'text/plain' });
+await userEvent.upload(fileInput, file);
+expect(fileInput.files[0].name).toBe('hello.txt');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

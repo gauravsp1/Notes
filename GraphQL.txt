@@ -1,0 +1,410 @@
+
+GraphQL is a query language for APIs that allows clients to request only the data they need. It was developed by Facebook as an alternative to REST APIs.
+Where REST relies on multiple endpoints, GraphQL exposes a single endpoint through which clients can query exactly what they need, no more, no less.
+
+Fetch only what you need (no over-fetching or under-fetching).
+Single endpoint (unlike REST, which has multiple endpoints).
+Strongly typed schema (ensures data consistency).
+Easier to evolve APIs (no need for versioning).
+
+Client ───► GraphQL Server ───► Resolvers ───► Data Sources (DBs, REST, etc.)
+         ◄─────────────────────◄───────────────────────
+
+
+Query
+
+const GET_AUTHOR = gql`
+  query GetAuthor($id: ID!) {
+    author(id: $id) {
+      name
+      books {
+        title
+      }
+    }
+  }
+`;
+You're creating a query named GetAuthor that:
+Takes an argument ($id)
+Fetches an author by that ID
+Returns the name of the author
+Also fetches a list of their books, and for each book, just the title
+
+GetAuthor → Operation name (optional but recommended)
+author → Mutation field name (must match backend schema)
+ID is a built-in scalar type in GraphQL (typically a string or number).
+
+| Concept                     | Meaning                                               |
+| --------------------------- | ----------------------------------------------------- |
+| `gql`                       | Parses GraphQL string into AST for Apollo             |
+| `query`                     | Defines a named, parameterized query                  |
+| `($id: ID!)`                | Accepts an input variable (must be provided)          |
+| `author(id: $id)`           | Calls the backend `author` resolver with the variable |
+| `{ name, books { title } }` | Specifies exactly what fields the client needs        |
+
+
+const AuthorDetails: React.FC<{ id: string }> = ({ id }) => {
+  const { loading, error, data } = useQuery(GET_AUTHOR, {
+    variables: { id },
+  });
+
+What is useLazyQuery? ****
+useLazyQuery is used when you don’t want to run a GraphQL query immediately when the component renders.
+Instead, you trigger it manually—like in response to a button click, form submit, or some other user action.
+
+| `useQuery`                         | `useLazyQuery`                               |
+| ---------------------------------- | -------------------------------------------- |
+| Runs **automatically on mount**    | Runs **only when you trigger it manually**   |
+| Good for static views              | Good for **search**, **filters**, **modals** |
+| Returns `{ data, loading, error }` | Returns `[triggerFn, { data, loading }]`     |
+
+
+const [fetchAuthor, { data, loading, error, called, refetch }] = useLazyQuery(GET_AUTHOR);
+fetchAuthor({ variables: { id: authorId } });
+ 
+First element (fetchAuthor) → A function to manually trigger the query. //Can name anything
+Second element → An object containing fixed properties.
+
+GraphQL Mutation
+In GraphQL, mutations are used to modify data (create, update, delete records). They work similarly to queries but allow changing data instead of just reading it.
+
+CreateAuthor → Operation name (optional but recommended)
+createAuthor → Mutation field name (must match backend schema)
+
+const CREATE_AUTHOR = gql`
+  mutation CreateAuthor($name: String!, $age: Int!) {
+    createAuthor(name: $name, age: $age) {
+      id
+      name
+      age
+    }
+  }
+`;
+
+ const [createAuthor, { data, loading, error }] = useMutation(CREATE_AUTHOR);
+
+  const handleCreateAuthor = () => {
+    createAuthor({
+      variables: {
+        name: "J.K. Rowling",
+        age: 55
+      }
+    });
+  };
+
+
+Aliases
+
+Aliases in GraphQL let you rename fields in the response, which is useful when:
+Fetching the same field multiple times with different arguments
+Avoiding name conflicts in deeply nested queries
+
+Feature	 											Without Alias			With Alias
+Fetching the same field multiple times				❌ Causes conflicts		✅ Works fine
+Fetching the same field with different arguments	❌ Overwrites results	✅ Keeps both results
+Clarity in response									❌ Hard to distinguish	✅ Clearer names
+
+query {
+  authorsByName: authors(sort: { field: "name", order: "ASC" }) {
+    name
+  }
+  authorsByAge: authors(sort: { field: "age", order: "DESC" }) {
+    name
+  }
+}
+
+{
+  "data": {
+    "authorsByName": [
+      { "name": "Agatha Christie" },
+      { "name": "Isaac Asimov" }
+    ],
+    "authorsByAge": [
+      { "name": "Isaac Asimov" },
+      { "name": "Agatha Christie" }
+    ]
+  }
+}
+
+Schemas and Types
+
+Scalars		String, Int, Boolean, ID
+Objects		type Author { name: String }
+Enums		enum Genre { FICTION, SCIFI }
+Inputs		input AuthorInput { name: String }
+Unions		`union SearchResult = Author
+
+GraphQL supports these scalars: Int, Float, String, Boolean, ID
+
+| GraphQL Type | Meaning           | JS Equivalent        |
+| ------------ | ----------------- | -------------------- |
+| `Int`        | Integer (32-bit)  | `number`             |
+| `Float`      | Decimal number    | `number`             |
+| `String`     | Text              | `string`             |
+| `Boolean`    | True/false        | `boolean`            |
+| `ID`         | Unique identifier | `string` or `number` |
+
+
+
+
+GraphQL Fragments
+Fragments in GraphQL allow you to reuse parts of queries across different components or queries. They help in:
+✅ Reducing duplication in large queries
+✅ Ensuring consistency when fetching the same data in multiple places
+✅ Improving readability by organizing complex queries
+
+fragment AuthorDetails on Author {
+  id
+  name
+  books {
+    title
+  }
+}
+
+query {
+  author(id: "1") {
+    ...AuthorDetails
+  }
+}
+
+query {
+  bestSellingAuthor {
+    ...AuthorDetails
+  }
+}
+
+Feature				Without Fragments				With Fragments
+Code Reusability	❌ Repetitive query code			✅ Reusable fragments
+Readability			❌ Large queries					✅ Clean and modular
+Maintainability		❌ Hard to update everywhere		✅ Easy to update one fragment
+
+
+Subscriptions ***
+GraphQL Subscriptions allow your frontend to automatically receive real-time updates from the server — like WebSockets do.
+Think of it as the GraphQL way of doing "push" updates instead of polling repeatedly.
+
+Example Use Cases
+Chat apps – get new messages instantly
+Stock price updates
+Live scoreboards
+Notifications
+
+How It Works
+A subscription is a special type of GraphQL operation.
+It uses WebSocket under the hood to keep a connection open.
+The server pushes data to the client when specific events occur.
+
+subscription OnNewMessage {
+  newMessage {
+    id
+    content
+    sender
+  }
+}
+
+import { gql, useSubscription } from "@apollo/client";
+
+const NEW_MESSAGE_SUBSCRIPTION = gql`
+  subscription OnNewMessage {
+    newMessage {
+      id
+      content
+      sender
+    }
+  }
+`;
+
+const Chat = () => {
+  const { data, loading } = useSubscription(NEW_MESSAGE_SUBSCRIPTION);
+
+  if (loading) return <p>Waiting for messages...</p>;
+
+  return <div>{data.newMessage.content}</div>;
+};
+
+
+| Concept          | Explanation                            |
+| ---------------- | -------------------------------------- |
+| Subscription     | Real-time GraphQL data                 |
+| Transport        | WebSocket                              |
+| Frontend Library | Apollo Client (with `useSubscription`) |
+| Server Support   | Required (e.g., Apollo Server, Hasura) |
+
+
+
+----------------------------------------------------------------
+
+**** Apollo Client ****
+
+Core Responsibilities of Apollo Client-
+Data fetching (from a GraphQL server)
+Caching (normalized, query-aware, entity-based cache)
+State management (global + local)
+Error handling (query & network level)
+Developer tools (Apollo DevTools for Chrome)
+Pagination, subscriptions, and optimistic UI
+
+
+Reactive Variables***
+Reactive Variables in Apollo Client are a lightweight way to manage local state outside of the Apollo cache, without needing GraphQL queries or the @client directive.
+ 
+makeVar ****
+makeVar() is used to declare and initialize a reactive variable. Think of it like creating a global store (similar to creating a Redux store slice).
+This creates a reactive variable named cartItemsVar.
+makeVar returns a function that is both:
+A getter (returns the current value)
+A setter (if you pass a new value)
+
+// cartStore.js
+import { makeVar } from "@apollo/client";
+
+// 1. Create a reactive variable
+export const cartItemsVar = makeVar([]); // initial value: empty array
+
+// 2. Set the variable
+cartItemsVar(['item1']);
+
+// 3. Read the variable
+console.log(cartItemsVar()); // true
+
+
+useReactiveVar  ***
+useReactiveVar() is a React hook used inside components to subscribe to changes in a reactive variable.
+
+import { useReactiveVar } from "@apollo/client";
+import { cartItemsVar } from "./cartStore";
+
+function CartComponent() {
+  const cartItems = useReactiveVar(cartItemsVar); // subscribes to changes
+
+  return <p>Total Items: {cartItems.length}</p>;
+}
+
+Every time you call cartItemsVar(newValue), all components using useReactiveVar(cartItemsVar) will re-render automatically.
+
+| Concept            | Redux Equivalent                   |
+| ------------------ | ---------------------------------- |
+| `makeVar()`        | `createStore()` or `createSlice()` |
+| `useReactiveVar()` | `useSelector()`                    |
+
+| Feature                  | `makeVar()`                          | `useReactiveVar()`                     |
+| ------------------------ | ------------------------------------ | -------------------------------------- |
+| **What it does**         | Creates a reactive variable (state)  | Subscribes to it in a component        |
+| **Where to use**         | Outside React (e.g. in a store file) | Inside React components                |
+| **Returns**              | Getter/setter function               | Current value that triggers re-renders |
+| **Triggers re-renders?** | ❌ No                                 | ✅ Yes                                  |
+
+
+// store/cart.js
+import { makeVar } from "@apollo/client";
+export const cartVar = makeVar([]);
+
+// components/Cart.js
+import { useReactiveVar } from "@apollo/client";
+import { cartVar } from "../store/cart";
+
+function Cart() {
+  const cartItems = useReactiveVar(cartVar);
+
+  const addItem = () => {
+    cartVar([...cartVar(), { id: Date.now(), name: "Item" }]);
+  };
+
+  return (
+    <>
+      <h3>Cart: {cartItems.length} items</h3>
+      <button onClick={addItem}>Add</button>
+    </>
+  );
+}
+
+apolloClient Files ***
+Automatically caches GraphQL data so it doesn’t refetch the same queries
+
+Create a file — say, apolloClient.js:
+// apolloClient.js
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: "https://countries.trevorblades.com", // Example public GraphQL API
+  }),
+  cache: new InMemoryCache(),
+});
+
+export default client;
+
+Wrap Your App with ApolloProvider
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ApolloProvider } from "@apollo/client";
+import App from "./App";
+import client from "./apolloClient";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

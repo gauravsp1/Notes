@@ -1,24 +1,42 @@
 LLD practices
 
+ToDo
 
-Filter
-realTime input
+Filter - Pagination, Search key , etc
+Infinite scroll
+Nested Comments
+FileStructure
+
+
+
+Done
+
+Accordian
+CountDown - pause, play
+StopWatch- pause, play, lap
+Clock- pause, play,
 Calculator
+Auto Suggestion
+Create a login Form
+ImageSlider
 ToDo List
+
+
 Tic-Tac-Toe Game
-Search Bar with filtering dropdown values 
-Price Range Slider with Min-Max Input ---https://www.geeksforgeeks.org/price-range-slider-with-min-max-input-using-html-css-and-javascript/
 Star Rating
-Drag and Drop Sortable List
+Snake and Ladder
+
+
+Drag and Drop Sortable List - With Google Help
+
+realTime input
+Price Range Slider with Min-Max Input ---https://www.geeksforgeeks.org/price-range-slider-with-min-max-input-using-html-css-and-javascript/
+
  
  
  
  
  
 Done
-Infinite scroll
-Accordian
-ImageSlider
-CountDown - pause, play
-StopWatch- pause, play, lap
-Clock- pause, play,
+
+

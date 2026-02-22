@@ -1,72 +1,89 @@
 
-New React features ---
-React 19
-Tailwind ---
-TypeScript ---
-React Router latest 
-Next js ---
-Office project details ---
 
-**********************
-ngnix
-cdn
+Current Plan ****
 
-*************************///////////////////////**************************//////////////////*******************
-Apply on linkedin
-arrange notes points 
-create Revision notes
-Past projects details HLD
-HLD practice
-Interview Audio
-Performance Optimization read more
-Vanilla Js - Basic
-Tailwind - Basic
-DSA
-Next.js - Basic
-TypeScript - Basic
-New hooks
-React 19
-GraphQL
+Resume Questions Check and Revise
+Theory Revise
+LLD Revise
+DSA revise
 
 
-********Interview Questions **********
-useImperativeHandle 
-forwardRef
-jest unit testing 
-
-------------HTML/CSS---------
-Grid CSS
-meta tag details
-
-----------------Javacript---------
-Polyfills-structuredClone, promise
-Create a deepCopy
-How micro-frontend are connected
-What is micro-frontend
-generator functions
------------------Coding---------
-
-
--------------React-------------
-
-React portal practice
-
--------------Redux-------------
-
-
--------------DSA-------------
-Union of arrays
-intersection of arrays
-
---------------------------
+TekSystems all Docs collect
+Wissen Prepare Guide
+Cypress
+DSA questions Revision
+Deployment Process
+Past Project HLD prep, details
 
 
 
+How have you used webHooks, service Workers , and how
 
 
 
+LinkedIn Interview Experiences
+Naukri profile update ChatGPT
+LinkedIn apply for jobs
 
 
+leetCode, neetCode freq asked questions
+System Design Questions
+React LLD questions
+
+
+---------------******ChatGPT*******--------------
+Redux - Javascript
+Redux - Typescript
+
+
+--------------xxxxxxxxx-----------oooooo------------xxxxxxxxxxx
+
+
+Next.js
+Generics
+
+
+
+What is system Design for frontend
+how to design it
+What all to consider
+
+
+
+Resume ATS
+
+Add action words + numbers %
+Accomplised X , implementin Y , Led to Z
+
+
+
+DSA Array
+
+
+
+DSA String
+
+//5. Find Largest odd number
+//6. Longest Common Prefix
+//8.isIsomorphic
+//9.Group Anagram
+//17.countAndSay
+//18. Roman to Integer
+
+Two Pointer
+//5.longestRepeatingChar
+
+Binary Search
+
+//6.findClosestElements
+//11. Arranging Coins
+//15. Find Minimum in Rotated Sorted Array
+//13. Search in Rotated Sorted Array
+
+
+Behavioural ***
+the part you dislike about your job
+the part you love about your job****
 
 
 

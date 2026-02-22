@@ -1,0 +1,555 @@
+
+
+Final Revision
+
+DSA Array --> 0/1390
+TypeScript HandsOn Practice
+
+
+
+
+
+DSA LinkedList 
+DSA Stack & Queue 
+DSA Trees 
+DSA Binary Search Tree 
+DSA BackTracking 
+DSA Greedy 
+DSA Maths 
+DSA DP 
+
+
+
+HLD
+Security ---> 0/223
+
+
+
+
+
+Done
+
+Polyfills ---> 185/185
+Promises Complex examples ---> 372/372
+Coding NotePads ---> 835/835
+HTML/CSS ---> 750/750
+JavaScript ---> 2160/2160
+Coding VStudio Questions ---> 927/927
+DSA String --->1835/1835
+DSA Recursion,Two-Pointer,Binary Search --->2353/2353
+React ---> 1492/1492
+New React ---> 918/918
+General Browser ---> 460/460
+System Design ---> 600/600
+SASS ---> 223/223
+Performance Optimization ---> 190/190
+Redux --> 305/305
+Redux HandsOn Practice
+LLD ---> 15/15
+GraphQL
+
+
+-----------------------------------------------------------------
+
+Testing - In Detail - like code coverage , synstax
+
+
+timestampQuery
+reactQuery
+
+
+----------------**************---------------*************
+Intro Flow
+
+Hello everyone, thank you for having me today.
+I’m Gaurav Pawar, and I have around 6 and a half years of experience in frontend development — primarily working with React.js, JavaScript (ES6+), TypeScript, Redux, GraphQL,HTML/CSS
+I’m currently working with TEKsystems as a Senior React Developer for our client HP,
+where I’m contributing to the development of a dashboard for managing bulk orders of laptops, printers, and related devices.
+The application is primarily used by enterprise clients and agents.
+Before this, I worked at NoBroker.com on Home Services and CRM applications,
+where I contributed to UI revamps and customer-engagement features that led to measurable improvements in sales and efficiency.
+Over the years, I’ve had the opportunity to take on responsibilities beyond coding — such as acting as Scrum Master, mentoring teammates,
+and collaborating closely with cross-functional teams to ensure smooth product delivery.
+
+
+TEKsystems / HP
+The project is focused on developing a high-performance enterprise dashboard used by HP’s internal teams and enterprise partners to place and manage bulk product orders
+— mainly for laptops, printers, and accessories.
+Earlier, this process was semi-manual and involved multiple tools for checking stock, pricing, and approvals.
+Our goal was to digitize and streamline that experience into a single unified dashboard.
+On the frontend, we’re using React.js, and GraphQL.
+I’m responsible for developing reusable UI components and integrating them with the backend GraphQL APIs.
+
+Implemented data virtualization and client-side pagination, so tables render efficiently even for large datasets.
+Used Apollo Client for GraphQL caching and lazy loading to avoid redundant data fetches.
+Optimized components using React.memo, useCallback, and useMemo to prevent unnecessary re-renders.
+
+
+
+
+NoBroker.com (Senior Frontend Developer)
+
+At NoBroker.com, I worked as a Senior Frontend Developer and contributed to two major projects — Social Hub and Home Services.
+
+Social Hub:
+The Social Hub project was a customer engagement platform built using React.js, Redux, React Hooks, and JavaScript.
+It was designed to help internal teams manage customer queries, complaints, and appreciation across multiple social media channels — like Facebook, Instagram, and Twitter.
+I developed a unified dashboard that provided a 360-degree view of each customer — including their order history, payments, call logs, chat history, and social media interactions.
+Agents could filter and manage tickets, reply to social media posts directly from the dashboard, make notes, and even view AI-generated call summaries for the last 60 days.
+
+
+Home-services:
+Home Services platform — NoBroker’s B2C vertical that provides services like painting, cleaning, and rental agreements.
+I was part of the UI revamp team, where we rebuilt the interface from scratch based on new design guidelines.
+We implemented a JSON-driven UI architecture, which allowed us to dynamically render service forms and layouts based on configuration data —
+making it easier to scale and add new services without code changes.
+I also implemented several frontend optimization techniques, including code splitting, lazy loading, and caching, which improved page load times and overall system efficiency.
+After deployment, the new UI led to a 40% increase in sales, mainly due to faster load times and improved user experience.
+
+
+Nobroker has Home-services department , which provides services like painting, cleaning , Rental aggrement.
+They we revamping theit UI completly , i was part of that team.
+We got new designs from designer , we implemented JSON driven UI.
+Improved Performance of UI 
+Implemented optimization techniques like code splitting, lazy loading, and caching.
+This resulted in improved page load times and overall system efficiency.
+Contributed to the successful UI revamp of a B2C Home-services project, resulting in a 40% increase in sales.
+
+
+Neova Solutions
+
+
+
+
+
+
+
+
+
+Mentoring Experience
+
+
+
+
+
+
+You mention 6+ years in React — how have you seen React evolve since you started?
+You’ve mentioned scalable and high-performance web apps — can you describe one scalability challenge you faced and how you solved it?
+What’s your approach to clean code in React? Any specific patterns or architecture you follow?
+Can you explain how you use TypeScript in your React codebase? (e.g., typing props, generics, API responses)
+How do you optimize bundle size and runtime performance?
+
+How do you handle errors, caching, and pagination with GraphQL?
+How did you structure your queries and mutations in the HP project?
+
+
+TEKsystems / HP (Current)
+This section screams enterprise-level, data-heavy dashboard → expect questions on architecture, performance, and data flow.
+Likely Questions:
+What was your role in the HP dashboard project — lead, individual contributor, or both?
+What kind of bulk operations were being performed, and how did you optimize them?
+Why did you choose GraphQL over REST here?
+How did you ensure the UI remained responsive while handling large datasets?
+What frontend performance metrics did you track? (e.g., Time to Interactive, FCP, bundle size)
+How did you manage state — local vs global?
+What kind of error boundaries or fallback UIs did you implement?
+
+
+NoBroker.com (Senior Frontend Developer)
+This is a high-value section — B2C, CRM, AI integration, social media tools — they’ll dig deep into this.
+Likely Questions:
+Tell me about the Home-services UI revamp — what were the key UX challenges and how did you measure “40% sales increase”?
+What did you do for performance optimization (code splitting, lazy loading, caching)? Explain one in depth.
+How did you integrate AI-powered call summaries? What tech or API was used on the frontend side?
+How did you handle large API responses (pagination, virtualization, etc.)?
+What caching strategy did you use — browser cache, service workers, or API layer caching?
+As Scrum Master, how did you manage sprints and blockers while still coding?
+
+
+Neova Solutions (React Developer)
+Short tenure → they may ask why you switched quickly and also check component design and reusability.
+Likely Questions:
+What kind of reusable components did you build in My Food Store?
+How did you handle state and props drilling across those components?
+How did you ensure responsiveness and accessibility for the E-commerce app?
+How was the collaboration with Muthoot Fincorp backend teams? (GraphQL/REST?)
+Why did you move from Neova after just 4 months?
+
+
+Principal Global Services (React Developer)
+Older project → they may use this to assess your foundational understanding of React and JS.
+Likely Questions:
+What was the architecture of the IdeaMine platform?
+Did you use class components back then? How did you migrate (if you did) to hooks later?
+How did you manage forms and validation in older projects?
+How did you ensure user engagement — any analytics or tracking on the frontend?
+
+
+Micro frontends — have you worked with them or modularized your app?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

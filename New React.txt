@@ -1,0 +1,1049 @@
+
+
+Aspect		React									ReactDOM
+Role		Defines the UI logic.					Bridges React with the browser DOM.
+Scope		Deals with components, state, etc.		Handles rendering to the DOM.
+Use Case	Writing React components.				Rendering components into the DOM.
+
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+const element = <h1>Hello, world</h1>;
+root.render(element);
+
+
+Always start component names with a capital letter. React treats components starting with lowercase letters as DOM tags.
+For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
+
+
+All React components must act like pure functions with respect to their props.
+
+
+JSX****
+You can put any valid JavaScript expression inside the curly braces in JSX.
+After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
+This means that you can use JSX inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:
+
+Since JSX is closer to JavaScript than to HTML, React DOM uses camelCase property naming convention instead of HTML attribute names.
+For example, class becomes className in JSX, and tabindex becomes tabIndex.
+
+JSX Prevents Injection Attacks
+It is safe to embed user input in JSX:
+
+const title = response.potentiallyMaliciousInput;
+// This is safe:
+const element = <h1>{title}</h1>;
+By default, React DOM escapes any values embedded in JSX before rendering them.
+Thus it ensures that you can never inject anything that’s not explicitly written in your application.
+Everything is converted to a string before being rendered. This helps prevent XSS (cross-site-scripting) attacks.
+
+Babel compiles JSX down to React.createElement() calls.
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
+
+Capitalized types indicate that the JSX tag is referring to a React component.
+These tags get compiled into a direct reference to the named variable, so if you use the JSX <Foo /> expression, Foo must be in scope.
+When an element type starts with a lowercase letter, it refers to a built-in component like <div> or <span> and results in a string 'div' or 'span'
+passed to React.createElement.
+Types that start with a capital letter like <Foo /> compile to React.createElement(Foo) and correspond to a component defined or imported in your JavaScript file.
+
+if statements and for loops are not expressions in JavaScript, so they can’t be used in JSX directly.
+
+If you pass no value for a prop, it defaults to true. These two JSX expressions are equivalent:
+<MyTextBox autocomplete />
+
+<MyTextBox autocomplete={true} />
+
+Children in JSX
+In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: props.children.
+There are several different ways to pass children
+You can provide more JSX elements as the children. This is useful for displaying nested components
+<MyContainer>
+  <MyFirstComponent />
+  <MySecondComponent />
+</MyContainer>
+
+Rendering Only the First Child
+const MyContainer = ({ children }: { children: React.ReactNode }) => {
+  const firstChild = React.Children.toArray(children)[0]; // Get the first child
+
+  return <div className="container">{firstChild}</div>;
+};
+
+Booleans, Null, and Undefined Are Ignored
+These JSX expressions will all render to the same thing:
+<div />
+
+<div></div>
+
+<div>{false}</div>
+
+<div>{null}</div>
+
+<div>{undefined}</div>
+
+<div>{true}</div>
+
+One caveat is that some “falsy” values, such as the 0 number, are still rendered by React.
+For example, this code will not behave as you might expect because 0 will be printed when props.messages is an empty array
+<div>
+  {props.messages.length &&
+    <MessageList messages={props.messages} />
+  }
+</div>
+To fix this, make sure that the expression before && is always boolean
+<div>
+  {props.messages.length > 0 &&
+    <MessageList messages={props.messages} />
+  }
+</div>
+Conversely, if you want a value like false, true, null, or undefined to appear in the output, you have to convert it to a string first
+
+Rendering Elements****
+To render a React element, first pass the DOM element to ReactDOM.createRoot(), then pass the React element to root.render():
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+const element = <h1>Hello, world</h1>;
+root.render(element);
+
+React elements are immutable. Once you create an element, you can’t change its children or attributes.
+An element is like a single frame in a movie: it represents the UI at a certain point in time.
+With our knowledge so far, the only way to update the UI is to create a new element, and pass it to root.render().
+
+
+Components and Props****
+Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. 
+Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and
+return React elements describing what should appear on the screen.
+
+const element = <Welcome name="Sara" />;
+When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object.
+We call this object “props”.
+Always start component names with a capital letter.React treats components starting with lowercase letters as DOM tags.
+For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope.
+
+Props are Read-Only
+Whether you declare a component as a function or a class, it must never modify its own props.
+Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs.
+All React components must act like pure functions with respect to their props.
+
+The Data Flows Down unidirectional
+Any state is always owned by some specific component, and any data or UI derived from that state can only affect components “below” them in the tree.
+
+
+Conditional Rendering***
+returning a falsy expression will still cause the element after && to be skipped but will return the falsy expression.
+In the example below, <div>0</div> will be returned by the render method.
+
+| Falsy Value | JSX Output with `&&` | JSX Output with ternary   |
+| ----------- | -------------------- | ------------------------- |
+| `false`     | renders nothing      | renders false/else branch |
+| `0`         | renders `0`          | renders `0` or else       |
+| `""`        | renders nothing      | renders `""` or else      |
+| `null`      | renders nothing      | renders else              |
+| `undefined` | renders nothing      | renders else              |
+
+
+Preventing Component from Rendering
+In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.
+{condition ? <Component /> : null}
+
+
+Keys***
+Keys help React identify which items have changed, are added, or are removed.
+Keys should be given to the elements inside the array to give the elements a stable identity
+
+
+Controlled Components****
+In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input.
+In React, mutable state is typically kept in the state property of components, and only updated with setState().
+An input form element whose value is controlled by React in this way is called a “controlled component”.
+The file input Tag  is an uncontrolled component in React, because its value is read-only.
+
+This is also called as controlled component
+ Just like the DOM <input> accepts both a value and an onChange prop, so can the custom TemperatureInput
+ accept both temperature and onTemperatureChange props from its parent Calculator.
+ 
+
+Composition *****
+function App() {
+  return (
+    <SplitPane
+      left={
+        <Contacts />
+      }
+      right={
+        <Chat />
+      } />
+  );
+}
+React elements like <Contacts /> and <Chat /> are just objects, so you can pass them as props like any other data. 
+
+
+Error boundaries****
+Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors,
+and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods,
+and in constructors of the whole tree below them.
+
+Error boundaries do not catch errors for:
+Event handlers (learn more)
+Asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks)
+Server side rendering
+Errors thrown in the error boundary itself (rather than its children)
+
+Use static getDerivedStateFromError() to render a fallback UI after an error has been thrown. Use componentDidCatch() to log error information.
+Error boundaries work like a JavaScript catch {} block, but for components. Only class components can be error boundaries.
+Note that error boundaries only catch errors in the components below them in the tree. An error boundary can’t catch an error within itself.
+If an error boundary fails trying to render the error message, the error will propagate to the closest error boundary above it.
+
+React doesn’t need error boundaries to recover from errors in event handlers.
+Unlike the render method and lifecycle methods, the event handlers don’t happen during rendering.
+So if they throw, React still knows what to display on the screen.
+If you need to catch an error inside an event handler, use the regular JavaScript try / catch statement
+
+
+Forwarding Refs****
+Ref forwarding is a technique for automatically passing a ref through a component to one of its children.
+
+const FancyButton = React.forwardRef((props, ref) => (
+  <button ref={ref} className="FancyButton">
+    {props.children}
+  </button>
+));
+
+// You can now get a ref directly to the DOM button:
+const ref = React.createRef();
+<FancyButton ref={ref}>Click me!</FancyButton>;
+
+The second ref argument only exists when you define a component with React.forwardRef call.
+Regular function or class components don’t receive the ref argument, and ref is not available in props either.
+
+Starting in React 19, you can now access ref as a prop for function components:
+function MyInput({placeholder, ref}) {
+  return <input placeholder={placeholder} ref={ref} />
+}
+
+//...
+<MyInput ref={ref} />
+New function components will no longer need forwardRef, and we will be publishing a codemod to automatically update your components to use the new ref prop.
+In future versions we will deprecate and remove forwardRef.
+
+
+Fragments ****
+A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+render() {
+  return (
+    <React.Fragment>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </React.Fragment>
+  );
+}
+You can use <></> the same way you’d use any other element except that it doesn’t support keys or attributes.
+key is the only attribute that can be passed to Fragment
+
+
+Higher-Order Components****
+a higher-order component is a function that takes a component and returns a new component.
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
+
+
+Optimizing Performance****
+
+Virtualize Long Lists
+If your application renders long lists of data (hundreds or thousands of rows), we recommend using a technique known as “windowing”.
+This technique only renders a small subset of your rows at any given time,
+and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created.
+react-window and react-virtualized are popular windowing libraries.
+
+
+Portals****
+Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+ReactDOM.createPortal(child, container)
+The first argument (child) is any renderable React child, such as an element, string, or fragment. The second argument (container) is a DOM element.
+A typical use case for portals is when a parent component has an overflow: hidden or z-index style,
+but you need the child to visually “break out” of its container. For example, dialogs, hovercards, and tooltips.
+An event fired from inside a portal will propagate to ancestors in the containing React tree, even if those elements are not ancestors in the DOM tree.
+For example, if you render a <Modal /> component, the parent can capture its events regardless of whether it’s implemented using portals.
+
+
+Profiler ****
+The Profiler measures how often a React application renders and what the “cost” of rendering is.
+Its purpose is to help identify parts of an application that are slow and may benefit from optimizations such as memoization.
+
+
+Refs****
+Refs provide a way to access DOM nodes or React elements created in the render method.
+There are a few good use cases for refs:
+Managing focus, text selection, or media playback.
+Triggering imperative animations.
+Integrating with third-party DOM libraries.
+
+
+Render Props is not common today 
+Render props was used to share logic between components without using HOCs
+Custom Hooks are cleaner – The same logic can be implemented using hooks, making code more readable.
+Render props were originally a workaround for class components, but hooks eliminate the need for that.
+
+
+Why is useEffect called inside a component?
+Placing useEffect inside the component lets us access the count state variable (or any props) right from the effect.
+We don’t need a special API to read it — it’s already in the function scope.
+Hooks embrace JavaScript closures and avoid introducing React-specific APIs where JavaScript already provides a solution.
+
+why the effect cleanup phase happens after every re-render, and not just once during unmounting. ????
+Because the effect might depend on changing values, and React needs to dispose of the old effect before applying a new one — to avoid memory leaks,
+duplicate subscriptions, or stale logic.
+
+useRef 
+useRef doesn’t notify you when its content changes. Mutating the .current property doesn’t cause a re-render. 
+
+
+useCallback and Stale Closures ***
+When using useCallback, it's crucial to understand how closures can lead to stale state values. Consider the following example:
+const [count, setCount] = useState(0);
+
+const increment = useCallback(() => {
+  setCount(count + 1);
+}, []);
+
+Here, increment is memoized with an empty dependency array, meaning it captures the count value at the time of its creation.
+If count changes later, increment will still reference the old value, leading to unexpected behavior.
+
+To avoid this, use the functional update form:
+const increment = useCallback(() => {
+  setCount(prevCount => prevCount + 1);
+}, []);
+This way, increment doesn't rely on the count variable from its closure but instead uses the latest state value provided by React.
+
+A stale closure happens when a function captures variables (like state or props) at a certain point in time, and those variables change later,
+but the function still references the old values. This often leads to bugs, particularly in asynchronous callbacks.
+
+
+
+useLayoutEffect  ****
+useLayoutEffect is a React hook similar to useEffect, but it fires synchronously after all DOM mutations, before the browser repaints. It’s particularly useful when:
+You need to read layout properties (e.g., width, height).
+You need to imperatively measure the DOM and make updates before the browser paints.
+You want to avoid visual flicker or content shift (layout jank).
+
+Feature				useEffect								useLayoutEffect
+Timing				Runs after paint						Runs before paint
+Blocking paint?		❌ No									✅ Yes
+Common use cases	API calls, logging, subscriptions		Measuring DOM, synchronizing scroll, animations
+Risk				Safe in SSR								Not recommended for SSR (throws warning in React 18+)
+
+import { useLayoutEffect, useRef, useState } from 'react';
+
+function LayoutBox() {
+  const boxRef = useRef(null);
+  const [boxHeight, setBoxHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const height = boxRef.current.getBoundingClientRect().height;
+    setBoxHeight(height); // setting state based on layout
+  }, []);
+
+  return (
+    <div>
+      <div ref={boxRef} style={{ height: '150px' }}>I am a box</div>
+      <p>Height: {boxHeight}px</p>
+    </div>
+  );
+}
+👆 useLayoutEffect ensures boxHeight is accurate before the browser paints, avoiding a visible reflow.
+
+Tricky Behaviors and Edge Cases
+1. Blocking Paint
+If useLayoutEffect runs expensive operations, it will delay the page paint, affecting performance. Always minimize what you do inside it.
+
+2. State Updates Can Cause Infinite Loops
+Avoid setting state unconditionally:
+Wrap state updates with conditions to prevent looping.
+
+3. Not SSR-Friendly
+React throws a warning when using useLayoutEffect in a server-rendered environment. Use useEffect or conditionally execute logic only on the client.
+
+Real-World Use Cases
+1. Synchronizing Scroll Position
+useLayoutEffect(() => {
+  window.scrollTo(0, scrollY); // prevents jump/flicker
+}, [scrollY]);
+
+2. Auto-resize Textarea
+3. Animation Library Sync
+
+Best Practices
+💡 Prefer useEffect unless you specifically need useLayoutEffect.
+🔬 Only use it when DOM measurement/layout correctness depends on it.
+🧹 Always clean up side effects properly.
+📉 Avoid heavy computations—can block rendering.
+
+
+
+Concurrent Rendering *****
+Concurrent Rendering is React’s ability to interrupt, pause, continue, or discard rendering work as needed — instead of blocking the main thread
+with a synchronous render all at once. It enables smooth user experiences by keeping your app responsive, even when it's doing heavy UI work.
+
+Key Features Enabled by Concurrent Rendering
+Automatic Batching: Multiple state updates, even those inside promises or timeouts, are batched into a single render, reducing unnecessary re-renders .
+Transitions with startTransition and useTransition: Mark non-urgent updates (like filtering a list) as transitions,
+allowing React to prioritize urgent updates (like typing) over them .
+Interruptible Rendering: React can interrupt rendering tasks to handle more urgent updates, preventing the UI from becoming unresponsive during heavy computations .
+Selective Hydration: In server-rendered applications, React can prioritize hydration of components based on user interactions, improving load performance .
+
+To utilize concurrent rendering, initialize your React application using createRoot instead of the older ReactDOM.render:
+
+Old --ReactDOM.render(<App />, document.getElementById("root")); 
+
+New
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+When to Use Concurrent Features
+User Input Handling: Ensure that user inputs remain responsive even during heavy rendering tasks.
+Data Fetching: Use transitions to manage the UI state during data fetching without blocking user interactions.
+Complex UIs: In applications with complex component trees, concurrent rendering helps maintain performance and responsiveness.
+
+
+In older versions of React (pre-18):
+
+Rendering was synchronous.
+Once rendering started, it couldn’t be stopped until it finished.
+Long renders = UI freeze or dropped frames.
+// Without concurrent rendering
+const handleChange = (e) => {
+  setQuery(e.target.value);     // 🐢 Causes slow re-render
+  expensiveComputation();       // UI becomes unresponsive
+};
+
+
+With Concurrent Rendering (enabled by React 18's Concurrent Mode and automatic features):
+Rendering is interruptible.
+React splits work into chunks and pauses/resumes when needed.
+High-priority updates (e.g., typing, clicks) can interrupt low-priority ones (e.g., background fetches or animations).
+
+
+// With concurrent rendering
+import { startTransition } from 'react';
+
+const handleChange = (e) => {
+  const value = e.target.value;
+  startTransition(() => {
+    setQuery(value);           // 🏃 Non-blocking, low-priority update
+  });
+};
+
+| Concept               | Purpose                                                        |
+| --------------------- | -------------------------------------------------------------- |
+| `startTransition`     | Marks non-urgent updates                                       |
+| `Suspense`            | Waits for async resources (e.g., fetch) without blocking paint |
+| `useDeferredValue`    | Postpones re-renders for laggy components                      |
+| `selective hydration` | Prioritize interactive content on SSR                          |
+| `React.lazy`          | Load components asynchronously                                 |
+
+
+Tricky Behaviors & Edge Cases
+Not all components are interruptible: legacy class components may behave differently.
+State consistency: React may throw away intermediate renders, so side effects must be handled carefully (e.g., avoid doing async work directly inside render).
+Timers or refs: can behave oddly if logic assumes synchronous flow.
+Always use useEffect or useLayoutEffect for logic that depends on committed DOM.
+
+
+startTransition****
+startTransition is a React API (introduced in React 18) that allows you to mark updates as "non-urgent" or "transitional".
+Without startTransition, every state update is treated as urgent. If an update causes expensive rendering (like filtering large lists),
+it might block more important UI updates like typing, causing:
+Input lag
+UI jank
+Frozen components
+
+import { startTransition } from 'react';
+
+startTransition(() => {
+  // Perform a non-urgent update here
+  setState(...);
+});
+
+| Urgent Updates    | Non-Urgent (startTransition) |
+| ----------------- | ---------------------------- |
+| Typing            | Search results rendering     |
+| Clicking buttons  | Filtering/sorting lists      |
+| Form inputs       | Lazy loading tabs/pages      |
+| Dragging/resizing | Animating or recalculating   |
+
+Best Practices
+✅ Use startTransition for performance-heavy updates that shouldn't block user input.
+✅ Combine with useDeferredValue when you want to "lag" a component render behind an urgent state change.
+❌ Don’t use for important state like form values, modals, or critical feedback — those should remain urgent.
+
+ Real-World Scenarios
+✅ Autocomplete or search
+✅ Tab switch with heavy component tree
+✅ Infinite scroll list appending
+✅ Page transitions or dashboard graphs
+✅ Animations on route change
+
+const [isPending, startTransition] = useTransition();
+  
+useDeferredValue ***
+useDeferredValue is a React Hook that allows you to defer a non-urgent value update so that the UI remains responsive during high-priority interactions (like typing or clicking).
+It helps delay expensive renders for derived state — like filtered lists, charts, or complex components — without blocking the user input.
+
+const deferredValue = useDeferredValue(value);
+value: Any value that may change (usually state).
+deferredValue: A version of value that lags behind slightly, allowing urgent updates (like input typing) to go through first.
+import { useState, useDeferredValue } from 'react';
+
+function Search() {
+  const [query, setQuery] = useState('');
+  const deferredQuery = useDeferredValue(query); // Laggy version
+  const results = useMemo(() => expensiveSearch(deferredQuery), [deferredQuery]);
+
+  return (
+    <>
+      <input value={query} onChange={(e) => setQuery(e.target.value)} />
+      <SearchResults results={results} />
+    </>
+  );
+}
+Typing stays smooth because SearchResults only re-renders when the deferred version of query updates.
+
+| Hook                   | What it does            | When to use                                                                |
+| ---------------------- | ----------------------- | -------------------------------------------------------------------------- |
+| **`useTransition`**    | Defers a *state update* | When *you trigger* a non-urgent update (e.g., tab change, filter click)    |
+| **`useDeferredValue`** | Defers a *value*        | When *you receive* a rapidly changing value (e.g., typing in search input) |
+
+
+| Concept        | `useTransition`                    | `useDeferredValue`                             |
+| -------------- | ---------------------------------- | ---------------------------------------------- |
+| What it defers | **A state update**                 | **A derived value**                            |
+| Trigger type   | You trigger an update (`setState`) | You receive a changing value (prop or state)   |
+| Control        | More explicit (`startTransition`)  | Passive (“let React delay this value”)         |
+| Return         | `[isPending, startTransition]`     | `deferredValue`                                |
+| Typical use    | Filtering, tab switching           | Search input, pagination data, derived filters |
+
+
+Mental Model
+User types fast → React updates query immediately (urgent)
+deferredQuery updates lazily → lets the browser finish handling input first
+Expensive re-render waits until CPU is available
+Think of it like a laggy mirror of the original state.
+
+| Good Use Cases           | Avoid For                       |
+| ------------------------ | ------------------------------- |
+| Search results           | Form validation state           |
+| Complex charts           | Input values themselves         |
+| Filters/sorting          | Critical UI updates             |
+| Virtualized list updates | Transitions that must be atomic |
+
+Edge Cases & Caveats
+
+1. Not a Throttle/Debounce
+useDeferredValue doesn’t wait a set time.
+It updates when the system is idle — intelligently scheduled by React.
+
+2. May Render Twice
+Initial render with stale data (deferred)
+Re-render once the deferred value updates
+
+3. Works Best with useMemo
+Use it with useMemo or React.memo to avoid expensive recalculations:
+const expensiveValue = useMemo(() => compute(deferredValue), [deferredValue]);
+
+startTransition: You wrap a state update and tell React “this update is low priority.”
+useDeferredValue: You wrap a value and say “let React deliver this value later.”
+
+👉 Think of it like:
+startTransition = tell React when you’re setting the state.
+useDeferredValue = tell React when you’re using the state.
+
+
+In SSR (e.g., using Next.js or Remix):
+The server sends a fully rendered HTML page to the browser.
+The browser displays it immediately (good for performance & SEO).
+Then React hydrates the app — attaches JavaScript to handle interactivity.
+
+// index.js
+import { hydrateRoot } from 'react-dom/client';
+import App from './App';
+
+hydrateRoot(document.getElementById('root'), <App />);
+
+hydrateRoot() is used instead of createRoot() in SSR to tell React:
+“This HTML is already rendered, just connect my JS behavior to it.”
+
+ Why Use Hydration?
+✅ Faster First Paint (HTML is already there)
+✅ Better SEO (crawler sees content immediately)
+✅ Perceived performance improvement
+✅ Essential for Next.js, Remix, Gatsby, etc.
+
+
+React Server Components ****
+
+1. The Problem RSCs Solve
+Traditionally, React apps run entirely on the client:
+The server sends HTML + JS.
+Browser downloads everything.
+Then React runs on client to render UI.
+
+Issues:
+Large JS bundles → slow loading.
+Fetching data in client → multiple round trips.
+SEO not great unless you also do SSR (Server-Side Rendering).
+
+So devs had to juggle between SSR + hydration + client-side fetching → complex, repetitive.
+
+2. What Are React Server Components?
+
+React Server Components = components that run only on the server.
+They never ship JS to the client.
+They can directly fetch data from DB, APIs, or filesystem.
+The server sends the ready-made result to the client.
+Client just renders it, no extra JS needed.
+
+👉 Think of them as lightweight, data-aware React components that don’t bloat your frontend bundle.
+
+3. How They Fit with Client Components
+In RSC architecture, you have two types of components:
+
+🔹 Server Components
+Run only on server.
+Can fetch data directly.
+No access to browser APIs (no useState, useEffect, DOM events).
+Zero JS shipped to client.
+
+🔹 Client Components
+Run in the browser.
+Handle interactivity (clicks, inputs, animations).
+Can use hooks like useState, useEffect.
+
+👉 You mix them:
+Server Components handle data + heavy logic.
+Client Components handle interactivity + UX.
+
+Why Is This Powerful?
+Smaller bundles → Server Components don’t get sent to browser.
+Direct data access → No need for REST/GraphQL overhead if server can query DB.
+Streaming → Server can progressively send parts of UI (great for slow APIs).
+SEO-friendly → Output is HTML-first.
+Less duplication → No need to fetch same data on server and client separately.
+
+Gotchas & Edge Cases
+Not all code can run on server
+Anything with window, DOM APIs, useEffect → must be a client component.
+Data fetching is async
+Server Components are always async.
+Boundary clarity
+You must declare "use client" explicitly when needed.
+Tooling is still evolving
+
+Next.js 13+ App Router fully supports it, but plain CRA doesn’t.
+Think of Server Components as static UI shells that hydrate only where needed.
+
+| Benefit            | Description                        |
+| ------------------ | ---------------------------------- |
+| 🔒 Backend Access  | Fetch from DB without API layer    |
+| 📦 Smaller Bundles | No JS sent for server components   |
+| ⚡ Faster Loads     | Less client JS = faster startup    |
+| 🌊 Streaming UI    | Partial loading with Suspense      |
+| 💰 Better DevX     | Simpler data fetching + fewer APIs |
+
+Limitations
+Server Components can’t use:
+useEffect, useState, useRef, etc.
+window, document, or any browser API
+Must be used with frameworks like Next.js 13+ App Router
+Requires React 18+
+Tooling & ecosystem still evolving
+
+Real-World Use Cases
+✅ Blog homepage with static content
+✅ Product pages with SEO + database reads
+✅ Admin dashboard with server auth
+✅ Markdown renderers, file readers, data loaders
+✅ Avoiding extra API layers for simple reads
+
+| Feature     | RSC                        | SSR                  | CSR                |
+| ----------- | -------------------------- | -------------------- | ------------------ |
+| Runs where? | Server only                | Server (then client) | Browser            |
+| Sends JS?   | No                         | Yes                  | Yes                |
+| Hydration?  | Only for interactive parts | Full hydration       | Fully dynamic      |
+| Data Access | Direct (e.g., DB)          | Indirect (via API)   | Indirect (via API) |
+| Bundle Size | Tiny (partial)             | Medium               | Large              |
+
+Let you move rendering + data fetching to the server
+Remove JS from the client where possible
+Enable clean separation between static and interactive UI
+Help build faster, lighter, more scalable apps
+
+
+SSR (Server-Side Rendering)
+React builds the full HTML of your page on the server.
+That HTML is sent to the browser → the user sees something immediately.
+Then React runs again on the client (hydration) → attaches JS logic so the page becomes interactive.
+👉 SSR = render the UI on server first, then rehydrate it on client.
+
+Problem:
+Even after SSR, the same component logic & JS must be sent to the client (big bundles).
+Hydration step can be expensive.
+
+RSC (React Server Components)
+RSCs run only on the server, and they never ship their JS to the client.
+They can fetch data directly (DB, APIs) without exposing that logic.
+They send a serialized result (like JSON instructions) to the client.
+The client combines this with Client Components for interactivity.
+👉 RSC = some parts of your app exist only on the server and never hydrate in the browser.
+
+
+| Feature        | SSR (Server-Side Rendering)                      | RSC (React Server Components)                    |
+| -------------- | ------------------------------------------------ | ------------------------------------------------ |
+| Runs where?    | Server (initial render), then client (hydration) | Server only (no hydration needed)                |
+| JS bundle size | Still ships all components to client             | Server-only components **not shipped**           |
+| Data fetching  | Usually via API calls (extra network hops)       | Can fetch DB/files directly (faster)             |
+| Interactivity  | After hydration only                             | Needs Client Components for interactivity        |
+| Output         | HTML (full page)                                 | Streamed React tree “instructions”               |
+| Use case       | Faster **first paint** + SEO                     | Smaller bundles, direct data access, better perf |
+
+Good Use Cases for RSC
+
+Data Fetching Components
+Static Content / Marketing Pages
+About Us, Blog articles, FAQs, Terms & Conditions.
+Rendered once on server, no hydration needed.
+Saves bundle size.
+
+Large Lists / Tables
+Server can pre-render a list of thousands of items.
+Client just receives HTML or streaming chunks.
+Reduces JS overhead massively.
+
+✅ Integrations with Backend
+Talking to databases, private APIs, file system.
+Example: fetching invoices, logs, analytics.
+You don’t want DB queries to ever touch the client bundle.
+
+✅ Layouts & Wrappers
+Navbars, footers, sidebars.
+Usually static or data-driven (menus, categories).
+Perfect for RSC because they’re repeated everywhere → huge bundle savings.
+
+
+Bad Use Cases for RSC
+
+⚠️ Don’t use RSC when you need:
+Interactivity → buttons, forms, drag-drop.
+Browser APIs → window, document, cookies, local storage.
+Stateful UI → animations, counters, dropdowns.
+👉 Those must stay Client Components.
+
+
+👉 Use RSC for data + static UI.
+👉 Use Client Components for interactivity.
+👉 Mix them strategically to reduce JS bundle size and improve performance.
+
+
+
+In React 19, you can render <Context> as a provider instead of <Context.Provider>***
+
+
+What Is the React Compiler? *****
+
+React Compiler automatically optimizes your React application by handling memoization for you, eliminating the need for manual useMemo, useCallback, and React.memo.
+The React Compiler is designed to improve update performance by:
+Skipping Cascading Re-renders: When a parent component re-renders, the compiler prevents unnecessary re-renders of child components if their props haven't changed.
+Avoiding Expensive Calculations: It detects and memoizes expensive computations within components or hooks, ensuring they're only recalculated when necessary.
+
+This optimization is achieved by statically analyzing your code and applying memoization techniques where appropriate.
+The compiler understands the Rules of React, allowing it to safely optimize components and hooks that adhere to these rules. 
+
+React Compiler only memoizes React components and hooks, not every function
+React Compiler’s memoization is not shared across multiple components or hooks
+
+Benefits of Using the React Compiler
+Improved Performance: By reducing unnecessary re-renders and optimizing computations, your application becomes more efficient.
+Reduced Boilerplate: Automatic memoization eliminates the need for manual optimization using useMemo or useCallback.
+Enhanced Developer Experience: With less manual optimization required, developers can focus more on building features.
+
+
+Profiler****
+Introduced in React 16.5, <Profiler> is a React component that allows you to collect timing information about the rendering of your components.
+
+The Profiler is a tool (built into React DevTools) that helps you:
+Measure how often components render.
+See how long each render takes.
+Identify unnecessary re-renders.
+Find performance bottlenecks.
+
+When to Use Profiler
+Slow pages: Something feels “laggy” (typing input, scrolling, clicking).
+Large lists: Want to confirm if virtualization (react-window) is helping.
+State-heavy apps: Debugging unnecessary re-renders caused by props/context.
+Before optimization: Always measure first, then optimize.
+
+The React Profiler (DevTools or <Profiler>) lets you measure component render timings, frequency, and causes,
+helping you spot unnecessary re-renders and performance bottlenecks before optimizing.
+
+
+Practical Use Cases
+Identifying Performance Bottlenecks: Determine which components are rendering frequently and taking up significant rendering time.
+Optimizing Component Renders: Use the insights to apply React.memo, useMemo, or useCallback to prevent unnecessary renders.
+Monitoring Specific Components: Wrap specific components with <Profiler> to monitor their performance in isolation.
+
+To utilize <Profiler>, wrap it around the component or part of the component tree you wish to profile. It requires two props:
+id: A string identifier for the profiler instance.
+onRender: A callback function that React calls every time the profiled component (or its descendants) renders.
+
+import React, { Profiler } from 'react';
+
+function onRenderCallback(
+  id, // the "id" prop of the Profiler tree that has just committed
+  phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+  actualDuration, // time spent rendering the committed update
+  baseDuration, // estimated time to render the entire subtree without memoization
+  startTime, // when React began rendering this update
+  commitTime, // when React committed this update
+  interactions // the Set of interactions belonging to this update
+) {
+  // Aggregate or log render timings...
+  console.log({ id, phase, actualDuration, baseDuration, startTime, commitTime, interactions });
+}
+
+function App() {
+  return (
+    <Profiler id="App" onRender={onRenderCallback}>
+      <YourComponent />
+    </Profiler>
+  );
+}
+
+id: The id prop of the <Profiler> component, useful for identifying which part of the tree was profiled.
+phase: Indicates whether the render was a "mount" (initial render) or an "update" (re-render).
+actualDuration: The time, in milliseconds, spent rendering the profiled component and its descendants during the current update.
+baseDuration: An estimate of the time to render the entire subtree without any optimizations like memoization.
+startTime: A timestamp for when React began rendering the current update.
+commitTime: A timestamp for when React committed the current update.
+interactions: A Set of interactions belonging to the update, useful for tracing user interactions.
+
+
+| Feature                             | React 16 | React 17 | React 18 |
+| ----------------------------------- | -------- | -------- | -------- |
+| Fiber Architecture                  | ✅        | ✅        | ✅        |
+| Fragments / Portals                 | ✅        | ✅        | ✅        |
+| Error Boundaries                    | ✅        | ✅        | ✅        |
+| Concurrent Rendering                | ❌        | ❌        | ✅        |
+| Automatic Batching                  | ❌        | ❌        | ✅        |
+| `useTransition` / `startTransition` | ❌        | ❌        | ✅        |
+| `useId`, `useDeferredValue`         | ❌        | ❌        | ✅        |
+| Streaming SSR                       | Partial  | Improved | ✅        |
+| Event Delegation Improvements       | ❌        | ✅        | ✅        |
+| Gradual Upgrade Support             | ❌        | ✅        | ✅        |
+
+
+React 16 (2017–2019)
+
+This was a huge rewrite (“Fiber”) that made all the later improvements possible.
+
+Key Features
+
+Fiber Reconciliation (Core rewrite)
+Entire React internals rewritten for async rendering.
+This laid groundwork for concurrent rendering (came later).
+
+Error Boundaries
+Special components (componentDidCatch, getDerivedStateFromError) to catch errors.
+Prevent entire app from crashing due to one component.
+
+Portals
+Render children into a DOM node outside the parent hierarchy.
+Useful for modals, tooltips.
+
+Fragments (<> </>)
+Return multiple elements without extra <div>.
+
+Context API (new)
+Cleaner global state sharing without prop drilling.
+
+Suspense (initial form)
+First step: suspense for lazy() code-splitting.
+
+
+React 17 (2020)
+
+React 17 was called a “stepping stone release” — not many user-facing features, but important internally.
+
+Key Features
+
+No new major features — focused on smooth upgrades.
+
+New Event System
+Events now attached to root instead of document.
+Easier embedding React apps inside non-React apps.
+
+Gradual Upgrades
+You could mix React 16 + 17 on the same page (helped big apps migrate).
+
+👉 React 17 = “boring but important” → stability release.
+
+
+React 18 (2022)
+
+Biggest release since React 16. Introduced Concurrent Rendering + new hooks/APIs.
+
+Key Features
+
+Concurrent Rendering (opt-in with createRoot)
+React can pause, interrupt, resume renders.
+Makes UI smoother.
+
+Automatic Batching
+Multiple state updates inside promises/async callbacks are batched automatically.
+
+New APIs for concurrency
+startTransition → mark non-urgent updates.
+useDeferredValue → laggy copy of a state.
+useId → stable unique IDs for hydration.
+
+Suspense for Data Fetching (improved)
+Suspense is now concurrent-aware → async data handling possible.
+
+Streaming SSR
+Server can stream HTML progressively.
+
+👉 React 18 = performance + concurrency revolution.
+
+
+
+
+
+React 16 (2017) → Fiber rewrite, Error Boundaries, Portals, Fragments, Context API.
+React 17 (2020) → No new features, event system refactor, smooth upgrades.
+React 18 (2022) → Concurrent Rendering, Suspense for data, startTransition, useDeferredValue, Streaming SSR., Server Components
+
+
+What is React Fiber?
+React Fiber is the reimplementation of React’s core algorithm for rendering, introduced in React 16.
+Its purpose is to make React more flexible, incremental, and performant, especially for complex UIs and animations.
+Key idea: Fiber allows React to pause, resume, and prioritize rendering work, instead of blocking the main thread.
+
+React Fiber is the reimplementation of React’s rendering engine introduced in React 16.
+It allows React to break rendering into incremental units of work called fibers, prioritize updates, and pause/resume work.
+This makes React apps smoother, especially for large trees, animations, and concurrent tasks.
+
+Why Fiber Was Introduced
+
+Before Fiber, React used stack-based reconciliation:
+Rendered the entire component tree synchronously
+Long renders blocked the main thread → UI could freeze
+Couldn’t interrupt work or prioritize updates
+
+React Fiber solves this by:
+Breaking rendering into small units of work (fibers)
+Assigning priority levels (high for user input, low for background updates)
+Supporting incremental rendering and smooth animations
+
+How React Fiber Works
+
+Fiber Node:
+Each component is represented as a fiber object
+
+Stores:
+Component type
+Props & state
+DOM node reference
+Links to parent, child, and sibling fibers
+
+Reconciliation:
+Fiber tree is created to compare new and old virtual DOM
+Only updates necessary nodes
+Can pause and resume work to avoid blocking UI
+
+Prioritization:
+User interactions get higher priority
+Background updates (like data fetching) get lower priority
+
+Commit Phase:
+After fiber tree calculation, changes are committed to the DOM
+
+
+| Feature    | Stack Reconciler (Old) | Fiber Reconciler (React 16+)                             |
+| ---------- | ---------------------- | -------------------------------------------------------- |
+| Render     | Synchronous            | Incremental (can pause/resume)                           |
+| Priority   | None                   | Supports priority (user input > animations > background) |
+| Complexity | Simple                 | More complex, enables advanced features                  |
+| Blocking   | Blocks main thread     | Non-blocking, smooth UI                                  |
+
+Fiber enables React features like:
+Time slicing: Breaks rendering into chunks to avoid UI freezing
+Suspense & Concurrent Mode: Wait for data or resources without blocking UI
+Error boundaries: Handle errors in subtree without crashing the app
+Smooth animations: Prioritized rendering for interactive UIs
+
+
+| Concept           | **React Fiber**                                                                                        | **Concurrent Rendering**                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **What it is**    | A **new internal architecture** (introduced in React 16) for the reconciliation and rendering process. | A **feature built on top of Fiber** (introduced in React 18) to **control when and how rendering happens**. |
+| **Purpose**       | Enables React to break rendering work into small chunks (units of work).                               | Allows React to schedule, pause, resume, or even *throw away* renders to keep UI responsive.                |
+| **Level**         | Under-the-hood **engine / algorithm**                                                                  | **User-facing behavior** enabled by Fiber                                                                   |
+| **Goal**          | Make rendering interruptible                                                                           | Use that interruptibility to achieve smoother, non-blocking UI                                              |
+| **Introduced in** | React 16                                                                                               | React 18 (as part of Concurrent Features)                                                                   |
+
+
+Fiber itself doesn’t decide when to pause, resume, or throw away renders.
+It just provides the infrastructure to make that possible.
+
+The scheduling and prioritization logic lives above Fiber, inside React’s scheduler (the “coordinator”) and Concurrent Rendering features
+
+Each Fiber node represents one unit of work (a component).
+Fiber allows React to:
+
+✅ Break the render into small units (fiber nodes)
+✅ Keep links to parent, child, and sibling (so it can traverse the tree efficiently)
+✅ Record metadata (props, state, effect list, etc.)
+✅ Pause and resume work safely, because it knows where it left off
+✅ Discard partial work if needed (since it’s incremental)
+
+However... Fiber itself doesn’t say when to do those — it just makes it possible.
+
+
+Who Actually Decides to Pause/Resume?
+
+That’s the job of the React Scheduler, which sits on top of Fiber.
+The scheduler monitors:
+Main thread availability
+User interactions
+Task priorities (user input > network updates > background work)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

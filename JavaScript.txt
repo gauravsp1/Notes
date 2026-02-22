@@ -58,27 +58,21 @@ Performance: Typically slower execution compared to compiled languages due to th
 Runtime Errors: Errors are detected at runtime, which can lead to issues being discovered later in the development process.
 
 
-Higher-Order function *********
-Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
-
-It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
-Ex. map, filter, and reduce.
-
-A parameter is a variable that we list as part of a function definition.
-An argument is a value that we pass to the function when we invoke it.
-
-
 loosly type and strongly type ************
 In programming languages, the concepts of loosely typed (also known as weakly typed) and strongly typed refer to how strictly a language enforces type constraints.
 In loosely typed languages, type checking is less strict, and implicit type conversions (coercions) are often performed.
 These languages tend to allow more flexibility in how variables are used, but this can sometimes lead to unexpected behaviors.
+let x = 10;         // x is a number
+x = "hello";        // now x is a string
 
 In strongly typed languages, type checking is more rigorous, and implicit type conversions are typically not performed or are restricted.
 Variables are often explicitly bound to a specific type, and attempting to use a value of the wrong type can result in errors.
+let x: number = 10;
+x = "hello"; // ❌ Error: Type 'string' is not assignable to type 'number'
 
 
 data types:  *******
-Primitive Data Types: Primitive types are simple, immutable values. They are stored directly in memory, and when you work with these types, JavaScript operates on their actual values.
+Primitive Data Types: These are immutable (cannot be changed) and are stored by value.
 1.Number  //typeof  number
 2.String  //typeof  string
 3.Boolean  //typeof  boolean
@@ -87,10 +81,25 @@ Primitive Data Types: Primitive types are simple, immutable values. They are sto
 6.BigInt: Introduced in ES2020, this type represents integers with arbitrary precision (i.e., larger than Number.MAX_SAFE_INTEGER).  //typeof  bigint
 7.Symbol: Introduced in ES6, it represents a unique and immutable identifier, mainly used for object property keys.  //typeof  symbol
 
-Non-Primitive (Reference) Data Types:
+Non-Primitive (Reference) Data Types: These are mutable and stored by reference.
 1.Object  //typeof  object
 2.Array  //typeof  object
 3.Function  //typeof  function
+
+
+falsy valuse *******
+false, 0, -0, 0n, "", null, undefined, and NaN
+
+
+"==" vs "===" ********
+"==" compares for same value can have different type
+"===" compares for same value and type
+
+
+console.log(undefined === "undefined") //False
+console.log(undefined == "undefined") //False
+undefined is a primitive type representing the absence of a value.
+"undefined" is a string — it’s literally a sequence of characters.
 
 
 null vs undefiend ********
@@ -140,10 +149,21 @@ null === undefined         // false
 null == undefined          // true
 
 typeOf function is function
+typeOf Class is function
 
 typeOf null ********
-n JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
+In JavaScript null is "nothing". It is supposed to be something that doesn't exist. 
 Unfortunately, in JavaScript, the data type of null is an object. You can consider it a bug in JavaScript that typeof null is an object.
+
+
+Higher-Order function *********
+Higher order functions are functions that operate on other functions, either by taking them as parameter or by returning them.
+
+It’s higher-order because instead of strings, numbers, or booleans, it goes higher to operate on functions
+Ex. map, filter, and reduce.
+
+A parameter is a variable that we list as part of a function definition.
+An argument is a value that we pass to the function when we invoke it.
 
 
 Why is JavaScript Single Threaded language *************
@@ -197,6 +217,13 @@ fetchData('https://api.example.com', (err, data) => {
             }
         });
     }
+});
+
+
+fetchData("Sample Data", (processD) => {
+  processData(processD, (saveD) => {
+    saveData(saveD);
+  });
 });
 
 ******With Promise ***********
@@ -441,18 +468,127 @@ Promise.allSettled(): Use when you need to handle the results of all promises, r
 Promise.any(): Use when you need the first successful result among multiple promises and want to ignore rejections unless all promises fail.
 
 
+How async await is different from Promises *********
+
+| Feature        | `Promise`                           | `async/await`                |
+| -------------- | ----------------------------------- | ---------------------------- |
+| Type           | Object                              | Syntax sugar over Promises   |
+| Style          | Chained (`.then().catch()`)         | Sequential, imperative style |
+| Readability    | Can get nested (callback-like)      | Cleaner, easier to read      |
+| Error Handling | `.catch()` or second `.then()`      | `try/catch` blocks           |
+| Return Type    | Always returns a `Promise`          | Also returns a `Promise`     |
+| Use Case       | Great for chaining multiple actions | Great for top-down logic     |
+
+1. Code Readability
+With async/await, the code looks synchronous even though it's not. It's much easier to reason about control flow.
+
+2. Parallel vs Sequential
+await pauses execution—don’t use it when tasks can run in parallel.
+Use Promise.all() for parallel async tasks
+
+Is there something which we can perform with async/await but not with Promises? ****
+No, there is nothing you can do with async/await that you can't do with Promises.
+They are functionally equivalent—async/await is just syntactic sugar over Promises introduced in ES2017.
+Promise = declarative & chainable
+async/await = imperative & readable
+
+What Promises Are Good For***
+Chained operations
+Parallel execution
+
+What async/await Is Better At***
+Top-down readable flow
+Looping over async operations (sequentially)
+for (let id of userIds) {
+  const data = await fetchUser(id);
+  console.log(data);
+}
+
+Conditional async logic
+if (user.isAdmin) {
+  await loadAdminPanel();
+} else {
+  await loadUserPanel();
+}
+
+| Feature        | Promises                       | async/await                      |
+| -------------- | ------------------------------ | -------------------------------- |
+| Syntax         | Functional, chain-based        | Synchronous-like, imperative     |
+| Readability    | Can become nested or cluttered | Clean and flat                   |
+| Error Handling | `.catch()`                     | `try/catch`                      |
+| Loops          | Hard / awkward                 | Easy (`for`, `while`, `map`)     |
+| Control flow   | More manual                    | Easier with `if`, `switch`, etc. |
+| Debugging      | Tricky stack traces            | More natural (stack preserved)   |
+| Concurrency    | Easier with `Promise.all`      | Same via `Promise.all` + `await` |
+
+
+Async/Await with Promise.all
+
+async function fetchAllData() {
+  const userPromise = fetchUser();
+  const postsPromise = fetchPosts();
+  const commentsPromise = fetchComments();
+
+ try {
+  const [user, posts, comments] = await Promise.all([
+    userPromise,
+    postsPromise,
+    commentsPromise
+  ]);
+
+  return { user, posts, comments };
+}
+} catch (error) {
+    console.error('One or more requests failed:', error);
+  }
+
+how to catch the errors of multiple await statements, how to idetify which await statements error is it***
+try/catch Around Each await
+Wrap Each Await in a Helper Function
+Use Promise.all() with single try/catch
+
+| Situation                                       | Best Pattern                                |
+| ----------------------------------------------- | ------------------------------------------- |
+| Sequential operations with dependencies         | Individual `try/catch` per `await`          |
+| Clean syntax without many `try/catch`           | `safe()` wrapper function                   |
+| Run all in parallel but don’t crash on one fail | `Promise.allSettled()`                      |
+| Need to fail fast if **any** one fails          | Use `Promise.all()` with single `try/catch` |
+
+`safe()` wrapper function *****
+function safeAsync(fn) {
+  return async (...args) => {
+    try {
+       const data = await fn(...args);
+	   return [null, data];
+    } catch (err) {
+      console.error("safeAsync error:", err);
+      return [error, null];
+    }
+  };
+}
+
+const getUserData = safeAsync(async () => {
+  const user = await fetchUser();
+  const posts = await fetchPosts(user.id);
+  const comments = await fetchComments(posts[0].id);
+  return { user, posts, comments };
+});
+
+const [err, data] = await getUserData();
+if (err) console.error("Error:", err);
+else console.log("Data:", data);
+
 Event Loop *****
-The event loop ensures that JavaScript can perform non-blocking, asynchronous operations even though it is single-threaded. 
+Event Loop: Enables non-blocking async operations in single-threaded JS.
+Function: Pulls tasks from callback queue → executes on call stack when stack is empty.
+Illusion: Makes JS seem multithreaded, but it’s single-threaded.
 
-An event loop is something that pulls stuff out of the callback queue and places it onto the call stack whenever the function stack becomes empty.
-The event loop  gives us an illusion of being multithreaded even though it is single-threaded. 
-The below illusion demonstrates the functioning of event loop well:
-Here the callback function in the event queue has not yet run and is waiting for its time into the stack when the SetTimeOut() is being executed 
-and the Web API is making the mentioned wait. When the function stack becomes empty, the function gets loaded onto the stack as shown below:
-That is where the event loop comes into picture, it takes the first event from the Event Queue and places it onto the stack 
-i.e in this case the callback function. From here, this function executes calling other functions inside it, if any.
-https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/
-
+Flow Example:
+setTimeout() callback goes to Web API → waits.
+Callback enters event queue after wait.
+Event loop moves callback to call stack once empty.
+Callback executes, calling any nested functions.
+Key Point: Allows async code to run without blocking synchronous code.
 
 Two types of Queue ********
 Macrotask/CallBack Queue ---setTimeout and other callback functions
@@ -505,8 +641,39 @@ var [a, , b] = [1,2,3];
 console.log(rest);
 // expected output: Array [30,40,50]
 
-obj{a:1,b:2,c:{d:4,e:5}}
-const {a,b,c:{d}} = obj
+Nested Obj Destructuring **
+
+const user = {
+  name: "Alice",
+  address: {
+    city: "New York",
+    zip: 10001,
+	test:[ { nameTest:"Gaurav"},{ nameTest:"Pawar"}]
+  }
+};
+
+// Destructuring
+const { name, address: { city, zip } } = user;
+console.log(name); // Alice
+console.log(city); // New York
+console.log(zip);  // 10001
+
+Assigning Alias
+const { address: { city: userCity } } = user;
+console.log(userCity); // New York
+
+
+const {
+  address: {
+    test: [
+      { nameTest: firstName },
+      { nameTest: secondName }
+    ]
+  }
+} = user;
+
+console.log(firstName);  // Gaurav
+console.log(secondName); // Pawar
 
 
 Default Parameter Values **********
@@ -519,7 +686,7 @@ myFunction(5); // will return 15
 
 The let keyword **********
 These two keywords provide Block Scope variables
-Before  JavaScript had only two types of scope: Global Scope and Function Scope.
+Before, JavaScript had only two types of scope: Global Scope and Function Scope.
 Global variables can be accessed from anywhere in a JavaScript program. Variables declared  (inside a function) have Function Scope.
 LET and CONST declared inside a block {} cannot be accessed from outside the block: var keyword cannot have Block Scope.
 Can reassign values in LET but not in CONST.Rest all same between LET and CONST.
@@ -530,6 +697,32 @@ Hoisting		Yes (initialized with undefined)	Yes (with Temporal Dead Zone)	Yes (wi
 Re-declaration	Allowed								Not allowed in the same scope	Not allowed in the same scope
 Reassignment	Allowed								Allowed							Not allowed (for primitive values)
 Mutability		Mutable								Mutable							Immutable binding (but mutable for objects and arrays)
+
+
+When you declare a variable using const, you’re making the binding (the reference to the value) immutable, not necessarily the value itself.
+const x = 5;
+x = 10; // ❌ Error: Assignment to constant variable
+Here, x holds the actual value 5.
+Since 5 is a primitive, and const freezes the binding, you can’t reassign it.
+
+const user = {
+  name: 'Alice',
+  age: 25
+};
+
+user.age = 26;         // ✅ Allowed
+user.email = 'a@x.com'; // ✅ Allowed
+user = { name: 'Bob' }; // ❌ Error: Assignment to constant variable
+
+user is a reference to an object in memory.
+const locks the reference, but not the object’s contents.
+You can mutate the object — add/remove/change properties — but you can’t make user point to a new object.
+
+| `const` prevents...       | But allows...                                |
+| ------------------------- | -------------------------------------------- |
+| Reassigning the variable  | Mutating the content (if it's an object)     |
+| Rebinding to a new object | Changing object properties or array elements |
+| Reinitialization          | Internal mutations                           |
 
 
 The const keyword makes a variable itself immutable, not its assigned content.
@@ -599,7 +792,7 @@ Lexical scope **********
 A lexical scope in JavaScript means that a variable defined outside a function can be accessible 
 inside another function defined after the variable declaration. 
 But the opposite is not true; the variables defined inside a function will not be accessible outside that function.
-Inner functions can acces outer variables but outter cannot access inner function variables
+Inner functions can acces outer variables but outter cannot access inner function variables.
 
 In JavaScript, functions create their own scope. The variables defined inside a function are not accessible outside of it.
 However, functions defined within another function have access to the variables of the outer function. This nested structure defines the lexical scope.
@@ -616,11 +809,30 @@ With ES6, let and const introduced block-scoped variables, which are only access
 
 
 Closure ***********
+A closure is a function that remembers its lexical scope even after the outer function has finished executing.
 A closure in JavaScript is created when a function is defined inside another function, and the inner function has access to the variables of the outer function, 
 even after the outer function has finished executing. 
 In simpler terms, a closure allows an inner function to "remember" and access its lexical scope, even when the outer function is no longer active.
+A closure is when a function "remembers" the variables from its lexical scope even when it runs outside that scope.
 
-commonly used for data encapsulation, function factories, callbacks, and event handlers, and maintaining private variables.
+commonly used for-
+data encapsulation
+function factories
+callbacks, and event handlers
+maintaining private variables.
+Memoization / Caching
+Custom Hooks in React (Under the Hood)
+Every useState, useCallback, etc., relies on closure to persist state between renders.
+
+| Use Case              | Why Closures Help              |
+| --------------------- | ------------------------------ |
+| Private state         | Encapsulate internal variables |
+| Function factories    | Customize logic and reuse it   |
+| Event/timer callbacks | Retain context over time       |
+| Memoization           | Cache previous results cleanly |
+| React hooks           | Persist logic across renders   |
+
+
 
 When an inner function is returned from an outer function, it preserves the environment (or lexical scope) in which it was created. 
 This environment includes any variables that were in scope at the time the closure was created.
@@ -641,6 +853,129 @@ closureFunc();  // Output: 'I am from outer'
 Disadvantages
 it uses more memory
 Careful attention is needed to avoid accidental variable sharing in loops and similar constructs.
+
+//   var b=15;
+// function foo(){
+//     var b=5;
+
+//     function baz (){
+//         console.log(b)
+//     }
+//     exec(baz);
+// }
+
+// function exec(func){
+//     var b=10;
+//     func();
+// }
+// foo();  //5
+
+| Concept            | Explanation                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| Lexical scope      | Functions remember the scope where they are **defined**, not where they're called. |
+| Closures           | `baz()` closes over `b` from its definition context (global in this case).         |
+| Variable shadowing | The `b = 10` inside `exec()` does **not** affect `baz()`.                          |
+
+
+Stale Closure*****
+When you define a function inside a React component (e.g., inside useEffect, useCallback, or just inline), that function "closes over" the state/props at the time of that render.
+So if count is 0 during a render, then handleClick will remember count as 0, even if the actual count state updates later — unless you re-create the closure.
+
+Stale State Inside setTimeout
+function Example1() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      alert("Count is " + count); // stale closure problem
+    }, 2000);
+  }, []); // runs only once on mount
+
+  return (
+    <button onClick={() => setCount(count + 1)}>Count: {count}</button>
+  );
+}
+
+useCallback with Stale State
+function Example2() {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount(count + 1); // stale count
+  }, []); // 👈 no dependency on count
+
+  return <button onClick={increment}>Increment</button>;
+}
+increment is memoized with count = 0
+Every click always sets count to 1
+
+Fix
+Pass count as a dependency
+const increment = useCallback(() => {
+  setCount(count + 1);
+}, [count]);
+
+use the updater function form
+const increment = useCallback(() => {
+  setCount(prev => prev + 1); // ✅ always uses latest
+}, []);
+
+useEffect without proper dependencies
+useEffect(() => {
+  const interval = setInterval(() => {
+    console.log("Count:", count); // stale count
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []); // only runs once
+
+
+Regular functions vs clouser functions
+
+A regular function is just a block of reusable code. It runs, does its job, and exits
+
+A closure is a function that:
+Is returned from another function
+Remembers the variables from its outer (lexical) scope even after the outer function has returned
+
+| Feature               | Regular Function            | Closure                          |
+| --------------------- | --------------------------- | -------------------------------- |
+| Scope                 | Uses local + global scope   | Also retains outer lexical scope |
+| Lifespan of variables | Lost after function ends    | Preserved via closure            |
+| Private state         | ❌ Not possible             | ✅ Yes (via closure)             |
+| Use in encapsulation  | ❌                          | ✅ Ideal for hiding state        |
+| Common use            | Stateless, repeatable logic | Stateful logic, factories, etc.  |
+
+
+function getCount() {
+  let count = 0;
+  count++;
+  return count;
+}
+
+getCount(); // 1
+getCount(); // 1 again! ❌
+
+function createCounter() {
+  let count = 0;
+  return function() {
+    return ++count;
+  };
+}
+
+const counter = createCounter();
+counter(); // 1
+counter(); // 2
+
+
+| Use Case               | Why Closure?                           |
+| ---------------------- | -------------------------------------- |
+| Data hiding            | Avoid polluting global scope           |
+| Stateful logic         | Functions that remember past values    |
+| Factories              | Create customized function variants    |
+| Memoization            | Cache results inside a function        |
+| React custom hooks     | Maintain private variables per hook    |
+| Currying / composition | Build pipelines from partial functions |
 
 
 JavaScript Arrow Functions **********
@@ -711,9 +1046,60 @@ This is called lexical scoping. The value of this in the arrow function is "lock
 
 the value of "this" inside a class refers to the instance of the class 
 
+this is dynamic — depends on how the function is called, not where it’s defined, in Traditional Functions
+const user = {
+  name: 'Alice',
+  greet: function () {
+    console.log(this.name); // ✅ 'this' refers to 'user' object
+  }
+};
+
+user.greet(); // Alice
+
+const user = {
+  name: 'Alice',
+  greet: function () {
+    console.log(this.name);
+  }
+};
+
+const greetFn = user.greet;
+greetFn(); // ❌ undefined (or window.name in browsers)
+The function is detached from the object — this becomes undefined (or global in non-strict mode).
+
+📌 this is lexically bound — it's inherited from the surrounding scope where the function is defined.
+
+
+const user = {
+  name: 'Gaurav',
+  greet() {
+    console.log(`Hi, I am ${this.name}`);
+  }
+};
+
+setTimeout(user.greet, 1000); // ❌ 'this' becomes global, not user
+
+Why?
+user.greet is passed by reference, then called by setTimeout, not user
+So it becomes a detached function, and this loses its binding
+
+In JavaScript, regular functions determine this based on how they're called. When passed as callbacks (e.g. to setTimeout, map, etc.), they lose their original context.
+const user = {
+  name: 'Gaurav',
+  greet() {
+    console.log(`Hi, I am ${this.name}`);
+  }
+};
+
+setTimeout(user.greet, 1000); // ❌ 'this' becomes undefined or window
+
+setTimeout just calls the function — it doesn’t preserve this
+greet() is invoked standalone — this ≠ user
+
 
 JavaScript Class ****************
-When we want same obj properties for many objs we create a blueprint of it that is called class
+A class is just syntactic sugar over JavaScript’s prototype-based inheritance.
+It provides a cleaner, more familiar way to write constructor functions and set up inheritance.
 
 class Person {
 	surname="Test"
@@ -738,6 +1124,15 @@ Inheritance: Implemented using the extends keyword to create hierarchical class 
 Static Methods: Belong to the class itself, not instances.
 Getters and Setters: Provide controlled access to properties.
 
+class User {
+  sayHi() { console.log('Hi'); }
+}
+is equivalent to:
+
+function User() {}
+User.prototype.sayHi = function () { console.log('Hi'); };
+
+
 
 Prototype ********
 In JavaScript, the prototype is a mechanism that allows objects to inherit properties and methods from another object.
@@ -748,6 +1143,13 @@ Prototype Chain: Every JavaScript object has a hidden internal property called [
 which points to another object. This other object is called the prototype. 
 If an object tries to access a property or method that doesn't exist on the object itself, the JavaScript engine looks for it on the object's prototype, 
 then on that prototype's prototype, and so on, forming a "prototype chain".
+
+When you access a property or method on an object:
+JavaScript first looks on the object itself.
+If not found, it looks on the object’s prototype.
+Then on the prototype’s prototype.
+And so on, until it reaches null.
+📈 This forms the prototype chain.
 
 Constructor Functions and prototype Property: In JavaScript, when you create an object using a constructor function, 
 each instance of that object inherits from the constructor’s prototype. The prototype property of the constructor is an object, 
@@ -779,6 +1181,13 @@ person2.sayHello(); // "Hello, my name is Bob"
 console.log(person1.hasOwnProperty('sayHello')); // false
 console.log(Person.prototype.hasOwnProperty('sayHello')); // true
 
+| Feature          | Direct in Constructor      | Using Prototype                                   |
+| ---------------- | -------------------------- | ------------------------------------------------- |
+| Memory Usage     | Every instance gets a copy | Shared across all instances                       |
+| Modifiable Later | Per instance               | Shared, can modify for all instances              |
+| Lookup           | Own property of object     | Looks up prototype chain if not found on instance |
+| Recommended For  | Instance-specific data     | Shared methods / behavior                         |
+
 
 const obj = {
   name: "gaurav",
@@ -787,11 +1196,41 @@ const obj = {
 obj.prototype.sayHello = function () {
   console.log(`My name is ${this.name}`);
 };
-obj.sayHello();
+obj.sayHello(); // Uncaught TypeError: Cannot set properties of undefined (setting 'sayHello')
 
 JavaScript objects don’t have a prototype property that allows you to directly add methods to them.
 The prototype property is specific to constructor functions and classes.
 For a regular object like obj, if you want to add a method, you can define it directly on the object.
+
+obj.__proto__.sayHello = function () {
+  console.log(`My name is ${this.name}`);
+};
+
+obj.sayHello(); // ✅ My name is gaurav
+
+ This works because you're modifying the object's prototype chain — you're adding sayHello to the prototype that obj inherits from (which is Object.prototype).
+ Modifying Object.prototype affects all objects — which can cause bugs:
+ const another = { city: 'Delhi' };
+another.sayHello(); // Also works unintentionally 😬
+
+const parent = {
+  greet() {
+    console.log("Hello from parent");
+  }
+};
+
+const child = Object.create(parent);
+child.greet(); // Hello from parent
+
+This allows inheritance: if a property or method is not found on the object itself, JavaScript looks up the prototype chain until it finds it (or reaches null).
+
+
+| Term            | What it is                                             |
+| --------------- | ------------------------------------------------------ |
+| `prototype`     | A property **on constructor functions**                |
+| `__proto__`     | A property **on objects**, pointing to their prototype |
+| `[[Prototype]]` | The internal hidden slot (what `__proto__` refers to)  |
+
 
 Constructor Function *****
 Constructor functions are intended to create and initialize objects. When you call a function with the new keyword, JavaScript treats it as a constructor function.
@@ -799,11 +1238,15 @@ The this object is returned implicitly if the function does not return another o
 function Person(name, age) {
     this.name = name;
     this.age = age;
+	this.greet = function() {
+		console.log(this.name);
+		};
 }
 
 const person1 = new Person("Alice", 30);
 console.log(person1.name); // Output: "Alice"
 console.log(person1.age);  // Output: 30
+person1.greet(); //Hello Alice
 
 When a function is called without new, it executes as a regular function.
 When a function is called with new, it creates a new object and binds this to that new object.
@@ -827,9 +1270,6 @@ Constructor Functions: Special functions for creating and initializing objects.
 Prototype: Used to add methods that are shared across all instances of a constructor function.
 The new Keyword: Facilitates the creation of a new object, setting up inheritance from the constructor's prototype.
 Constructor functions and prototypes are foundational concepts in JavaScript, enabling efficient object creation and method sharing.
-
-Prototype is object (_proto_) which gets bind to our defined object,array,function....it has pre-defined methods
-Prototype of _proto_ is Object.prototype and Prototype of  Object.prototype is null......this is also called prototype chain
 
 
 Factory Function*****
@@ -916,7 +1356,7 @@ Bind creates a copy of that method with our Object and can be invoked latter. It
 It doesn’t directly invoke it.
 
 let printMyName=person.fullName.bind(person1, "Oslo", "Norway");
-
+printMyName()
 
 Use Cases
 call() and apply()
@@ -953,6 +1393,12 @@ JS 2021
 Use Strict *********
 Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
 
+"use strict" is a directive (a string, not a statement) that tells the JavaScript engine to enforce a stricter set of rules.
+It helps catch silent errors, disables unsafe features, and improves performance optimizations in some engines.
+
+Accidentally Creating Global Variables
+Duplicate Parameter Names
+
 Prevents the use of undeclared variables: In normal JavaScript, assigning a value to an undeclared variable automatically creates it as a global variable.
 In strict mode, it throws an error.
 Eliminates this coercion: In normal JavaScript, this can point to the global object in functions if not explicitly bound.
@@ -966,13 +1412,17 @@ Aids in identifying bad practices early by throwing errors during development.
 You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
 Strict mode changes previously accepted "bad syntax" into real errors.
 
+| Function Type | Strict Mode | Standalone Call | Method Call    | `this` behavior                       |
+| ------------- | ----------- | --------------- | -------------- | ------------------------------------- |
+| Regular       | ✅ Yes       | undefined       | calling object | own `this` (dynamic)                  |
+| Regular       | ❌ No        | global object   | calling object | own `this` (dynamic)                  |
+| Arrow         | ✅/❌         | inherited       | inherited      | lexical `this` from surrounding scope |
+
 
 Comparing two Objects ***********
 Comparing objects is easy, use === or Object.is(). This function returns true if they have the same reference and false if they do not. 
 Again, let me stress, it is comparing the references to the objects, not the keys and values of the objects.
 Same for array.
-structuredClone()
-const clone = structuredClone(originalObject);
 
 
 How to make a copy of array or object *******
@@ -1008,6 +1458,8 @@ Javascript has 5 data types that are passed by value: Boolean, null, undefined, 
 Javascript has 3 data types that are passed by reference: Array, Function, and Object. These are all technically Objects, 
 so we’ll refer to them collectively as Objects.
 
+Value Types store the actual value directly in the variable.
+Reference Types store a reference (memory address) to the actual value (usually an object in memory).
 
 deep copying and shallow copying *****
 A deep copy means that all of the values of the new variable are copied and disconnected from the original variable. 
@@ -1019,18 +1471,6 @@ deep copy. In this way, if X vanishes Y is still valid in the memory.
 Nested arrays/objects ****
 JSON.parse(JSON.stringify(someArray))
 const deepCopy = structuredClone(original);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 JavaScript Array Methods **********
@@ -1055,6 +1495,7 @@ substr(start, length)
 array.splice(index, howmany, item1, ....., itemX)...for array only
 var fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.splice(2, 0, "Lemon", "Kiwi");
+
 
 array methods which modify old array and which provide new array *******
 Modify - push(), pop(),shift(),unshift(),splice(),sort(),reverse()
@@ -1149,6 +1590,33 @@ const obj = {
 console.log(Object.keys(obj)); 
 // Output: ['1', 'a', 'b'] - Numeric key comes first due to auto-sorting
 
+const userRoles = new Map();
+
+userRoles.set("Alice", "admin");
+userRoles.set("Bob", "editor");
+
+console.log(userRoles.get("Alice")); // "admin"
+console.log(userRoles.has("Bob"));   // true
+console.log(userRoles.size);         // 2
+
+
+userRoles.forEach((value, key) => {
+  console.log(`${key} => ${value}`);
+});
+
+| Method            | Description                    |
+| ----------------- | ------------------------------ |
+| `set(key, value)` | Add or update a key-value pair |
+| `get(key)`        | Retrieve the value for a key   |
+| `has(key)`        | Check if a key exists          |
+| `delete(key)`     | Remove a key-value pair        |
+| `clear()`         | Remove all entries             |
+| `size`            | Property — number of items     |
+| `keys()`          | Returns an iterator of keys    |
+| `values()`        | Returns an iterator of values  |
+| `entries()`       | Returns `[key, value]` pairs   |
+
+
 
 new Set() ******
 In JavaScript, the Set object is a collection of unique values. It was introduced in ES6 (ECMAScript 2015) and is similar to an array,
@@ -1157,9 +1625,14 @@ but it only allows unique values (i.e., no duplicates). A Set maintains insertio
 const mySet = new Set();
 
 Key Features of Set
-Unique Values: A Set ensures all values are unique, meaning it will not allow duplicate values.
-Insertion Order: A Set preserves the order of elements based on how they were added.
-No Key-Value Pairs: Unlike Map, a Set does not store key-value pairs, only values.
+
+| Feature                       | Description                    |
+| ----------------------------- | ------------------------------ |
+| Stores **only unique** values | No duplicates allowed          |
+| **Order preserved**           | Iterates in insertion order    |
+| Supports **any value type**   | Primitives, objects, etc.      |
+| Iterable                      | Yes (`for...of`, spread, etc.) |
+
 
 Feature				Set									Array
 Duplicates			Does not allow duplicates.			Allows duplicates.
@@ -1169,6 +1642,32 @@ Methods				Limited (add, delete, has, etc.)	Rich set of array methods (push, pop
 Use Cases			Unique values, efficient lookup		Ordered collection with duplicates allowed
 
 Set is useful when you need a collection of unique values, such as ensuring no duplicate entries in a list or quickly checking if a value exists in a collection.
+
+const colors = new Set();
+
+colors.add("red");
+colors.add("blue");
+colors.add("red"); // duplicate — will be ignored
+
+console.log(colors); // Set(2) { "red", "blue" }
+console.log(colors.size); // 2
+
+| Method          | Description                        |
+| --------------- | ---------------------------------- |
+| `add(value)`    | Adds a new value                   |
+| `delete(value)` | Removes a value                    |
+| `has(value)`    | Checks if the value exists         |
+| `clear()`       | Removes all values                 |
+| `size`          | Returns the number of unique items |
+
+const arr = [1, 2, 2, 3, 4, 4];
+const uniqueArr = [...new Set(arr)];
+
+console.log(uniqueArr); // [1, 2, 3, 4]
+
+for (const value of mySet) {
+  console.log(value);
+}
 
 
 event bubbling ********
@@ -1211,6 +1710,8 @@ Currying ******
 Currying turns multi-argument functions into single argument functions.
 Curried functions take many arguments one at a time.
 
+Currying is the process of transforming a function that takes multiple arguments into a sequence of functions that each take one argument.
+
 function curriedAdd(a) {
     return function(b) {
         return function(c) {
@@ -1221,7 +1722,8 @@ function curriedAdd(a) {
 
 console.log(curriedAdd(1)(2)(3)); // Output: 6
 
-Currying is often used in libraries like Lodash and frameworks like React to simplify function creation. Here’s an example using a curried function for a simple configuration object:
+Currying is often used in libraries like Lodash and frameworks like React to simplify function creation.
+Here’s an example using a curried function for a simple configuration object:
 function configure(setting) {
   return function(value) {
     return function(callback) {
@@ -1287,15 +1789,6 @@ JSON Example
   {"firstName":"Peter", "lastName":"Jones"}
 ]
 }
-
-"==" vs "===" ********
-"==" compares for same value can have different type
-"===" compares for same value and type
-
-
-falsy valuse *******
-false, 0, -0, 0n, "", null, undefined, and NaN
-
 
 
 Recursion JavaScript *************
@@ -1363,110 +1856,9 @@ Freezing Nested Objects
 Object.freeze() performs a shallow freeze, meaning only the immediate properties of the object are frozen.
 If the object has nested objects, those nested objects can still be modified unless they are explicitly frozen as well.
 
-function deepFreeze(obj) {
-  // Retrieve the property names defined on obj
-  const propNames = Object.getOwnPropertyNames(obj);
-
-  // Freeze properties before freezing the object itself
-  propNames.forEach((name) => {
-    const prop = obj[name];
-
-    // If prop is an object, freeze it recursively
-    if (typeof prop === "object" && prop !== null) {
-      deepFreeze(prop);
-    }
-  });
-
-  // Freeze the original object (non-recursive)
-  return Object.freeze(obj);
-}
-
-const user = {
-  name: "Alice",
-  address: {
-    city: "New York",
-    country: {
-      name: "USA",
-    },
-  },
-};
-
-deepFreeze(user);
-
-user.address.city = "Los Angeles"; // This won't work now
-user.address.country.name = "Canada"; // This also won't work
-
-console.log(user.address.city); // Output: "New York"
-console.log(user.address.country.name); // Output: "USA"
 
 How to check if an object is empty (Ojb.keys.length,Ojb.values.length) ********
 Object.keys(obj).length === 0;
-
-
-local storage vs session storage ********
-
-
-Feature				Local Storage																		Session Storage
-Scope				Available across all tabs and windows of the same origin (domain).					Available only within the current tab (or window).
-Persistence			Data persists even after the browser is closed and reopened.						Data is cleared when the tab or browser window is closed.
-Lifetime			Data remains until explicitly removed (or until the browser's storage is cleared).	Data is available only for the duration of the page session (tab or window).
-Storage Limit		Generally 5-10 MB (varies slightly by browser).										Similar to local storage, typically 5-10 MB (depending on the browser).
-Shared Across Tabs	Yes, shared across all tabs and windows for the same domain.						No, unique to each tab or window.
-Use Case			Useful for storing data that needs to persist across sessions, 						Useful for storing temporary data like session-specific state or data that
-					like user preferences, themes, or tokens.											only needs to exist for the current session.
-API					localStorage.setItem(), localStorage.getItem(), localStorage.removeItem(),			sessionStorage.setItem(), sessionStorage.getItem(),
-					localStorage.clear()																sessionStorage.removeItem(), sessionStorage.clear()
-
-Local Storage is suitable for long-term storage needs where data should persist across multiple browser sessions.
-Session Storage is ideal for short-term storage needs where data should only persist for the duration of a page session.
-
-
-Cookies ****
-Cookies are small pieces of data stored in the user's browser and sent to the server with every HTTP request. 
-They are mainly used to remember information about the user between different requests or visits, such as authentication tokens, user preferences, or session data.
-
-Key Features of Cookies:
-Size Limit: Cookies have a size limit of about 4KB per cookie.
-Expiration: Cookies can have an expiration date. If no expiration is set, the cookie is deleted when the browser is closed (session cookies). 
-			Otherwise, cookies persist until the specified expiration date (persistent cookies).
-Domain and Path: Cookies are associated with a specific domain and path, meaning they are sent only to the server that set them.
-Can be accessed by both the client and server
-
-Types of Cookies
-
-Session Cookies:
-These cookies are temporary and are deleted once the user closes the browser.
-They are mainly used to maintain a session, such as keeping a user logged in while navigating different pages of a website.
-
-Persistent Cookies:
-These cookies remain on the user’s device for a set duration defined in the cookie’s expires or max-age attribute.
-They can be used to store login tokens or user preferences for future visits.
-
-First-party Cookies:
-Created by the website the user is visiting.
-They are typically used for functionality like remembering login information or preferences (e.g., language, theme).
-
-Third-party Cookies:
-Set by domains other than the one the user is currently visiting.
-Commonly used for advertising and tracking purposes across different websites.
-
-Common Use Cases
-
-Session Management:
-Cookies store session identifiers to keep a user logged in across page navigations.
-For example, a session ID stored in a cookie allows the server to recognize the user during their visit.
-
-Personalization:
-Cookies can store user preferences (e.g., language or theme), so websites can provide a consistent experience across visits.
-
-Tracking and Analytics:
-Advertisers and analytics services use cookies to track users across different websites, allowing them to serve targeted ads or measure user behavior.
-
-Shopping Carts:
-E-commerce sites use cookies to keep track of items added to the cart, even if the user navigates away or comes back later.
-
-Typically used for data that must be sent to the server with each HTTP request (like session identifiers or CSRF tokens).
-how to use - document.cookie
 
 
 Pure Function *******
@@ -1537,6 +1929,39 @@ Array item access with optional chaining
 let arrayItem = arr?.[42];
 
 
+&&= Operator
+If the first value is true, the second value is assigned.
+let x = 10;
+x &&= 5;
+
+||= Operator
+If the first value is false, the second value is assigned.
+let x = 10;
+x ||= 5;
+
+Array toReversed() Method ,toSorted,toSpliced
+The difference between the new toReversed() method and the old reverse() method is that the new method creates a new array,
+keeping the original array unchanged, while the old method altered the original array.
+ 
+Object.groupBy()
+The Object.groupBy() method groups elements of an object according to string values returned from a callback function.
+The Object.groupBy() method does not change the original object.
+ const fruits = [
+  {name:"apples", quantity:300},
+  {name:"bananas", quantity:500},
+  {name:"oranges", quantity:200},
+  {name:"kiwi", quantity:150}
+];
+
+// Callback function to Group Elements
+function myCallback({ quantity }) {
+  return quantity > 200 ? "ok" : "low";
+}
+
+// Group by Quantity
+const result = Object.groupBy(fruits, myCallback);
+ 
+ 
 Debounce****
 Debouncing ensures that a function is only executed after a specified delay has passed since the last time it was invoked.
 
@@ -1606,62 +2031,6 @@ Debouncing: Use it when you only want to execute a function after an event stops
 Throttling: Use it when you want to limit how often a function is called while an event is continuously firing (e.g., to handle scroll events or resizing efficiently).
 
 
-What is CORS issue *****
-CORS stands for Cross-Origin Resource Sharing. It's a security feature implemented by web browsers to restrict web pages from making requests to a different domain 
-than the one that served the original page. This restriction is in place to prevent malicious websites from accessing sensitive data from other websites without permission.
-
-Origin: An origin is defined by the combination of scheme (protocol), domain, and port of a URL. For example, https://example.com and http://localhost:3000 are different origins.
-
-Same-Origin Policy: By default, web browsers enforce the Same-Origin Policy, which means that a web page served from one origin cannot normally make requests to resources
-from a different origin.
-
-Cross-Origin Requests: When a web page tries to make a request to a different origin (cross-origin request), 
-the browser sends an HTTP request with an Origin header indicating the origin of the requesting page.
-
-CORS Headers: The server hosting the requested resource can include special HTTP headers in its response to indicate whether it allows cross-origin requests 
-from the requesting origin. These headers include:
-
-Access-Control-Allow-Origin: Specifies which origins are allowed to access the resource. It can be a specific origin, * (wildcard) to allow any origin, 
-or null to disallow all cross-origin requests.
-
-Access-Control-Allow-Methods: Specifies the HTTP methods (e.g., GET, POST, etc.) allowed when accessing the resource.
-
-Access-Control-Allow-Headers: Specifies the HTTP headers allowed when accessing the resource.
-
-Access-Control-Allow-Credentials: Indicates whether the resource supports credentials such as cookies or authorization headers in cross-origin requests.
-
-Preflight Requests: For certain types of cross-origin requests (e.g., requests with custom headers or methods other than GET, POST, or HEAD),
-the browser first sends a preflight OPTIONS request to the server to determine if the actual request is safe to send.
-The server responds with CORS headers indicating whether the actual request is allowed.
-
-Simple Requests: Requests that meet certain criteria, such as using only safe methods (e.g., GET, POST)
-and not including custom headers other than those allowed by the server,are considered simple requests and may not trigger a preflight request.
-
-
-WebPack bunderler analyses *********
-https://www.youtube.com/watch?v=5IG4UmULyoA timestamp 7:38
-
-
-Rendering Pattern ****************
-CSR
-SSR
-SSG(Static Site Generation)
-iSSG(Incremental Static Site Generation)
-
-https://www.youtube.com/watch?v=fRgAI3FiYHc&list=PLe3J6mZBq1xVDr297Yg0p1SHbdj_Oceld
-
-CSR vs SSR***********
-
-SSR -
-For SEO
-fast initial load
-mostly static contain
-
-CSR-
-SEO not so imp
-lots of user interaction
-
-
 Encapsulation ******
 Encapsulation is a fundamental concept in object-oriented programming (OOP) that restricts direct access to some of an object's components and
 can prevent the accidental modification of data. In JavaScript, encapsulation is achieved primarily through the use of functions and closures,
@@ -1707,65 +2076,27 @@ In this example, count is a private variable that cannot be accessed directly fr
 The only way to modify or access count is through the methods provided (increment, decrement, and getCount)
 
 
-Web vitals ************
+function Counter() {
+  let count = 0; // private variable
 
-LCP (Largest ContentFul Paint) -- Loading  below 2.5 sec 
-FID(First Input Delay) -- Interactive below 100ms
-CLS (Cumulative Layout Shift) -- Visual Stability  below 0.1
+  this.increment = function () {
+    count++;
+    return count;
+  };
 
-How to measure speed *******
-https://web.dev/what-is-speed/
+  this.decrement = function () {
+    count--;
+    return count;
+  };
 
-Core Web Vitals
+  this.getCount = function () {
+    return count;
+  };
+}
 
-Largest Contentful Paint (LCP):
-Definition: Measures loading performance. It marks the point in the page load timeline when the main content has likely loaded.
-Good Threshold: LCP should occur within 2.5 seconds of when the page first starts loading.
-
-First Input Delay (FID):
-Definition: Measures interactivity. It quantifies the delay between when a user first interacts with a page (e.g., clicks a button) and when the browser responds to that interaction.
-Good Threshold: FID should be less than 100 milliseconds.
-
-Cumulative Layout Shift (CLS):
-Definition: Measures visual stability. It quantifies the amount of unexpected layout shift of visible page content.
-Good Threshold: CLS should be less than 0.1.
-
-Other Web Vitals
-In addition to the core Web Vitals, there are other important metrics that contribute to overall user experience:
-First Contentful Paint (FCP): Time from when the page starts loading to when any part of the page's content is rendered.
-Time to Interactive (TTI): The time it takes for the page to become fully interactive.
-Total Blocking Time (TBT): The sum of all time periods between FCP and TTI when the main thread was blocked for long enough to prevent input responsiveness.
-
-Importance of Web Vitals
-User Experience: Improving Web Vitals can lead to a better user experience by making websites load faster, respond quicker, and be more visually stable.
-SEO: Google uses these metrics as part of its ranking criteria, so optimizing for Web Vitals can improve search engine visibility and ranking.
-Performance Monitoring: They provide a standardized way to measure and monitor the performance of web pages.
-
-Tools for Measuring Web Vitals
-There are several tools and techniques to measure Web Vitals:
-Lighthouse: An open-source, automated tool for improving the quality of web pages. It provides audits for performance, accessibility, progressive web apps, SEO, and more.
-PageSpeed Insights: Provides insights into the performance of a web page on both mobile and desktop devices and provides suggestions on how to improve.
-Chrome DevTools: Built into the Chrome browser, it offers a variety of tools for developers to analyze and debug web performance.
-Web Vitals Extension: A Chrome extension that provides real-time feedback on the core Web Vitals metrics for any site you visit.
-Search Console: Provides a Core Web Vitals report to help website owners understand how their pages perform based on real-world usage data (field data).
-
-Example of Improving Core Web Vitals
-Here's a brief overview of how you might improve each of the core Web Vitals:
-
-Largest Contentful Paint (LCP):
-Optimize images and videos (use modern formats, compress, lazy load).
-Improve server response times (reduce time to first byte, use a CDN).
-Minimize render-blocking CSS and JavaScript.
-
-First Input Delay (FID):
-Minimize JavaScript execution time.
-Break up long tasks.
-Use web workers to run heavy tasks off the main thread.
-
-Cumulative Layout Shift (CLS):
-Include size attributes on your images and video elements.
-Ensure ads, embeds, and iframes have reserved space.
-Avoid inserting content above existing content except in response to user interaction.
+const counter = new Counter();
+console.log(counter.increment()); // 1
+console.log(counter.getCount());  // 1
 
 
 using fetch get/post/put/delete syntax ********
@@ -1821,17 +2152,6 @@ fetch('https://api.example.com/data/1', {
   .catch(error => console.error('Error:', error));
 
 
-
-Minification-(bundle multiple files in a group) ***********
-Minification is the process of minimizing code and markup in your web pages and script files. 
-It's one of the main methods used to reduce load times and bandwidth usage on websites. 
-Minification dramatically improves site speed and accessibility, directly translating into a better user experience
-
-Minification works by analyzing and rewriting the text-based parts of a website to reduce its overall file size. 
-Minification extends to scripts, style sheets, and other components that the web browser uses to render the site. 
-Minification is performed on the web server before a response is sent.
-
-
 partial classes **********
 A “partial class” is a class whose methods and variables are parceled out into multiple files. 
 When the files are compiled, the class reassembles itself into the full class definition
@@ -1839,6 +2159,3 @@ in general JavaScript is a class-less language. Everything is an object.
 And when it comes to inheritance, objects inherit from objects, not classes from classes as in the "class"-ical languages.
 Purpose of partial classes is to allow a class's definition to span across multiple files. 
 This can allow better maintainability and separation of your code. We use partial classes to split up our larger classes.
-
-
-

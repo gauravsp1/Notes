@@ -1,0 +1,36 @@
+React left
+
+Optimizing Performance
+How to create a build of code
+different types of configurations like package.json, typescript, appolo client
+React testing 
+
+
+Below hooks
+
+useImperativeHandle
+useSyncExternalStore
+useInsertionEffect
+useOptimistic
+useTransition
+useActionState 
+
+Socket.io 
+Self production ready setUp due to decription of create-react-app -- Next.js, React Router, Expo
+GraphQL SetUp, flow in Current Project
+
+
+
+How GraphQL is better than REST Apis
+
+
+
+
+
+
+
+
+
+
+
+

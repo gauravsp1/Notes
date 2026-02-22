@@ -1,19 +1,73 @@
 
+Subject: Application for React Developer Position – Gaurav Pawar
 
-Intro 
+Hello,
 
-Hi, I have 5 years of experience into frontend technology. Currently i am working with Nobroker as a React developer.
-Here i am working on a project called Social Hub.
-In it Developing a platform to manage customer queries, complaints, and feedback across multiple social media accounts. 
-The platform provided a 360-degree view of customer information (orders, payments, calls, chats, and social media posts),
-integrating AI-powered 60-day call summaries for enhanced insights. 
+I am writing to express my interest in the React Developer position at Synechron.
+With over 6 years of experience in building scalable and responsive web applications, I have strong hands-on expertise in React.js, Redux, Redux Toolkit, React Hooks, JavaScript (ES6+), TypeScript, HTML5, CSS3, along with experience working with GraphQL and REST APIs.
+I believe my technical background and proven ability to deliver high-quality applications will allow me to contribute effectively to your development team.
+Please find attached my resume for your consideration. I would be glad to discuss how my skills and experience align with the requirements of this role.
+Looking forward to your response.
+Thank you for your time and consideration.
+
+Best regards,
+Gaurav Pawar
+(9284943393)
+
+
+
+
+LinkedIn
+
+I am interested in the React Developer position at BestBuy.
+I have 6+ years of experience in developing scalable, responsive web applications with hands-on expertise in React.js,
+Redux, Redux Toolkit, React Hooks, JavaScript (ES6+), TypeScript, HTML5, CSS3, GraphQL, and REST APIs.
+
+Please find attached my resume for your consideration.
+
+
+
+Referal Msg
+
+Hi Amit,
+I came across an opening for a React Developer role at UST,
+and I am very interested in applying. Since you are currently working there, I was wondering if you could kindly refer me for the role.
+I have 6+ years of experience working with React.js, JavaScript (ES6+), TypeScript, GraphQL, and REST APIs.
+I believe my skills align well with the requirements of the role.
+I’ve attached my resume for your reference. Please let me know if you need any additional details from my end.
+
+Job Referal Id:- R157552
+Link:- https://usource.ripplehire.com/candidate/?token=8YxWjpwDhdL62DFYUIcQ&lang=en&source=USTLINKEDIN&ref=USTLINKEDIN#detail/job/44850
+
+
+Thanks a lot for your support!
+
+
+Hi, I’m interested in the React Developer role at Decathlon. With 6+ yrs in React.js, JavaScript, TypeScript, GraphQL & REST APIs, I’d be glad to connect, learn more, and stay in touch.
+
+
+
+
+Hello, I have 6 years of experience in frontend development, with a strong focus on React and JavaScript.
+Currently, I’m working with TekSystems as a React Developer, where I’m deployed on a project for HP.
+At HP, I’m contributing to the development of a dashboard used for placing bulk orders of laptops, printers, and other devices, primarily targeted at agents and enterprise clients. 
+My responsibilities include building reusable components, optimizing performance, and ensuring a smooth user experience across the application.
+
+
+
+Projects & Impact
+
+HP Dashboard: Reduced manual workflows by 30% with an advanced order management dashboard.
+NoBroker Customer Platform: Handled customer tickets across platforms, contributing to CSAT improvement.
+E-commerce Website (Muthoot): Enabled online bike sales with responsive and intuitive UI.
+
 
 Project Points
 
 Social Hub
 
- Created a platform to manage customer queries, complaints, and appreciation across multiple social media accounts.
- Delivered a 360-degree view of customer information and integrated AI-powered call summaries.
+Created a platform to manage customer queries, complaints, and appreciation across multiple social media accounts.
+Delivered a 360-degree view of customer information and integrated AI-powered call summaries.
 Dashboard is enabled with ticket filtering, mapping customer, replying directly to social media accounts form dashboard
 facility to make notes
 customer history - orders ,payment , calls, chats
@@ -45,47 +99,8 @@ Resume Points
  hashtag#Hiring 
  hashtag#JobOpenings
  
-
-React Developer with 5+years of experience
-
-Hi ,
-I wanted to reach out and inquire if there are any openings for a Frontend Software Developer
-With over 5 years of experience working with React.js, JavaScript, HTML, and CSS, I have developed a strong proficiency in building responsive and dynamic web applications.
-I’d love to contribute my skills and expertise to your team. If any relevant roles are available, I’d appreciate the chance to discuss further.
-Thank you for your time, and I look forward to hearing from you.
-
-Best regards,
-Gaurav
-
-
-
-200 characters
-
-Hi, I'm inquiring about Frontend Developer roles.
-With 5+ years in React.js, JavaScript, HTML, and CSS, I'd love to contribute to your team.
-Please let me know of any openings.
-Thanks.
-
-
-Hi,I wanted to inquire about React Developer roles.
-With 5+ years in React.js, JavaScript, HTML, and CSS, I'd love to contribute to your team.
-Please let me know of any openings.
-
-
-
-Referal
-
-Hi,
-I hope you're doing well! With over 5 years of hands-on experience in React.js, JavaScript, HTML, and CSS, I’ve built a strong proficiency in developing dynamic,
-responsive web applications.
-I’m currently exploring new opportunities and was wondering if you could refer me for a Senior Frontend Developer role at your company.
-I’ve attached my CV for your reference and would greatly appreciate your support. Thank you in advance for your consideration!
-
-
-5 min intro
-10min code snippits
-10min code snippits
-10-15 min theory
-20-30 min coding problem
+ 
+ 
+Talent Acquisition Specialist
 
 

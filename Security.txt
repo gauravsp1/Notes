@@ -2,6 +2,18 @@
 
 
 XSS (Cross site scripting)*****
+Cross-Site Scripting (XSS) is a client-side code injection attack.
+An attacker injects malicious scripts (usually JavaScript) into content that is later served to other users by a trusted web application.
+When unsuspecting users load the compromised page, the browser executes the attacker’s code as if it came from a legitimate source.
+
+Why is XSS Dangerous?
+Steals cookies, session tokens, or other sensitive user data.
+Performs actions on behalf of the user (e.g., banking transactions, profile updates).
+Defaces websites or redirects users to malicious sites.
+Installs malware or phishing payloads.
+Bypasses client-side validations and hijacks app behavior.
+
+
 1. Stored (Persistent) XSS:
 In a blog comment system, imagine there's no validation or sanitization of user input. An attacker might leave the following comment:
 <script>alert('You have been hacked!');</script>
@@ -182,14 +194,132 @@ When a web page makes a cross-origin request (e.g., using fetch, XMLHttpRequest,
 the browser sends an HTTP request with special CORS headers to determine if the request is safe.
 
 
-
-Method:Option ****
 What is preflight****
+In web development, particularly when dealing with CORS (Cross-Origin Resource Sharing),
+a preflight request is an automatic initial HTTP request made by the browser before the actual API request is sent.
+It’s used to determine if the actual request is safe to send.
+A preflight is a OPTIONS request that the browser sends to the server before the actual HTTP request (like POST, PUT, or DELETE) 
 
 
+DoS Attack ****
+Denial of Service (DoS) is a type of cyberattack aimed at disrupting the normal functioning of a server, service,
+or network by overwhelming it with a flood of traffic or exploiting a vulnerability that causes the system to crash or become unresponsive.
+
+Types of DoS Attacks
+
+1.Volumetric Attacks
+These attacks flood the target with massive volumes of traffic, exhausting bandwidth or processing capacity.
+
+2.Protocol Attacks
+Exploits weaknesses in network protocols to consume server resources.
+
+The Distributed version (DDoS) is more dangerous. It uses multiple systems (often a botnet) across the globe to coordinate a single large-scale attack,
+making it hard to stop or trace.
+
+Mitigation Strategies
+Rate limiting – Throttle requests from a single IP.
+Geo-blocking – Block suspicious regions if not relevant to your business.
+Session timeout and connection limits.
+Use load balancers to distribute traffic.
 
 
+HTTP headers ****
+HTTP headers are key-value pairs sent between client and server to pass metadata about the request or response.
+They don’t carry actual content—they describe it, control behavior, influence caching, set security policies, and more.
+
+Authentication
+Content negotiation
+Caching
+Security
+Custom application metadata
+
+| Header             | Purpose                               | Example                         |
+| ------------------ | ------------------------------------- | ------------------------------- |
+| `Authorization`    | Send access tokens or credentials     | `Bearer abc123`                 |
+| `Content-Type`     | Format of the request body            | `application/json`, `text/html` |
+| `Accept`           | Expected response formats             | `application/json`              |
+| `User-Agent`       | Info about the client (browser, etc.) | `Mozilla/5.0 ...`               |
+| `Cookie`           | Send cookies stored in browser        | `sessionId=abc123`              |
+| `Referer`          | Tells where the request came from     | `https://example.com/login`     |
+| `X-Requested-With` | Common in AJAX requests               | `XMLHttpRequest`                |
+| `Host`             | Target domain of the request          | `example.com`                   |
+| `Range`            | Ask for partial content (e.g., video) | `bytes=0-1023`                  |
+
+Custom Headers (X- prefixed or vendor-defined)
+You can define your own headers for custom behavior.
+X-Request-ID: 7bc8121e-90ef
+X-Client-Version: 2.1.0
+X-Feature-Flag: true
+
+| Header                      | Purpose                              |
+| --------------------------- | ------------------------------------ |
+| `X-Frame-Options`           | Prevent clickjacking                 |
+| `X-XSS-Protection`          | Basic XSS protection (deprecated)    |
+| `X-Content-Type-Options`    | Avoid MIME-type sniffing (`nosniff`) |
+| `Content-Security-Policy`   | Control resources loaded (anti-XSS)  |
+| `Strict-Transport-Security` | Enforce HTTPS                        |
+| `Referrer-Policy`           | Limit referer header exposure        |
+| `Permissions-Policy`        | Restrict access to browser features  |
 
 
+| Type              | Examples                                 |
+| ----------------- | ---------------------------------------- |
+| Authentication    | Bearer tokens, API keys                  |
+| Content info      | Content-Type, Content-Length             |
+| Language / format | Accept, Accept-Encoding, Accept-Language |
+| Cookies / Session | Cookie, Set-Cookie                       |
+| Caching           | ETag, Cache-Control                      |
+| Security          | CSP, X-Frame-Options, HSTS               |
+| Debugging         | X-Request-ID, X-Trace-ID                 |
+| CORS              | Access-Control-\* headers                |
 
+
+Expiry for the token
+Set expiry with maxAge
+res.cookie('token', jwtToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'Strict',
+  maxAge: 15 * 60 * 1000  // 15 minutes in milliseconds
+});
+
+Delete a Cookie
+res.clearCookie('token'); // Shortcut in Express
+
+// Or manually:
+res.cookie('token', '', { maxAge: 0 });
+
+
+What Is HTTP Caching?****
+HTTP caching lets browsers, CDNs, proxies, and servers store a copy of a resource so it doesn't need to be fetched from origin every time.
+It’s controlled by HTTP headers sent in both requests and responses.
+
+| Type              | Location                | Example                         |
+| ----------------- | ----------------------- | ------------------------------- |
+| **Browser cache** | Client-side             | Images, CSS, JS in browser      |
+| **Proxy cache**   | Between client & server | CDNs like Cloudflare or Varnish |
+
+How Caching Works – Key Flow
+Server responds to a request with cache headers like:
+Cache-Control
+ETag
+Last-Modified
+
+Browser or proxy stores the response
+On next request:
+If still fresh → use cached copy (fast!)
+If stale → client revalidates with server using If-None-Match or If-Modified-Since
+
+
+What can we do to increase the performance of our application ****
+| Area               | Strategy                        |
+| ------------------ | ------------------------------- |
+| Rendering          | `memo`, `useCallback`, `key`    |
+| Code splitting     | `React.lazy`, route-based       |
+| Asset optimization | Compression, image lazy loading |
+| List rendering     | `react-window`, `react-virtual` |
+| Data fetching      | Cache, dedup, prefetching       |
+| State management   | Minimal & localized             |
+| Build optimization | Tree shaking, bundle analysis   |
+| SSR/SSG            | For SEO and fast first paint    |
 
